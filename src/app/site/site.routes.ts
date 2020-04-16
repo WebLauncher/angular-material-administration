@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { ListComponent } from './components/list/list.component';
-import { CreateComponent } from './components/create/create.component';
+import { AddComponent } from './components/add/add.component';
 import { UpdateComponent } from './components/update/update.component';
 
 export const siteRoutes: Routes = [
@@ -10,8 +10,8 @@ export const siteRoutes: Routes = [
     data: { animation: 'heroes' }
   },
   {
-    path: ':collection/create',
-    component: CreateComponent,
+    path: ':collection/add',
+    component: AddComponent,
     data: { animation: 'hero' }
   },
   {

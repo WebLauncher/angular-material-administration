@@ -6,7 +6,7 @@ import { ListComponent } from './components/list/list.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { CreateComponent } from './components/create/create.component';
+import { AddComponent } from './components/add/add.component';
 import { UpdateComponent } from './components/update/update.component';
 import { ValueFormatService } from './services/value-format.service';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,9 +20,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormComponent } from './components/form/form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  declarations: [ListComponent, CreateComponent, UpdateComponent, MetadataComponent, FormComponent],
+  declarations: [ListComponent, AddComponent, UpdateComponent, MetadataComponent, FormComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(siteRoutes),
@@ -38,7 +41,10 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MatDatepickerModule,
     FormsModule,
     ReactiveFormsModule,
-    CKEditorModule
+    CKEditorModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatSelectModule
   ],
   providers: [
     DatePipe,

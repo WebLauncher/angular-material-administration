@@ -1,9 +1,9 @@
-<!-- <div class="loading-box-overflow">
+<div class="loading-box-overflow" *ngIf="isLoading$ | async">
   <mat-spinner diameter="50"></mat-spinner>
-</div> -->
+</div>
 <ng-container *ngIf="metadata$ | async as metadata; else noMetadata">
   <mat-toolbar class="justify-between">
-    <h1>Create {{metadata?.single}}</h1>
+    <h1>Add {{metadata?.single}}</h1>
     <button mat-raised-button
             color="warn"
             routerLink="/{{collectionName$ | async}}/list">
@@ -12,6 +12,7 @@
   </mat-toolbar>
   <mat-card>
     <app-form [fields]="fields$ | async"
+              *ngIf="fields$ | async"
               (save)="save($event);"></app-form>
   </mat-card>
 </ng-container>

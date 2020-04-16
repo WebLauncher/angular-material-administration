@@ -1,9 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, of, forkJoin } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { map, shareReplay, switchMap, tap } from 'rxjs/operators';
+import { map, shareReplay, tap, switchMap, take, catchError } from 'rxjs/operators';
 import { SiteMetadata } from 'src/app/site-metadata';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { capitalize } from 'lodash';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-metadata',
@@ -32,22 +34,72 @@ export class MetadataComponent implements OnInit {
   }
 
   getFieldLabel(field: string) {
-    return field[0].toUpperCase() + field.slice(1);
+    return capitalize(field);
   }
 
   getFields() {
     return this.metadata$.pipe(
-      map(metadata => Object.entries(metadata?.fields)),
-      map(entries =>
-        entries
+      map(metadata => {
+        const entries = Object.entries(metadata?.fields);
+
+        return entries
           .map(
             ([key, value]) => typeof value === 'object' ?
               { ...value, name: key, label: this.getFieldLabel(key) } :
               { name: key, label: this.getFieldLabel(key) }
           )
-          .filter(field => field.name !== 'id')
-      ),
+          .filter(field => this.showField(metadata, field));
+      }),
+      switchMap(fields => forkJoin(fields.map(field => this.addAdditionalMetadata(field)))),
+      catchError(error => {
+        console.error(error);
+
+        return [];
+      }),
       shareReplay(1)
     );
+  }
+
+  getWithTimestamps(element, metadata, action: 'add' | 'update') {
+    const newElement = { ...element };
+
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp()
+    if (action === 'add' && metadata?.createdTimestamp) {
+      newElement[metadata?.createdTimestamp] = timestamp;
+    }
+    if (metadata?.updatedTimestamp) {
+      newElement[metadata?.updatedTimestamp] = timestamp;
+    }
+
+    return newElement;
+  }
+
+  private addAdditionalMetadata(field) {
+    if (field?.type === 'select' && field?.select?.type === 'collection') {
+      return this.db.collection(field?.select?.collection)
+        .valueChanges({ idField: field?.select?.collectionValue })
+        .pipe(
+          take(1),
+          map(docs => {
+            return {
+              ...field,
+              options: docs.map(doc => {
+                return {
+                  value: doc[field?.select?.collectionValue],
+                  label: doc[field?.select?.collectionLabel]
+                };
+              })
+            };
+          })
+        );
+    }
+
+    return of(field);
+  }
+
+  private showField(metadata, field) {
+    return field.name !== 'id' &&
+      (!metadata?.createdTimestamp || metadata?.createdTimestamp !== field.name) &&
+      (!metadata?.updatedTimestamp || metadata?.updatedTimestamp !== field.name);
   }
 }

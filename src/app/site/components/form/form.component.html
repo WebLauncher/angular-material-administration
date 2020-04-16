@@ -14,7 +14,8 @@
                let-field="field">
 
     <ng-container [ngSwitch]="field?.type">
-      <div *ngSwitchCase="'html'" class="ckeditor">
+      <div *ngSwitchCase="'html'"
+           class="ckeditor">
         <mat-label>{{field?.label}}</mat-label>
         <ckeditor [formControlName]="field?.name"
                   [editor]="Editor"></ckeditor>
@@ -24,6 +25,16 @@
         <mat-label>{{field?.label}}</mat-label>
         <textarea matInput
                   [formControlName]="field?.name"></textarea>
+      </mat-form-field>
+
+      <mat-form-field *ngSwitchCase="'select'">
+        <mat-label>{{field?.label}}</mat-label>
+        <mat-select [formControlName]="field?.name">
+          <mat-option *ngFor="let option of field?.options"
+                      [value]="option?.value">
+            {{option?.label}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field *ngSwitchCase="'timestamp'">

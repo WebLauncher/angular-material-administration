@@ -1,9 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MetadataComponent } from '../metadata/metadata.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, combineLatest } from 'rxjs';
-import { map, shareReplay, switchMap, withLatestFrom, tap } from 'rxjs/operators';
+import { map, shareReplay, switchMap, take } from 'rxjs/operators';
+import { SnackbarService } from '../../services/snackbar.service';
+import { capitalize } from 'lodash';
 
 @Component({
   selector: 'app-update',
@@ -25,7 +27,9 @@ export class UpdateComponent extends MetadataComponent implements OnInit {
 
   constructor(
     public route: ActivatedRoute,
-    public db: AngularFirestore
+    public db: AngularFirestore,
+    private snackbar: SnackbarService,
+    private router: Router
   ) {
     super(route, db);
   }
@@ -43,8 +47,23 @@ export class UpdateComponent extends MetadataComponent implements OnInit {
       );
   }
 
-  save(doc: any) {
-    console.log(doc);
+  save(element: any) {
+    combineLatest([
+      this.metadata$,
+      this.collection$,
+      this.collectionName$,
+      this.id$
+    ])
+      .pipe(take(1))
+      .subscribe(([metadata, collection, collectionName, id]) => {
+        collection.doc(id).update(this.getWithTimestamps(element, metadata, 'update'))
+          .then(() => {
+            this.snackbar.success(`${capitalize(metadata?.single)} updated successfully!`);
+            this.router.navigate([`/${collectionName}/list`]);
+          }).catch(() => {
+            this.snackbar.error(`There was an error updating ${metadata?.single}!`);
+          });
+      });
   }
 
   private getDoc() {

@@ -14,7 +14,7 @@ import { slideInAnimation } from '../animations';
   animations: [slideInAnimation]
 })
 export class LayoutComponent implements OnInit {
-  entities: any = Object.values(SiteMetadata.entities);
+  entities: any = Object.values(SiteMetadata.entities).filter((entity: any) => !entity?.hideList);
   user$ = this.auth.user;
   userName$ = this.user$.pipe(
     map(user => user.displayName || user.email)

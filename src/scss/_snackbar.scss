@@ -1,0 +1,15 @@
+@import "variables";
+
+.snackbar-error {
+  background: $error-bg;
+  button {
+    color: $white;
+  }
+}
+
+.snackbar-success {
+  background: $success-bg;
+  button {
+    color: $white;
+  }
+}

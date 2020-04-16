@@ -1,12 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { SiteMetadata } from '../../../site-metadata';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { map, switchMap, shareReplay, tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
+import { map, switchMap, shareReplay, tap, take } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ValueFormatService } from '../../services/value-format.service';
 import { pickBy } from 'lodash';
 import { MetadataComponent } from '../metadata/metadata.component';
+import { SnackbarService } from '../../services/snackbar.service';
+import { capitalize } from 'lodash';
 
 @Component({
   selector: 'app-list',
@@ -21,7 +22,8 @@ export class ListComponent extends MetadataComponent implements OnInit {
   constructor(
     public route: ActivatedRoute,
     public db: AngularFirestore,
-    private valueFormatService: ValueFormatService
+    private valueFormatService: ValueFormatService,
+    private snackbar: SnackbarService
   ) {
     super(route, db);
   }
@@ -34,10 +36,26 @@ export class ListComponent extends MetadataComponent implements OnInit {
       switchMap(collection => collection.valueChanges({ idField: 'id' }))
     );
   }
+
   getValue(element, column) {
     return this.metadata$.pipe(map(
       metadata => this.valueFormatService.transform(element[column], metadata?.fields[column]?.type, metadata?.fields[column])
     ));
+  }
+
+  delete(element) {
+    combineLatest([
+      this.metadata$,
+      this.collection$
+    ])
+      .pipe(take(1))
+      .subscribe(([metadata, collection]) => {
+        collection.doc(element.id).delete().then(() => {
+          this.snackbar.success(`${capitalize(metadata?.single)} added successfully!`);
+        }).catch(() => {
+          this.snackbar.error(`There was an error adding ${metadata?.single}!`);
+        });
+      });
   }
 
   private getDisplayedColumns() {
