@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "administration",
+      "public": "dist/administration",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

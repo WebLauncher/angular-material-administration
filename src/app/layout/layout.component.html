@@ -1,0 +1,35 @@
+<mat-sidenav-container class="layout-container"
+                       *ngIf="user$ | async">
+  <mat-sidenav mode="side"
+               opened
+               color="primary">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <img class="logo"
+             src="assets/logo.png"
+             alt="Logo" />
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-nav-list color="primary">
+      <ng-container *ngFor="let entity of entities">
+        <a mat-list-item
+           color="primary"
+           routerLinkActive="active"
+           [routerLink]="entity.plural"> {{entity.plural | titlecase}} </a>
+        <mat-divider *ngIf="entity?.showMenuDividerAfter"></mat-divider>
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <mat-toolbar-row class="user-toolbar">
+        <button mat-button>Hi, {{userName$ | async}}</button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <div class="page-content">
+      <div [@routeAnimation]="getAnimationData(routerOutlet)">
+        <router-outlet #routerOutlet="outlet"></router-outlet>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

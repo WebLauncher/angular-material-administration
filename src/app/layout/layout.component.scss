@@ -1,0 +1,30 @@
+:host {
+  height: 100%;
+  display: block;
+}
+
+.layout-container {
+  height: 100%;
+}
+
+.logo {
+  max-height: 2.5rem;
+}
+
+mat-sidenav {
+  width: 15%;
+}
+
+.user-toolbar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.page-content {
+  padding: 1rem;
+}
+
+.active {
+  color: white !important;
+  background-color: black !important;
+}

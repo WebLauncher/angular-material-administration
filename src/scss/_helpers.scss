@@ -1,0 +1,38 @@
+.flex {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-stretch {
+  align-items: stretch;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.loading-box,
+.loading-box-overflow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-box-overflow {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  background: rgba(white, 0.9);
+}

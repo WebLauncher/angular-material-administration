@@ -1,0 +1,23 @@
+<!-- <div class="loading-box-overflow">
+  <mat-spinner diameter="50"></mat-spinner>
+</div> -->
+<ng-container *ngIf="metadata$ | async as metadata; else noMetadata">
+  <mat-toolbar class="justify-between">
+    <h1>Create {{metadata?.single}}</h1>
+    <button mat-raised-button
+            color="warn"
+            routerLink="/{{collectionName$ | async}}/list">
+      <mat-icon>keyboard_backspace</mat-icon> Cancel
+    </button>
+  </mat-toolbar>
+  <mat-card>
+    <app-form [fields]="fields$ | async"
+              (save)="save($event);"></app-form>
+  </mat-card>
+</ng-container>
+
+<ng-template #noMetadata>
+  <mat-chip-list>
+    <mat-chip color="warn">No entity metadata defined for&nbsp;<strong>{{collectionName$ | async}}</strong>!</mat-chip>
+  </mat-chip-list>
+</ng-template>

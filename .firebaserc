@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "unified-welder-663": {
+      "hosting": {
+        "administration": [
+          "unified-welder-663"
+        ]
+      }
+    }
+  }
+}
