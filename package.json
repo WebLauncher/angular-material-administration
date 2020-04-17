@@ -36,7 +36,7 @@
     "@ngrx/schematics": "^9.1.0",
     "@ngrx/store": "^9.1.0",
     "@ngrx/store-devtools": "^9.1.0",
-    "firebase": "^7.13.2",
+    "firebase": "^7.14.1",
     "lodash": "^4.17.15",
     "luxon": "^1.23.0",
     "ngx-auth-firebaseui": "^4.0.4",
