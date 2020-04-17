@@ -1,5 +1,5 @@
 {
-  "name": "file-upload",
+  "name": "material-material-file-upload",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^9.1.0",

@@ -1,21 +1,21 @@
 import { Component, ChangeDetectionStrategy, Input, OnDestroy, HostBinding, ElementRef, Optional, Self, ViewChild } from '@angular/core';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { Subject } from 'rxjs';
-import { FormBuilder, FormGroup, NgControl, FormControl } from '@angular/forms';
+import { FormBuilder, NgControl, FormControl } from '@angular/forms';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'mat-file-upload',
-  templateUrl: './file-upload.component.html',
-  styleUrls: ['./file-upload.component.scss'],
+  selector: 'mat-material-file-upload',
+  templateUrl: './material-file-upload.component.html',
+  styleUrls: ['./material-file-upload.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: MatFormFieldControl, useExisting: MatFileUploadComponent }],
 })
 export class MatFileUploadComponent implements OnDestroy, MatFormFieldControl<File[]>{
   static nextId = 0;
-  @HostBinding() id = `mat-file-upload-${MatFileUploadComponent.nextId++}`;
+  @HostBinding() id = `mat-material-file-upload-${MatFileUploadComponent.nextId++}`;
   @HostBinding('class.floating')
   get shouldLabelFloat() {
     return this.focused || !this.empty;
@@ -53,7 +53,7 @@ export class MatFileUploadComponent implements OnDestroy, MatFormFieldControl<Fi
   @Input() buttonText = 'Choose...';
 
   errorState = false;
-  controlType = 'mat-file-upload';
+  controlType = 'mat-material-file-upload';
 
   @HostBinding('attr.aria-describedby') describedBy = '';
 

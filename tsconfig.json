@@ -16,9 +16,13 @@
       "dom"
     ],
     "paths": {
-      "file-upload": [
-        "dist/file-upload/file-upload",
-        "dist/file-upload"
+      "material-file-upload": [
+        "dist/material-file-upload/material-file-upload",
+        "dist/material-file-upload"
+      ],
+      "material-administration": [
+        "dist/material-administration/material-administration",
+        "dist/material-administration"
       ]
     }
   },

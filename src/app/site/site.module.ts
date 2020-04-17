@@ -26,7 +26,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { FileUploadModule } from 'projects/file-upload/src/public-api';
+import { FileUploadModule } from 'material-file-upload';
 
 
 @NgModule({

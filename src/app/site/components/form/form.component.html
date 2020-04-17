@@ -79,8 +79,8 @@
       <!-- file upload -->
       <mat-form-field *ngSwitchCase="'file'">
         <mat-label>{{field?.label}}</mat-label>
-        <mat-file-upload [formControlName]="field?.name"
-                         [placeholder]="field?.placeholder"></mat-file-upload>
+        <mat-material-file-upload [formControlName]="field?.name"
+                         [placeholder]="field?.placeholder"></mat-material-file-upload>
       </mat-form-field>
       <!-- text input -->
       <mat-form-field *ngSwitchDefault>
