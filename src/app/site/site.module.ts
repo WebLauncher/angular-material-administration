@@ -23,6 +23,11 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FileUploadModule } from 'projects/file-upload/src/public-api';
+
 
 @NgModule({
   declarations: [ListComponent, AddComponent, UpdateComponent, MetadataComponent, FormComponent],
@@ -44,7 +49,11 @@ import { MatSelectModule } from '@angular/material/select';
     CKEditorModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatSlideToggleModule,
+    FileUploadModule
   ],
   providers: [
     DatePipe,

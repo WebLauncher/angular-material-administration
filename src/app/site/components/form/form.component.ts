@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
@@ -25,15 +25,18 @@ export class FormComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group(
-      this.fields.reduce((prev, cur) => {
-        return { ...prev, [cur?.name]: [this.getFieldValue(cur), this.getFieldValidators(cur)] };
-      }, {})
-    );
+    if (this.fields) {
+      this.form = this.formBuilder.group(
+        this.fields?.reduce((prev, cur) => {
+          return { ...prev, [cur?.name]: [this.getFieldValue(cur), this.getFieldValidators(cur)] };
+        }, {})
+      );
 
-    this.form.valueChanges.pipe(
-      takeUntil(this.destroyed$)
-    ).subscribe(this.valueChanges);
+      this.form.valueChanges.pipe(
+        tap(console.log),
+        takeUntil(this.destroyed$)
+      ).subscribe(this.valueChanges);
+    }
   }
 
   ngOnDestroy() {

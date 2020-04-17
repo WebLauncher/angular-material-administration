@@ -1,0 +1,20 @@
+<div class="mat-file-upload-container"
+     (click)="openChooseFile()">
+  <input placeholder="{{placeholder}}"
+         class="name"
+         [value]="getName()"
+         readonly="readonly" />
+  <input *ngIf="multiple"
+         type="file"
+         #file
+         style="display: none"
+         (change)="onFilesAdded()"
+         multiple />
+
+  <input *ngIf="!multiple"
+         type="file"
+         #file
+         style="display: none"
+         (change)="onFilesAdded()" />
+  <button mat-stroked-button>{{buttonText}}</button>
+</div>

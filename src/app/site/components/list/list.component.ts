@@ -8,6 +8,7 @@ import { pickBy } from 'lodash';
 import { MetadataComponent } from '../metadata/metadata.component';
 import { SnackbarService } from '../../services/snackbar.service';
 import { capitalize } from 'lodash';
+import { DataAdapterService } from '../../services/data-adapter.service';
 
 @Component({
   selector: 'app-list',
@@ -15,25 +16,23 @@ import { capitalize } from 'lodash';
   styleUrls: ['./list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListComponent extends MetadataComponent implements OnInit {
+export class ListComponent extends MetadataComponent {
   displayedColumns$: Observable<string[]>;
   list$: Observable<any[]>;
 
   constructor(
     public route: ActivatedRoute,
-    public db: AngularFirestore,
     private valueFormatService: ValueFormatService,
-    private snackbar: SnackbarService
+    private snackbar: SnackbarService,
+    public dataAdapterService: DataAdapterService
   ) {
-    super(route, db);
-  }
-
-  ngOnInit(): void {
-    super.ngOnInit();
+    super(route, dataAdapterService);
 
     this.displayedColumns$ = this.getDisplayedColumns();
-    this.list$ = this.collection$.pipe(
-      switchMap(collection => collection.valueChanges({ idField: 'id' }))
+    this.list$ = this.collectionName$.pipe(
+      switchMap(collection => this.dataAdapterService.list(collection, 'id')),
+      shareReplay(1),
+      tap(() => this.isLoading$.next(false))
     );
   }
 
@@ -44,18 +43,13 @@ export class ListComponent extends MetadataComponent implements OnInit {
   }
 
   delete(element) {
-    combineLatest([
-      this.metadata$,
-      this.collection$
-    ])
-      .pipe(take(1))
-      .subscribe(([metadata, collection]) => {
-        collection.doc(element.id).delete().then(() => {
-          this.snackbar.success(`${capitalize(metadata?.single)} added successfully!`);
-        }).catch(() => {
-          this.snackbar.error(`There was an error adding ${metadata?.single}!`);
-        });
-      });
+    this.isLoading$.next(true);
+    this.dataAdapterService.delete(this.collectionName$.getValue(), element?.id)
+      .subscribe(
+        () => this.snackbar.success(`${capitalize(this.metadata$.getValue()?.single)} added successfully!`),
+        () => this.snackbar.error(`There was an error adding ${this.metadata$.getValue()?.single}!`),
+        () => this.isLoading$.next(false)
+      );
   }
 
   private getDisplayedColumns() {

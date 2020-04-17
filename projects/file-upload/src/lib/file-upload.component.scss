@@ -1,0 +1,25 @@
+.mat-file-upload-container {
+  display: flex;
+}
+span {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+:host.floating span {
+  opacity: 1;
+}
+
+input {
+  border: none;
+  background: none;
+  padding: 0;
+  outline: none;
+  font: inherit;
+  text-align: center;
+  flex-grow: 1;
+  text-align: left;
+}
+
+button {
+  line-height: normal;
+}

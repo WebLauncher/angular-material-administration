@@ -10,3 +10,22 @@ mat-form-field {
   min-height: 200px;
 }
 
+.ckeditor {
+  margin-bottom: 1rem;
+
+  label {
+    opacity: 0.54;
+    transform: scale(0.75);
+  }
+}
+
+.radio {
+  margin-bottom: 1rem;
+
+  mat-label {
+    margin-right: 1rem;
+  }
+  mat-radio-button {
+    margin-right: 0.5rem;
+  }
+}

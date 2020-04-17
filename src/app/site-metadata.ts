@@ -9,8 +9,8 @@ export const SiteMetadata = {
       fields: {
         id: 'id',
         sport: {
-          type: 'select',
-          select: {
+          inputType: 'select',
+          data: {
             type: 'collection',
             collection: 'sports',
             collectionValue: 'id',
@@ -20,8 +20,12 @@ export const SiteMetadata = {
         title: 'title',
         content: {
           hideInList: true,
-          type: 'html'
+          inputType: 'ckeditor'
         },
+        // imageUrl: {
+        //   label: 'Image',
+        //   inputType: 'file'
+        // },
         created: {
           type: 'timestamp',
           hideInForm: true
@@ -40,17 +44,27 @@ export const SiteMetadata = {
       updatedTimestamp: 'updated',
       fields: {
         id: 'id',
-        sport: 'sport',
+        sport: {
+          inputType: 'select',
+          data: {
+            type: 'collection',
+            collection: 'sports',
+            collectionValue: 'id',
+            collectionLabel: 'name'
+          }
+        },
         title: 'title',
         description: {
           hideInList: true,
-          type: 'html'
+          inputType: 'ckeditor'
         },
         start: {
-          type: 'timestamp'
+          type: 'timestamp',
+          inputType: 'datepicker'
         },
         end: {
-          type: 'timestamp'
+          type: 'timestamp',
+          inputType: 'datepicker'
         },
         created: {
           type: 'timestamp',

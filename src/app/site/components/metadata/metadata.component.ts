@@ -1,11 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable, BehaviorSubject, of, forkJoin } from 'rxjs';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { BehaviorSubject, of, forkJoin, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { map, shareReplay, tap, switchMap, take, catchError } from 'rxjs/operators';
+import { map, shareReplay, switchMap, take, catchError, takeUntil, tap } from 'rxjs/operators';
 import { SiteMetadata } from 'src/app/site-metadata';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { capitalize } from 'lodash';
-import * as firebase from 'firebase/app';
+import { DataAdapterService } from '../../services/data-adapter.service';
 
 @Component({
   selector: 'app-metadata',
@@ -13,24 +12,31 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./metadata.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MetadataComponent implements OnInit {
-  metadata$: Observable<any>;
-  collectionName$: Observable<string>;
-  collection$: Observable<AngularFirestoreCollection<any>>;
+export class MetadataComponent implements OnDestroy {
+  metadata$: BehaviorSubject<any> = new BehaviorSubject(null);
+  collectionName$: BehaviorSubject<string> = new BehaviorSubject(null);
   isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  destroyed$ = new Subject();
 
   constructor(
     public route: ActivatedRoute,
-    public db: AngularFirestore
-  ) { }
+    public dataAdapterService: DataAdapterService
+  ) {
+    this.route.params.pipe(
+      tap(() => this.isLoading$.next(true)),
+      map(params => params?.collection),
+      takeUntil(this.destroyed$)
+    ).subscribe(this.collectionName$);
+    this.collectionName$.pipe(
+      map(name => SiteMetadata.entities[name] || null),
+      takeUntil(this.destroyed$),
+      shareReplay(1)
+    ).subscribe(this.metadata$);
+  }
 
-  ngOnInit(): void {
-    this.collectionName$ = this.route.params.pipe(map(params => params?.collection));
-    this.metadata$ = this.collectionName$.pipe(map(name => SiteMetadata.entities[name] || null), shareReplay(1));
-    this.collection$ = this.collectionName$.pipe(
-      map(collectionName => this.db.collection(collectionName)),
-      tap(() => this.isLoading$.next(false))
-    );
+  ngOnDestroy() {
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 
   getFieldLabel(field: string) {
@@ -45,7 +51,7 @@ export class MetadataComponent implements OnInit {
         return entries
           .map(
             ([key, value]) => typeof value === 'object' ?
-              { ...value, name: key, label: this.getFieldLabel(key) } :
+              { ...value, name: key, label: ((value as any)?.label || this.getFieldLabel(key)) } :
               { name: key, label: this.getFieldLabel(key) }
           )
           .filter(field => this.showField(metadata, field));
@@ -63,7 +69,7 @@ export class MetadataComponent implements OnInit {
   getWithTimestamps(element, metadata, action: 'add' | 'update') {
     const newElement = { ...element };
 
-    const timestamp = firebase.firestore.FieldValue.serverTimestamp()
+    const timestamp = this.dataAdapterService.getTimestamp();
     if (action === 'add' && metadata?.createdTimestamp) {
       newElement[metadata?.createdTimestamp] = timestamp;
     }
@@ -75,9 +81,8 @@ export class MetadataComponent implements OnInit {
   }
 
   private addAdditionalMetadata(field) {
-    if (field?.type === 'select' && field?.select?.type === 'collection') {
-      return this.db.collection(field?.select?.collection)
-        .valueChanges({ idField: field?.select?.collectionValue })
+    if ((field?.inputType === 'select' || field?.inputType === 'radio') && field?.data?.type === 'collection') {
+      return this.dataAdapterService.list(field?.data?.collection, field?.data?.collectionValue)
         .pipe(
           take(1),
           map(docs => {
@@ -85,8 +90,8 @@ export class MetadataComponent implements OnInit {
               ...field,
               options: docs.map(doc => {
                 return {
-                  value: doc[field?.select?.collectionValue],
-                  label: doc[field?.select?.collectionLabel]
+                  value: doc[field?.data?.collectionValue],
+                  label: doc[field?.data?.collectionLabel]
                 };
               })
             };

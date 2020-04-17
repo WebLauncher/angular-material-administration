@@ -1,32 +1,36 @@
 <form [formGroup]="form"
       (ngSubmit)="submit()">
-  <div *ngFor="let field of fields">
-    <ng-container *ngTemplateOutlet="formField; context: {field: field}"></ng-container>
-  </div>
-  <div class="flex justify-end">
-    <button mat-raised-button
-            color="primary"
-            type="submit">Save
-    </button>
-  </div>
+  <ng-container *ngIf="fields">
+
+    <div *ngFor="let field of fields">
+      <ng-container *ngTemplateOutlet="formField; context: {field: field}"></ng-container>
+    </div>
+    <div class="flex justify-end">
+      <button mat-raised-button
+              color="primary"
+              type="submit">Save
+      </button>
+    </div>
+  </ng-container>
 
   <ng-template #formField
                let-field="field">
 
-    <ng-container [ngSwitch]="field?.type">
-      <div *ngSwitchCase="'html'"
+    <ng-container [ngSwitch]="field?.inputType">
+      <!-- ckeditor -->
+      <div *ngSwitchCase="'ckeditor'"
            class="ckeditor">
-        <mat-label>{{field?.label}}</mat-label>
+        <label>{{field?.label}}</label>
         <ckeditor [formControlName]="field?.name"
                   [editor]="Editor"></ckeditor>
       </div>
-
-      <mat-form-field *ngSwitchCase="'text'">
+      <!-- textarea -->
+      <mat-form-field *ngSwitchCase="'textarea'">
         <mat-label>{{field?.label}}</mat-label>
         <textarea matInput
                   [formControlName]="field?.name"></textarea>
       </mat-form-field>
-
+      <!-- select -->
       <mat-form-field *ngSwitchCase="'select'">
         <mat-label>{{field?.label}}</mat-label>
         <mat-select [formControlName]="field?.name">
@@ -36,8 +40,18 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-
-      <mat-form-field *ngSwitchCase="'timestamp'">
+      <!-- radio -->
+      <div *ngSwitchCase="'radio'"
+           class="radio">
+        <mat-label>{{field?.label}}:</mat-label>
+        <mat-radio-group [formControlName]="field?.name"
+                         color="primary">
+          <mat-radio-button *ngFor="let option of field?.options"
+                            [value]="option?.value">{{option?.label}}</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <!-- datepicker -->
+      <mat-form-field *ngSwitchCase="'datepicker'">
         <mat-label>{{field?.label}}</mat-label>
         <input matInput
                [formControlName]="field?.name"
@@ -47,7 +61,28 @@
         <mat-datepicker touchUi
                         #picker></mat-datepicker>
       </mat-form-field>
-
+      <!-- checkbox -->
+      <div *ngSwitchCase="'checkbox'"
+           class="checkbox">
+        <mat-checkbox [formControlName]="field?.name"
+                      color="primary"
+                      [value]="true">{{field?.label}}</mat-checkbox>
+      </div>
+      <!-- slide togle -->
+      <div *ngSwitchCase="'toggle'"
+           class="checkbox">
+        <mat-slide-toggle color="primary"
+                          [formControlName]="field?.name">
+          {{field?.label}}
+        </mat-slide-toggle>
+      </div>
+      <!-- file upload -->
+      <mat-form-field *ngSwitchCase="'file'">
+        <mat-label>{{field?.label}}</mat-label>
+        <mat-file-upload [formControlName]="field?.name"
+                         [placeholder]="field?.placeholder"></mat-file-upload>
+      </mat-form-field>
+      <!-- text input -->
       <mat-form-field *ngSwitchDefault>
         <mat-label>{{field?.label}}</mat-label>
         <input matInput

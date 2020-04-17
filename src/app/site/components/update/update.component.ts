@@ -2,10 +2,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MetadataComponent } from '../metadata/metadata.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable, combineLatest } from 'rxjs';
-import { map, shareReplay, switchMap, take } from 'rxjs/operators';
+import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
+import { map, shareReplay, switchMap, take, takeUntil, tap, filter } from 'rxjs/operators';
 import { SnackbarService } from '../../services/snackbar.service';
 import { capitalize } from 'lodash';
+import { DataAdapterService } from '../../services/data-adapter.service';
 
 @Component({
   selector: 'app-update',
@@ -13,31 +14,21 @@ import { capitalize } from 'lodash';
   styleUrls: ['./update.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UpdateComponent extends MetadataComponent implements OnInit {
+export class UpdateComponent extends MetadataComponent {
   fields$: Observable<any[]>;
   doc$: Observable<any>;
-  id$: Observable<any>;
-
-  get entityTitle$() {
-    return combineLatest([
-      this.metadata$,
-      this.doc$
-    ]).pipe(map(([metadata, doc]) => doc?.[metadata?.titleField || 'title']));
-  }
+  id$: BehaviorSubject<any> = new BehaviorSubject(null);
+  entityTitle$: Observable<string>;
 
   constructor(
     public route: ActivatedRoute,
-    public db: AngularFirestore,
     private snackbar: SnackbarService,
-    private router: Router
+    private router: Router,
+    public dataAdapterService: DataAdapterService
   ) {
-    super(route, db);
-  }
+    super(route, dataAdapterService);
 
-  ngOnInit(): void {
-    super.ngOnInit();
-
-    this.id$ = this.route.params.pipe(map(params => params.id), shareReplay(1));
+    this.route.params.pipe(map(params => params.id), takeUntil(this.destroyed$)).subscribe(this.id$);
     this.doc$ = this.getDoc();
     this.fields$ = combineLatest([this.getFields(), this.doc$])
       .pipe(
@@ -45,33 +36,28 @@ export class UpdateComponent extends MetadataComponent implements OnInit {
           return { ...field, value: this.getFieldValue(field, doc) };
         }))
       );
+    this.entityTitle$ = this.doc$.pipe(map(doc => doc?.[this.metadata$.getValue()?.titleField || 'title']));
   }
 
-  save(element: any) {
-    combineLatest([
-      this.metadata$,
-      this.collection$,
-      this.collectionName$,
-      this.id$
-    ])
-      .pipe(take(1))
-      .subscribe(([metadata, collection, collectionName, id]) => {
-        collection.doc(id).update(this.getWithTimestamps(element, metadata, 'update'))
-          .then(() => {
-            this.snackbar.success(`${capitalize(metadata?.single)} updated successfully!`);
-            this.router.navigate([`/${collectionName}/list`]);
-          }).catch(() => {
-            this.snackbar.error(`There was an error updating ${metadata?.single}!`);
-          });
-      });
+  save(item: any) {
+    this.isLoading$.next(true);
+    this.dataAdapterService.update(
+      this.collectionName$.getValue(),
+      this.id$.getValue(),
+      this.getWithTimestamps(item, this.metadata$.getValue(), 'update')
+    ).subscribe(
+      () => {
+        this.snackbar.success(`${capitalize(this.metadata$.getValue()?.single)} updated successfully!`);
+        this.router.navigate([`/${this.collectionName$.getValue()}/list`]);
+      },
+      () => this.snackbar.error(`There was an error updating ${this.metadata$.getValue()?.single}!`),
+      () => this.isLoading$.next(false)
+    );
   }
 
   private getDoc() {
-    return combineLatest([
-      this.id$,
-      this.collection$
-    ]).pipe(
-      switchMap(([id, collection]) => collection.doc(id).valueChanges()),
+    return this.dataAdapterService.get(this.collectionName$.getValue(), this.id$.getValue()).pipe(
+      tap(() => this.isLoading$.next(false)),
       shareReplay(1)
     );
   }
