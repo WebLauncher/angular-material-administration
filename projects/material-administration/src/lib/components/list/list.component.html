@@ -52,7 +52,9 @@
   </table>
 
   <mat-card *ngIf="!(list$ | async)?.length">
-    No {{metadata?.plural}} added. <a mat-button color="primary" routerLink="/{{collectionName$ | async}}/add">Add {{metadata?.single}}</a>
+    No {{metadata?.plural}} added. <a mat-button
+       color="primary"
+       routerLink="/{{collectionName$ | async}}/add">Add {{metadata?.single}}</a>
   </mat-card>
 </ng-container>
 

@@ -29,6 +29,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MaterialAdministrationModule } from 'projects/material-administration/src';
 
 export function firebaseAppNameFactory() {
   return `U Cluj App`;
@@ -69,7 +70,8 @@ export function firebaseAppNameFactory() {
     MatPaginatorModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MaterialAdministrationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

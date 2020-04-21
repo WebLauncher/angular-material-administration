@@ -7,7 +7,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'mat-material-file-upload',
+  selector: 'mat-file-upload',
   templateUrl: './material-file-upload.component.html',
   styleUrls: ['./material-file-upload.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

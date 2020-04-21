@@ -22,10 +22,10 @@ export const SiteMetadata = {
           hideInList: true,
           inputType: 'ckeditor'
         },
-        // imageUrl: {
-        //   label: 'Image',
-        //   inputType: 'file'
-        // },
+        imageUrl: {
+          label: 'Image',
+          inputType: 'file'
+        },
         created: {
           type: 'timestamp',
           hideInForm: true

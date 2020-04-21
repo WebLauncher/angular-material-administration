@@ -9,7 +9,22 @@
     "lib": [
       "dom",
       "es2018"
-    ]
+    ],
+    "paths": {
+      "@angular/*": [
+        "./node_modules/@angular/*"
+      ],
+      "@ckeditor/*": [
+        "./node_modules/@ckeditor/*"
+      ],
+      "firebase": [
+        "./node_modules/firebase"
+      ],
+      "@weblauncher/material-file-upload": [
+        "./dist/material-file-upload/material-file-upload",
+        "./dist/material-file-upload"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,

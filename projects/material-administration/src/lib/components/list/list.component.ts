@@ -1,8 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Optional, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { map, switchMap, shareReplay, tap, take } from 'rxjs/operators';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { map, switchMap, shareReplay, tap } from 'rxjs/operators';
 import { ValueFormatService } from '../../services/value-format.service';
 import { pickBy } from 'lodash';
 import { MetadataComponent } from '../metadata/metadata.component';
@@ -11,7 +10,7 @@ import { capitalize } from 'lodash';
 import { DataAdapterService } from '../../services/data-adapter.service';
 
 @Component({
-  selector: 'app-list',
+  selector: 'mat-administration-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -24,9 +23,10 @@ export class ListComponent extends MetadataComponent {
     public route: ActivatedRoute,
     private valueFormatService: ValueFormatService,
     private snackbar: SnackbarService,
-    public dataAdapterService: DataAdapterService
+    public dataAdapterService: DataAdapterService,
+    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: any
   ) {
-    super(route, dataAdapterService);
+    super(route, dataAdapterService, metadata);
 
     this.displayedColumns$ = this.getDisplayedColumns();
     this.list$ = this.collectionName$.pipe(

@@ -16,11 +16,11 @@
       "dom"
     ],
     "paths": {
-      "material-file-upload": [
+      "@weblauncher/material-file-upload": [
         "dist/material-file-upload/material-file-upload",
         "dist/material-file-upload"
       ],
-      "material-administration": [
+      "@weblauncher/material-administration": [
         "dist/material-administration/material-administration",
         "dist/material-administration"
       ]

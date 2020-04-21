@@ -1,16 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Inject, Optional } from '@angular/core';
 import { MetadataComponent } from '../metadata/metadata.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, combineLatest } from 'rxjs';
 import { take, tap, switchMap } from 'rxjs/operators';
 import { SnackbarService } from '../../services/snackbar.service';
 import { capitalize } from 'lodash';
-import * as firebase from 'firebase';
 import { DataAdapterService } from '../../services/data-adapter.service';
 
 @Component({
-  selector: 'app-add',
+  selector: 'mat-administration-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -22,9 +20,10 @@ export class AddComponent extends MetadataComponent {
     public route: ActivatedRoute,
     private snackbar: SnackbarService,
     private router: Router,
-    public dataAdapterService: DataAdapterService
+    public dataAdapterService: DataAdapterService,
+    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: any
   ) {
-    super(route, dataAdapterService);
+    super(route, dataAdapterService, metadata);
 
     this.fields$ = this.getFields().pipe(tap(() => this.isLoading$.next(false)));
   }

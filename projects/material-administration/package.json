@@ -2,8 +2,16 @@
   "name": "material-administration",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^9.1.1",
-    "@angular/core": "^9.1.1",
+    "@angular/common": "^9.1.0",
+    "@angular/core": "^9.1.0",
+    "@angular/forms": "^9.1.1",
+    "@angular/material": "^9.1.0",
+    "@angular/cdk": "^9.1.0",
+    "@ckeditor/ckeditor5-angular": "1.2.3",
+    "@angular/fire": "^5.4.2",
+    "firebase": "^7.13.2",
+    "lodash": "^4.17.15",
+    "luxon": "^1.23.0",
     "tslib": "^1.10.0"
   }
 }

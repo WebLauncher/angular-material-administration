@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
-  selector: 'app-form',
+  selector: 'mat-administration-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

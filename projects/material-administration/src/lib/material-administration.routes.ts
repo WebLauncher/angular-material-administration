@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { ListComponent, AddComponent, UpdateComponent } from '@weblauncher/material-administration';
+import { ListComponent, AddComponent, UpdateComponent } from './components';
 
-export const siteRoutes: Routes = [
+export const moduleRoutes: Routes = [
   {
     path: ':collection/list',
     component: ListComponent,

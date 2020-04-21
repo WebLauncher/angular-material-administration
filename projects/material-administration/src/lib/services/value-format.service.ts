@@ -1,16 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional, Inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { SiteMetadata } from '../../site-metadata';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ValueFormatService {
-  metadata = SiteMetadata;
-
-
   constructor(
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') private metadata: any
   ) { }
 
   transform(value: any, type: string, options = null) {

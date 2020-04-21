@@ -1,15 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Optional, Inject } from '@angular/core';
 import { MetadataComponent } from '../metadata/metadata.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
-import { map, shareReplay, switchMap, take, takeUntil, tap, filter } from 'rxjs/operators';
+import { map, shareReplay, takeUntil, tap } from 'rxjs/operators';
 import { SnackbarService } from '../../services/snackbar.service';
 import { capitalize } from 'lodash';
 import { DataAdapterService } from '../../services/data-adapter.service';
 
 @Component({
-  selector: 'app-update',
+  selector: 'mat-administration-update',
   templateUrl: './update.component.html',
   styleUrls: ['./update.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -24,9 +23,10 @@ export class UpdateComponent extends MetadataComponent {
     public route: ActivatedRoute,
     private snackbar: SnackbarService,
     private router: Router,
-    public dataAdapterService: DataAdapterService
+    public dataAdapterService: DataAdapterService,
+    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: any
   ) {
-    super(route, dataAdapterService);
+    super(route, dataAdapterService, metadata);
 
     this.route.params.pipe(map(params => params.id), takeUntil(this.destroyed$)).subscribe(this.id$);
     this.doc$ = this.getDoc();

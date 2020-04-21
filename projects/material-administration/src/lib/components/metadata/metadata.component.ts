@@ -1,13 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnDestroy, Optional, Inject } from '@angular/core';
 import { BehaviorSubject, of, forkJoin, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { map, shareReplay, switchMap, take, catchError, takeUntil, tap } from 'rxjs/operators';
-import { SiteMetadata } from 'src/app/site-metadata';
 import { capitalize } from 'lodash';
 import { DataAdapterService } from '../../services/data-adapter.service';
 
 @Component({
-  selector: 'app-metadata',
+  selector: 'mat-administration-metadata',
   templateUrl: './metadata.component.html',
   styleUrls: ['./metadata.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -20,7 +19,8 @@ export class MetadataComponent implements OnDestroy {
 
   constructor(
     public route: ActivatedRoute,
-    public dataAdapterService: DataAdapterService
+    public dataAdapterService: DataAdapterService,
+    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: any
   ) {
     this.route.params.pipe(
       tap(() => this.isLoading$.next(true)),
@@ -28,7 +28,7 @@ export class MetadataComponent implements OnDestroy {
       takeUntil(this.destroyed$)
     ).subscribe(this.collectionName$);
     this.collectionName$.pipe(
-      map(name => SiteMetadata.entities[name] || null),
+      map(name => metadata.entities[name] || null),
       takeUntil(this.destroyed$),
       shareReplay(1)
     ).subscribe(this.metadata$);
