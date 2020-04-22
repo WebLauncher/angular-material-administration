@@ -16,13 +16,16 @@
       "dom"
     ],
     "paths": {
-      "@weblauncher/material-file-upload": [
-        "dist/material-file-upload/material-file-upload",
-        "dist/material-file-upload"
+      "@weblauncher/material-file-input": [
+        "dist/material-file-input/material-file-input",
+        "dist/material-file-input"
       ],
       "@weblauncher/material-administration": [
         "dist/material-administration/material-administration",
         "dist/material-administration"
+      ],
+      "types": [
+        "types"
       ]
     }
   },

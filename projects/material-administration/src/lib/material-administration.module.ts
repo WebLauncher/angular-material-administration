@@ -22,7 +22,7 @@ import { ListComponent, AddComponent, UpdateComponent, MetadataComponent, FormCo
 import { ValueFormatService } from './services/value-format.service';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatNativeDateModule } from '@angular/material/core';
-import { FileUploadModule } from '@weblauncher/material-file-upload';
+import { MatFileInputModule } from '@weblauncher/material-file-input';
 import { moduleRoutes } from './material-administration.routes';
 
 @NgModule({
@@ -46,7 +46,7 @@ import { moduleRoutes } from './material-administration.routes';
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    FileUploadModule,
+    MatFileInputModule,
     MatButtonModule,
     CKEditorModule,
     MatInputModule,
@@ -56,7 +56,8 @@ import { moduleRoutes } from './material-administration.routes';
     MatSlideToggleModule,
     MatDatepickerModule,
     MatSnackBarModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatFileInputModule
   ],
   providers: [
     ValueFormatService,

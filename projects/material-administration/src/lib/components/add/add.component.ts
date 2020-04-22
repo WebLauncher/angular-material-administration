@@ -6,6 +6,7 @@ import { take, tap, switchMap } from 'rxjs/operators';
 import { SnackbarService } from '../../services/snackbar.service';
 import { capitalize } from 'lodash';
 import { DataAdapterService } from '../../services/data-adapter.service';
+import { Immutable } from 'types/immutable';
 
 @Component({
   selector: 'mat-administration-add',
@@ -21,7 +22,7 @@ export class AddComponent extends MetadataComponent {
     private snackbar: SnackbarService,
     private router: Router,
     public dataAdapterService: DataAdapterService,
-    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: any
+    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: Immutable<any>
   ) {
     super(route, dataAdapterService, metadata);
 

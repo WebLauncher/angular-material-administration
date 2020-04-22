@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatFileUploadComponent } from './material-file-upload.component';
+import { MatFileInputComponent } from './material-file-input.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 
 
 @NgModule({
-  declarations: [MatFileUploadComponent],
+  declarations: [MatFileInputComponent],
   imports: [
     CommonModule,
     MatInputModule,
@@ -16,6 +16,6 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     FormsModule
   ],
-  exports: [MatFileUploadComponent]
+  exports: [MatFileInputComponent]
 })
-export class FileUploadModule { }
+export class MatFileInputModule { }

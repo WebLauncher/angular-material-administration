@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { siteRoutes } from './site.routes';
 import { MatTableModule } from '@angular/material/table';
@@ -20,7 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { FileUploadModule } from '@weblauncher/material-file-upload';
+import { MatFileInputModule } from '@weblauncher/material-file-input';
 import { MaterialAdministrationModule } from 'projects/material-administration/src';
 import { SiteMetadata } from '../site-metadata';
 
@@ -48,7 +48,7 @@ import { SiteMetadata } from '../site-metadata';
     MatRadioModule,
     MatCheckboxModule,
     MatSlideToggleModule,
-    FileUploadModule,
+    MatFileInputModule,
     MaterialAdministrationModule
   ],
   providers: [

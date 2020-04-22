@@ -8,14 +8,14 @@ import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'mat-file-upload',
-  templateUrl: './material-file-upload.component.html',
-  styleUrls: ['./material-file-upload.component.scss'],
+  templateUrl: './material-file-input.component.html',
+  styleUrls: ['./material-file-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: MatFormFieldControl, useExisting: MatFileUploadComponent }],
+  providers: [{ provide: MatFormFieldControl, useExisting: MatFileInputComponent }],
 })
-export class MatFileUploadComponent implements OnDestroy, MatFormFieldControl<File[]>{
+export class MatFileInputComponent implements OnDestroy, MatFormFieldControl<File[]>{
   static nextId = 0;
-  @HostBinding() id = `mat-material-file-upload-${MatFileUploadComponent.nextId++}`;
+  @HostBinding() id = `mat-material-file-input-${MatFileInputComponent.nextId++}`;
   @HostBinding('class.floating')
   get shouldLabelFloat() {
     return this.focused || !this.empty;
@@ -53,7 +53,7 @@ export class MatFileUploadComponent implements OnDestroy, MatFormFieldControl<Fi
   @Input() buttonText = 'Choose...';
 
   errorState = false;
-  controlType = 'mat-material-file-upload';
+  controlType = 'mat-material-file-input';
 
   @HostBinding('attr.aria-describedby') describedBy = '';
 

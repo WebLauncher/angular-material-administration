@@ -5,17 +5,17 @@ export const moduleRoutes: Routes = [
   {
     path: ':collection/list',
     component: ListComponent,
-    data: { animation: 'heroes' }
+    data: { animation: 'list' }
   },
   {
     path: ':collection/add',
     component: AddComponent,
-    data: { animation: 'hero' }
+    data: { animation: 'edit' }
   },
   {
     path: ':collection/update/:id',
     component: UpdateComponent,
-    data: { animation: 'hero' }
+    data: { animation: 'edit' }
   },
   {
     path: ':collection',

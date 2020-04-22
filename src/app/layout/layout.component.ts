@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { map, take } from 'rxjs/operators';
 import { SiteMetadata } from '../site-metadata';
@@ -10,7 +10,6 @@ import { slideInAnimation } from '../animations';
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [slideInAnimation]
 })
 export class LayoutComponent implements OnInit {
