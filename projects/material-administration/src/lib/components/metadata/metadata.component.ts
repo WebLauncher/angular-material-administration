@@ -66,18 +66,18 @@ export class MetadataComponent implements OnDestroy {
     );
   }
 
-  getWithTimestamps(element, metadata, action: 'add' | 'update') {
-    const newElement = { ...element };
+  getWithTimestamps(item, metadata, action: 'add' | 'update') {
+    const newItem = { ...item };
 
     const timestamp = this.dataAdapterService.getTimestamp();
     if (action === 'add' && metadata?.createdTimestamp) {
-      newElement[metadata?.createdTimestamp] = timestamp;
+      newItem[metadata?.createdTimestamp] = timestamp;
     }
     if (metadata?.updatedTimestamp) {
-      newElement[metadata?.updatedTimestamp] = timestamp;
+      newItem[metadata?.updatedTimestamp] = timestamp;
     }
 
-    return newElement;
+    return newItem;
   }
 
   private addAdditionalMetadata(field) {

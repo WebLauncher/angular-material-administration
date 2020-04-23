@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -24,6 +24,10 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFileInputModule } from '@weblauncher/material-file-input';
 import { moduleRoutes } from './material-administration.routes';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { FirebaseAppConfig, FIREBASE_OPTIONS, FIREBASE_APP_NAME } from '@angular/fire';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -57,7 +61,10 @@ import { moduleRoutes } from './material-administration.routes';
     MatDatepickerModule,
     MatSnackBarModule,
     MatNativeDateModule,
-    MatFileInputModule
+    MatFileInputModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    FlexLayoutModule
   ],
   providers: [
     ValueFormatService,
@@ -69,7 +76,30 @@ import { moduleRoutes } from './material-administration.routes';
     UpdateComponent,
     MetadataComponent,
     FormComponent,
-    RouterModule
+    RouterModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule
   ]
 })
-export class MaterialAdministrationModule { }
+export class MaterialAdministrationModule {
+  static forRoot(
+    configFactory: FirebaseAppConfig,
+    appNameFactory: () => string | undefined = () => undefined,
+  ): ModuleWithProviders {
+    return {
+      ngModule: MaterialAdministrationModule,
+      providers:
+        [
+          {
+            provide: FIREBASE_OPTIONS,
+            useValue: configFactory
+          },
+          {
+            provide: FIREBASE_APP_NAME,
+            useFactory: appNameFactory
+          },
+          ValueFormatService
+        ]
+    };
+  }
+}

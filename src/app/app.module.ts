@@ -30,6 +30,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MaterialAdministrationModule } from 'projects/material-administration/src';
+import { AngularFireStorageModule, AngularFireStorage } from '@angular/fire/storage';
 
 export function firebaseAppNameFactory() {
   return `U Cluj App`;
@@ -52,6 +53,7 @@ export function firebaseAppNameFactory() {
     EntityDataModule.forRoot(entityConfig),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireStorageModule,
     NgxAuthFirebaseUIModule.forRoot(environment.firebase, firebaseAppNameFactory,
       {
         authGuardFallbackURL: '/login',
@@ -71,9 +73,8 @@ export function firebaseAppNameFactory() {
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MaterialAdministrationModule
+    MaterialAdministrationModule.forRoot(environment.firebase, firebaseAppNameFactory)
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

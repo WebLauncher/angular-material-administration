@@ -3,14 +3,18 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { DataAdapterInterface } from './data-adapter';
 import { of, from } from 'rxjs';
 import * as firebase from 'firebase/app';
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
+import { uuidv4 } from 'uuid/v4';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataAdapterService implements DataAdapterInterface {
+  currentTask: AngularFireUploadTask;
 
   constructor(
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private storage: AngularFireStorage
   ) { }
 
   get(collection: string, id: string) {
@@ -34,7 +38,10 @@ export class DataAdapterService implements DataAdapterInterface {
   }
 
   upload(file: File) {
-    return of(true);
+    const filePath = uuidv4() + '_' + file.name;
+    this.currentTask = this.storage.upload(filePath, file);
+
+    return this.currentTask.snapshotChanges();
   }
 
   getTimestamp() {

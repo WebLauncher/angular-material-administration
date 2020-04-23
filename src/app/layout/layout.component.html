@@ -1,5 +1,5 @@
 <mat-sidenav-container class="layout-container"
-                       *ngIf="user$ | async">
+                       *ngIf="user$ | async; else notlogged">
   <mat-sidenav mode="side"
                opened
                color="primary">
@@ -33,3 +33,7 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<ng-template #notlogged>
+  <router-outlet #routerOutlet="outlet"></router-outlet>
+</ng-template>
