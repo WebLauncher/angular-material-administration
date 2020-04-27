@@ -24,7 +24,14 @@ export const SiteMetadata = {
         },
         imageUrl: {
           label: 'Image',
-          inputType: 'file'
+          inputType: 'image',
+          format: 'image',
+          style: {
+            list: {
+              height: '5rem',
+              padding: '0.5rem'
+            }
+          }
         },
         created: {
           type: 'timestamp',

@@ -16,7 +16,8 @@ import { DataAdapterService } from '../../services/data-adapter.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListComponent extends MetadataComponent {
-  displayedColumns$: Observable<string[]>;
+  displayedColumns$: Observable<any[]>;
+  displayedColumnsNames$: Observable<string[]>;
   list$: Observable<any[]>;
 
   constructor(
@@ -29,6 +30,7 @@ export class ListComponent extends MetadataComponent {
     super(route, dataAdapterService, metadata);
 
     this.displayedColumns$ = this.getDisplayedColumns();
+    this.displayedColumnsNames$ = this.displayedColumns$.pipe(map(columns => columns.map(column => column?.id)));
     this.list$ = this.collectionName$.pipe(
       switchMap(collection => this.dataAdapterService.list(collection, 'id')),
       shareReplay(1),
@@ -54,7 +56,7 @@ export class ListComponent extends MetadataComponent {
 
   private getDisplayedColumns() {
     return this.metadata$.pipe(
-      map(metadata => [...this.getDisplayableColumns(metadata?.fields), 'actions']),
+      map(metadata => [...this.getDisplayableColumns(metadata?.fields), { id: 'actions', label: 'Actions' }]),
       shareReplay(1)
     );
   }
@@ -64,6 +66,12 @@ export class ListComponent extends MetadataComponent {
       return [];
     }
 
-    return Object.keys(pickBy(columns, col => col && !col?.hideInList));
+    return Object.keys(pickBy(columns, col => col && !col?.hideInList)).map(column => {
+      return {
+        ...columns[column],
+        label: columns[column]?.label || this.getFieldLabel({ label: column }),
+        id: columns[column]?.id || column
+      };
+    });
   }
 }

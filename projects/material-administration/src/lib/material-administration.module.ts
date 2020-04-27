@@ -28,6 +28,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { FirebaseAppConfig, FIREBASE_OPTIONS, FIREBASE_APP_NAME } from '@angular/fire';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatDatepickerModule,
     MatSnackBarModule,
     MatNativeDateModule,
+    MatPaginatorModule,
+    MatSortModule,
     MatFileInputModule,
     AngularFirestoreModule,
     AngularFireStorageModule,

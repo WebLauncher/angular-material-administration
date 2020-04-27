@@ -39,8 +39,8 @@ export class MetadataComponent implements OnDestroy {
     this.destroyed$.complete();
   }
 
-  getFieldLabel(field: string) {
-    return capitalize(field);
+  getFieldLabel(field: any) {
+    return capitalize(field?.label);
   }
 
   getFields() {

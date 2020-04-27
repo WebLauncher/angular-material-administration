@@ -82,6 +82,12 @@
         <mat-file-upload [formControlName]="field?.name"
                          [placeholder]="field?.placeholder"></mat-file-upload>
       </mat-form-field>
+      <!-- image upload -->
+      <mat-form-field *ngSwitchCase="'image'">
+        <mat-label>{{field?.label}}</mat-label>
+        <mat-file-upload [formControlName]="field?.name"
+                         [placeholder]="field?.placeholder"></mat-file-upload>
+      </mat-form-field>
       <!-- text input -->
       <mat-form-field *ngSwitchDefault>
         <mat-label>{{field?.label}}</mat-label>
