@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { DataAdapterInterface } from './data-adapter';
-import { of, from } from 'rxjs';
+import { from, Subject } from 'rxjs';
 import * as firebase from 'firebase/app';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
-import { uuidv4 } from 'uuid/v4';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { v4 as uuidv4 } from 'uuid';
+import { map, finalize, filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataAdapterService implements DataAdapterInterface {
-  currentTask: AngularFireUploadTask;
-
   constructor(
     private db: AngularFirestore,
     private storage: AngularFireStorage
@@ -22,7 +21,7 @@ export class DataAdapterService implements DataAdapterInterface {
   }
 
   list(collection: string, idField: string) {
-    return this.db.collection(collection).valueChanges({idField});
+    return this.db.collection(collection).valueChanges({ idField });
   }
 
   add(collection: string, item: any) {
@@ -38,10 +37,21 @@ export class DataAdapterService implements DataAdapterInterface {
   }
 
   upload(file: File) {
-    const filePath = uuidv4() + '_' + file.name;
-    this.currentTask = this.storage.upload(filePath, file);
+    const filePath = uuidv4() + '_' + file?.name;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+    const downloadUrl$ = new Subject<string>();
 
-    return this.currentTask.snapshotChanges();
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe(downloadUrl => {
+          downloadUrl$.next(downloadUrl);
+          downloadUrl$.complete();
+        });
+      })
+    ).subscribe();
+
+    return downloadUrl$.pipe(filter(Boolean));
   }
 
   getTimestamp() {

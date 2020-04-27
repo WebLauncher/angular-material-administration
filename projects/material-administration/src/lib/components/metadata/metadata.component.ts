@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnDestroy, Optional, Inject } from '@angular/core';
 import { BehaviorSubject, of, forkJoin, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { map, shareReplay, switchMap, take, catchError, takeUntil, tap } from 'rxjs/operators';
+import { map, shareReplay, switchMap, take, catchError, takeUntil, tap, finalize } from 'rxjs/operators';
 import { capitalize } from 'lodash';
 import { DataAdapterService } from '../../services/data-adapter.service';
 
@@ -60,9 +60,42 @@ export class MetadataComponent implements OnDestroy {
       catchError(error => {
         console.error(error);
 
-        return [];
+        return of([]);
       }),
       shareReplay(1)
+    );
+  }
+
+  processUploads(item, metadata, action: 'add' | 'update') {
+    const filesKeys = Object.keys(item)
+      .filter(key => Array.isArray(item[key]) && item[key][0] instanceof File);
+
+    const itemUpdates = {};
+
+    return forkJoin(filesKeys.map(key => {
+      return this.dataAdapterService.upload(item[key][0]).pipe(
+        map(downloadUrl => {
+          return { key, downloadUrl };
+        }),
+        catchError(error => {
+          console.error(error);
+
+          return of(null);
+        })
+      );
+    })).pipe(
+      map(uploadedFiles => {
+        if (uploadedFiles) {
+          uploadedFiles.forEach(uploadedFile => {
+            itemUpdates[uploadedFile?.key] = uploadedFile?.downloadUrl;
+          });
+        }
+
+        return {
+          ...item,
+          ...itemUpdates
+        };
+      })
     );
   }
 

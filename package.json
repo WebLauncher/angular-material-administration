@@ -6,6 +6,8 @@
     "start": "ng serve",
     "build:projects": "ng build material-file-input && ng build material-administration",
     "build:prod": "ng build --prod",
+    "watch:material-file-input": "ng build material-file-input --watch",
+    "watch:material-administration": "ng build material-administration --watch",
     "deploy": "ng build --prod && firebase deploy",
     "test": "ng test",
     "lint": "ng lint",

@@ -1,32 +1,35 @@
 # Angular Material Administration Library
 
-This library is a component library for delivering a fast data entity administration project based on injecting a data service and entity metadata.
+This projects is a component library for delivering a fast data entity administration project based on injecting a data service and entity metadata.
 
 
-# Contributing
+## Contributing
 
-`npm i` 
+This project requires knowledge of Angular and Angular libraries creation. Please read docs to get yourself started in using Angular. The next steps only describe how to start this projects after all needed software is installed on your computer.
 
-## Development server
+1. Clone / Fork repository
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+2. Install dependencies
 
-## Code scaffolding
+`npm i`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+3. Build libraries
 
-## Build
+`npm run build:projects`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+(as most of development is focused on the `material-administration` library you can use `npm run watch:material-administration` to watch for file changes and reload the app)
 
-## Running unit tests
+4. Server the demo app
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+`ng s`
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Folders details
 
-## Further help
+/projects   -> contains libraries for the projects
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+  /material-administration  -> main components library for handling data management
+
+  /material-file-input      -> material file input library
+
+/src  -> main demo app

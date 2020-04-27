@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, Inject, Optional } from '@angular/c
 import { MetadataComponent } from '../metadata/metadata.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, combineLatest } from 'rxjs';
-import { take, tap, switchMap } from 'rxjs/operators';
+import { take, tap, switchMap, map } from 'rxjs/operators';
 import { SnackbarService } from '../../services/snackbar.service';
 import { capitalize } from 'lodash';
 import { DataAdapterService } from '../../services/data-adapter.service';
@@ -29,7 +29,7 @@ export class AddComponent extends MetadataComponent {
     this.fields$ = this.getFields().pipe(tap(() => this.isLoading$.next(false)));
   }
 
-  save(element: any) {
+  save(item: any) {
     this.isLoading$.next(true);
     combineLatest([
       this.metadata$,
@@ -37,7 +37,18 @@ export class AddComponent extends MetadataComponent {
     ])
       .pipe(
         take(1),
-        switchMap(([metadata, collectionName]) => this.dataAdapterService.add(collectionName, this.getWithTimestamps(element, metadata, 'add')))
+        switchMap(([metadata, collectionName]) => {
+          return this.processUploads(item, metadata, 'add').pipe(map(updatedItem => {
+            return [
+              metadata,
+              collectionName,
+              updatedItem
+            ];
+          }));
+        }),
+        switchMap(([metadata, collectionName, updatedItem]) =>
+          this.dataAdapterService.add(collectionName, this.getWithTimestamps(updatedItem, metadata, 'add'))
+        )
       ).subscribe(
         () => {
           this.snackbar.success(`${capitalize(this.metadata$.getValue()?.single)} added successfully!`);
