@@ -46,8 +46,8 @@ export class AddComponent extends MetadataComponent {
             ];
           }));
         }),
-        switchMap(([metadata, collectionName, updatedItem]) =>
-          this.dataAdapterService.add(collectionName, this.getWithTimestamps(updatedItem, metadata, 'add'))
+        switchMap(([_, collectionName, updatedItem]) =>
+          this.dataAdapterService.add(collectionName, this.getWithTimestamps(updatedItem, 'add'))
         )
       ).subscribe(
         () => {

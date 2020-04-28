@@ -44,7 +44,7 @@ export class UpdateComponent extends MetadataComponent {
     this.dataAdapterService.update(
       this.collectionName$.getValue(),
       this.id$.getValue(),
-      this.getWithTimestamps(item, this.metadata$.getValue(), 'update')
+      this.getWithTimestamps(item, 'update')
     ).subscribe(
       () => {
         this.snackbar.success(`${capitalize(this.metadata$.getValue()?.single)} updated successfully!`);
