@@ -79,14 +79,14 @@
       <!-- file upload -->
       <mat-form-field *ngSwitchCase="'file'">
         <mat-label>{{field?.label}}</mat-label>
-        <mat-file-upload [formControlName]="field?.name"
-                         [placeholder]="field?.placeholder"></mat-file-upload>
+        <mat-file-input [formControlName]="field?.name"
+                        [placeholder]="field?.placeholder"></mat-file-input>
       </mat-form-field>
       <!-- image upload -->
       <mat-form-field *ngSwitchCase="'image'">
         <mat-label>{{field?.label}}</mat-label>
-        <mat-file-upload [formControlName]="field?.name"
-                         [placeholder]="field?.placeholder"></mat-file-upload>
+        <mat-file-input [formControlName]="field?.name"
+                        [placeholder]="field?.placeholder"></mat-file-input>
       </mat-form-field>
       <!-- text input -->
       <mat-form-field *ngSwitchDefault>
