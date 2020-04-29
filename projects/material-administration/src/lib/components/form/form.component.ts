@@ -33,7 +33,6 @@ export class FormComponent implements OnInit, OnDestroy {
       );
 
       this.form.valueChanges.pipe(
-        tap(console.log),
         takeUntil(this.destroyed$)
       ).subscribe(this.valueChanges);
     }
@@ -48,6 +47,11 @@ export class FormComponent implements OnInit, OnDestroy {
     if (this.form.valid) {
       this.save.emit(this.form.value);
     }
+  }
+
+  removeImage(field) {
+    field.value = null;
+    this.form.get(field.name).setValue(null);
   }
 
   private getFieldValue(field) {

@@ -65,7 +65,6 @@ import { MatSortModule } from '@angular/material/sort';
     MatNativeDateModule,
     MatPaginatorModule,
     MatSortModule,
-    MatFileInputModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
     FlexLayoutModule

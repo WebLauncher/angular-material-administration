@@ -7,5 +7,11 @@ export interface DataAdapterInterface {
   update: (collection: string, id: string, item: any) => Observable<any>;
   delete: (collection: string, id: string) => Observable<any>;
   upload: (file: File) => Observable<any>;
+  removeUpload: (filePath: string) => Observable<any>;
   getTimestamp: () => any;
+}
+
+export interface DownloadData {
+  downloadUrl: string;
+  path?: string;
 }

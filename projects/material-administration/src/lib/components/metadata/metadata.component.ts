@@ -1,9 +1,10 @@
 import { Component, ChangeDetectionStrategy, OnDestroy, Optional, Inject } from '@angular/core';
-import { BehaviorSubject, of, forkJoin, Subject } from 'rxjs';
+import { BehaviorSubject, of, forkJoin, Subject, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { map, shareReplay, switchMap, take, catchError, takeUntil, tap, finalize } from 'rxjs/operators';
 import { capitalize } from 'lodash';
 import { DataAdapterService } from '../../services/data-adapter.service';
+import { DownloadData } from '../../services';
 
 @Component({
   selector: 'mat-administration-metadata',
@@ -39,7 +40,11 @@ export class MetadataComponent implements OnDestroy {
     this.destroyed$.complete();
   }
 
-  getFieldLabel(field: any) {
+  getFieldLabel(field: any): string {
+    if (typeof field === 'string') {
+      return capitalize(field);
+    }
+
     return capitalize(field?.label);
   }
 
@@ -74,20 +79,21 @@ export class MetadataComponent implements OnDestroy {
 
     return forkJoin(filesKeys.map(key => {
       return this.dataAdapterService.upload(item[key][0]).pipe(
-        map(downloadUrl => {
-          return { key, downloadUrl };
+        map(downloadData => {
+          return { key, downloadData };
         }),
         catchError(error => {
           console.error(error);
 
           return of(null);
         })
-      );
+      ) as Observable<{ key: string, downloadData: DownloadData }>;
     })).pipe(
-      map(uploadedFiles => {
+      map((uploadedFiles) => {
         if (uploadedFiles) {
           uploadedFiles.forEach(uploadedFile => {
-            itemUpdates[uploadedFile?.key] = uploadedFile?.downloadUrl;
+            itemUpdates[uploadedFile?.key] = uploadedFile?.downloadData?.downloadUrl;
+            itemUpdates[uploadedFile?.key + 'Path'] = uploadedFile?.downloadData?.path;
           });
         }
 
@@ -99,18 +105,22 @@ export class MetadataComponent implements OnDestroy {
     );
   }
 
-  getWithTimestamps(item, metadata, action: 'add' | 'update') {
+  getWithTimestamps(item, action: 'add' | 'update') {
     const newItem = { ...item };
 
     const timestamp = this.dataAdapterService.getTimestamp();
-    if (action === 'add' && metadata?.createdTimestamp) {
-      newItem[metadata?.createdTimestamp] = timestamp;
+    if (action === 'add' && this.metadata$.getValue()?.createdTimestamp) {
+      newItem[this.metadata$.getValue()?.createdTimestamp] = timestamp;
     }
-    if (metadata?.updatedTimestamp) {
-      newItem[metadata?.updatedTimestamp] = timestamp;
+    if (this.metadata$.getValue()?.updatedTimestamp) {
+      newItem[this.metadata$.getValue()?.updatedTimestamp] = timestamp;
     }
 
     return newItem;
+  }
+
+  getFieldMedatada(field: string) {
+    return this.metadata$.getValue()?.entities?.[field];
   }
 
   private addAdditionalMetadata(field) {

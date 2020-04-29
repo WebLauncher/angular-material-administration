@@ -7,7 +7,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'mat-file-upload',
+  selector: 'mat-file-input',
   templateUrl: './material-file-input.component.html',
   styleUrls: ['./material-file-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,7 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class MatFileInputComponent implements OnDestroy, MatFormFieldControl<File[]>{
   static nextId = 0;
-  @HostBinding() id = `mat-material-file-input-${MatFileInputComponent.nextId++}`;
+  @HostBinding() id = `mat-file-input-${MatFileInputComponent.nextId++}`;
   @HostBinding('class.floating')
   get shouldLabelFloat() {
     return this.focused || !this.empty;

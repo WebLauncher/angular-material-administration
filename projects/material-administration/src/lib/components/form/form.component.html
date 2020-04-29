@@ -79,15 +79,31 @@
       <!-- file upload -->
       <mat-form-field *ngSwitchCase="'file'">
         <mat-label>{{field?.label}}</mat-label>
-        <mat-file-upload [formControlName]="field?.name"
-                         [placeholder]="field?.placeholder"></mat-file-upload>
+        <mat-file-input [formControlName]="field?.name"
+                        [placeholder]="field?.placeholder"></mat-file-input>
       </mat-form-field>
       <!-- image upload -->
-      <mat-form-field *ngSwitchCase="'image'">
-        <mat-label>{{field?.label}}</mat-label>
-        <mat-file-upload [formControlName]="field?.name"
-                         [placeholder]="field?.placeholder"></mat-file-upload>
-      </mat-form-field>
+      <div *ngSwitchCase="'image'">
+        <div *ngIf="field?.value">
+          <mat-label>{{field?.label}}</mat-label>
+          <div fxLayout="row"
+               fxLayoutAlign="start">
+            <img class="file-input-image"
+                 [src]="field?.value"
+                 alt="field?.label" />
+            <button type="button"
+                    mat-raised-button
+                    (click)="removeImage(field)">Remove</button>
+          </div>
+        </div>
+
+        <mat-form-field *ngIf="!field?.value">
+          <mat-label>{{field?.label}}</mat-label>
+          <mat-file-input [formControlName]="field?.name"
+                          [placeholder]="field?.placeholder"></mat-file-input>
+
+        </mat-form-field>
+      </div>
       <!-- text input -->
       <mat-form-field *ngSwitchDefault>
         <mat-label>{{field?.label}}</mat-label>

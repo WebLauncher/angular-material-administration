@@ -1,4 +1,6 @@
-export const SiteMetadata = {
+import { MatAdministrationMetadata } from '@weblauncher/material-administration';
+
+export const SiteMetadata: MatAdministrationMetadata = {
   timestampFormat: 'medium',
   entities: {
     news: {
@@ -26,6 +28,7 @@ export const SiteMetadata = {
           label: 'Image',
           inputType: 'image',
           format: 'image',
+          filePathField: 'imageUrlPath',
           style: {
             list: {
               height: '5rem',

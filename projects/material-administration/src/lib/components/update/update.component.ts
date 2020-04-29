@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, Optional, Inject } from '@angular/c
 import { MetadataComponent } from '../metadata/metadata.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
-import { map, shareReplay, takeUntil, tap } from 'rxjs/operators';
+import { map, shareReplay, takeUntil, tap, take, switchMap } from 'rxjs/operators';
 import { SnackbarService } from '../../services/snackbar.service';
 import { capitalize } from 'lodash';
 import { DataAdapterService } from '../../services/data-adapter.service';
@@ -41,18 +41,33 @@ export class UpdateComponent extends MetadataComponent {
 
   save(item: any) {
     this.isLoading$.next(true);
-    this.dataAdapterService.update(
-      this.collectionName$.getValue(),
-      this.id$.getValue(),
-      this.getWithTimestamps(item, this.metadata$.getValue(), 'update')
-    ).subscribe(
-      () => {
-        this.snackbar.success(`${capitalize(this.metadata$.getValue()?.single)} updated successfully!`);
-        this.router.navigate([`/${this.collectionName$.getValue()}/list`]);
-      },
-      () => this.snackbar.error(`There was an error updating ${this.metadata$.getValue()?.single}!`),
-      () => this.isLoading$.next(false)
-    );
+
+    combineLatest([
+      this.metadata$,
+      this.collectionName$
+    ])
+      .pipe(
+        take(1),
+        switchMap(([metadata, collectionName]) => {
+          return this.processUploads(item, metadata, 'update').pipe(map(updatedItem => {
+            return [
+              metadata,
+              collectionName,
+              updatedItem
+            ];
+          }));
+        }),
+        switchMap(([_, collectionName, updatedItem]) =>
+          this.dataAdapterService.update(collectionName, this.id$.getValue(), this.getWithTimestamps(updatedItem, 'update'))
+        )
+      ).subscribe(
+        () => {
+          this.snackbar.success(`${capitalize(this.metadata$.getValue()?.single)} updated successfully!`);
+          this.router.navigate([`/${this.collectionName$.getValue()}/list`]);
+        },
+        () => this.snackbar.error(`There was an error updating ${this.metadata$.getValue()?.single}!`),
+        () => this.isLoading$.next(false)
+      );
   }
 
   private getDoc() {

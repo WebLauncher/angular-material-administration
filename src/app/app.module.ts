@@ -67,11 +67,6 @@ export function firebaseAppNameFactory() {
     MatButtonModule,
     MatDividerModule,
     MatProgressSpinnerModule,
-    MatTableModule,
-    CdkTableModule,
-    MatPaginatorModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
     MatNativeDateModule,
     MaterialAdministrationModule.forRoot(environment.firebase, firebaseAppNameFactory)
   ],
