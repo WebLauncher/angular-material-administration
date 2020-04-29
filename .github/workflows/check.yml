@@ -1,4 +1,4 @@
-name: Check
+name: Checks
 on:
   push:
     branches:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Lint and Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
