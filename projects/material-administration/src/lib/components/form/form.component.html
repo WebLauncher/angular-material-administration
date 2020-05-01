@@ -15,104 +15,104 @@
 
   <ng-template #formField
                let-field="field">
-
-    <ng-container [ngSwitch]="field?.inputType">
-      <!-- ckeditor -->
-      <div *ngSwitchCase="'ckeditor'"
-           class="ckeditor">
-        <label>{{field?.label}}</label>
-        <ckeditor [formControlName]="field?.name"
-                  [editor]="Editor"></ckeditor>
-      </div>
-      <!-- textarea -->
-      <mat-form-field *ngSwitchCase="'textarea'">
-        <mat-label>{{field?.label}}</mat-label>
-        <textarea matInput
-                  [formControlName]="field?.name"></textarea>
-      </mat-form-field>
-      <!-- select -->
-      <mat-form-field *ngSwitchCase="'select'">
-        <mat-label>{{field?.label}}</mat-label>
-        <mat-select [formControlName]="field?.name">
-          <mat-option *ngFor="let option of field?.options"
-                      [value]="option?.value">
-            {{option?.label}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <!-- radio -->
-      <div *ngSwitchCase="'radio'"
-           class="radio">
-        <mat-label>{{field?.label}}:</mat-label>
-        <mat-radio-group [formControlName]="field?.name"
-                         color="primary">
-          <mat-radio-button *ngFor="let option of field?.options"
-                            [value]="option?.value">{{option?.label}}</mat-radio-button>
-        </mat-radio-group>
-      </div>
-      <!-- datepicker -->
-      <mat-form-field *ngSwitchCase="'datepicker'">
-        <mat-label>{{field?.label}}</mat-label>
-        <input matInput
-               [formControlName]="field?.name"
-               [matDatepicker]="picker">
-        <mat-datepicker-toggle matSuffix
-                               [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker touchUi
-                        #picker></mat-datepicker>
-      </mat-form-field>
-      <!-- checkbox -->
-      <div *ngSwitchCase="'checkbox'"
-           class="checkbox">
-        <mat-checkbox [formControlName]="field?.name"
-                      color="primary"
-                      [value]="true">{{field?.label}}</mat-checkbox>
-      </div>
-      <!-- slide togle -->
-      <div *ngSwitchCase="'toggle'"
-           class="checkbox">
-        <mat-slide-toggle color="primary"
-                          [formControlName]="field?.name">
-          {{field?.label}}
-        </mat-slide-toggle>
-      </div>
-      <!-- file upload -->
-      <mat-form-field *ngSwitchCase="'file'">
-        <mat-label>{{field?.label}}</mat-label>
-        <mat-file-input [formControlName]="field?.name"
-                        [placeholder]="field?.placeholder"></mat-file-input>
-      </mat-form-field>
-      <!-- image upload -->
-      <div *ngSwitchCase="'image'">
-        <div *ngIf="field?.value">
-          <mat-label>{{field?.label}}</mat-label>
-          <div fxLayout="row"
-               fxLayoutAlign="start">
-            <img class="file-input-image"
-                 [src]="field?.value"
-                 alt="field?.label" />
-            <button type="button"
-                    mat-raised-button
-                    (click)="removeImage(field)">Remove</button>
-          </div>
+    <div class="form-field-container" [ngStyle]="field?.style?.form">
+      <ng-container [ngSwitch]="field?.inputType">
+        <!-- ckeditor -->
+        <div *ngSwitchCase="'ckeditor'"
+             class="ckeditor">
+          <label>{{field?.label}}</label>
+          <ckeditor [formControlName]="field?.name"
+                    [editor]="Editor"></ckeditor>
         </div>
-
-        <mat-form-field *ngIf="!field?.value">
+        <!-- textarea -->
+        <mat-form-field *ngSwitchCase="'textarea'">
+          <mat-label>{{field?.label}}</mat-label>
+          <textarea matInput
+                    [formControlName]="field?.name"></textarea>
+        </mat-form-field>
+        <!-- select -->
+        <mat-form-field *ngSwitchCase="'select'">
+          <mat-label>{{field?.label}}</mat-label>
+          <mat-select [formControlName]="field?.name">
+            <mat-option *ngFor="let option of field?.options"
+                        [value]="option?.value">
+              {{option?.label}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- radio -->
+        <div *ngSwitchCase="'radio'"
+             class="radio">
+          <mat-label>{{field?.label}}:</mat-label>
+          <mat-radio-group [formControlName]="field?.name"
+                           color="primary">
+            <mat-radio-button *ngFor="let option of field?.options"
+                              [value]="option?.value">{{option?.label}}</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <!-- datepicker -->
+        <mat-form-field *ngSwitchCase="'datepicker'">
+          <mat-label>{{field?.label}}</mat-label>
+          <input matInput
+                 [formControlName]="field?.name"
+                 [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix
+                                 [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi
+                          #picker></mat-datepicker>
+        </mat-form-field>
+        <!-- checkbox -->
+        <div *ngSwitchCase="'checkbox'"
+             class="checkbox">
+          <mat-checkbox [formControlName]="field?.name"
+                        color="primary"
+                        [value]="true">{{field?.label}}</mat-checkbox>
+        </div>
+        <!-- slide togle -->
+        <div *ngSwitchCase="'toggle'"
+             class="checkbox">
+          <mat-slide-toggle color="primary"
+                            [formControlName]="field?.name">
+            {{field?.label}}
+          </mat-slide-toggle>
+        </div>
+        <!-- file upload -->
+        <mat-form-field *ngSwitchCase="'file'">
           <mat-label>{{field?.label}}</mat-label>
           <mat-file-input [formControlName]="field?.name"
                           [placeholder]="field?.placeholder"></mat-file-input>
-
         </mat-form-field>
-      </div>
-      <!-- text input -->
-      <mat-form-field *ngSwitchDefault>
-        <mat-label>{{field?.label}}</mat-label>
-        <input matInput
-               [formControlName]="field?.name"
-               [placeholder]="field?.placeholder">
-      </mat-form-field>
-    </ng-container>
+        <!-- image upload -->
+        <div *ngSwitchCase="'image'">
+          <div *ngIf="field?.value">
+            <mat-label>{{field?.label}}</mat-label>
+            <div fxLayout="row"
+                 fxLayoutAlign="start">
+              <img class="file-input-image"
+                   [src]="field?.value"
+                   alt="field?.label" />
+              <button type="button"
+                      mat-raised-button
+                      (click)="removeImage(field)">Remove</button>
+            </div>
+          </div>
 
+          <mat-form-field *ngIf="!field?.value">
+            <mat-label>{{field?.label}}</mat-label>
+            <mat-file-input [formControlName]="field?.name"
+                            [placeholder]="field?.placeholder"></mat-file-input>
+
+          </mat-form-field>
+        </div>
+        <!-- text input -->
+        <mat-form-field *ngSwitchDefault>
+          <mat-label>{{field?.label}}</mat-label>
+          <input matInput
+                 [formControlName]="field?.name"
+                 [placeholder]="field?.placeholder">
+        </mat-form-field>
+      </ng-container>
+    </div>
   </ng-template>
 
 </form>
