@@ -23,7 +23,7 @@ import { ValueFormatService } from './services/value-format.service';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFileInputModule } from '@weblauncher/material-file-input';
-import { moduleRoutes } from './material-administration.routes';
+import { materialAdministrationRoutes } from './material-administration.routes';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { FirebaseAppConfig, FIREBASE_OPTIONS, FIREBASE_APP_NAME } from '@angular/fire';
@@ -45,7 +45,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatCardModule,
     MatIconModule,
     MatToolbarModule,
-    RouterModule.forChild(moduleRoutes),
+    RouterModule.forChild(materialAdministrationRoutes),
     MatProgressSpinnerModule,
     CdkTableModule,
     MatTableModule,
