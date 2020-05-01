@@ -26,6 +26,7 @@ export interface MatAdministrationEntity {
   showMenuDividerAfter: boolean;
   titleField: string;
   hideList: boolean;
+  idField: string;
   fields: { [k: string]: string | Partial<MatAdministrationEntityField>; }
 }
 
