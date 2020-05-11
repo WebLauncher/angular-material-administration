@@ -1,20 +1,22 @@
-import { Component, ChangeDetectionStrategy, OnDestroy, Optional, Inject } from '@angular/core';
+import { Component, OnDestroy, Optional, Inject } from '@angular/core';
 import { BehaviorSubject, of, forkJoin, Subject, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { map, shareReplay, switchMap, take, catchError, takeUntil, tap, finalize } from 'rxjs/operators';
+import { map, shareReplay, switchMap, take, catchError, takeUntil } from 'rxjs/operators';
 import { capitalize } from 'lodash';
 import { DataAdapterService } from '../../services/data-adapter.service';
 import { DownloadData } from '../../services';
+import { MatAdministrationEntity } from '../../types/material-administration-metadata';
 
 @Component({
   selector: 'mat-administration-metadata',
   templateUrl: './metadata.component.html',
-  styleUrls: ['./metadata.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./metadata.component.scss']
 })
 export class MetadataComponent implements OnDestroy {
   metadata$: BehaviorSubject<any> = new BehaviorSubject(null);
+  collectionPath$: BehaviorSubject<string> = new BehaviorSubject(null);
   collectionName$: BehaviorSubject<string> = new BehaviorSubject(null);
+  subCollections$: BehaviorSubject<MatAdministrationEntity[]> = new BehaviorSubject(null);
   isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(true);
   destroyed$ = new Subject();
 
@@ -24,15 +26,36 @@ export class MetadataComponent implements OnDestroy {
     @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: any
   ) {
     this.route.params.pipe(
-      tap(() => this.isLoading$.next(true)),
       map(params => params?.collection),
       takeUntil(this.destroyed$)
-    ).subscribe(this.collectionName$);
+    )
+      .subscribe(this.collectionPath$);
+
+    this.collectionPath$.pipe(
+      map(collectionPath => collectionPath.replace(/\:/gi, '\/')),
+      shareReplay(1)
+    )
+      .subscribe(this.collectionName$);
+
     this.collectionName$.pipe(
-      map(name => metadata.entities[name] || null),
-      takeUntil(this.destroyed$),
+      map(name => this.getMetadata(name, metadata)),
       shareReplay(1)
     ).subscribe(this.metadata$);
+
+    this.metadata$.pipe(
+      map(metadata => {
+        if (!metadata?.entities) {
+          return null;
+        }
+
+        return Object.keys(metadata.entities).map(key => {
+          return {
+            id: key,
+            ...metadata.entities[key]
+          };
+        });
+      })
+    ).subscribe(this.subCollections$);
   }
 
   ngOnDestroy() {
@@ -75,34 +98,38 @@ export class MetadataComponent implements OnDestroy {
     const filesKeys = Object.keys(item)
       .filter(key => Array.isArray(item[key]) && item[key][0] instanceof File);
 
-    const itemUpdates = {};
+    if (filesKeys.length) {
+      const itemUpdates = {};
 
-    return forkJoin(filesKeys.map(key => {
-      return this.dataAdapterService.upload(item[key][0]).pipe(
-        map(downloadData => {
-          return { key, downloadData };
-        }),
-        catchError(error => {
-          console.error(error);
+      return forkJoin(filesKeys.map(key => {
+        return this.dataAdapterService.upload(item[key][0]).pipe(
+          map(downloadData => {
+            return { key, downloadData };
+          }),
+          catchError(error => {
+            console.error(error);
 
-          return of(null);
+            return of(null);
+          })
+        ) as Observable<{ key: string, downloadData: DownloadData }>;
+      })).pipe(
+        map((uploadedFiles) => {
+          if (uploadedFiles) {
+            uploadedFiles.forEach(uploadedFile => {
+              itemUpdates[uploadedFile?.key] = uploadedFile?.downloadData?.downloadUrl;
+              itemUpdates[uploadedFile?.key + 'Path'] = uploadedFile?.downloadData?.path;
+            });
+          }
+
+          return {
+            ...item,
+            ...itemUpdates
+          };
         })
-      ) as Observable<{ key: string, downloadData: DownloadData }>;
-    })).pipe(
-      map((uploadedFiles) => {
-        if (uploadedFiles) {
-          uploadedFiles.forEach(uploadedFile => {
-            itemUpdates[uploadedFile?.key] = uploadedFile?.downloadData?.downloadUrl;
-            itemUpdates[uploadedFile?.key + 'Path'] = uploadedFile?.downloadData?.path;
-          });
-        }
+      );
+    }
 
-        return {
-          ...item,
-          ...itemUpdates
-        };
-      })
-    );
+    return of(item);
   }
 
   getWithTimestamps(item, action: 'add' | 'update') {
@@ -121,6 +148,16 @@ export class MetadataComponent implements OnDestroy {
 
   getFieldMedatada(field: string) {
     return this.metadata$.getValue()?.entities?.[field];
+  }
+
+  private getMetadata(collectionName: string, metadata: any) {
+    const nameParts = collectionName.split('/');
+
+    if (nameParts.length === 1) {
+      return metadata.entities[nameParts[0]] || null;
+    }
+
+    return this.getMetadata(nameParts.slice(2).join('/'), metadata.entities[nameParts[0]]);
   }
 
   private addAdditionalMetadata(field) {

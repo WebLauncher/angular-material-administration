@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Inject, Optional } from '@angular/core';
+import { Component, Inject, Optional } from '@angular/core';
 import { MetadataComponent } from '../metadata/metadata.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, combineLatest } from 'rxjs';
@@ -11,8 +11,7 @@ import { Immutable } from 'types/immutable';
 @Component({
   selector: 'mat-administration-add',
   templateUrl: './add.component.html',
-  styleUrls: ['./add.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./add.component.scss']
 })
 export class AddComponent extends MetadataComponent {
   fields$: Observable<any[]>;
@@ -26,7 +25,7 @@ export class AddComponent extends MetadataComponent {
   ) {
     super(route, dataAdapterService, metadata);
 
-    this.fields$ = this.getFields().pipe(tap(() => this.isLoading$.next(false)));
+    this.fields$ = this.getFields().pipe(tap(() => { this.isLoading$.next(false); }));
   }
 
   save(item: any) {
@@ -52,7 +51,7 @@ export class AddComponent extends MetadataComponent {
       ).subscribe(
         () => {
           this.snackbar.success(`${capitalize(this.metadata$.getValue()?.single)} added successfully!`);
-          this.router.navigate([`/${this.collectionName$.getValue()}/list`]);
+          this.router.navigate([`/${this.collectionPath$.getValue()}/list`]);
         },
         () => this.snackbar.error(`There was an error adding ${this.metadata$.getValue()?.single}!`),
         () => this.isLoading$.next(false)

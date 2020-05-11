@@ -3,16 +3,18 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "npm run clean && run-p watch:* serve",
     "build:projects": "ng build material-file-input && ng build material-administration",
     "build:prod": "ng build --prod",
+    "serve": "wait-on dist/material-administration/public-api.d.ts && ng serve",
     "watch:material-file-input": "ng build material-file-input --watch",
-    "watch:material-administration": "ng build material-administration --watch",
+    "watch:material-administration": "wait-on dist/material-file-input/public-api.d.ts && ng build material-administration --watch",
     "deploy": "ng build --prod && firebase deploy",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ngcc"
+    "postinstall": "ngcc",
+    "clean": "rimraf dist"
   },
   "private": true,
   "dependencies": {
@@ -40,6 +42,7 @@
     "@ngrx/schematics": "^9.1.0",
     "@ngrx/store": "^9.1.0",
     "@ngrx/store-devtools": "^9.1.0",
+    "@types/lodash": "^4.14.150",
     "firebase": "^7.13.2",
     "lodash": "^4.17.15",
     "luxon": "^1.23.0",
@@ -76,6 +79,7 @@
     "protractor": "~5.4.3",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~3.8.3"
+    "typescript": "~3.8.3",
+    "wait-on": "^5.0.0"
   }
 }

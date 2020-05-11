@@ -10,8 +10,7 @@ import { DataAdapterService } from '../../services/data-adapter.service';
 @Component({
   selector: 'mat-administration-update',
   templateUrl: './update.component.html',
-  styleUrls: ['./update.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./update.component.scss']
 })
 export class UpdateComponent extends MetadataComponent {
   fields$: Observable<any[]>;
@@ -63,7 +62,7 @@ export class UpdateComponent extends MetadataComponent {
       ).subscribe(
         () => {
           this.snackbar.success(`${capitalize(this.metadata$.getValue()?.single)} updated successfully!`);
-          this.router.navigate([`/${this.collectionName$.getValue()}/list`]);
+          this.router.navigate([`/${this.collectionPath$.getValue()}/list`]);
         },
         () => this.snackbar.error(`There was an error updating ${this.metadata$.getValue()?.single}!`),
         () => this.isLoading$.next(false)

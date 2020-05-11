@@ -11,3 +11,10 @@ table {
   max-height: 5rem;
   padding: 1rem;
 }
+
+.mat-column-id {
+  max-width: 2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 1rem;
+}

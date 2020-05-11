@@ -1,7 +1,7 @@
-import { Component, ChangeDetectionStrategy, Optional, Inject } from '@angular/core';
+import { Component, Optional, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, switchMap, shareReplay, tap } from 'rxjs/operators';
+import { map, switchMap, shareReplay, tap, withLatestFrom } from 'rxjs/operators';
 import { ValueFormatService } from '../../services/value-format.service';
 import { pickBy } from 'lodash';
 import { MetadataComponent } from '../metadata/metadata.component';
@@ -12,8 +12,7 @@ import { DataAdapterService } from '../../services/data-adapter.service';
 @Component({
   selector: 'mat-administration-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./list.component.scss']
 })
 export class ListComponent extends MetadataComponent {
   displayedColumns$: Observable<any[]>;
@@ -56,7 +55,16 @@ export class ListComponent extends MetadataComponent {
 
   private getDisplayedColumns() {
     return this.metadata$.pipe(
-      map(metadata => [...this.getDisplayableColumns(metadata?.fields), { id: 'actions', label: 'Actions' }]),
+      withLatestFrom(this.subCollections$),
+      map(([metadata, subCollections]) => {
+        const collumns = this.getDisplayableColumns(metadata?.fields);
+        if (subCollections) {
+          collumns.push({ id: 'entities', label: 'Manage' });
+        }
+        collumns.push({ id: 'actions', label: 'Actions' });
+
+        return collumns;
+      }),
       shareReplay(1)
     );
   }

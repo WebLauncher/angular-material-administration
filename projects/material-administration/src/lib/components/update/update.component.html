@@ -3,14 +3,24 @@
   <mat-spinner diameter="50"></mat-spinner>
 </div>
 <ng-container *ngIf="metadata$ | async as metadata; else noMetadata">
-  <mat-toolbar class="justify-between">
+  <mat-administration-breadcrumbs [collectionName]="collectionName$ | async"
+                                  action="update"></mat-administration-breadcrumbs>
+  <mat-toolbar class="justify-between toolbar-main">
     <h1>Update {{metadata?.single}}</h1>
     <span class="entity-title">{{entityTitle$ | async}}<br /><small>#{{id$ | async}}</small></span>
-    <button mat-raised-button
-            color="warn"
-            routerLink="/{{collectionName$ | async}}/list">
+    <a mat-raised-button
+       color="warn"
+       routerLink="/{{collectionPath$ | async}}/list">
       <mat-icon>keyboard_backspace</mat-icon> Cancel
-    </button>
+    </a>
+  </mat-toolbar>
+  <mat-toolbar *ngIf="subCollections$ | async as subCollections">
+    <a *ngFor="let subCollection of subCollections"
+       mat-raised-button
+       aria-label="Manage"
+       routerLink="/{{collectionName$ | async}}:{{id$ | async}}:{{subCollection?.id}}/list">
+      {{subCollection?.plural | titlecase}}
+    </a>
   </mat-toolbar>
   <mat-card>
     <mat-administration-form *ngIf="fields$ | async"

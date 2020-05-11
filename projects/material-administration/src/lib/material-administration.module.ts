@@ -30,6 +30,8 @@ import { FirebaseAppConfig, FIREBASE_OPTIONS, FIREBASE_APP_NAME } from '@angular
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { MatSortModule } from '@angular/material/sort';
     AddComponent,
     UpdateComponent,
     MetadataComponent,
-    FormComponent
+    FormComponent,
+    BreadcrumbsComponent
   ],
   imports: [
     CommonModule,
@@ -67,7 +70,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatSortModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatMenuModule
   ],
   providers: [
     ValueFormatService,
