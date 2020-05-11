@@ -15,7 +15,7 @@
         <a mat-list-item
            color="primary"
            routerLinkActive="active"
-           [routerLink]="entity.plural"> {{entity.plural | titlecase}} </a>
+           [routerLink]="entity.id"> {{entity.plural | titlecase}} </a>
         <mat-divider *ngIf="entity?.showMenuDividerAfter"></mat-divider>
       </ng-container>
     </mat-nav-list>

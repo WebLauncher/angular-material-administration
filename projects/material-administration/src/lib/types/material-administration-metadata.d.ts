@@ -19,6 +19,7 @@ export interface MatAdministrationEntityField {
 }
 
 export interface MatAdministrationEntity {
+  id?: string;
   single: string;
   plural: string;
   createdTimestamp: string;
@@ -28,6 +29,7 @@ export interface MatAdministrationEntity {
   hideList: boolean;
   idField: string;
   fields: { [k: string]: string | Partial<MatAdministrationEntityField>; }
+  entities: { [k: string]: Partial<MatAdministrationEntity>; }
 }
 
 export interface MatAdministrationMetadata {

@@ -13,7 +13,12 @@ import { slideInAnimation } from '../animations';
   animations: [slideInAnimation]
 })
 export class LayoutComponent implements OnInit {
-  entities: any = Object.values(SiteMetadata.entities).filter((entity: any) => !entity?.hideList);
+  entities: any = Object.keys(SiteMetadata.entities).filter((key: any) => !SiteMetadata.entities[key]?.hideList).map(key => {
+    return {
+      id: key,
+      ...SiteMetadata.entities[key]
+    };
+  });
   user$ = this.auth.user;
   userName$ = this.user$.pipe(
     map(user => user.displayName || user.email)

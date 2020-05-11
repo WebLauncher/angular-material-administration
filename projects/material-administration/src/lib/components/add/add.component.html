@@ -3,13 +3,15 @@
   <mat-spinner diameter="50"></mat-spinner>
 </div>
 <ng-container *ngIf="metadata$ | async as metadata; else noMetadata">
+  <mat-administration-breadcrumbs [collectionName]="collectionName$ | async"
+                                  action="add"></mat-administration-breadcrumbs>
   <mat-toolbar class="justify-between">
     <h1>Add {{metadata?.single}}</h1>
-    <button mat-raised-button
-            color="warn"
-            routerLink="/{{collectionName$ | async}}/list">
+    <a mat-raised-button
+       color="warn"
+       routerLink="/{{collectionPath$ | async}}/list">
       <mat-icon>keyboard_backspace</mat-icon> Cancel
-    </button>
+    </a>
   </mat-toolbar>
   <mat-card>
     <mat-administration-form [fields]="fields$ | async"

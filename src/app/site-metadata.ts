@@ -38,6 +38,49 @@ export const SiteMetadata: MatAdministrationMetadata = {
           type: 'timestamp',
           hideInForm: true
         }
+      },
+      entities: {
+        images: {
+          single: 'image',
+          plural: 'images',
+          createdTimestamp: 'created',
+          updatedTimestamp: 'updated',
+          fields: {
+            title: 'title',
+            imageUrl: {
+              label: 'Image',
+              inputType: 'image',
+              format: 'image',
+              filePathField: 'imageUrlPath'
+            },
+            created: {
+              type: 'timestamp',
+              hideInForm: true
+            },
+            updated: {
+              type: 'timestamp',
+              hideInForm: true
+            }
+          }
+        },
+        comments: {
+          single: 'comment',
+          plural: 'comments',
+          createdTimestamp: 'created',
+          updatedTimestamp: 'updated',
+          fields: {
+            title: 'title',
+            content: 'content',
+            created: {
+              type: 'timestamp',
+              hideInForm: true
+            },
+            updated: {
+              type: 'timestamp',
+              hideInForm: true
+            }
+          }
+        }
       }
     },
     events: {

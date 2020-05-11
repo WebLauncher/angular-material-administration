@@ -11,17 +11,11 @@ This project requires knowledge of Angular and Angular libraries creation. Pleas
 
 2. Install dependencies
 
-`npm i`
+  `npm i`
 
-3. Build libraries
+3. Start project
 
-`npm run build:projects`
-
-(as most of development is focused on the `material-administration` library you can use `npm run watch:material-administration` to watch for file changes and reload the app)
-
-4. Server the demo app
-
-`ng s`
+  `npm start`
 
 
 ## Folders details
