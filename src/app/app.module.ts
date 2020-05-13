@@ -24,8 +24,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MaterialAdministrationModule } from 'projects/material-administration/src';
+import { MaterialAdministrationModule } from '@weblauncher/material-administration';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { SiteMetadata } from './site-metadata';
 
 export function firebaseAppNameFactory() {
   return `U Cluj App`;
@@ -64,6 +65,12 @@ export function firebaseAppNameFactory() {
     MatProgressSpinnerModule,
     MatNativeDateModule,
     MaterialAdministrationModule.forRoot(environment.firebase, firebaseAppNameFactory)
+  ],
+  providers: [
+    {
+      provide: 'MAT_ADMINISTRATION_METADATA',
+      useValue: SiteMetadata
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -18,7 +18,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RouterModule } from '@angular/router';
-import { ListComponent, AddComponent, UpdateComponent, MetadataComponent, FormComponent } from './components/index';
+import { ListComponent, AddComponent, UpdateComponent, MetadataComponent, FormComponent, MenuComponent, BreadcrumbsComponent } from './components/index';
 import { ValueFormatService } from './services/value-format.service';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -30,8 +30,9 @@ import { FirebaseAppConfig, FIREBASE_OPTIONS, FIREBASE_APP_NAME } from '@angular
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { MatMenuModule } from '@angular/material/menu';
     UpdateComponent,
     MetadataComponent,
     FormComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    MenuComponent
   ],
   imports: [
     CommonModule,
@@ -71,7 +73,9 @@ import { MatMenuModule } from '@angular/material/menu';
     AngularFirestoreModule,
     AngularFireStorageModule,
     FlexLayoutModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [
     ValueFormatService,
@@ -83,6 +87,8 @@ import { MatMenuModule } from '@angular/material/menu';
     UpdateComponent,
     MetadataComponent,
     FormComponent,
+    MenuComponent,
+    BreadcrumbsComponent,
     RouterModule,
     AngularFirestoreModule,
     AngularFireStorageModule

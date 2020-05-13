@@ -1,0 +1,9 @@
+<mat-nav-list color="primary">
+  <ng-container *ngFor="let entity of entities">
+    <a mat-list-item
+       color="primary"
+       routerLinkActive="active"
+       [routerLink]="entity.id"> {{entity.plural | titlecase}} </a>
+    <mat-divider *ngIf="entity?.showMenuDividerAfter"></mat-divider>
+  </ng-container>
+</mat-nav-list>
