@@ -1,18 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { map, take } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { SiteMetadata } from '../site-metadata';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { slideInAnimation } from '../animations';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss'],
-  animations: [slideInAnimation]
+  styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent {
   entities: any = Object.keys(SiteMetadata.entities).filter((key: any) => !SiteMetadata.entities[key]?.hideList).map(key => {
     return {
       id: key,
@@ -25,22 +23,9 @@ export class LayoutComponent implements OnInit {
   );
   selectedEntity$: BehaviorSubject<string> = new BehaviorSubject('');
   @ViewChild('router', { static: false }) router: RouterOutlet;
+  animation$ = new BehaviorSubject('');
 
   constructor(
     private auth: AngularFireAuth
   ) { }
-
-  ngOnInit(): void {
-  }
-
-  getAnimationData(outlet: RouterOutlet) {
-    if (outlet?.isActivated) {
-      outlet.activatedRoute.params.pipe(
-        take(1),
-        map(params => params?.collection)
-      ).subscribe(this.selectedEntity$);
-    }
-
-    return outlet?.activatedRouteData?.animation;
-  }
 }

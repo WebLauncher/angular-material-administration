@@ -23,7 +23,6 @@ import { ValueFormatService } from './services/value-format.service';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFileInputModule } from '@weblauncher/material-file-input';
-import { materialAdministrationRoutes } from './material-administration.routes';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { FirebaseAppConfig, FIREBASE_OPTIONS, FIREBASE_APP_NAME } from '@angular/fire';
@@ -33,6 +32,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,7 @@ import { MatListModule } from '@angular/material/list';
     MatCardModule,
     MatIconModule,
     MatToolbarModule,
-    RouterModule.forChild(materialAdministrationRoutes),
+    RouterModule,
     MatProgressSpinnerModule,
     CdkTableModule,
     MatTableModule,
@@ -90,6 +90,7 @@ import { MatListModule } from '@angular/material/list';
     MenuComponent,
     BreadcrumbsComponent,
     RouterModule,
+    BrowserAnimationsModule,
     AngularFirestoreModule,
     AngularFireStorageModule
   ]

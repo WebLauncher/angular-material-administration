@@ -13,16 +13,15 @@
     <mat-administration-menu></mat-administration-menu>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary" class="navbar-top">
+    <mat-toolbar color="primary"
+                 class="navbar-top">
       <mat-toolbar-row class="user-toolbar">
         <button mat-button>Hi, {{userName$ | async}}</button>
       </mat-toolbar-row>
     </mat-toolbar>
-    <div class="page-content">
-      <div [@routeAnimation]="getAnimationData(routerOutlet)">
-        <router-outlet #routerOutlet="outlet"></router-outlet>
-      </div>
-    </div>
+    <main class="page-content">
+      <router-outlet #routerOutlet="outlet"></router-outlet>
+    </main>
   </mat-sidenav-content>
 </mat-sidenav-container>
 

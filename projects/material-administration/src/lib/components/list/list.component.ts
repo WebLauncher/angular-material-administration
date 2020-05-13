@@ -32,8 +32,8 @@ export class ListComponent extends MetadataComponent {
     this.displayedColumnsNames$ = this.displayedColumns$.pipe(map(columns => columns.map(column => column?.id)));
     this.list$ = this.collectionName$.pipe(
       switchMap(collection => this.dataAdapterService.list(collection, this.metadata$.getValue()?.idField || 'id')),
-      shareReplay(1),
-      tap(() => this.isLoading$.next(false))
+      tap(() => this.isLoading$.next(false)),
+      shareReplay(1)
     );
   }
 

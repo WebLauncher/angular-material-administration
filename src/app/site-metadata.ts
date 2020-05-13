@@ -28,7 +28,10 @@ export const SiteMetadata: MatAdministrationMetadata = {
           label: 'Image',
           inputType: 'image',
           format: 'image',
-          filePathField: 'imageUrlPath'
+          filePathField: 'imageUrlPath',
+          style: {
+            list: { height: '100px' }
+          }
         },
         created: {
           type: 'timestamp',

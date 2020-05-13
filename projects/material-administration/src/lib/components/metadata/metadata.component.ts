@@ -1,7 +1,7 @@
 import { Component, OnDestroy, Optional, Inject } from '@angular/core';
 import { BehaviorSubject, of, forkJoin, Subject, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { map, shareReplay, switchMap, take, catchError, takeUntil } from 'rxjs/operators';
+import { map, shareReplay, switchMap, take, catchError, takeUntil, tap } from 'rxjs/operators';
 import { capitalize } from 'lodash';
 import { DataAdapterService } from '../../services/data-adapter.service';
 import { DownloadData } from '../../services';
@@ -27,6 +27,7 @@ export class MetadataComponent implements OnDestroy {
   ) {
     this.route.params.pipe(
       map(params => params?.collection),
+      tap(() => this.isLoading$.next(true)),
       takeUntil(this.destroyed$)
     )
       .subscribe(this.collectionPath$);
