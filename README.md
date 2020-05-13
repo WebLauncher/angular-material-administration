@@ -1,3 +1,5 @@
+![Build and Deploy](https://github.com/WebLauncher/angular-material-administration/workflows/Build%20and%20Deploy/badge.svg?branch=master)
+
 # Angular Material Administration Library
 
 This projects is a component library for delivering a fast data entity administration project based on injecting a data service and entity metadata.
