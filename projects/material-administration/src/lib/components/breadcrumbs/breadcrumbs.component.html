@@ -1,18 +1,21 @@
 <div fxLayout="row"
-     fxAlign="start">
-  <ng-container *ngFor="let item of links$ | async; let last = last">
-    <div fxLayout="row"
-         fxLayoutAlign="start center">
-      <a mat-button
-         [routerLink]="item.url">
-        <ng-container *ngIf="item.source">
-          {{(item.source | async)}}
-        </ng-container>
-        <ng-container *ngIf="!item.source">
-          {{item.name}}
-        </ng-container>
-      </a>
-      <mat-icon *ngIf="!last">arrow_right</mat-icon>
-    </div>
+     fxAlign="start"
+     *ngIf="links$ | async as links">
+  <ng-container *ngIf="links.length > 1">
+    <ng-container *ngFor="let item of links; let last = last">
+      <div fxLayout="row"
+           fxLayoutAlign="start center">
+        <a mat-button
+           [routerLink]="item.url">
+          <ng-container *ngIf="item.source">
+            {{(item.source | async)}}
+          </ng-container>
+          <ng-container *ngIf="!item.source">
+            {{item.name}}
+          </ng-container>
+        </a>
+        <mat-icon *ngIf="!last">arrow_right</mat-icon>
+      </div>
+    </ng-container>
   </ng-container>
 </div>

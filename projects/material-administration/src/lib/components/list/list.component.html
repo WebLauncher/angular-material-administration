@@ -6,7 +6,7 @@
   <mat-administration-breadcrumbs [collectionName]="collectionName$ | async"
                                   action="list"></mat-administration-breadcrumbs>
   <mat-toolbar class="justify-between">
-    <h1>Manage {{metadata?.plural}}</h1>
+    <h1>{{metadata?.plural | titlecase}}</h1>
     <button mat-raised-button
             color="primary"
             routerLink="/{{collectionPath$ | async}}/add">

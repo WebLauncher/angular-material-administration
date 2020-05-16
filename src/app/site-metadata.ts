@@ -34,12 +34,10 @@ export const SiteMetadata: MatAdministrationMetadata = {
           }
         },
         created: {
-          type: 'timestamp',
-          hideInForm: true
+          type: 'timestamp'
         },
         updated: {
-          type: 'timestamp',
-          hideInForm: true
+          type: 'timestamp'
         }
       },
       entities: {

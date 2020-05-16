@@ -183,9 +183,15 @@ export class MetadataComponent implements OnDestroy {
     return of(field);
   }
 
-  private showField(metadata, field) {
+  private showField(metadata: MatAdministrationEntity, field) {
     return field.name !== 'id' &&
+    (
+    (
       (!metadata?.createdTimestamp || metadata?.createdTimestamp !== field.name) &&
-      (!metadata?.updatedTimestamp || metadata?.updatedTimestamp !== field.name);
+      (!metadata?.updatedTimestamp || metadata?.updatedTimestamp !== field.name)
+    ) ||
+      (!metadata?.fields[field.name]?.hideInForm && !metadata?.fields[field.name]?.type !== 'timestamp') ||
+      metadata?.fields[field.name]?.showInForm
+    );
   }
 }

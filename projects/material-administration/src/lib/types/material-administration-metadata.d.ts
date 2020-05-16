@@ -1,6 +1,9 @@
 export interface MatAdministrationEntityField {
+  id?: string;
   hideInList: boolean;
+  showInList: boolean;
   hideInForm: boolean;
+  showInForm: boolean;
   inputType: string;
   type: string;
   data: {

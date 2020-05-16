@@ -8,6 +8,7 @@ import { MetadataComponent } from '../metadata/metadata.component';
 import { SnackbarService } from '../../services/snackbar.service';
 import { capitalize } from 'lodash';
 import { DataAdapterService } from '../../services/data-adapter.service';
+import { MatAdministrationMetadata, MatAdministrationEntityField } from '../../types';
 
 @Component({
   selector: 'mat-administration-list',
@@ -24,7 +25,7 @@ export class ListComponent extends MetadataComponent {
     private valueFormatService: ValueFormatService,
     private snackbar: SnackbarService,
     public dataAdapterService: DataAdapterService,
-    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: any
+    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: MatAdministrationMetadata
   ) {
     super(route, dataAdapterService, metadata);
 
@@ -74,12 +75,16 @@ export class ListComponent extends MetadataComponent {
       return [];
     }
 
-    return Object.keys(pickBy(columns, col => col && !col?.hideInList)).map(column => {
+    return Object.keys(pickBy(columns, col => this.canDisplayColumn(col))).map(column => {
       return {
         ...columns[column],
         label: columns[column]?.label || this.getFieldLabel({ label: column }),
         id: columns[column]?.id || column
       };
     });
+  }
+
+  private canDisplayColumn(column: MatAdministrationEntityField): boolean {
+    return column && !column?.hideInList && (column?.showInList || column?.type !== 'timestamp');
   }
 }
