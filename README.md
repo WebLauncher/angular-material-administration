@@ -15,6 +15,12 @@ This project requires knowledge of Angular and Angular libraries creation. Pleas
 
   `npm i`
 
+4. Install global tools
+
+  `npm i lerna -g`
+
+  `npm i commitizen -g`
+
 3. Start project
 
   `npm start`
