@@ -16,8 +16,10 @@ jobs:
           npm install
       - name: Build
         run: |
-          npm run build:projects
-          npm run build:prod
+          npx lerna run build
+      - name: Publish
+        run: |
+          npx lerna publish --contents dist --yes
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:

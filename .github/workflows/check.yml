@@ -21,5 +21,4 @@ jobs:
           npm run lint
       - name: Build
         run: |
-          npm run build:projects
-          npm run build:prod
+          npx lerna run build
