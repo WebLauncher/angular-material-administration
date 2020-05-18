@@ -1,0 +1,32 @@
+{
+  "name": "material-administration",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^9.1.0",
+    "@angular/core": "^9.1.0",
+    "@angular/forms": "^9.1.1",
+    "@angular/material": "^9.1.0",
+    "@angular/cdk": "^9.1.0",
+    "@ckeditor/ckeditor5-angular": "1.2.3",
+    "@angular/fire": "^5.4.2",
+    "@angular/flex-layout": "^9.0.0-beta.29",
+    "uuid": "^7.0.3",
+    "firebase": "^7.13.2",
+    "lodash": "^4.17.15",
+    "luxon": "^1.23.0",
+    "tslib": "^1.10.0",
+    "material-file-input": "*"
+  },
+  "main": "bundles/material-administration.umd.js",
+  "module": "fesm5/material-administration.js",
+  "es2015": "fesm2015/material-administration.js",
+  "esm5": "esm5/material-administration.js",
+  "esm2015": "esm2015/material-administration.js",
+  "fesm5": "fesm5/material-administration.js",
+  "fesm2015": "fesm2015/material-administration.js",
+  "typings": "material-administration.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by Ivy. This is not allowed.\\nPlease delete and rebuild the package, without compiling with Ivy, before attempting to publish.\\n')\" && exit 1"
+  }
+}

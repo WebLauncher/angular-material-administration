@@ -1,6 +1,10 @@
 {
   "name": "material-file-input",
   "version": "0.0.1",
+  "scripts": {
+    "build": "ng build material-file-input",
+    "postpublish": "rm -rf dist/"
+  },
   "peerDependencies": {
     "@angular/common": "^9.1.0",
     "@angular/core": "^9.1.0",

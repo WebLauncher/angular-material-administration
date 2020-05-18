@@ -1,0 +1,6 @@
+/*
+ * Public API Surface of material-file-input
+ */
+export * from './lib/material-file-input.component';
+export * from './lib/material-file-input.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL21hdGVyaWFsLWZpbGUtaW5wdXQvIiwic291cmNlcyI6WyJwdWJsaWMtYXBpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztHQUVHO0FBRUgsY0FBYyxxQ0FBcUMsQ0FBQztBQUNwRCxjQUFjLGtDQUFrQyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLypcbiAqIFB1YmxpYyBBUEkgU3VyZmFjZSBvZiBtYXRlcmlhbC1maWxlLWlucHV0XG4gKi9cblxuZXhwb3J0ICogZnJvbSAnLi9saWIvbWF0ZXJpYWwtZmlsZS1pbnB1dC5jb21wb25lbnQnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvbWF0ZXJpYWwtZmlsZS1pbnB1dC5tb2R1bGUnO1xuIl19

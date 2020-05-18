@@ -1,6 +1,10 @@
 {
   "name": "material-administration",
   "version": "0.0.1",
+  "scripts": {
+    "build": "ng build material-administration",
+    "postpublish": "rm -rf dist/"
+  },
   "peerDependencies": {
     "@angular/common": "^9.1.0",
     "@angular/core": "^9.1.0",
@@ -14,6 +18,10 @@
     "firebase": "^7.13.2",
     "lodash": "^4.17.15",
     "luxon": "^1.23.0",
-    "tslib": "^1.10.0"
+    "tslib": "^1.10.0",
+    "material-file-input": "*"
+  },
+  "devDependencies": {
+    "material-file-input": "*"
   }
 }
