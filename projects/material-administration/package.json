@@ -1,27 +1,27 @@
 {
   "name": "material-administration",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "scripts": {
     "build": "ng build material-administration",
     "postpublish": "rm -rf dist/"
   },
   "peerDependencies": {
+    "@angular/cdk": "^9.1.0",
     "@angular/common": "^9.1.0",
     "@angular/core": "^9.1.0",
-    "@angular/forms": "^9.1.1",
-    "@angular/material": "^9.1.0",
-    "@angular/cdk": "^9.1.0",
-    "@ckeditor/ckeditor5-angular": "1.2.3",
     "@angular/fire": "^5.4.2",
     "@angular/flex-layout": "^9.0.0-beta.29",
-    "uuid": "^7.0.3",
+    "@angular/forms": "^9.1.1",
+    "@angular/material": "^9.1.0",
+    "@ckeditor/ckeditor5-angular": "1.2.3",
     "firebase": "^7.13.2",
     "lodash": "^4.17.15",
     "luxon": "^1.23.0",
+    "material-file-input": "*",
     "tslib": "^1.10.0",
-    "material-file-input": "*"
+    "uuid": "^7.0.3"
   },
   "devDependencies": {
-    "material-file-input": "*"
+    "material-file-input": "^0.1.0"
   }
 }
