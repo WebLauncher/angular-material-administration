@@ -18,7 +18,6 @@
     "pre:commit": "ng lint --fix",
     "commit": "git add . && npx git-cz"
   },
-  "private": true,
   "dependencies": {
     "@angular-material-extensions/password-strength": "^6.0.0",
     "@angular/animations": "^9.1.1",
