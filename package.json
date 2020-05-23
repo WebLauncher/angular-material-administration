@@ -16,7 +16,6 @@
     "postinstall": "ngcc",
     "clean": "rimraf projects/**/dist",
     "pre:commit": "ng lint --fix",
-    "pre:push": "ng lint",
     "commit": "git add . && npx git-cz"
   },
   "private": true,
@@ -95,8 +94,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "npm run pre:commit",
-      "pre-push": "npm run pre:push"
+      "pre-commit": "npm run pre:commit"
     }
   },
   "config": {
