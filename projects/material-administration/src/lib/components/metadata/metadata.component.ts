@@ -44,15 +44,15 @@ export class MetadataComponent implements OnDestroy {
     ).subscribe(this.metadata$);
 
     this.metadata$.pipe(
-      map(metadata => {
-        if (!metadata?.entities) {
+      map(meta => {
+        if (!meta?.entities) {
           return null;
         }
 
-        return Object.keys(metadata.entities).map(key => {
+        return Object.keys(meta.entities).map(key => {
           return {
             id: key,
-            ...metadata.entities[key]
+            ...meta.entities[key]
           };
         });
       })
