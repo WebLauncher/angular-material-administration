@@ -16,7 +16,7 @@
     "postinstall": "ngcc",
     "clean": "rimraf projects/**/dist",
     "precommit": "ng lint --fix",
-    "prepush": "ng lint --fix"
+    "prepush": "ng lint"
   },
   "private": true,
   "dependencies": {
