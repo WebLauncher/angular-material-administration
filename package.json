@@ -15,8 +15,9 @@
     "e2e": "ng e2e",
     "postinstall": "ngcc",
     "clean": "rimraf projects/**/dist",
-    "precommit": "ng lint --fix",
-    "prepush": "ng lint"
+    "pre:commit": "ng lint --fix",
+    "pre:push": "ng lint",
+    "commit": "git add . && npx git-cz"
   },
   "private": true,
   "dependencies": {
@@ -94,8 +95,8 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "npm run precommit",
-      "pre-push": "npm run prepush"
+      "pre-commit": "npm run pre:commit",
+      "pre-push": "npm run pre:push"
     }
   },
   "config": {
