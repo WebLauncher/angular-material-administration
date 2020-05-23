@@ -6,15 +6,17 @@
     "start": "npm run clean && run-p watch:* serve",
     "build:projects": "ng build material-file-input && ng build material-administration",
     "build:prod": "ng build --prod",
-    "serve": "wait-on dist/material-administration/public-api.d.ts && ng serve",
+    "serve": "wait-on projects/material-administration/dist/public-api.d.ts && ng serve",
     "watch:material-file-input": "ng build material-file-input --watch",
-    "watch:material-administration": "wait-on dist/material-file-input/public-api.d.ts && ng build material-administration --watch",
+    "watch:material-administration": "wait-on projects/material-file-input/dist/public-api.d.ts && ng build material-administration --watch",
     "deploy": "ng build --prod && firebase deploy",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ngcc",
-    "clean": "rimraf dist"
+    "clean": "rimraf projects/**/dist",
+    "precommit": "ng lint --fix",
+    "prepush": "ng lint --fix"
   },
   "private": true,
   "dependencies": {
@@ -91,7 +93,9 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "npm run precommit",
+      "pre-push": "npm run prepush"
     }
   },
   "config": {

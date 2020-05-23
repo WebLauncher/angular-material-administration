@@ -1,9 +1,12 @@
 {
-  "name": "@weblauncher/material-administration",
+  "name": "material-administration",
   "version": "0.1.0",
   "scripts": {
-    "build": "ng build material-administration",
+    "build": "wait-on ../material-file-input/dist/public-api.d.ts && ng build material-administration",
     "postpublish": "rm -rf dist/"
+  },
+  "devDependencies": {
+    "@weblauncher/material-file-input": "*"
   },
   "peerDependencies": {
     "@angular/cdk": "^9.1.0",
@@ -14,14 +17,11 @@
     "@angular/forms": "^9.1.1",
     "@angular/material": "^9.1.0",
     "@ckeditor/ckeditor5-angular": "1.2.3",
+    "@weblauncher/material-file-input": "*",
     "firebase": "^7.13.2",
     "lodash": "^4.17.15",
     "luxon": "^1.23.0",
-    "@weblauncher/material-file-input": "*",
     "tslib": "^1.10.0",
     "uuid": "^7.0.3"
-  },
-  "devDependencies": {
-    "@weblauncher/material-file-input": "^0.1.0"
   }
 }

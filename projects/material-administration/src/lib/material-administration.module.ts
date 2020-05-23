@@ -22,7 +22,6 @@ import { ListComponent, AddComponent, UpdateComponent, MetadataComponent, FormCo
 import { ValueFormatService } from './services/value-format.service';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatFileInputModule } from '@weblauncher/material-file-input';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { FirebaseAppConfig, FIREBASE_OPTIONS, FIREBASE_APP_NAME } from '@angular/fire';
@@ -33,6 +32,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFileInputModule } from '@weblauncher/material-file-input';
 
 @NgModule({
   declarations: [

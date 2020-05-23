@@ -17,12 +17,16 @@
     ],
     "paths": {
       "@weblauncher/material-file-input": [
-        "dist/material-file-input/material-file-input",
-        "dist/material-file-input"
+        "./projects/material-file-input/dist"
+      ],
+      "@weblauncher/material-file-input/*": [
+        "./projects/material-file-input/dist/"
       ],
       "@weblauncher/material-administration": [
-        "dist/material-administration/material-administration",
-        "dist/material-administration"
+        "./projects/material-administration/dist"
+      ],
+      "@weblauncher/material-administration/*": [
+        "./projects/material-administration/dist/"
       ],
       "types": [
         "types"

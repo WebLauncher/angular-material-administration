@@ -21,8 +21,10 @@
         "./node_modules/firebase"
       ],
       "@weblauncher/material-file-input": [
-        "./dist/material-file-input/material-file-input",
-        "./dist/material-file-input"
+        "./projects/material-file-input/dist"
+      ],
+      "@weblauncher/material-file-input/*": [
+        "./projects/material-file-input/dist/"
       ]
     }
   },
