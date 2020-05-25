@@ -1,5 +1,5 @@
 {
-  "name": "material-file-input",
+  "name": "@weblauncher/material-file-input",
   "version": "0.1.1",
   "scripts": {
     "build": "ng build material-file-input",
