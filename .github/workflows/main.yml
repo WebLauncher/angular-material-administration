@@ -23,7 +23,7 @@ jobs:
           git config --global user.name "webbot"
           npx lerna publish --contents dist --yes
         env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
