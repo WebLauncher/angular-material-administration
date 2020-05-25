@@ -1,6 +1,7 @@
 {
   "name": "administration",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "ng": "ng",
     "start": "npm run clean && run-p watch:* serve",
@@ -65,6 +66,7 @@
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
+    "clang-format": "^1.4.0",
     "codelyzer": "^5.1.2",
     "commitizen": "^4.1.2",
     "cz-conventional-changelog": "^3.2.0",
