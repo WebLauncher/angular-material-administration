@@ -24,8 +24,8 @@ jobs:
           npx lerna run build
       - name: Publish
         run: |
-          git config --global user.email "contact@weblauncher.ro"
-          git config --global user.name "webbot"
+          git config --global user.email "me_shuv@yahoo.com"
+          git config --global user.name "mihaivarga"
           npm config set access public
           npx lerna publish --contents dist --yes
         env:
