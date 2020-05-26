@@ -4,7 +4,7 @@ This is an Angular component library to generate material design UI to render an
 
 ## Usage
 
-TODO
+See demo app for usage. https://unified-welder-663.web.app/
 
 ## Contribute
 
