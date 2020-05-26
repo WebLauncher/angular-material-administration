@@ -27,7 +27,7 @@ jobs:
           git config --global user.email "contact@weblauncher.ro"
           git config --global user.name "webbot"
           npm config set access public
-          npx lerna version
+          npx lerna version --yes
           npx lerna publish --contents dist --no-verify-access --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
