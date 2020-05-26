@@ -34,7 +34,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Build demo
         run: |
-          ng build --prod
+          npm run build:prod
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
