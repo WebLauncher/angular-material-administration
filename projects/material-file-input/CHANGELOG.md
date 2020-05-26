@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/WebLauncher/angular-material-administration/compare/@weblauncher/material-file-input@0.2.0...@weblauncher/material-file-input@0.2.1) (2020-05-26)
+
+
+### Bug Fixes
+
+* **build:** version set ([1e31650](https://github.com/WebLauncher/angular-material-administration/commit/1e316506b55bab5be2cccf7a9c4c955534bc6841))
+* **deploy:** private library false ([88d9ae2](https://github.com/WebLauncher/angular-material-administration/commit/88d9ae2bcb6be1fa4cfb158c2661f94b152297c6))
+
+
+
+
+
 # 0.2.0 (2020-05-25)
 
 

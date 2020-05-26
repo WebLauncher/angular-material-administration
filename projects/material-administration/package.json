@@ -1,13 +1,13 @@
 {
   "name": "@weblauncher/material-administration",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": false,
   "scripts": {
     "build": "wait-on ../material-file-input/dist/public-api.d.ts && ng build material-administration",
     "postpublish": "rm -rf dist/"
   },
   "devDependencies": {
-    "@weblauncher/material-file-input": "^0.2.0"
+    "@weblauncher/material-file-input": "^0.2.1"
   },
   "peerDependencies": {
     "@angular/cdk": "^9.1.0",
