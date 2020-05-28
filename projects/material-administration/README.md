@@ -8,4 +8,4 @@ See demo app for usage. https://unified-welder-663.web.app/
 
 ## Contribute
 
-TODO
+Read contribution guide here

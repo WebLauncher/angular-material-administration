@@ -26,4 +26,4 @@ In your templates now you can add
 
 ## Contribute
 
-TODO
+Read contribution guide here
