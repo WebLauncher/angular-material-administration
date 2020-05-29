@@ -39,6 +39,15 @@ jobs:
       - name: Build
         run: |
           npx lerna run build
+      - name: Build demo
+        run: |
+          npm run build:prod
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - name: Git identity
         run: |
           git config --global user.email "me_shuv@yahoo.com"
@@ -54,12 +63,4 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      - name: Build demo
-        run: |
-          npm run build:prod
-      - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
