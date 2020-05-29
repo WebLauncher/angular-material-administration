@@ -3,6 +3,11 @@
   "version": "0.2.5",
   "keywords": ["angular", "material", "input", "file"],
   "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WebLauncher/angular-material-administration"
+  },
+  "license": "MIT",
   "scripts": {
     "build": "ng build material-file-input",
     "postpublish": "rm -rf dist/"
