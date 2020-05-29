@@ -26,4 +26,4 @@ In your templates now you can add
 
 ## Contribute
 
-[Go to Angular Material Administration library contribution guide](https://github.com/WebLauncher/angular-material-administration/CONTRIBUTION.md)
+[Angular Material Administration library contribution guide](https://github.com/WebLauncher/angular-material-administration/CONTRIBUTION.md)

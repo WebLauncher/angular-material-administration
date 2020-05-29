@@ -8,4 +8,4 @@ See demo app for usage. https://unified-welder-663.web.app/
 
 ## Contribute
 
-[Go to Angular Material Administration library contribution guide](https://github.com/WebLauncher/angular-material-administration/CONTRIBUTION.md)
+[Angular Material Administration library contribution guide](https://github.com/WebLauncher/angular-material-administration/CONTRIBUTION.md)
