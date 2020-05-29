@@ -1,5 +1,7 @@
 # Material File Upload Input
 
+[![npm version](https://badge.fury.io/js/%40weblauncher%2Fmaterial-file-input.svg)](https://badge.fury.io/js/%40weblauncher%2Fmaterial-file-input)
+
 This is an Angular Material component library for having a file input component.
 
 ## Instalation
