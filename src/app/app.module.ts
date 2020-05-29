@@ -4,13 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { EntityDataModule } from '@ngrx/data';
-import { entityConfig } from './entity-metadata';
 import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -33,24 +27,17 @@ export function firebaseAppNameFactory() {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    LayoutComponent
-  ],
+  declarations: [AppComponent, LoginComponent, LayoutComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}, {}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([]),
-    StoreRouterConnectingModule.forRoot(),
-    EntityDataModule.forRoot(entityConfig),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,
-    NgxAuthFirebaseUIModule.forRoot(environment.firebase, firebaseAppNameFactory,
+    NgxAuthFirebaseUIModule.forRoot(
+      environment.firebase,
+      firebaseAppNameFactory,
       {
         authGuardFallbackURL: '/login',
         authGuardLoggedInURL: '/site',
@@ -64,14 +51,17 @@ export function firebaseAppNameFactory() {
     MatDividerModule,
     MatProgressSpinnerModule,
     MatNativeDateModule,
-    MaterialAdministrationModule.forRoot(environment.firebase, firebaseAppNameFactory)
+    MaterialAdministrationModule.forRoot(
+      environment.firebase,
+      firebaseAppNameFactory
+    ),
   ],
   providers: [
     {
       provide: 'MAT_ADMINISTRATION_METADATA',
-      useValue: SiteMetadata
-    }
+      useValue: SiteMetadata,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

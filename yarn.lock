@@ -239,10 +239,10 @@
   resolved "https://registry.yarnpkg.com/@angular/core/-/core-9.1.1.tgz#0a4bb3f81e4103d141556dd5c7272f05bc78cfaa"
   integrity sha512-6lDlUlePafr/392hOvvTZZl6xPHT50U6658sHUAVIr0Un4mJ2MHNHKZtO45bpn3hM4gjFcYRQ7Rpd0umW74iTA==
 
-"@angular/fire@^5.4.2":
-  version "5.4.2"
-  resolved "https://registry.yarnpkg.com/@angular/fire/-/fire-5.4.2.tgz#fb2d54935de0d83789e940e5f57a6ffc0e1ef4eb"
-  integrity sha512-QzB5d1wtqr9jxfsVNv2+569MlfK4/QrrpNy0IngOHdxS4FBbXqMOcx37iv1m2mzJv9zlGUddUX44IZP5Xfb3cw==
+"@angular/fire@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@angular/fire/-/fire-6.0.0.tgz#c1dbae9e78ed74af951fb7222108c444300a4d15"
+  integrity sha512-zWhaJaZPtfJKiNSb1I3WqqvopW0fN3S61w4PjPdsm5WME+9M9alP0zpRVclpbCU26LpBSLhrRrSLyn3ROlAOIw==
 
 "@angular/flex-layout@^9.0.0-beta.29":
   version "9.0.0-beta.31"
@@ -1038,10 +1038,10 @@
     "@ckeditor/ckeditor5-watchdog" "^17.0.0"
     tslib "^1.9.0"
 
-"@ckeditor/ckeditor5-build-classic@^18.0.0":
-  version "18.0.0"
-  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-build-classic/-/ckeditor5-build-classic-18.0.0.tgz#751a475bb14bcadcf6fc6285c979bccd1cb40883"
-  integrity sha512-7nyaDU5sUSl+7wXPwr0d5bOlO2e0LRQh2iJJCJfAjjuUESwtiBGoFC+Ql5dEht0xlfARoSWQMlkUvGuHOVja7A==
+"@ckeditor/ckeditor5-build-classic@^19.0.1":
+  version "19.0.1"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-build-classic/-/ckeditor5-build-classic-19.0.1.tgz#14fa2da034710e111dfd6869f7cea9f0b60cab0f"
+  integrity sha512-Lwd9AzbR2Iqhk4CzALyoULNKBslTHdetiLYF/RprNBfkMmOG7M3IH4Y7oqoNLQ80t5LsQEpOGlvo2iBAO0J3nQ==
 
 "@ckeditor/ckeditor5-watchdog@^17.0.0":
   version "17.0.0"
@@ -2316,41 +2316,6 @@
   dependencies:
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
-
-"@ngrx/data@^9.1.0":
-  version "9.1.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/data/-/data-9.1.2.tgz#83edb62ea284d350223bf9eb515778b9db56427c"
-  integrity sha512-qNjC04VnpC3ISBEt7EDU/VBduid0+/F3yxE2qaUxyesCEBADLC+Th8y28sfVUJ37BSoTpno7zAOAU8VvpI1iGw==
-
-"@ngrx/effects@^9.1.0":
-  version "9.1.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-9.1.2.tgz#9d81f05b6ba3eb42a911d20f35d2112af3adbfd8"
-  integrity sha512-H9jbGUzP5izk9Ap8BQJicO1+xheyDyHBbvv6b1NkaRHpDizhPOSBjoFWExFfsejXo0dafaIsu6aI+y+Fp+LSsg==
-
-"@ngrx/entity@^9.1.0":
-  version "9.1.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/entity/-/entity-9.1.2.tgz#4958ddae597b93118489e57ec62ca6539765b768"
-  integrity sha512-V6sN/W2rLZFFMlzML3AcHYrA6h9mRMpSVqpsMF4ZLhubmQWP4BG24vyJX8ExtH46OU7ick8aiYqrNzF4rJMiag==
-
-"@ngrx/router-store@^9.1.0":
-  version "9.1.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-9.1.2.tgz#4433c951c7090fa0705e6b69a5d1d25a04134508"
-  integrity sha512-zqAm7fOdJ34dY2Tlts2YV9MDcDP2CqB+hLEytjo/bOIkUo/lQA1R5VAUI+Z8+tUlmPqSVIJkzsGuCxO6XnLEjQ==
-
-"@ngrx/schematics@^9.1.0":
-  version "9.1.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/schematics/-/schematics-9.1.2.tgz#6b5de7f2294f0df353888ddd48f436bf25667fd2"
-  integrity sha512-oa2fSjoaYlTmBPJW45EQlaeTGIJZ5wKXQFDGUBlJQNtZf/El2CXmGyo0VWzxQ40y2GCdt4gCXeDHZWCchUFCLA==
-
-"@ngrx/store-devtools@^9.1.0":
-  version "9.1.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-9.1.2.tgz#b10bbde90acce2ab65f3d648051239cdd261049e"
-  integrity sha512-i9gwj9FlUVrei9yMwwFx15RV0JWOI73cjbjKhZ2lUWmCF6bfZeuPYZmEs3/80L8r3R9nZWnBoX9xxQslte65iw==
-
-"@ngrx/store@^9.1.0":
-  version "9.1.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-9.1.2.tgz#cc443d08d53440cafd669048a974b05456e95070"
-  integrity sha512-FQXFonF8hSGJDqgLaoWHy2mkeJwVdoa3jLoT1YpkJWxsFMG4U0T6JYG4VrtuymDgo9XwWBBJqIiNpdTgHhofSQ==
 
 "@ngtools/webpack@9.1.0":
   version "9.1.0"
@@ -10757,7 +10722,7 @@ ng-packagr@^9.0.0:
     terser "^4.3.8"
     update-notifier "^4.0.0"
 
-ngx-auth-firebaseui@^4.0.4:
+ngx-auth-firebaseui@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/ngx-auth-firebaseui/-/ngx-auth-firebaseui-4.3.0.tgz#9413dbe629f3d93cd0b27d222579d7ddf2041bd9"
   integrity sha512-Nl/Sfeo0HuVw7ESvBANnHagoVjZ3hxkWjQQdM+RrkSotk85pfSsyXXo1JwuXuW7ky6Gd5KqLUzRuxTpOdgKB6A==
