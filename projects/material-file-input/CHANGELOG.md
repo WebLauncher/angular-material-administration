@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.3 (2020-05-29)
+
+
+### Bug Fixes
+
+* **build:** change readme ([e8bfa37](https://github.com/WebLauncher/angular-material-administration/commit/e8bfa378ec91f9b09a543c437728ce040625624b))
+
+
+
+
+
 ## 0.2.2 (2020-05-29)
 
 **Note:** Version bump only for package @weblauncher/material-file-input
