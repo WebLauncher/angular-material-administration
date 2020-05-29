@@ -1,6 +1,6 @@
 {
   "name": "@weblauncher/material-administration",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "keywords": ["angular", "material", "firebase", "rest"],
   "private": false,
   "scripts": {
@@ -8,7 +8,7 @@
     "postpublish": "rm -rf dist/"
   },
   "devDependencies": {
-    "@weblauncher/material-file-input": "^0.2.4"
+    "@weblauncher/material-file-input": "^0.2.5"
   },
   "peerDependencies": {
     "@angular/cdk": "^9.1.0",
