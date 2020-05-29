@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.6 (2020-05-29)
+
+
+### Bug Fixes
+
+* **deploy:** deploy to firebase before publish to npm ([0a2496d](https://github.com/WebLauncher/angular-material-administration/commit/0a2496d532f29166ed8cac8c7be8e20985d0dd15))
+
+
+
+
+
 ## 0.2.5 (2020-05-29)
 
 **Note:** Version bump only for package @weblauncher/material-administration
