@@ -12,12 +12,12 @@
     "watch:material-administration": "wait-on projects/material-file-input/dist/public-api.d.ts && ng build material-administration --watch",
     "deploy": "ng build --prod && firebase deploy",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "ng lint && yarn run lint:styles",
+    "lint:styles": "stylelint \"src/**/*.scss\" && stylelint \"projects/**/*.scss\"",
     "e2e": "ng e2e",
     "postinstall": "ngcc",
     "clean": "rimraf projects/**/dist",
-    "pre:commit": "ng lint --fix",
-    "commit": "git add . && npx git-cz"
+    "pre:commit": "yarn run lint"
   },
   "dependencies": {
     "@angular-material-extensions/password-strength": "^6.0.0",
@@ -80,6 +80,9 @@
     "npm-run-all": "^4.1.5",
     "protractor": "~5.4.3",
     "semantic-release": "^17.0.7",
+    "stylelint": "^13.5.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-scss": "^3.17.2",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3",

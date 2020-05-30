@@ -1,10 +1,12 @@
 .mat-material-file-input-container {
   display: flex;
 }
+
 span {
   opacity: 0;
   transition: opacity 200ms;
 }
+
 :host.floating span {
   opacity: 1;
 }
@@ -15,9 +17,8 @@ input {
   padding: 0;
   outline: none;
   font: inherit;
-  text-align: center;
-  flex-grow: 1;
   text-align: left;
+  flex-grow: 1;
 }
 
 button {
