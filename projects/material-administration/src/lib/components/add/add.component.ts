@@ -1,6 +1,6 @@
 import { Component, Inject, Optional } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable } from 'rxjs';
 import { take, tap, switchMap, map } from 'rxjs/operators';
 import { capitalize } from 'lodash';
 import { Immutable } from 'types/immutable';
@@ -34,11 +34,11 @@ export class AddComponent extends MetadataComponent {
 
   save(item: any) {
     this.isLoading$.next(true);
-    combineLatest([this.metadata$, this.collectionName$])
+    this.collectionName$
       .pipe(
         take(1),
-        switchMap(([metadata, collectionName]) => {
-          return this.processUploads(item, metadata, 'add').pipe(
+        switchMap(([collectionName]) => {
+          return this.processUploads(item).pipe(
             map((updatedItem) => {
               return [collectionName, updatedItem];
             })

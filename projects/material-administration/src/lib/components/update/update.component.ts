@@ -47,11 +47,11 @@ export class UpdateComponent extends MetadataComponent {
   save(item: any) {
     this.isLoading$.next(true);
 
-    combineLatest([this.metadata$, this.collectionName$])
+    this.collectionName$
       .pipe(
         take(1),
-        switchMap(([metadata, collectionName]) => {
-          return this.processUploads(item, metadata, 'update').pipe(
+        switchMap((collectionName) => {
+          return this.processUploads(item).pipe(
             map((updatedItem) => {
               return [collectionName, updatedItem];
             })
