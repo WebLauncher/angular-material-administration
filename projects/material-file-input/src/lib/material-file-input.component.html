@@ -7,14 +7,14 @@
   <input *ngIf="multiple"
          type="file"
          #file
-         style="display: none"
+         style="display: none;"
          (change)="onFilesAdded()"
          multiple />
 
   <input *ngIf="!multiple"
          type="file"
          #file
-         style="display: none"
+         style="display: none;"
          (change)="onFilesAdded()" />
   <button mat-stroked-button>{{buttonText}}</button>
 </div>

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Optional, Inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { MatAdministrationEntity, MatAdministrationMetadata } from '../../types';
 import { capitalize } from 'lodash';
 import { map } from 'rxjs/operators';
+import { MatAdministrationEntity, MatAdministrationMetadata } from '../../types/material-administration-metadata';
 import { DataAdapterService } from '../../services';
 
 @Component({
@@ -27,11 +27,11 @@ export class BreadcrumbsComponent implements OnInit {
   constructor(
     @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: MatAdministrationMetadata,
     public dataAdapterService: DataAdapterService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.links$ = this.collectionName$.pipe(
-      map(collectionName => {
+      map((collectionName) => {
         const parts = collectionName.split('/');
         return this.getLinks(parts, this.metadata.entities[parts[0]]);
       })
@@ -53,17 +53,21 @@ export class BreadcrumbsComponent implements OnInit {
   private getItemUrl(collection, itemId, metadata, baseUrl) {
     return {
       name: metadata.titleField || 'title',
-      source: this.dataAdapterService.get(collection, itemId).pipe(map(data => data?.[metadata.titleField || 'title'])),
+      source: this.dataAdapterService
+        .get(collection, itemId)
+        .pipe(map((data) => data?.[metadata.titleField || 'title'])),
       url: [`${baseUrl}${collection}/update/${itemId}`]
     };
   }
 
-  private getPartUrls(part, metadata, baseUrl = '', action = 'list', itemId = '') {
+  private getPartUrls(part, metadata, baseUrl = '', action = 'list') {
     if (action === 'list') {
-      return [{
-        name: capitalize(metadata.plural),
-        url: [`${baseUrl}${part}/list`]
-      }];
+      return [
+        {
+          name: capitalize(metadata.plural),
+          url: [`${baseUrl}${part}/list`]
+        }
+      ];
     }
 
     if (action === 'add') {
@@ -91,5 +95,7 @@ export class BreadcrumbsComponent implements OnInit {
         }
       ];
     }
+
+    return [];
   }
 }

@@ -18,8 +18,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RouterModule } from '@angular/router';
-import { ListComponent, AddComponent, UpdateComponent, MetadataComponent, FormComponent, MenuComponent, BreadcrumbsComponent } from './components/index';
-import { ValueFormatService } from './services/value-format.service';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -33,6 +31,16 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFileInputModule } from '@weblauncher/material-file-input';
+import { ValueFormatService } from './services/value-format.service';
+import {
+  ListComponent,
+  AddComponent,
+  UpdateComponent,
+  MetadataComponent,
+  FormComponent,
+  MenuComponent,
+  BreadcrumbsComponent
+} from './components/index';
 
 @NgModule({
   declarations: [
@@ -77,10 +85,7 @@ import { MatFileInputModule } from '@weblauncher/material-file-input';
     MatSidenavModule,
     MatListModule
   ],
-  providers: [
-    ValueFormatService,
-    DatePipe
-  ],
+  providers: [ValueFormatService, DatePipe],
   exports: [
     ListComponent,
     AddComponent,
@@ -98,22 +103,21 @@ import { MatFileInputModule } from '@weblauncher/material-file-input';
 export class MaterialAdministrationModule {
   static forRoot(
     configFactory: FirebaseAppConfig,
-    appNameFactory: () => string | undefined = () => undefined,
+    appNameFactory: () => string | undefined = () => undefined
   ): ModuleWithProviders {
     return {
       ngModule: MaterialAdministrationModule,
-      providers:
-        [
-          {
-            provide: FIREBASE_OPTIONS,
-            useValue: configFactory
-          },
-          {
-            provide: FIREBASE_APP_NAME,
-            useFactory: appNameFactory
-          },
-          ValueFormatService
-        ]
+      providers: [
+        {
+          provide: FIREBASE_OPTIONS,
+          useValue: configFactory
+        },
+        {
+          provide: FIREBASE_APP_NAME,
+          useFactory: appNameFactory
+        },
+        ValueFormatService
+      ]
     };
   }
 }

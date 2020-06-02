@@ -1,4 +1,4 @@
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 
 export interface DataAdapterInterface {
   get: (collection: string, id: string) => Observable<any>;

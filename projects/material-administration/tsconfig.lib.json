@@ -20,6 +20,9 @@
       "firebase": [
         "./node_modules/firebase"
       ],
+      "rxjs": [
+        "./node_modules/rxjs"
+      ],
       "@weblauncher/material-file-input": [
         "./projects/material-file-input/dist"
       ],

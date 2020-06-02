@@ -17,4 +17,5 @@ export const materialAdministrationRoutes: Routes = [
   {
     path: ':collection',
     redirectTo: ':collection/list'
-  }];
+  }
+];

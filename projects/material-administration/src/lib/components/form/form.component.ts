@@ -1,14 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { takeUntil, tap } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'mat-administration-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit, OnDestroy {
   @Input() fields: any[];
@@ -20,21 +19,17 @@ export class FormComponent implements OnInit, OnDestroy {
 
   private destroyed$: Subject<void> = new Subject();
 
-  constructor(
-    private formBuilder: FormBuilder
-  ) { }
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     if (this.fields) {
       this.form = this.formBuilder.group(
         this.fields?.reduce((prev, cur) => {
-          return { ...prev, [cur?.name]: [this.getFieldValue(cur), this.getFieldValidators(cur)] };
+          return { ...prev, [cur?.name]: [this.getFieldValue(cur), this.getFieldValidators()] };
         }, {})
       );
 
-      this.form.valueChanges.pipe(
-        takeUntil(this.destroyed$)
-      ).subscribe(this.valueChanges);
+      this.form.valueChanges.pipe(takeUntil(this.destroyed$)).subscribe(this.valueChanges);
     }
   }
 
@@ -50,7 +45,6 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   removeImage(field) {
-    field.value = null;
     this.form.get(field.name).setValue(null);
   }
 
@@ -58,7 +52,7 @@ export class FormComponent implements OnInit, OnDestroy {
     return field?.value;
   }
 
-  private getFieldValidators(field) {
+  private getFieldValidators() {
     return [Validators.required];
   }
 }

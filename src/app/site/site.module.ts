@@ -4,12 +4,7 @@ import { RouterModule } from '@angular/router';
 import { siteRoutes } from './site.routes';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(siteRoutes)
-  ],
-  exports: [
-    RouterModule
-  ]
+  imports: [CommonModule, RouterModule.forChild(siteRoutes)],
+  exports: [RouterModule]
 })
-export class SiteModule { }
+export class SiteModule {}

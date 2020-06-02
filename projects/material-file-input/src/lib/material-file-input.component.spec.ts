@@ -1,20 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FileInputComponent } from './material-file-input.component';
+import { MatFileInputComponent } from './material-file-input.component';
 
-describe('FileInputComponent', () => {
-  let component: FileInputComponent;
-  let fixture: ComponentFixture<FileInputComponent>;
+describe('MatFileInputComponent', () => {
+  let component: MatFileInputComponent;
+  let fixture: ComponentFixture<MatFileInputComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FileInputComponent ]
-    })
-    .compileComponents();
+      declarations: [MatFileInputComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FileInputComponent);
+    fixture = TestBed.createComponent(MatFileInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

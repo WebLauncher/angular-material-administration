@@ -8,7 +8,7 @@ export interface MatAdministrationEntityField {
     collection: string;
     collectionValue: string;
     collectionLabel: string;
-  }
+  };
   label: string;
   format: string;
   filePathField: string;
@@ -28,11 +28,11 @@ export interface MatAdministrationEntity {
   titleField: string;
   hideList: boolean;
   idField: string;
-  fields: { [k: string]: string | Partial<MatAdministrationEntityField>; }
-  entities: { [k: string]: Partial<MatAdministrationEntity>; }
+  fields: { [k: string]: string | Partial<MatAdministrationEntityField> };
+  entities: { [k: string]: Partial<MatAdministrationEntity> };
 }
 
 export interface MatAdministrationMetadata {
   timestampFormat: string;
-  entities: { [k: string]: Partial<MatAdministrationEntity>; }
+  entities: { [k: string]: Partial<MatAdministrationEntity> };
 }

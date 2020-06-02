@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "start": "npm run clean && run-p watch:* serve",
+    "start": "yarn run clean && run-p watch:* serve",
     "build:projects": "ng build material-file-input && ng build material-administration",
     "build:prod": "ng build --prod",
     "serve": "wait-on projects/material-administration/dist/public-api.d.ts && ng serve",
@@ -15,9 +15,7 @@
     "lint": "ng lint && yarn run lint:styles",
     "lint:styles": "stylelint \"src/**/*.scss\" && stylelint \"projects/**/*.scss\"",
     "e2e": "ng e2e",
-    "postinstall": "ngcc",
-    "clean": "rimraf projects/**/dist",
-    "pre:commit": "yarn run lint"
+    "clean": "rimraf projects/**/dist"
   },
   "dependencies": {
     "@angular-material-extensions/password-strength": "^6.0.0",
@@ -36,9 +34,14 @@
     "@ckeditor/ckeditor5-angular": "^1.2.3",
     "@ckeditor/ckeditor5-build-classic": "^19.0.1",
     "@firebase/app": "^0.6.1",
+    "@firebase/app-types": "^0.6.1",
     "@firebase/auth": "^0.14.2",
+    "@firebase/util": "^0.2.47",
     "@types/lodash": "^4.14.150",
+    "eslint-config-airbnb-typescript": "^7.2.1",
+    "eslint-plugin-jasmine": "^4.1.1",
     "firebase": "^7.13.2",
+    "lint-staged": "^10.2.7",
     "lodash": "^4.17.15",
     "luxon": "^1.23.0",
     "ngx-auth-firebaseui": "^4.3.0",
@@ -48,9 +51,14 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "~0.900",
+    "@angular-devkit/architect": "~0.901.7",
     "@angular-devkit/build-angular": "~0.901.7",
     "@angular-devkit/build-ng-packagr": "~0.901.7",
+    "@angular-eslint/builder": "^0.0.1-alpha.32",
+    "@angular-eslint/eslint-plugin": "^0.0.1-alpha.32",
+    "@angular-eslint/eslint-plugin-template": "^0.0.1-alpha.32",
+    "@angular-eslint/schematics": "^0.0.1-alpha.32",
+    "@angular-eslint/template-parser": "^0.0.1-alpha.32",
     "@angular/cli": "~9.1.7",
     "@angular/compiler-cli": "~9.1.9",
     "@angular/language-service": "~9.1.9",
@@ -59,10 +67,19 @@
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
+    "@typescript-eslint/eslint-plugin": "^3.0.2",
+    "@typescript-eslint/eslint-plugin-tslint": "^3.0.2",
+    "@typescript-eslint/parser": "^3.0.2",
     "clang-format": "^1.4.0",
     "codelyzer": "^5.1.2",
     "commitizen": "^4.1.2",
     "cz-conventional-changelog": "^3.2.0",
+    "eslint": "^7.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsdoc": "^26.0.1",
+    "eslint-plugin-prefer-arrow": "^1.2.1",
+    "eslint-plugin-prettier": "^3.1.3",
     "firebase-tools": "^8.4.1",
     "fuzzy": "^0.1.3",
     "husky": "^4.2.5",
@@ -78,20 +95,20 @@
     "lerna": "^3.21.0",
     "ng-packagr": "^9.0.0",
     "npm-run-all": "^4.1.5",
+    "prettier": "^2.0.5",
     "protractor": "~5.4.3",
     "semantic-release": "^17.0.7",
     "stylelint": "^13.5.0",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-scss": "^3.17.2",
     "ts-node": "~8.3.0",
-    "tslint": "~6.1.0",
     "typescript": "~3.8.3",
     "wait-on": "^5.0.0"
   },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "npm run pre:commit"
+      "pre-commit": "lint-staged --relative"
     }
   },
   "config": {
@@ -106,5 +123,10 @@
   },
   "workspaces": [
     "projects/*"
-  ]
+  ],
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --fix"
+    ]
+  }
 }

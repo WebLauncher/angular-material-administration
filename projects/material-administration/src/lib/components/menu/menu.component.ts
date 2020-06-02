@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional, Inject } from '@angular/core';
+import { Component, Optional, Inject } from '@angular/core';
 
 @Component({
   selector: 'mat-administration-menu',
@@ -6,14 +6,14 @@ import { Component, OnInit, Optional, Inject } from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
-  entities = Object.keys(this.metadata?.entities).filter((key: any) => !this.metadata.entities[key]?.hideList).map(key => {
-    return {
-      id: key,
-      ...this.metadata.entities[key]
-    };
-  });
+  entities = Object.keys(this.metadata?.entities)
+    .filter((key: any) => !this.metadata.entities[key]?.hideList)
+    .map((key) => {
+      return {
+        id: key,
+        ...this.metadata.entities[key]
+      };
+    });
 
-  constructor(
-    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') private metadata: any
-  ) { }
+  constructor(@Optional() @Inject('MAT_ADMINISTRATION_METADATA') private metadata: any) {}
 }
