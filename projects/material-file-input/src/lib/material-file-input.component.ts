@@ -1,4 +1,14 @@
-import { Component, ChangeDetectionStrategy, Input, OnDestroy, HostBinding, ElementRef, Optional, Self, ViewChild } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  OnDestroy,
+  HostBinding,
+  ElementRef,
+  Optional,
+  Self,
+  ViewChild
+} from '@angular/core';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { Subject } from 'rxjs';
 import { FormBuilder, NgControl, FormControl } from '@angular/forms';
@@ -11,10 +21,11 @@ import { takeUntil } from 'rxjs/operators';
   templateUrl: './material-file-input.component.html',
   styleUrls: ['./material-file-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: MatFormFieldControl, useExisting: MatFileInputComponent }],
+  providers: [{ provide: MatFormFieldControl, useExisting: MatFileInputComponent }]
 })
-export class MatFileInputComponent implements OnDestroy, MatFormFieldControl<File[]>{
+export class MatFileInputComponent implements OnDestroy, MatFormFieldControl<File[]> {
   static nextId = 0;
+  // eslint-disable-next-line no-plusplus
   @HostBinding() id = `mat-file-input-${MatFileInputComponent.nextId++}`;
   @HostBinding('class.floating')
   get shouldLabelFloat() {
@@ -42,10 +53,16 @@ export class MatFileInputComponent implements OnDestroy, MatFormFieldControl<Fil
   private requiredValue = false;
 
   @Input()
-  get disabled(): boolean { return this.disabledValue; }
+  get disabled(): boolean {
+    return this.disabledValue;
+  }
   set disabled(value: boolean) {
     this.disabledValue = coerceBooleanProperty(value);
-    this.disabledValue ? this.form.disable() : this.form.enable();
+    if (this.disabledValue) {
+      this.form.disable();
+    } else {
+      this.form.enable();
+    }
     this.stateChanges.next();
   }
   private disabledValue = false;
@@ -90,17 +107,15 @@ export class MatFileInputComponent implements OnDestroy, MatFormFieldControl<Fil
     if (this.ngControl != null) {
       // Setting the value accessor directly (instead of using
       // the providers) to avoid running into a circular import.
-      this.ngControl.valueAccessor = (this as any);
+      this.ngControl.valueAccessor = this as any;
     }
     this.form = new FormControl(null);
-    this.form.valueChanges.pipe(
-      takeUntil(this.destroyed$)
-    ).subscribe(value => {
+    this.form.valueChanges.pipe(takeUntil(this.destroyed$)).subscribe((value) => {
       if (this.onChange) {
         this.onChange(value);
       }
     });
-    fm.monitor(elRef.nativeElement, true).subscribe(origin => {
+    fm.monitor(elRef.nativeElement, true).subscribe((origin) => {
       this.focused = !!origin;
       this.stateChanges.next();
     });
@@ -131,7 +146,7 @@ export class MatFileInputComponent implements OnDestroy, MatFormFieldControl<Fil
     this.onChange = fn;
   }
 
-  registerOnTouched() { }
+  registerOnTouched() {}
 
   openChooseFile() {
     if (this.value) {
@@ -151,6 +166,6 @@ export class MatFileInputComponent implements OnDestroy, MatFormFieldControl<Fil
       return '';
     }
 
-    return this.multiple ? this.value.map(file => file?.name).join(', ') : this.value[0]?.name;
+    return this.multiple ? this.value.map((file) => file?.name).join(', ') : this.value[0]?.name;
   }
 }

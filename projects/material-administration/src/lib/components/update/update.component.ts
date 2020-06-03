@@ -1,10 +1,10 @@
-import { Component, ChangeDetectionStrategy, Optional, Inject } from '@angular/core';
-import { MetadataComponent } from '../metadata/metadata.component';
+import { Component, Optional, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
 import { map, shareReplay, takeUntil, tap, take, switchMap } from 'rxjs/operators';
-import { SnackbarService } from '../../services/snackbar.service';
 import { capitalize } from 'lodash';
+import { SnackbarService } from '../../services/snackbar.service';
+import { MetadataComponent } from '../metadata/metadata.component';
 import { DataAdapterService } from '../../services/data-adapter.service';
 
 @Component({
@@ -27,39 +27,45 @@ export class UpdateComponent extends MetadataComponent {
   ) {
     super(route, dataAdapterService, metadata);
 
-    this.route.params.pipe(map(params => params.id), takeUntil(this.destroyed$)).subscribe(this.id$);
-    this.doc$ = this.getDoc();
-    this.fields$ = combineLatest([this.getFields(), this.doc$])
+    this.route.params
       .pipe(
-        map(([fields, doc]) => fields.map(field => {
+        map((params) => params.id),
+        takeUntil(this.destroyed$)
+      )
+      .subscribe(this.id$);
+    this.doc$ = this.getDoc();
+    this.fields$ = combineLatest([this.getFields(), this.doc$]).pipe(
+      map(([fields, doc]) =>
+        fields.map((field) => {
           return { ...field, value: this.getFieldValue(field, doc) };
-        }))
-      );
-    this.entityTitle$ = this.doc$.pipe(map(doc => doc?.[this.metadata$.getValue()?.titleField || 'title']));
+        })
+      )
+    );
+    this.entityTitle$ = this.doc$.pipe(map((doc) => doc?.[this.metadata$.getValue()?.titleField || 'title']));
   }
 
   save(item: any) {
     this.isLoading$.next(true);
 
-    combineLatest([
-      this.metadata$,
-      this.collectionName$
-    ])
+    this.collectionName$
       .pipe(
         take(1),
-        switchMap(([metadata, collectionName]) => {
-          return this.processUploads(item, metadata, 'update').pipe(map(updatedItem => {
-            return [
-              metadata,
-              collectionName,
-              updatedItem
-            ];
-          }));
+        switchMap((collectionName) => {
+          return this.processUploads(item).pipe(
+            map((updatedItem) => {
+              return [collectionName, updatedItem];
+            })
+          );
         }),
-        switchMap(([_, collectionName, updatedItem]) =>
-          this.dataAdapterService.update(collectionName, this.id$.getValue(), this.getWithTimestamps(updatedItem, 'update'))
+        switchMap(([collectionName, updatedItem]) =>
+          this.dataAdapterService.update(
+            collectionName,
+            this.id$.getValue(),
+            this.getWithTimestamps(updatedItem, 'update')
+          )
         )
-      ).subscribe(
+      )
+      .subscribe(
         () => {
           this.snackbar.success(`${capitalize(this.metadata$.getValue()?.single)} updated successfully!`);
           this.router.navigate([`/${this.collectionPath$.getValue()}/list`]);

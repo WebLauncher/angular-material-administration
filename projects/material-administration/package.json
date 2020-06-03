@@ -1,19 +1,45 @@
 {
-  "name": "material-administration",
-  "version": "0.0.1",
+  "name": "@weblauncher/material-administration",
+  "version": "0.2.8",
+  "keywords": [
+    "angular",
+    "material",
+    "firebase",
+    "rest"
+  ],
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WebLauncher/angular-material-administration"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "wait-on ../material-file-input/dist/public-api.d.ts && ng build material-administration",
+    "postpublish": "rm -rf dist/"
+  },
+  "devDependencies": {
+    "@weblauncher/material-file-input": "^0.2.8"
+  },
   "peerDependencies": {
+    "@angular/cdk": "^9.1.0",
     "@angular/common": "^9.1.0",
     "@angular/core": "^9.1.0",
+    "@angular/fire": "^6.0.0",
+    "@angular/flex-layout": "^9.0.0-beta.29",
     "@angular/forms": "^9.1.1",
     "@angular/material": "^9.1.0",
-    "@angular/cdk": "^9.1.0",
+    "@angular/router": "^9.1.0",
+    "@angular/platform-browser": "~9.1.9",
+    "@angular/platform-browser-dynamic": "~9.1.9",
     "@ckeditor/ckeditor5-angular": "1.2.3",
-    "@angular/fire": "^5.4.2",
-    "@angular/flex-layout": "^9.0.0-beta.29",
-    "uuid": "^7.0.3",
+    "@ckeditor/ckeditor5-build-classic": "^19.0.1",
+    "@weblauncher/material-file-input": "*",
     "firebase": "^7.13.2",
     "lodash": "^4.17.15",
     "luxon": "^1.23.0",
-    "tslib": "^1.10.0"
+    "rxjs": "~6.5.4",
+    "tslib": "^1.10.0",
+    "uuid": "^7.0.3",
+    "zone.js": "~0.10.2"
   }
 }

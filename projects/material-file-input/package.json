@@ -1,11 +1,32 @@
 {
-  "name": "material-file-input",
-  "version": "0.0.1",
+  "name": "@weblauncher/material-file-input",
+  "version": "0.2.8",
+  "keywords": [
+    "angular",
+    "material",
+    "input",
+    "file"
+  ],
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WebLauncher/angular-material-administration"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "ng build material-file-input",
+    "postpublish": "rm -rf dist/"
+  },
   "peerDependencies": {
+    "@angular/cdk": "^9.1.0",
     "@angular/common": "^9.1.0",
     "@angular/core": "^9.1.0",
+    "@angular/forms": "^9.1.1",
     "@angular/material": "^9.1.0",
-    "@angular/cdk": "^9.1.0",
-    "tslib": "^1.10.0"
+    "@angular/platform-browser": "~9.1.9",
+    "@angular/platform-browser-dynamic": "~9.1.9",
+    "rxjs": "~6.5.4",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.10.2"
   }
 }

@@ -1,12 +1,12 @@
 import { Component, Inject, Optional } from '@angular/core';
-import { MetadataComponent } from '../metadata/metadata.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable } from 'rxjs';
 import { take, tap, switchMap, map } from 'rxjs/operators';
-import { SnackbarService } from '../../services/snackbar.service';
 import { capitalize } from 'lodash';
-import { DataAdapterService } from '../../services/data-adapter.service';
 import { Immutable } from 'types/immutable';
+import { SnackbarService } from '../../services/snackbar.service';
+import { DataAdapterService } from '../../services/data-adapter.service';
+import { MetadataComponent } from '../metadata/metadata.component';
 
 @Component({
   selector: 'mat-administration-add',
@@ -25,30 +25,30 @@ export class AddComponent extends MetadataComponent {
   ) {
     super(route, dataAdapterService, metadata);
 
-    this.fields$ = this.getFields().pipe(tap(() => { this.isLoading$.next(false); }));
+    this.fields$ = this.getFields().pipe(
+      tap(() => {
+        this.isLoading$.next(false);
+      })
+    );
   }
 
   save(item: any) {
     this.isLoading$.next(true);
-    combineLatest([
-      this.metadata$,
-      this.collectionName$
-    ])
+    this.collectionName$
       .pipe(
         take(1),
-        switchMap(([metadata, collectionName]) => {
-          return this.processUploads(item, metadata, 'add').pipe(map(updatedItem => {
-            return [
-              metadata,
-              collectionName,
-              updatedItem
-            ];
-          }));
+        switchMap(([collectionName]) => {
+          return this.processUploads(item).pipe(
+            map((updatedItem) => {
+              return [collectionName, updatedItem];
+            })
+          );
         }),
-        switchMap(([_, collectionName, updatedItem]) =>
+        switchMap(([collectionName, updatedItem]) =>
           this.dataAdapterService.add(collectionName, this.getWithTimestamps(updatedItem, 'add'))
         )
-      ).subscribe(
+      )
+      .subscribe(
         () => {
           this.snackbar.success(`${capitalize(this.metadata$.getValue()?.single)} added successfully!`);
           this.router.navigate([`/${this.collectionPath$.getValue()}/list`]);

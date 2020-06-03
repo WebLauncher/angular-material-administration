@@ -2,30 +2,24 @@
 
 # Angular Material Administration Library
 
-This projects is a component library for delivering a fast data entity administration project based on injecting a data service and entity metadata.
+This project is a monorepo that contains the main `material-administration` module that facilitates the creation of simple and intuitive administration site for several data APIs like Firebase Firestore.
 
+Other libraries contained in this repository are being published separately to npm. See list below with libraries published by this project.
+
+## Library list
+
+### Data management
+
+[@weblauncher/material-administration](projects/material-administration/README.md) [![npm version](https://badge.fury.io/js/%40weblauncher%2Fmaterial-administration.svg)](https://badge.fury.io/js/%40weblauncher%2Fmaterial-administration)
+
+### UI/UX Material design components
+
+[@weblauncher/material-file-input](projects/material-file-input/README.md) [![npm version](https://badge.fury.io/js/%40weblauncher%2Fmaterial-file-input.svg)](https://badge.fury.io/js/%40weblauncher%2Fmaterial-file-input)
 
 ## Contributing
 
-This project requires knowledge of Angular and Angular libraries creation. Please read docs to get yourself started in using Angular. The next steps only describe how to start this projects after all needed software is installed on your computer.
+[Read contribution guide](CONTRIBUTION.md)
 
-1. Clone / Fork repository
+## License
 
-2. Install dependencies
-
-  `npm i`
-
-3. Start project
-
-  `npm start`
-
-
-## Folders details
-
-/projects   -> contains libraries for the projects
-
-  /material-administration  -> main components library for handling data management
-
-  /material-file-input      -> material file input library
-
-/src  -> main demo app
+[Read license](LICENSE.md)

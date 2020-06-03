@@ -4,8 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { map, shareReplay, switchMap, take, catchError, takeUntil, tap } from 'rxjs/operators';
 import { capitalize } from 'lodash';
 import { DataAdapterService } from '../../services/data-adapter.service';
-import { DownloadData } from '../../services';
-import { MatAdministrationEntity } from '../../types/material-administration-metadata';
+import { DownloadData } from '../../services/index';
+import { MatAdministrationEntity, MatAdministrationEntityField } from '../../types/material-administration-metadata';
 
 @Component({
   selector: 'mat-administration-metadata',
@@ -25,38 +25,44 @@ export class MetadataComponent implements OnDestroy {
     public dataAdapterService: DataAdapterService,
     @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: any
   ) {
-    this.route.params.pipe(
-      map(params => params?.collection),
-      tap(() => this.isLoading$.next(true)),
-      takeUntil(this.destroyed$)
-    )
+    this.route.params
+      .pipe(
+        map((params) => params?.collection),
+        tap(() => this.isLoading$.next(true)),
+        takeUntil(this.destroyed$)
+      )
       .subscribe(this.collectionPath$);
 
-    this.collectionPath$.pipe(
-      map(collectionPath => collectionPath.replace(/\:/gi, '\/')),
-      shareReplay(1)
-    )
+    this.collectionPath$
+      .pipe(
+        map((collectionPath) => collectionPath.replace(/:/gi, '/')),
+        shareReplay(1)
+      )
       .subscribe(this.collectionName$);
 
-    this.collectionName$.pipe(
-      map(name => this.getMetadata(name, metadata)),
-      shareReplay(1)
-    ).subscribe(this.metadata$);
+    this.collectionName$
+      .pipe(
+        map((name) => this.getMetadata(name, metadata)),
+        shareReplay(1)
+      )
+      .subscribe(this.metadata$);
 
-    this.metadata$.pipe(
-      map(metadata => {
-        if (!metadata?.entities) {
-          return null;
-        }
+    this.metadata$
+      .pipe(
+        map((meta) => {
+          if (!meta?.entities) {
+            return null;
+          }
 
-        return Object.keys(metadata.entities).map(key => {
-          return {
-            id: key,
-            ...metadata.entities[key]
-          };
-        });
-      })
-    ).subscribe(this.subCollections$);
+          return Object.keys(meta.entities).map((key) => {
+            return {
+              id: key,
+              ...meta.entities[key]
+            };
+          });
+        })
+      )
+      .subscribe(this.subCollections$);
   }
 
   ngOnDestroy() {
@@ -74,51 +80,44 @@ export class MetadataComponent implements OnDestroy {
 
   getFields() {
     return this.metadata$.pipe(
-      map(metadata => {
+      map((metadata) => {
         const entries = Object.entries(metadata?.fields);
 
         return entries
-          .map(
-            ([key, value]) => typeof value === 'object' ?
-              { ...value, name: key, label: ((value as any)?.label || this.getFieldLabel(key)) } :
-              { name: key, label: this.getFieldLabel(key) }
+          .map(([key, value]) =>
+            typeof value === 'object'
+              ? { ...value, name: key, label: (value as any)?.label || this.getFieldLabel(key) }
+              : { name: key, label: this.getFieldLabel(key) }
           )
-          .filter(field => this.showField(metadata, field));
+          .filter((field) => this.showField(metadata, field));
       }),
-      switchMap(fields => forkJoin(fields.map(field => this.addAdditionalMetadata(field)))),
-      catchError(error => {
-        console.error(error);
-
-        return of([]);
-      }),
+      switchMap((fields) => forkJoin(fields.map((field) => this.addAdditionalMetadata(field)))),
+      catchError(() => of([])),
       shareReplay(1)
     );
   }
 
-  processUploads(item, metadata, action: 'add' | 'update') {
-    const filesKeys = Object.keys(item)
-      .filter(key => Array.isArray(item[key]) && item[key][0] instanceof File);
+  processUploads(item) {
+    const filesKeys = Object.keys(item).filter((key) => Array.isArray(item[key]) && item[key][0] instanceof File);
 
     if (filesKeys.length) {
       const itemUpdates = {};
 
-      return forkJoin(filesKeys.map(key => {
-        return this.dataAdapterService.upload(item[key][0]).pipe(
-          map(downloadData => {
-            return { key, downloadData };
-          }),
-          catchError(error => {
-            console.error(error);
-
-            return of(null);
-          })
-        ) as Observable<{ key: string, downloadData: DownloadData }>;
-      })).pipe(
+      return forkJoin(
+        filesKeys.map((key) => {
+          return this.dataAdapterService.upload(item[key][0]).pipe(
+            map((downloadData) => {
+              return { key, downloadData };
+            }),
+            catchError(() => of(null))
+          ) as Observable<{ key: string; downloadData: DownloadData }>;
+        })
+      ).pipe(
         map((uploadedFiles) => {
           if (uploadedFiles) {
-            uploadedFiles.forEach(uploadedFile => {
+            uploadedFiles.forEach((uploadedFile) => {
               itemUpdates[uploadedFile?.key] = uploadedFile?.downloadData?.downloadUrl;
-              itemUpdates[uploadedFile?.key + 'Path'] = uploadedFile?.downloadData?.path;
+              itemUpdates[`${uploadedFile?.key}Path`] = uploadedFile?.downloadData?.path;
             });
           }
 
@@ -163,35 +162,38 @@ export class MetadataComponent implements OnDestroy {
 
   private addAdditionalMetadata(field) {
     if ((field?.inputType === 'select' || field?.inputType === 'radio') && field?.data?.type === 'collection') {
-      return this.dataAdapterService.list(field?.data?.collection, field?.data?.collectionValue)
-        .pipe(
-          take(1),
-          map(docs => {
-            return {
-              ...field,
-              options: docs.map(doc => {
-                return {
-                  value: doc[field?.data?.collectionValue],
-                  label: doc[field?.data?.collectionLabel]
-                };
-              })
-            };
-          })
-        );
+      return this.dataAdapterService.list(field?.data?.collection, field?.data?.collectionValue).pipe(
+        take(1),
+        map((docs) => {
+          return {
+            ...field,
+            options: docs.map((doc) => {
+              return {
+                value: doc[field?.data?.collectionValue],
+                label: doc[field?.data?.collectionLabel]
+              };
+            })
+          };
+        })
+      );
     }
 
     return of(field);
   }
 
   private showField(metadata: MatAdministrationEntity, field) {
-    return field.name !== 'id' &&
-    (
-    (
-      (!metadata?.createdTimestamp || metadata?.createdTimestamp !== field.name) &&
-      (!metadata?.updatedTimestamp || metadata?.updatedTimestamp !== field.name)
-    ) ||
-      (!metadata?.fields[field.name]?.hideInForm && !metadata?.fields[field.name]?.type !== 'timestamp') ||
-      metadata?.fields[field.name]?.showInForm
+    const fieldDetails = this.getFieldDetails(metadata, field?.name);
+
+    return (
+      field.name !== 'id' &&
+      (((!metadata?.createdTimestamp || metadata?.createdTimestamp !== field.name) &&
+        (!metadata?.updatedTimestamp || metadata?.updatedTimestamp !== field.name)) ||
+        (!fieldDetails?.hideInForm && fieldDetails?.type !== 'timestamp') ||
+        fieldDetails.showInForm)
     );
+  }
+
+  private getFieldDetails(metadata: MatAdministrationEntity, fieldName: string): Partial<MatAdministrationEntityField> {
+    return metadata?.fields[fieldName] as Partial<MatAdministrationEntityField>;
   }
 }

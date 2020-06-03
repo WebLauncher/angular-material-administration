@@ -2,11 +2,11 @@ import { Component, Optional, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, switchMap, shareReplay, tap, withLatestFrom } from 'rxjs/operators';
+import { pickBy, capitalize } from 'lodash';
 import { ValueFormatService } from '../../services/value-format.service';
-import { pickBy } from 'lodash';
 import { MetadataComponent } from '../metadata/metadata.component';
 import { SnackbarService } from '../../services/snackbar.service';
-import { capitalize } from 'lodash';
+
 import { DataAdapterService } from '../../services/data-adapter.service';
 import { MatAdministrationMetadata, MatAdministrationEntityField } from '../../types';
 
@@ -30,28 +30,29 @@ export class ListComponent extends MetadataComponent {
     super(route, dataAdapterService, metadata);
 
     this.displayedColumns$ = this.getDisplayedColumns();
-    this.displayedColumnsNames$ = this.displayedColumns$.pipe(map(columns => columns.map(column => column?.id)));
+    this.displayedColumnsNames$ = this.displayedColumns$.pipe(map((columns) => columns.map((column) => column?.id)));
     this.list$ = this.collectionName$.pipe(
-      switchMap(collection => this.dataAdapterService.list(collection, this.metadata$.getValue()?.idField || 'id')),
+      switchMap((collection) => this.dataAdapterService.list(collection, this.metadata$.getValue()?.idField || 'id')),
       tap(() => this.isLoading$.next(false)),
       shareReplay(1)
     );
   }
 
   getValue(element, column) {
-    return this.metadata$.pipe(map(
-      metadata => this.valueFormatService.transform(element[column], metadata?.fields[column]?.type, metadata?.fields[column])
-    ));
+    return this.metadata$.pipe(
+      map((metadata) =>
+        this.valueFormatService.transform(element[column], metadata?.fields[column]?.type, metadata?.fields[column])
+      )
+    );
   }
 
   delete(element) {
     this.isLoading$.next(true);
-    this.dataAdapterService.delete(this.collectionName$.getValue(), element?.id)
-      .subscribe(
-        () => this.snackbar.success(`${capitalize(this.metadata$.getValue()?.single)} added successfully!`),
-        () => this.snackbar.error(`There was an error adding ${this.metadata$.getValue()?.single}!`),
-        () => this.isLoading$.next(false)
-      );
+    this.dataAdapterService.delete(this.collectionName$.getValue(), element?.id).subscribe(
+      () => this.snackbar.success(`${capitalize(this.metadata$.getValue()?.single)} added successfully!`),
+      () => this.snackbar.error(`There was an error adding ${this.metadata$.getValue()?.single}!`),
+      () => this.isLoading$.next(false)
+    );
   }
 
   private getDisplayedColumns() {
@@ -75,7 +76,7 @@ export class ListComponent extends MetadataComponent {
       return [];
     }
 
-    return Object.keys(pickBy(columns, col => this.canDisplayColumn(col))).map(column => {
+    return Object.keys(pickBy(columns, (col) => this.canDisplayColumn(col))).map((column) => {
       return {
         ...columns[column],
         label: columns[column]?.label || this.getFieldLabel({ label: column }),
