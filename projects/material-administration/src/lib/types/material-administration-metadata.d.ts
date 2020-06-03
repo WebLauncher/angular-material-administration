@@ -1,11 +1,14 @@
+import { EntityFieldType } from './entity-field-type.enum';
+import { EntityFieldInputType } from './entity-field-input-type.enum';
+
 export interface MatAdministrationEntityField {
   id?: string;
   hideInList: boolean;
   showInList: boolean;
   hideInForm: boolean;
   showInForm: boolean;
-  inputType: string;
-  type: string;
+  inputType: EntityFieldInputType | string;
+  type: EntityFieldType | string;
   data: {
     type: string;
     collection: string;

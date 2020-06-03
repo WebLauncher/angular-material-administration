@@ -2,7 +2,7 @@ import { Component, Inject, Optional } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take, tap, switchMap, map } from 'rxjs/operators';
-import { capitalize } from 'lodash';
+import { capitalize } from 'lodash-es';
 import { Immutable } from 'types/immutable';
 import { SnackbarService } from '../../services/snackbar.service';
 import { DataAdapterService } from '../../services/data-adapter.service';

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Optional, Inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { capitalize } from 'lodash';
+import { capitalize } from 'lodash-es';
 import { map } from 'rxjs/operators';
 import { MatAdministrationEntity, MatAdministrationMetadata } from '../../types/material-administration-metadata';
 import { DataAdapterService } from '../../services';

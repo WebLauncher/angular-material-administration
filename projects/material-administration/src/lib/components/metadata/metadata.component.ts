@@ -2,7 +2,7 @@ import { Component, OnDestroy, Optional, Inject } from '@angular/core';
 import { BehaviorSubject, of, forkJoin, Subject, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { map, shareReplay, switchMap, take, catchError, takeUntil, tap } from 'rxjs/operators';
-import { capitalize } from 'lodash';
+import { capitalize } from 'lodash-es';
 import { DataAdapterService } from '../../services/data-adapter.service';
 import { DownloadData } from '../../services/index';
 import { MatAdministrationEntity, MatAdministrationEntityField } from '../../types/material-administration-metadata';

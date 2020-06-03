@@ -2,6 +2,18 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "dist",
   "lib": {
-    "entryFile": "src/public-api.ts"
-  }
+    "entryFile": "src/public-api.ts",
+    "umdModuleIds": {
+      "lodash-es": "lodash-es",
+      "@weblauncher/material-file-input": "@weblauncher/material-file-input",
+      "firebase/app": "firebase",
+      "uuid": "uuid",
+      "@ckeditor/ckeditor5-angular": "@ckeditor/ckeditor5-angular",
+      "@ckeditor/ckeditor5-build-classic": "@ckeditor/ckeditor5-build-classic"
+    }
+  },
+  "whitelistedNonPeerDependencies": [
+    "lodash-es",
+    "@weblauncher/material-file-input"
+  ]
 }
