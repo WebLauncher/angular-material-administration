@@ -8,6 +8,7 @@ export const SiteMetadata: MatAdministrationMetadata = {
       plural: 'news',
       createdTimestamp: 'created',
       updatedTimestamp: 'updated',
+      autoTimestamps: true,
       fields: {
         id: 'id',
         sport: {
@@ -55,12 +56,10 @@ export const SiteMetadata: MatAdministrationMetadata = {
               filePathField: 'imageUrlPath'
             },
             created: {
-              type: EntityFieldType.Timestamp,
-              hideInForm: true
+              type: EntityFieldType.Timestamp
             },
             updated: {
-              type: EntityFieldType.Timestamp,
-              hideInForm: true
+              type: EntityFieldType.Timestamp
             }
           }
         },
@@ -73,12 +72,10 @@ export const SiteMetadata: MatAdministrationMetadata = {
             title: 'title',
             content: 'content',
             created: {
-              type: EntityFieldType.Timestamp,
-              hideInForm: true
+              type: EntityFieldType.Timestamp
             },
             updated: {
-              type: EntityFieldType.Timestamp,
-              hideInForm: true
+              type: EntityFieldType.Timestamp
             }
           }
         }
@@ -115,12 +112,10 @@ export const SiteMetadata: MatAdministrationMetadata = {
           inputType: 'datepicker'
         },
         created: {
-          type: EntityFieldType.Timestamp,
-          hideInForm: true
+          type: EntityFieldType.Timestamp
         },
         updated: {
-          type: EntityFieldType.Timestamp,
-          hideInForm: true
+          type: EntityFieldType.Timestamp
         }
       }
     },

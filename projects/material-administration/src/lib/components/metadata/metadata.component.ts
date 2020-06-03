@@ -6,6 +6,7 @@ import { capitalize } from 'lodash-es';
 import { DataAdapterService } from '../../services/data-adapter.service';
 import { DownloadData } from '../../services/index';
 import { MatAdministrationEntity, MatAdministrationEntityField } from '../../types/material-administration-metadata';
+import { EntityFieldType } from '../../types';
 
 @Component({
   selector: 'mat-administration-metadata',
@@ -188,7 +189,7 @@ export class MetadataComponent implements OnDestroy {
       field.name !== 'id' &&
       (((!metadata?.createdTimestamp || metadata?.createdTimestamp !== field.name) &&
         (!metadata?.updatedTimestamp || metadata?.updatedTimestamp !== field.name)) ||
-        (!fieldDetails?.hideInForm && fieldDetails?.type !== 'timestamp') ||
+        (!fieldDetails?.hideInForm && fieldDetails?.type !== EntityFieldType.Timestamp) ||
         fieldDetails.showInForm)
     );
   }

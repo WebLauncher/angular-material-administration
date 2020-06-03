@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
 import { map, shareReplay, takeUntil, tap, take, switchMap } from 'rxjs/operators';
 import { capitalize } from 'lodash-es';
+import { EntityFieldType } from '../../types';
 import { SnackbarService } from '../../services/snackbar.service';
 import { MetadataComponent } from '../metadata/metadata.component';
 import { DataAdapterService } from '../../services/data-adapter.service';
@@ -83,7 +84,7 @@ export class UpdateComponent extends MetadataComponent {
   }
 
   private getFieldValue(field: any, doc: any) {
-    if (field?.type === 'timestamp') {
+    if (field?.type === EntityFieldType.Timestamp) {
       return doc?.[field?.name]?.toDate();
     }
 

@@ -28,6 +28,7 @@ export interface MatAdministrationEntity {
   id?: string;
   single: string;
   plural: string;
+  autoTimestamps: boolean;
   createdTimestamp: string;
   updatedTimestamp: string;
   showMenuDividerAfter: boolean;

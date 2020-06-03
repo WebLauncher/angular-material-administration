@@ -8,7 +8,7 @@ import { MetadataComponent } from '../metadata/metadata.component';
 import { SnackbarService } from '../../services/snackbar.service';
 
 import { DataAdapterService } from '../../services/data-adapter.service';
-import { MatAdministrationMetadata, MatAdministrationEntityField } from '../../types';
+import { MatAdministrationMetadata, MatAdministrationEntityField, EntityFieldType } from '../../types';
 
 @Component({
   selector: 'mat-administration-list',
@@ -86,6 +86,6 @@ export class ListComponent extends MetadataComponent {
   }
 
   private canDisplayColumn(column: MatAdministrationEntityField): boolean {
-    return column && !column?.hideInList && (column?.showInList || column?.type !== 'timestamp');
+    return column && !column?.hideInList && (column?.showInList || column?.type !== EntityFieldType.Timestamp);
   }
 }

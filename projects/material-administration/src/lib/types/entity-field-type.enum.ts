@@ -1,4 +1,6 @@
 export enum EntityFieldType {
   String = 'string',
-  Timestamp = 'timestamp'
+  Timestamp = 'timestamp',
+  Boolean = 'boolean',
+  Number = 'number'
 }
