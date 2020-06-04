@@ -2,7 +2,7 @@ import { Component, Optional, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, switchMap, shareReplay, tap, withLatestFrom } from 'rxjs/operators';
-import { pickBy, capitalize } from 'lodash-es';
+import { pickBy, capitalize, merge } from 'lodash-es';
 import { ValueFormatService } from '../../services/value-format.service';
 import { MetadataComponent } from '../metadata/metadata.component';
 import { SnackbarService } from '../../services/snackbar.service';
@@ -76,7 +76,9 @@ export class ListComponent extends MetadataComponent {
       return [];
     }
 
-    return Object.keys(pickBy(columns, (col) => this.canDisplayColumn(col))).map((column) => {
+    const autoFields = this.getAutoFields();
+
+    return Object.keys(pickBy(merge(columns, autoFields), (col) => this.canDisplayColumn(col))).map((column) => {
       return {
         ...columns[column],
         label: columns[column]?.label || this.getFieldLabel({ label: column }),

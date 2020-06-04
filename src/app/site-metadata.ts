@@ -6,8 +6,6 @@ export const SiteMetadata: MatAdministrationMetadata = {
     news: {
       single: 'news',
       plural: 'news',
-      createdTimestamp: 'created',
-      updatedTimestamp: 'updated',
       autoTimestamps: true,
       fields: {
         id: 'id',
@@ -35,18 +33,14 @@ export const SiteMetadata: MatAdministrationMetadata = {
           }
         },
         created: {
-          type: EntityFieldType.Timestamp
-        },
-        updated: {
-          type: EntityFieldType.Timestamp
+          showInList: true
         }
       },
       entities: {
         images: {
           single: 'image',
           plural: 'images',
-          createdTimestamp: 'created',
-          updatedTimestamp: 'updated',
+          autoTimestamps: true,
           fields: {
             title: 'title',
             imageUrl: {
@@ -56,26 +50,19 @@ export const SiteMetadata: MatAdministrationMetadata = {
               filePathField: 'imageUrlPath'
             },
             created: {
-              type: EntityFieldType.Timestamp
-            },
-            updated: {
-              type: EntityFieldType.Timestamp
+              showInList: true
             }
           }
         },
         comments: {
           single: 'comment',
           plural: 'comments',
-          createdTimestamp: 'created',
-          updatedTimestamp: 'updated',
+          autoTimestamps: true,
           fields: {
             title: 'title',
             content: 'content',
             created: {
-              type: EntityFieldType.Timestamp
-            },
-            updated: {
-              type: EntityFieldType.Timestamp
+              showInList: true
             }
           }
         }
@@ -85,8 +72,7 @@ export const SiteMetadata: MatAdministrationMetadata = {
       single: 'event',
       plural: 'events',
       showMenuDividerAfter: true,
-      createdTimestamp: 'created',
-      updatedTimestamp: 'updated',
+      autoTimestamps: true,
       fields: {
         id: 'id',
         sport: {
@@ -105,17 +91,16 @@ export const SiteMetadata: MatAdministrationMetadata = {
         },
         start: {
           type: EntityFieldType.Timestamp,
-          inputType: 'datepicker'
+          inputType: 'datepicker',
+          showInList: true
         },
         end: {
           type: EntityFieldType.Timestamp,
-          inputType: 'datepicker'
+          inputType: 'datepicker',
+          showInList: true
         },
         created: {
-          type: EntityFieldType.Timestamp
-        },
-        updated: {
-          type: EntityFieldType.Timestamp
+          showInList: true
         }
       }
     },

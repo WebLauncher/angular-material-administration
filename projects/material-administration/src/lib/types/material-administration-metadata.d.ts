@@ -3,6 +3,7 @@ import { EntityFieldInputType } from './entity-field-input-type.enum';
 
 export interface MatAdministrationEntityField {
   id?: string;
+  name?: string;
   hideInList: boolean;
   showInList: boolean;
   hideInForm: boolean;

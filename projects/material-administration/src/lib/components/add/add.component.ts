@@ -34,16 +34,13 @@ export class AddComponent extends MetadataComponent {
 
   save(item: any) {
     this.isLoading$.next(true);
+
     this.collectionName$
       .pipe(
         take(1),
-        switchMap(([collectionName]) => {
-          return this.processUploads(item).pipe(
-            map((updatedItem) => {
-              return [collectionName, updatedItem];
-            })
-          );
-        }),
+        switchMap((collectionName) =>
+          this.processUploads(item).pipe(map((updatedItem) => [collectionName, updatedItem]))
+        ),
         switchMap(([collectionName, updatedItem]) =>
           this.dataAdapterService.add(collectionName, this.getWithTimestamps(updatedItem, 'add'))
         )
