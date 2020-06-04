@@ -7,14 +7,17 @@ import {
   ElementRef,
   Optional,
   Self,
-  ViewChild
+  ViewChild,
+  DoCheck
 } from '@angular/core';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { Subject } from 'rxjs';
-import { FormBuilder, NgControl, FormControl } from '@angular/forms';
+import { FormBuilder, NgControl, FormControl, ControlValueAccessor, NgForm, FormGroupDirective } from '@angular/forms';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntil } from 'rxjs/operators';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MaterialFileInputMixinBase } from './material-file-input-mixin';
 
 @Component({
   selector: 'mat-file-input',
@@ -23,7 +26,8 @@ import { takeUntil } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: MatFormFieldControl, useExisting: MatFileInputComponent }]
 })
-export class MatFileInputComponent implements OnDestroy, MatFormFieldControl<File[]> {
+export class MatFileInputComponent extends MaterialFileInputMixinBase
+  implements OnDestroy, MatFormFieldControl<File[]>, ControlValueAccessor, DoCheck {
   static nextId = 0;
   // eslint-disable-next-line no-plusplus
   @HostBinding() id = `mat-file-input-${MatFileInputComponent.nextId++}`;
@@ -101,8 +105,13 @@ export class MatFileInputComponent implements OnDestroy, MatFormFieldControl<Fil
     @Optional() @Self() public ngControl: NgControl,
     fb: FormBuilder,
     private fm: FocusMonitor,
-    private elRef: ElementRef<HTMLElement>
+    private elRef: ElementRef<HTMLElement>,
+    public _defaultErrorStateMatcher: ErrorStateMatcher,
+    @Optional() public _parentForm: NgForm,
+    @Optional() public _parentFormGroup: FormGroupDirective
   ) {
+    super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
+
     // Replace the provider from above with this.
     if (this.ngControl != null) {
       // Setting the value accessor directly (instead of using
@@ -126,6 +135,15 @@ export class MatFileInputComponent implements OnDestroy, MatFormFieldControl<Fil
     this.fm.stopMonitoring(this.elRef.nativeElement);
     this.destroyed$.next();
     this.destroyed$.complete();
+  }
+
+  ngDoCheck(): void {
+    if (this.ngControl) {
+      // We need to re-evaluate this on every change detection cycle, because there are some
+      // error triggers that we can't subscribe to (e.g. parent form submissions). This means
+      // that whatever logic is in here has to be super lean or we risk destroying the performance.
+      this.updateErrorState();
+    }
   }
 
   onContainerClick(event: MouseEvent) {
