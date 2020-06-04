@@ -2,10 +2,11 @@ import { Component, Optional, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
 import { map, shareReplay, takeUntil, tap, take, switchMap } from 'rxjs/operators';
-import { capitalize } from 'lodash';
+import { capitalize } from 'lodash-es';
+import { EntityFieldType } from '../../types';
 import { SnackbarService } from '../../services/snackbar.service';
 import { MetadataComponent } from '../metadata/metadata.component';
-import { DataAdapterService } from '../../services/data-adapter.service';
+import { DataAdapterInterface } from '../../services';
 
 @Component({
   selector: 'mat-administration-update',
@@ -22,7 +23,7 @@ export class UpdateComponent extends MetadataComponent {
     public route: ActivatedRoute,
     private snackbar: SnackbarService,
     private router: Router,
-    public dataAdapterService: DataAdapterService,
+    @Inject('MAT_ADMINISTRATION_DATA_ADAPTER') public dataAdapterService: DataAdapterInterface,
     @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: any
   ) {
     super(route, dataAdapterService, metadata);
@@ -83,7 +84,7 @@ export class UpdateComponent extends MetadataComponent {
   }
 
   private getFieldValue(field: any, doc: any) {
-    if (field?.type === 'timestamp') {
+    if (field?.type === EntityFieldType.Timestamp) {
       return doc?.[field?.name]?.toDate();
     }
 

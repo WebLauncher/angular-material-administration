@@ -1,8 +1,15 @@
+import { EntityFieldType } from './entity-field-type.enum';
+import { EntityFieldInputType } from './entity-field-input-type.enum';
+
 export interface MatAdministrationEntityField {
+  id?: string;
+  name?: string;
   hideInList: boolean;
+  showInList: boolean;
   hideInForm: boolean;
-  inputType: string;
-  type: string;
+  showInForm: boolean;
+  inputType: EntityFieldInputType | string;
+  type: EntityFieldType | string;
   data: {
     type: string;
     collection: string;
@@ -22,6 +29,7 @@ export interface MatAdministrationEntity {
   id?: string;
   single: string;
   plural: string;
+  autoTimestamps: boolean;
   createdTimestamp: string;
   updatedTimestamp: string;
   showMenuDividerAfter: boolean;
@@ -33,6 +41,6 @@ export interface MatAdministrationEntity {
 }
 
 export interface MatAdministrationMetadata {
-  timestampFormat: string;
+  timestampFormat?: string;
   entities: { [k: string]: Partial<MatAdministrationEntity> };
 }

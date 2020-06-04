@@ -1,5 +1,6 @@
 import { Injectable, Optional, Inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { EntityFieldType } from '../types';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,10 @@ export class ValueFormatService {
 
   transform(value: any, type: string, options = null) {
     switch (type) {
-      case 'timestamp':
+      case EntityFieldType.Timestamp:
         return this.datePipe.transform(
           value?.toDate(),
-          options?.format || this.metadata?.timestampFormat,
+          options?.format || this.metadata?.timestampFormat || 'medium',
           options.timezone,
           options?.locale
         );

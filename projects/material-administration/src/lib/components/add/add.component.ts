@@ -2,11 +2,11 @@ import { Component, Inject, Optional } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take, tap, switchMap, map } from 'rxjs/operators';
-import { capitalize } from 'lodash';
+import { capitalize } from 'lodash-es';
 import { Immutable } from 'types/immutable';
 import { SnackbarService } from '../../services/snackbar.service';
-import { DataAdapterService } from '../../services/data-adapter.service';
 import { MetadataComponent } from '../metadata/metadata.component';
+import { DataAdapterInterface } from '../../services/data-adapter';
 
 @Component({
   selector: 'mat-administration-add',
@@ -20,7 +20,7 @@ export class AddComponent extends MetadataComponent {
     public route: ActivatedRoute,
     private snackbar: SnackbarService,
     private router: Router,
-    public dataAdapterService: DataAdapterService,
+    @Inject('MAT_ADMINISTRATION_DATA_ADAPTER') public dataAdapterService: DataAdapterInterface,
     @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: Immutable<any>
   ) {
     super(route, dataAdapterService, metadata);
@@ -34,16 +34,13 @@ export class AddComponent extends MetadataComponent {
 
   save(item: any) {
     this.isLoading$.next(true);
+
     this.collectionName$
       .pipe(
         take(1),
-        switchMap(([collectionName]) => {
-          return this.processUploads(item).pipe(
-            map((updatedItem) => {
-              return [collectionName, updatedItem];
-            })
-          );
-        }),
+        switchMap((collectionName) =>
+          this.processUploads(item).pipe(map((updatedItem) => [collectionName, updatedItem]))
+        ),
         switchMap(([collectionName, updatedItem]) =>
           this.dataAdapterService.add(collectionName, this.getWithTimestamps(updatedItem, 'add'))
         )

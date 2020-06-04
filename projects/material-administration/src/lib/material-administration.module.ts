@@ -41,6 +41,7 @@ import {
   MenuComponent,
   BreadcrumbsComponent
 } from './components/index';
+import { FirestoreDataAdapterService } from './services';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,14 @@ import {
     MatSidenavModule,
     MatListModule
   ],
-  providers: [ValueFormatService, DatePipe],
+  providers: [
+    ValueFormatService,
+    DatePipe,
+    {
+      provide: 'MAT_ADMINISTRATION_DATA_ADAPTER',
+      useClass: FirestoreDataAdapterService
+    }
+  ],
   exports: [
     ListComponent,
     AddComponent,

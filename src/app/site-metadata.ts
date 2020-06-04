@@ -1,17 +1,14 @@
-import { MatAdministrationMetadata } from '@weblauncher/material-administration';
+import { MatAdministrationMetadata, EntityFieldType, EntityFieldInputType } from '@weblauncher/material-administration';
 
 export const SiteMetadata: MatAdministrationMetadata = {
-  timestampFormat: 'medium',
   entities: {
     news: {
       single: 'news',
       plural: 'news',
-      createdTimestamp: 'created',
-      updatedTimestamp: 'updated',
+      autoTimestamps: true,
       fields: {
-        id: 'id',
         sport: {
-          inputType: 'select',
+          inputType: EntityFieldInputType.Select,
           data: {
             type: 'collection',
             collection: 'sports',
@@ -22,11 +19,11 @@ export const SiteMetadata: MatAdministrationMetadata = {
         title: 'title',
         content: {
           hideInList: true,
-          inputType: 'ckeditor'
+          inputType: EntityFieldInputType.Ckeditor
         },
         imageUrl: {
           label: 'Image',
-          inputType: 'image',
+          inputType: EntityFieldInputType.Image,
           format: 'image',
           filePathField: 'imageUrlPath',
           style: {
@@ -34,53 +31,42 @@ export const SiteMetadata: MatAdministrationMetadata = {
           }
         },
         created: {
-          type: 'timestamp',
-          hideInForm: true
-        },
-        updated: {
-          type: 'timestamp',
-          hideInForm: true
+          showInList: true
         }
       },
       entities: {
         images: {
           single: 'image',
           plural: 'images',
-          createdTimestamp: 'created',
-          updatedTimestamp: 'updated',
+          autoTimestamps: true,
           fields: {
+            id: {
+              hideInList: true
+            },
             title: 'title',
             imageUrl: {
               label: 'Image',
-              inputType: 'image',
+              inputType: EntityFieldInputType.Image,
               format: 'image',
               filePathField: 'imageUrlPath'
             },
             created: {
-              type: 'timestamp',
-              hideInForm: true
-            },
-            updated: {
-              type: 'timestamp',
-              hideInForm: true
+              showInList: true
             }
           }
         },
         comments: {
           single: 'comment',
           plural: 'comments',
-          createdTimestamp: 'created',
-          updatedTimestamp: 'updated',
+          autoTimestamps: true,
           fields: {
+            id: {
+              hideInList: true
+            },
             title: 'title',
             content: 'content',
             created: {
-              type: 'timestamp',
-              hideInForm: true
-            },
-            updated: {
-              type: 'timestamp',
-              hideInForm: true
+              showInList: true
             }
           }
         }
@@ -90,12 +76,10 @@ export const SiteMetadata: MatAdministrationMetadata = {
       single: 'event',
       plural: 'events',
       showMenuDividerAfter: true,
-      createdTimestamp: 'created',
-      updatedTimestamp: 'updated',
+      autoTimestamps: true,
       fields: {
-        id: 'id',
         sport: {
-          inputType: 'select',
+          inputType: EntityFieldInputType.Select,
           data: {
             type: 'collection',
             collection: 'sports',
@@ -106,23 +90,20 @@ export const SiteMetadata: MatAdministrationMetadata = {
         title: 'title',
         description: {
           hideInList: true,
-          inputType: 'ckeditor'
+          inputType: EntityFieldInputType.Ckeditor
         },
         start: {
-          type: 'timestamp',
-          inputType: 'datepicker'
+          type: EntityFieldType.Timestamp,
+          inputType: 'datepicker',
+          showInList: true
         },
         end: {
-          type: 'timestamp',
-          inputType: 'datepicker'
+          type: EntityFieldType.Timestamp,
+          inputType: 'datepicker',
+          showInList: true
         },
         created: {
-          type: 'timestamp',
-          hideInForm: true
-        },
-        updated: {
-          type: 'timestamp',
-          hideInForm: true
+          showInList: true
         }
       }
     },
@@ -131,7 +112,6 @@ export const SiteMetadata: MatAdministrationMetadata = {
       plural: 'users',
       titleField: 'email',
       fields: {
-        id: 'id',
         email: 'email',
         displayName: 'displayName'
       }
@@ -141,7 +121,6 @@ export const SiteMetadata: MatAdministrationMetadata = {
       plural: 'sports',
       hideList: true,
       fields: {
-        id: 'id',
         name: 'name',
         order: 'order',
         icon: 'icon'

@@ -2,10 +2,10 @@ import { Component, OnDestroy, Optional, Inject } from '@angular/core';
 import { BehaviorSubject, of, forkJoin, Subject, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { map, shareReplay, switchMap, take, catchError, takeUntil, tap } from 'rxjs/operators';
-import { capitalize } from 'lodash';
-import { DataAdapterService } from '../../services/data-adapter.service';
-import { DownloadData } from '../../services/index';
-import { MatAdministrationEntity } from '../../types/material-administration-metadata';
+import { capitalize } from 'lodash-es';
+import { DownloadData, DataAdapterInterface } from '../../services/index';
+import { MatAdministrationEntity, MatAdministrationEntityField } from '../../types/material-administration-metadata';
+import { EntityFieldType, EntityFieldInputType } from '../../types';
 
 @Component({
   selector: 'mat-administration-metadata',
@@ -22,7 +22,7 @@ export class MetadataComponent implements OnDestroy {
 
   constructor(
     public route: ActivatedRoute,
-    public dataAdapterService: DataAdapterService,
+    @Inject('MAT_ADMINISTRATION_DATA_ADAPTER') public dataAdapterService: DataAdapterInterface,
     @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: any
   ) {
     this.route.params
@@ -81,7 +81,10 @@ export class MetadataComponent implements OnDestroy {
   getFields() {
     return this.metadata$.pipe(
       map((metadata) => {
-        const entries = Object.entries(metadata?.fields);
+        const entries = Object.entries({
+          ...metadata?.fields,
+          ...this.getAutoFields()
+        });
 
         return entries
           .map(([key, value]) =>
@@ -136,11 +139,12 @@ export class MetadataComponent implements OnDestroy {
     const newItem = { ...item };
 
     const timestamp = this.dataAdapterService.getTimestamp();
-    if (action === 'add' && this.metadata$.getValue()?.createdTimestamp) {
-      newItem[this.metadata$.getValue()?.createdTimestamp] = timestamp;
+    const metadata = this.metadata$.getValue();
+    if (action === 'add' && (metadata?.createdTimestamp || metadata?.autoTimestamps)) {
+      newItem[metadata?.createdTimestamp || 'created'] = timestamp;
     }
-    if (this.metadata$.getValue()?.updatedTimestamp) {
-      newItem[this.metadata$.getValue()?.updatedTimestamp] = timestamp;
+    if (metadata?.updatedTimestamp || metadata?.autoTimestamps) {
+      newItem[metadata?.updatedTimestamp || 'updated'] = timestamp;
     }
 
     return newItem;
@@ -148,6 +152,30 @@ export class MetadataComponent implements OnDestroy {
 
   getFieldMedatada(field: string) {
     return this.metadata$.getValue()?.entities?.[field];
+  }
+
+  getAutoFields(): { [k: string]: string | Partial<MatAdministrationEntityField> } {
+    const autoFields: { [k: string]: string | Partial<MatAdministrationEntityField> } = {};
+    const metadata = this.metadata$.getValue();
+
+    if (metadata.autoTimestamps) {
+      autoFields.created = {
+        type: EntityFieldType.Timestamp
+      };
+      autoFields.updated = {
+        type: EntityFieldType.Timestamp
+      };
+    }
+
+    if (!metadata.idField && !metadata.fields[this.getIdField()]) {
+      autoFields.id = this.getIdField();
+    }
+
+    return autoFields;
+  }
+
+  getIdField() {
+    return this.metadata$.getValue()?.idField || 'id';
   }
 
   private getMetadata(collectionName: string, metadata: any) {
@@ -161,7 +189,10 @@ export class MetadataComponent implements OnDestroy {
   }
 
   private addAdditionalMetadata(field) {
-    if ((field?.inputType === 'select' || field?.inputType === 'radio') && field?.data?.type === 'collection') {
+    if (
+      (field?.inputType === EntityFieldInputType.Select || field?.inputType === EntityFieldInputType.Radio) &&
+      field?.data?.type === 'collection'
+    ) {
       return this.dataAdapterService.list(field?.data?.collection, field?.data?.collectionValue).pipe(
         take(1),
         map((docs) => {
@@ -181,11 +212,35 @@ export class MetadataComponent implements OnDestroy {
     return of(field);
   }
 
-  private showField(metadata, field) {
+  private showField(metadata: MatAdministrationEntity, field: Partial<MatAdministrationEntityField>) {
+    const fieldDetails = this.getFieldDetails(metadata, field);
+
+    let createdTimestamp = metadata?.createdTimestamp;
+    if (metadata?.autoTimestamps && !createdTimestamp) {
+      createdTimestamp = 'created';
+    }
+
+    let updatedTimestamp = '';
+    if (metadata?.autoTimestamps && !updatedTimestamp) {
+      updatedTimestamp = 'updated';
+    }
+
     return (
-      field.name !== 'id' &&
-      (!metadata?.createdTimestamp || metadata?.createdTimestamp !== field.name) &&
-      (!metadata?.updatedTimestamp || metadata?.updatedTimestamp !== field.name)
+      field.name !== this.getIdField() &&
+      (((!createdTimestamp || createdTimestamp !== field.name) &&
+        (!updatedTimestamp || updatedTimestamp !== field.name)) ||
+        (!fieldDetails?.hideInForm && fieldDetails?.type !== EntityFieldType.Timestamp) ||
+        fieldDetails.showInForm)
     );
+  }
+
+  private getFieldDetails(
+    metadata: MatAdministrationEntity,
+    field: Partial<MatAdministrationEntityField>
+  ): Partial<MatAdministrationEntityField> {
+    return {
+      ...field,
+      ...(metadata?.fields[field?.name] as Partial<MatAdministrationEntityField>)
+    };
   }
 }
