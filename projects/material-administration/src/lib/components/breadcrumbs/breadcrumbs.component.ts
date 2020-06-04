@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { capitalize } from 'lodash-es';
 import { map } from 'rxjs/operators';
 import { MatAdministrationEntity, MatAdministrationMetadata } from '../../types/material-administration-metadata';
-import { DataAdapterService } from '../../services';
+import { DataAdapterInterface } from '../../services';
 
 @Component({
   selector: 'mat-administration-breadcrumbs',
@@ -26,7 +26,7 @@ export class BreadcrumbsComponent implements OnInit {
 
   constructor(
     @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: MatAdministrationMetadata,
-    public dataAdapterService: DataAdapterService
+    @Inject('MAT_ADMINISTRATION_DATA_ADAPTER') public dataAdapterService: DataAdapterInterface
   ) {}
 
   ngOnInit(): void {

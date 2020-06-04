@@ -6,7 +6,7 @@ import { capitalize } from 'lodash-es';
 import { EntityFieldType } from '../../types';
 import { SnackbarService } from '../../services/snackbar.service';
 import { MetadataComponent } from '../metadata/metadata.component';
-import { DataAdapterService } from '../../services/data-adapter.service';
+import { DataAdapterInterface } from '../../services';
 
 @Component({
   selector: 'mat-administration-update',
@@ -23,7 +23,7 @@ export class UpdateComponent extends MetadataComponent {
     public route: ActivatedRoute,
     private snackbar: SnackbarService,
     private router: Router,
-    public dataAdapterService: DataAdapterService,
+    @Inject('MAT_ADMINISTRATION_DATA_ADAPTER') public dataAdapterService: DataAdapterInterface,
     @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: any
   ) {
     super(route, dataAdapterService, metadata);

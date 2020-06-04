@@ -1,14 +1,12 @@
 import { MatAdministrationMetadata, EntityFieldType, EntityFieldInputType } from '@weblauncher/material-administration';
 
 export const SiteMetadata: MatAdministrationMetadata = {
-  timestampFormat: 'medium',
   entities: {
     news: {
       single: 'news',
       plural: 'news',
       autoTimestamps: true,
       fields: {
-        id: 'id',
         sport: {
           inputType: EntityFieldInputType.Select,
           data: {
@@ -42,6 +40,9 @@ export const SiteMetadata: MatAdministrationMetadata = {
           plural: 'images',
           autoTimestamps: true,
           fields: {
+            id: {
+              hideInList: true
+            },
             title: 'title',
             imageUrl: {
               label: 'Image',
@@ -59,6 +60,9 @@ export const SiteMetadata: MatAdministrationMetadata = {
           plural: 'comments',
           autoTimestamps: true,
           fields: {
+            id: {
+              hideInList: true
+            },
             title: 'title',
             content: 'content',
             created: {
@@ -74,7 +78,6 @@ export const SiteMetadata: MatAdministrationMetadata = {
       showMenuDividerAfter: true,
       autoTimestamps: true,
       fields: {
-        id: 'id',
         sport: {
           inputType: EntityFieldInputType.Select,
           data: {
@@ -109,7 +112,6 @@ export const SiteMetadata: MatAdministrationMetadata = {
       plural: 'users',
       titleField: 'email',
       fields: {
-        id: 'id',
         email: 'email',
         displayName: 'displayName'
       }
@@ -119,7 +121,6 @@ export const SiteMetadata: MatAdministrationMetadata = {
       plural: 'sports',
       hideList: true,
       fields: {
-        id: 'id',
         name: 'name',
         order: 'order',
         icon: 'icon'

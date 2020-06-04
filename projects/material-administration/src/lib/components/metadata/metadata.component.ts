@@ -3,8 +3,7 @@ import { BehaviorSubject, of, forkJoin, Subject, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { map, shareReplay, switchMap, take, catchError, takeUntil, tap } from 'rxjs/operators';
 import { capitalize } from 'lodash-es';
-import { DataAdapterService } from '../../services/data-adapter.service';
-import { DownloadData } from '../../services/index';
+import { DownloadData, DataAdapterInterface } from '../../services/index';
 import { MatAdministrationEntity, MatAdministrationEntityField } from '../../types/material-administration-metadata';
 import { EntityFieldType, EntityFieldInputType } from '../../types';
 
@@ -23,7 +22,7 @@ export class MetadataComponent implements OnDestroy {
 
   constructor(
     public route: ActivatedRoute,
-    public dataAdapterService: DataAdapterService,
+    @Inject('MAT_ADMINISTRATION_DATA_ADAPTER') public dataAdapterService: DataAdapterInterface,
     @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: any
   ) {
     this.route.params
@@ -147,7 +146,7 @@ export class MetadataComponent implements OnDestroy {
     if (metadata?.updatedTimestamp || metadata?.autoTimestamps) {
       newItem[metadata?.updatedTimestamp || 'updated'] = timestamp;
     }
-    console.log(newItem);
+
     return newItem;
   }
 
@@ -168,7 +167,15 @@ export class MetadataComponent implements OnDestroy {
       };
     }
 
+    if (!metadata.idField && !metadata.fields[this.getIdField()]) {
+      autoFields.id = this.getIdField();
+    }
+
     return autoFields;
+  }
+
+  getIdField() {
+    return this.metadata$.getValue()?.idField || 'id';
   }
 
   private getMetadata(collectionName: string, metadata: any) {
@@ -219,7 +226,7 @@ export class MetadataComponent implements OnDestroy {
     }
 
     return (
-      field.name !== 'id' &&
+      field.name !== this.getIdField() &&
       (((!createdTimestamp || createdTimestamp !== field.name) &&
         (!updatedTimestamp || updatedTimestamp !== field.name)) ||
         (!fieldDetails?.hideInForm && fieldDetails?.type !== EntityFieldType.Timestamp) ||

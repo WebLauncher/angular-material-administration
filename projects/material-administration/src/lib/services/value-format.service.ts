@@ -13,7 +13,7 @@ export class ValueFormatService {
       case EntityFieldType.Timestamp:
         return this.datePipe.transform(
           value?.toDate(),
-          options?.format || this.metadata?.timestampFormat,
+          options?.format || this.metadata?.timestampFormat || 'medium',
           options.timezone,
           options?.locale
         );

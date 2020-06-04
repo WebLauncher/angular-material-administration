@@ -41,6 +41,6 @@ export interface MatAdministrationEntity {
 }
 
 export interface MatAdministrationMetadata {
-  timestampFormat: string;
+  timestampFormat?: string;
   entities: { [k: string]: Partial<MatAdministrationEntity> };
 }

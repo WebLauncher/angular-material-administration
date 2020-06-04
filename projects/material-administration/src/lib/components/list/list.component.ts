@@ -6,9 +6,8 @@ import { pickBy, capitalize, merge } from 'lodash-es';
 import { ValueFormatService } from '../../services/value-format.service';
 import { MetadataComponent } from '../metadata/metadata.component';
 import { SnackbarService } from '../../services/snackbar.service';
-
-import { DataAdapterService } from '../../services/data-adapter.service';
 import { MatAdministrationMetadata, MatAdministrationEntityField, EntityFieldType } from '../../types';
+import { DataAdapterInterface } from '../../services';
 
 @Component({
   selector: 'mat-administration-list',
@@ -24,7 +23,7 @@ export class ListComponent extends MetadataComponent {
     public route: ActivatedRoute,
     private valueFormatService: ValueFormatService,
     private snackbar: SnackbarService,
-    public dataAdapterService: DataAdapterService,
+    @Inject('MAT_ADMINISTRATION_DATA_ADAPTER') public dataAdapterService: DataAdapterInterface,
     @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: MatAdministrationMetadata
   ) {
     super(route, dataAdapterService, metadata);
@@ -32,7 +31,7 @@ export class ListComponent extends MetadataComponent {
     this.displayedColumns$ = this.getDisplayedColumns();
     this.displayedColumnsNames$ = this.displayedColumns$.pipe(map((columns) => columns.map((column) => column?.id)));
     this.list$ = this.collectionName$.pipe(
-      switchMap((collection) => this.dataAdapterService.list(collection, this.metadata$.getValue()?.idField || 'id')),
+      switchMap((collection) => this.dataAdapterService.list(collection, this.getIdField())),
       tap(() => this.isLoading$.next(false)),
       shareReplay(1)
     );
@@ -78,13 +77,13 @@ export class ListComponent extends MetadataComponent {
 
     const autoFields = this.getAutoFields();
 
-    return Object.keys(pickBy(merge(columns, autoFields), (col) => this.canDisplayColumn(col))).map((column) => {
-      return {
+    return Object.keys(pickBy(merge(columns, autoFields), (col) => this.canDisplayColumn(col)))
+      .sort((column) => (column === this.getIdField() ? -1 : 0))
+      .map((column) => ({
         ...columns[column],
         label: columns[column]?.label || this.getFieldLabel({ label: column }),
         id: columns[column]?.id || column
-      };
-    });
+      }));
   }
 
   private canDisplayColumn(column: MatAdministrationEntityField): boolean {

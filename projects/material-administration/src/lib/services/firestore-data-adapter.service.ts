@@ -10,7 +10,7 @@ import { DataAdapterInterface, DownloadData } from './data-adapter';
 @Injectable({
   providedIn: 'root'
 })
-export class DataAdapterService implements DataAdapterInterface {
+export class FirestoreDataAdapterService implements DataAdapterInterface {
   constructor(private db: AngularFirestore, private storage: AngularFireStorage) {}
 
   get(collection: string, id: string) {
