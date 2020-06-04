@@ -1,14 +1,14 @@
 {
   "targets": {
-    "unified-welder-663": {
+    "weblauncher-administration": {
       "hosting": {
         "administration": [
-          "unified-welder-663"
+          "weblauncher-administration"
         ]
       }
     }
   },
   "projects": {
-    "admin": "unified-welder-663"
+    "admin": "weblauncher-administration"
   }
 }

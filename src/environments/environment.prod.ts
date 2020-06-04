@@ -1,13 +1,13 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: 'AIzaSyDWIA8araSKyyIjPNQNIkadrq-aKLtOXwk',
-    authDomain: 'unified-welder-663.firebaseapp.com',
-    databaseURL: 'https://unified-welder-663.firebaseio.com',
-    projectId: 'unified-welder-663',
-    storageBucket: 'unified-welder-663.appspot.com',
-    messagingSenderId: '173721926823',
-    appId: '1:173721926823:web:c92a2d49a704480dd4af82',
-    measurementId: 'G-ZTWHJFJMXT'
+    apiKey: 'AIzaSyBSzQMavDTC_xRHdGxmHGrzBhYHbIiCEss',
+    authDomain: 'weblauncher-administration.firebaseapp.com',
+    databaseURL: 'https://weblauncher-administration.firebaseio.com',
+    projectId: 'weblauncher-administration',
+    storageBucket: 'weblauncher-administration.appspot.com',
+    messagingSenderId: '384505651321',
+    appId: '1:384505651321:web:5d8b767431b0ff218534a8',
+    measurementId: 'G-NR03P4BZ8K'
   }
 };
