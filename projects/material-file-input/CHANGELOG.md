@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.10 (2020-06-04)
+
+
+### Bug Fixes
+
+* **build:** yarn lock wrong in CI ([9adcda2](https://github.com/WebLauncher/angular-material-administration/commit/9adcda201a3bef821c5f4ee9537270a32526d6f3))
+
+
+
+
+
 ## 0.2.9 (2020-06-02)
 
 **Note:** Version bump only for package @weblauncher/material-file-input
