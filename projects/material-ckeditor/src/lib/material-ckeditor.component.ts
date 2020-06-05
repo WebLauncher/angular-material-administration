@@ -1,34 +1,36 @@
 import {
   Component,
-  Input,
   OnDestroy,
+  DoCheck,
   HostBinding,
-  ElementRef,
+  Input,
+  ViewChild,
   Optional,
   Self,
-  ViewChild,
-  DoCheck
+  ElementRef
 } from '@angular/core';
+import { FormControl, ControlValueAccessor, NgControl, FormBuilder, NgForm, FormGroupDirective } from '@angular/forms';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MatFormFieldControl } from '@angular/material/form-field';
-import { Subject } from 'rxjs';
-import { FormBuilder, NgControl, FormControl, ControlValueAccessor, NgForm, FormGroupDirective } from '@angular/forms';
-import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { MaterialFileInputMixinBase } from './material-file-input-mixin';
+import { takeUntil } from 'rxjs/operators';
+import { MaterialCkeditorMixinBase } from './material-ckeditor-mixin';
 
 @Component({
-  selector: 'mat-file-input',
-  templateUrl: './material-file-input.component.html',
-  styleUrls: ['./material-file-input.component.scss'],
-  providers: [{ provide: MatFormFieldControl, useExisting: MatFileInputComponent }]
+  selector: 'mat-ckeditor',
+  templateUrl: './material-ckeditor.component.html',
+  styleUrls: ['./material-ckeditor.component.scss'],
+  providers: [{ provide: MatFormFieldControl, useExisting: MaterialCkeditorComponent }]
 })
-export class MatFileInputComponent extends MaterialFileInputMixinBase
-  implements OnDestroy, MatFormFieldControl<File[]>, ControlValueAccessor, DoCheck {
+export class MaterialCkeditorComponent extends MaterialCkeditorMixinBase
+  implements OnDestroy, MatFormFieldControl<string>, ControlValueAccessor, DoCheck {
   static nextId = 0;
+  Editor = ClassicEditor;
   // eslint-disable-next-line no-plusplus
-  @HostBinding() id = `mat-file-input-${MatFileInputComponent.nextId++}`;
+  @HostBinding() id = `mat-ckeditor-${MaterialCkeditorComponent.nextId++}`;
   @HostBinding('class.floating')
   get shouldLabelFloat() {
     return this.focused || !this.empty;
@@ -72,7 +74,7 @@ export class MatFileInputComponent extends MaterialFileInputMixinBase
   @Input() buttonText = 'Choose...';
 
   errorState = false;
-  controlType = 'mat-file-input';
+  controlType = 'mat-ckeditor';
 
   @HostBinding('attr.aria-describedby') describedBy = '';
 
@@ -82,7 +84,7 @@ export class MatFileInputComponent extends MaterialFileInputMixinBase
   stateChanges = new Subject<void>();
   focused = false;
 
-  set value(value: File[]) {
+  set value(value: string) {
     this.form.setValue(value);
     this.stateChanges.next();
   }
@@ -95,7 +97,7 @@ export class MatFileInputComponent extends MaterialFileInputMixinBase
     return !this.form.value;
   }
 
-  @ViewChild('file') file;
+  @ViewChild('editor') editor;
 
   private destroyed$ = new Subject();
 
@@ -154,7 +156,7 @@ export class MatFileInputComponent extends MaterialFileInputMixinBase
     this.describedBy = ids.join(' ');
   }
 
-  writeValue(value: File[]) {
+  writeValue(value: string) {
     this.value = value;
   }
 
@@ -163,25 +165,4 @@ export class MatFileInputComponent extends MaterialFileInputMixinBase
   }
 
   registerOnTouched() {}
-
-  openChooseFile() {
-    if (this.value) {
-      this.value = null;
-      this.file.nativeElement.value = '';
-    }
-    this.file.nativeElement.click();
-  }
-
-  onFilesAdded() {
-    const files = Object.values(this.file.nativeElement.files) as File[];
-    this.value = files;
-  }
-
-  getName() {
-    if (!this.value) {
-      return '';
-    }
-
-    return this.multiple ? this.value.map((file) => file?.name).join(', ') : this.value[0]?.name;
-  }
 }

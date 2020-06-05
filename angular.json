@@ -191,11 +191,49 @@
           }
         }
       }
+    },
+    "material-ckeditor": {
+      "projectType": "library",
+      "root": "projects/material-ckeditor",
+      "sourceRoot": "projects/material-ckeditor/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/material-ckeditor/tsconfig.lib.json",
+            "project": "projects/material-ckeditor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/material-ckeditor/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/material-ckeditor/src/test.ts",
+            "tsConfig": "projects/material-ckeditor/tsconfig.spec.json",
+            "karmaConfig": "projects/material-ckeditor/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "eslintConfig": "projects/material-ckeditor/.eslintrc.js",
+            "tsConfig": [
+              "projects/material-ckeditor/tsconfig.lib.json",
+              "projects/material-ckeditor/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
     }
   },
   "defaultProject": "administration",
   "cli": {
-    "defaultCollection": "@ngrx/schematics",
     "analytics": false
   }
 }

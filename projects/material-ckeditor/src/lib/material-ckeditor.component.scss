@@ -1,0 +1,14 @@
+:host ::ng-deep {
+
+  .ck-content,
+  .ck-focused {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .ck-toolbar {
+    border: none !important;
+    background: none !important;
+  }
+}

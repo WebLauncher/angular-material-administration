@@ -1,11 +1,11 @@
 {
-  "name": "@weblauncher/material-file-input",
-  "version": "0.2.12",
+  "name": "@weblauncher/material-ckeditor",
+  "version": "0.0.1",
   "keywords": [
     "angular",
     "material",
-    "input",
-    "file"
+    "ckeditor",
+    "ckeditor5"
   ],
   "private": false,
   "repository": {
@@ -14,7 +14,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "ng build material-file-input",
+    "build": "ng build material-ckeditor",
     "postpublish": "rm -rf dist/"
   },
   "peerDependencies": {
@@ -25,6 +25,8 @@
     "@angular/material": "^9.1.0",
     "@angular/platform-browser": "~9.1.9",
     "@angular/platform-browser-dynamic": "~9.1.9",
+    "@ckeditor/ckeditor5-angular": "1.2.3",
+    "@ckeditor/ckeditor5-build-classic": "^19.0.1",
     "rxjs": "~6.5.4",
     "zone.js": "~0.10.2"
   },

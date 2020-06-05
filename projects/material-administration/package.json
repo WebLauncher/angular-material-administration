@@ -14,11 +14,12 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "wait-on ../material-file-input/dist/public-api.d.ts && ng build material-administration",
+    "build": "wait-on ../material-file-input/dist/public-api.d.ts ../material-ckeditor/dist/public-api.d.ts && ng build material-administration",
     "postpublish": "rm -rf dist/"
   },
   "devDependencies": {
-    "@weblauncher/material-file-input": "^0.2.12"
+    "@weblauncher/material-file-input": "^0.2.12",
+    "@weblauncher/material-ckeditor": "^0.2.12"
   },
   "peerDependencies": {
     "@angular/cdk": "^9.1.0",
@@ -31,15 +32,16 @@
     "@angular/platform-browser": "~9.1.9",
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "^9.1.0",
-    "@ckeditor/ckeditor5-angular": "1.2.3",
-    "@ckeditor/ckeditor5-build-classic": "^19.0.1",
     "@weblauncher/material-file-input": "*",
+    "@weblauncher/material-ckeditor": "*",
     "firebase": "^7.13.2",
     "lodash-es": "^4.17.15",
     "luxon": "^1.23.0",
     "rxjs": "~6.5.4",
-    "tslib": "^1.10.0",
     "uuid": "^7.0.3",
     "zone.js": "~0.10.2"
+  },
+  "dependencies": {
+    "tslib": "^1.10.0"
   }
 }

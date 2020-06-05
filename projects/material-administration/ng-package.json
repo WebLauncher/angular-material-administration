@@ -6,10 +6,9 @@
     "umdModuleIds": {
       "lodash-es": "lodash-es",
       "@weblauncher/material-file-input": "@weblauncher/material-file-input",
+      "@weblauncher/material-ckeditor": "@weblauncher/material-ckeditor",
       "firebase/app": "firebase",
-      "uuid": "uuid",
-      "@ckeditor/ckeditor5-angular": "@ckeditor/ckeditor5-angular",
-      "@ckeditor/ckeditor5-build-classic": "@ckeditor/ckeditor5-build-classic"
+      "uuid": "uuid"
     }
   },
   "whitelistedNonPeerDependencies": [

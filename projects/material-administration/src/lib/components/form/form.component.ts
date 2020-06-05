@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angu
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'mat-administration-form',
@@ -15,7 +14,6 @@ export class FormComponent implements OnInit, OnDestroy {
   @Output() valueChanges: EventEmitter<any> = new EventEmitter();
 
   form: FormGroup;
-  Editor = ClassicEditor;
 
   private destroyed$: Subject<void> = new Subject();
 

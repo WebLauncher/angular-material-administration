@@ -28,6 +28,12 @@
       ],
       "@weblauncher/material-file-input/*": [
         "./projects/material-file-input/dist/"
+      ],
+      "@weblauncher/material-ckeditor": [
+        "./projects/material-ckeditor/dist"
+      ],
+      "@weblauncher/material-ckeditor/*": [
+        "./projects/material-ckeditor/dist/"
       ]
     }
   },

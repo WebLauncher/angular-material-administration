@@ -20,17 +20,23 @@
         "./projects/material-file-input/dist"
       ],
       "@weblauncher/material-file-input/*": [
-        "./projects/material-file-input/dist/"
+        "./projects/material-file-input/dist/*"
       ],
       "@weblauncher/material-administration": [
         "./projects/material-administration/dist"
       ],
       "@weblauncher/material-administration/*": [
-        "./projects/material-administration/dist/"
+        "./projects/material-administration/dist/*"
       ],
       "types": [
         "types"
-      ]
+      ],
+      "@weblauncher/material-ckeditor": [
+        "./projects/material-ckeditor/dist"
+      ],
+      "@weblauncher/material-ckeditor/*": [
+        "./projects/material-ckeditor/dist/*"
+      ],
     }
   },
   "angularCompilerOptions": {

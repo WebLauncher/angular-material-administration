@@ -11,7 +11,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
@@ -31,6 +30,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFileInputModule } from '@weblauncher/material-file-input';
+import { MatCkeditorModule } from '@weblauncher/material-ckeditor';
 import { ValueFormatService } from './services/value-format.service';
 import {
   ListComponent,
@@ -68,7 +68,6 @@ import { FirestoreDataAdapterService } from './services';
     MatFormFieldModule,
     MatFileInputModule,
     MatButtonModule,
-    CKEditorModule,
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
@@ -84,7 +83,8 @@ import { FirestoreDataAdapterService } from './services';
     FlexLayoutModule,
     MatMenuModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatCkeditorModule
   ],
   providers: [
     ValueFormatService,

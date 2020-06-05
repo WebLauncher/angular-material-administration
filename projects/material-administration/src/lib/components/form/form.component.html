@@ -15,15 +15,15 @@
 
   <ng-template #formField
                let-field="field">
-    <div class="form-field-container" [ngStyle]="field?.style?.form">
+    <div class="form-field-container"
+         [ngStyle]="field?.style?.form">
       <ng-container [ngSwitch]="field?.inputType">
         <!-- ckeditor -->
-        <div *ngSwitchCase="'ckeditor'"
-             class="ckeditor">
-          <label>{{field?.label}}</label>
-          <ckeditor [formControlName]="field?.name"
-                    [editor]="Editor"></ckeditor>
-        </div>
+        <mat-form-field *ngSwitchCase="'ckeditor'"
+                        class="ckeditor">
+          <mat-label>{{field?.label}}</mat-label>
+          <mat-ckeditor [formControlName]="field?.name"></mat-ckeditor>
+        </mat-form-field>
         <!-- textarea -->
         <mat-form-field *ngSwitchCase="'textarea'">
           <mat-label>{{field?.label}}</mat-label>
