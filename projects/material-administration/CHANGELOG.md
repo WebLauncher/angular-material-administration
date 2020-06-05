@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.13 (2020-06-05)
+
+
+### Bug Fixes
+
+* **app:** added demosite user and password for testing ([aba2fc2](https://github.com/WebLauncher/angular-material-administration/commit/aba2fc281253876ac5b1fcc8bc3fb5280d5b757f))
+
+
+
+
+
 ## 0.2.12 (2020-06-04)
 
 **Note:** Version bump only for package @weblauncher/material-administration
