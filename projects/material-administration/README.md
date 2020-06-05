@@ -6,7 +6,7 @@ This is an Angular component library to generate material design UI to render an
 
 ## Usage
 
-See demo app for usage. https://weblauncher-administration.web.app/
+See demo app for usage. https://weblauncher-administration.web.app/ [U: test@test.com / P: testing]
 
 ## Contribute
 
