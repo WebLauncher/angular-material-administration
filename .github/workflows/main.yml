@@ -38,6 +38,7 @@ jobs:
           yarn install
       - name: Build
         run: |
+          npx ngcc
           npx lerna run build
       - name: Build demo
         run: |
