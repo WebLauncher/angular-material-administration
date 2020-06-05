@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@weblauncher/material-file-input": "^0.2.13",
-    "@weblauncher/material-ckeditor": "^0.2.13"
+    "@weblauncher/material-ckeditor": "*"
   },
   "peerDependencies": {
     "@angular/cdk": "^9.1.0",
