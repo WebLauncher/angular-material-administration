@@ -1,6 +1,6 @@
 {
   "name": "@weblauncher/material-administration",
-  "version": "0.2.15",
+  "version": "0.2.16",
   "keywords": [
     "angular",
     "material",
@@ -18,8 +18,8 @@
     "postpublish": "rm -rf dist/"
   },
   "devDependencies": {
-    "@weblauncher/material-ckeditor": "^0.0.3",
-    "@weblauncher/material-file-input": "^0.2.15"
+    "@weblauncher/material-ckeditor": "^0.0.4",
+    "@weblauncher/material-file-input": "^0.2.16"
   },
   "peerDependencies": {
     "@angular/cdk": "^9.1.0",
