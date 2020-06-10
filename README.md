@@ -16,6 +16,8 @@ Other libraries contained in this repository are being published separately to n
 
 [@weblauncher/material-file-input](projects/material-file-input/README.md) [![npm version](https://badge.fury.io/js/%40weblauncher%2Fmaterial-file-input.svg)](https://badge.fury.io/js/%40weblauncher%2Fmaterial-file-input)
 
+[@weblauncher/material-ckeditor](projects/material-ckeditor/README.md) [![npm version](https://badge.fury.io/js/%40weblauncher%2Fmaterial-ckeditor.svg)](https://badge.fury.io/js/%40weblauncher%2Fmaterial-ckeditor)
+
 ## Contributing
 
 [Read contribution guide](CONTRIBUTION.md)
