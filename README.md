@@ -20,8 +20,8 @@ Other libraries contained in this repository are being published separately to n
 
 ## Contributing
 
-[Read contribution guide](CONTRIBUTION.md)
+[Read contribution guide](./CONTRIBUTION.md)
 
 ## License
 
-[Read license](LICENSE.md)
+[Read license](LICENSE)
