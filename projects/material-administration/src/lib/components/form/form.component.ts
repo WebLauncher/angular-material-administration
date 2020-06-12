@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angu
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { MatAdministrationEntityField } from '../../types';
 
 @Component({
   selector: 'mat-administration-form',
@@ -9,8 +10,10 @@ import { Subject } from 'rxjs';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit, OnDestroy {
-  @Input() fields: any[];
+  @Input() fields: MatAdministrationEntityField[];
+
   @Output() save: EventEmitter<any> = new EventEmitter();
+
   @Output() valueChanges: EventEmitter<any> = new EventEmitter();
 
   form: FormGroup;
@@ -23,7 +26,7 @@ export class FormComponent implements OnInit, OnDestroy {
     if (this.fields) {
       this.form = this.formBuilder.group(
         this.fields?.reduce((prev, cur) => {
-          return { ...prev, [cur?.name]: [this.getFieldValue(cur), this.getFieldValidators()] };
+          return { ...prev, [cur?.name]: [this.getFieldValue(cur), this.getFieldValidators(cur)] };
         }, {})
       );
 
@@ -50,7 +53,7 @@ export class FormComponent implements OnInit, OnDestroy {
     return field?.value;
   }
 
-  private getFieldValidators() {
-    return [Validators.required];
+  private getFieldValidators(field: MatAdministrationEntityField) {
+    return field.validatorOrOpts || [Validators.required];
   }
 }

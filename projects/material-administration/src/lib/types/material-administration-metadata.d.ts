@@ -1,3 +1,4 @@
+import { ValidatorFn, AbstractControlOptions, AsyncValidatorFn } from '@angular/forms';
 import { EntityFieldType } from './entity-field-type.enum';
 import { EntityFieldInputType } from './entity-field-input-type.enum';
 
@@ -23,6 +24,8 @@ export interface MatAdministrationEntityField {
     list: { [k: string]: any };
     form: { [k: string]: any };
   }>;
+  validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null;
+  asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null;
 }
 
 export interface MatAdministrationEntity {
