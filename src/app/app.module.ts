@@ -23,7 +23,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SiteMetadata } from './site-metadata';
 
 export function firebaseAppNameFactory() {
-  return 'U Cluj App';
+  return 'Material Administration';
 }
 
 @NgModule({
