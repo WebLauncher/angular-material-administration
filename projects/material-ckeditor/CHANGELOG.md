@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.0.17 (2020-06-15)
+
+**Note:** Version bump only for package @weblauncher/material-ckeditor
+
+
+
+
+
 ## 0.0.16 (2020-06-15)
 
 **Note:** Version bump only for package @weblauncher/material-ckeditor
