@@ -16,7 +16,8 @@
     "lint": "ng lint && yarn run lint:styles",
     "lint:styles": "stylelint \"src/**/*.scss\" && stylelint \"projects/**/*.scss\"",
     "e2e": "ng e2e",
-    "clean": "rimraf projects/**/dist"
+    "clean": "rimraf projects/**/dist",
+    "postinstall": "ngcc"
   },
   "dependencies": {
     "@angular-material-extensions/password-strength": "^6.0.0",
