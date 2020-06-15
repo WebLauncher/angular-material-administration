@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.32 (2020-06-15)
+
+
+### Bug Fixes
+
+* **app:** fixed some UI issues ([857b6a0](https://github.com/WebLauncher/angular-material-administration/commit/857b6a017e3ffa0bf3dd4d6657e2b5a366502f4a))
+
+
+
+
+
 ## 0.2.31 (2020-06-15)
 
 **Note:** Version bump only for package @weblauncher/material-administration
