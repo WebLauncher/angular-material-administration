@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MaterialCkeditorComponent } from './material-ckeditor.component';
+import { MaterialCkeditorComponent } from './ckeditor.component';
 
 describe('MaterialCkeditorComponent', () => {
   let component: MaterialCkeditorComponent;

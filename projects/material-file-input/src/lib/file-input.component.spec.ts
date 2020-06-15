@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MatFileInputComponent } from './material-file-input.component';
+import { MatFileInputComponent } from './file-input.component';
 
 describe('MatFileInputComponent', () => {
   let component: MatFileInputComponent;

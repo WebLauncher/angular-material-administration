@@ -2,5 +2,5 @@
  * Public API Surface of material-ckeditor
  */
 
-export * from './lib/material-ckeditor.component';
-export * from './lib/material-ckeditor.module';
+export * from './lib/ckeditor.component';
+export * from './lib/ckeditor.module';

@@ -13,6 +13,7 @@
   },
   "whitelistedNonPeerDependencies": [
     "lodash-es",
-    "@weblauncher/material-file-input"
+    "@weblauncher/material-file-input",
+    "@weblauncher/material-ckeditor"
   ]
 }
