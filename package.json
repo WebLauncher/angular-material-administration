@@ -37,7 +37,7 @@
     "@ckeditor/ckeditor5-build-classic": "^19.0.1",
     "@firebase/app": "^0.6.1",
     "@firebase/app-types": "^0.6.1",
-    "@firebase/auth": "^0.14.2",
+    "@firebase/auth": "^0.14.6",
     "@firebase/firestore": "^1.14.6",
     "@firebase/util": "^0.2.47",
     "@types/lodash-es": "^4.17.3",
