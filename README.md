@@ -8,11 +8,13 @@ Other libraries contained in this repository are being published separately to n
 
 ## Library list
 
-### Data management
+### Data management components
 
 [@weblauncher/material-administration](projects/material-administration/README.md) [![npm version](https://badge.fury.io/js/%40weblauncher%2Fmaterial-administration.svg)](https://badge.fury.io/js/%40weblauncher%2Fmaterial-administration)
 
-### UI/UX Material design components
+[@weblauncher/material-form](projects/material-form/README.md) [![npm version](https://badge.fury.io/js/%40weblauncher%2Fmaterial-form.svg)](https://badge.fury.io/js/%40weblauncher%2Fmaterial-form)
+
+### Material design components
 
 [@weblauncher/material-file-input](projects/material-file-input/README.md) [![npm version](https://badge.fury.io/js/%40weblauncher%2Fmaterial-file-input.svg)](https://badge.fury.io/js/%40weblauncher%2Fmaterial-file-input)
 
