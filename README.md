@@ -10,15 +10,15 @@ Other libraries contained in this repository are being published separately to n
 
 ### Data management components
 
-[@weblauncher/material-administration](projects/material-administration/README.md) [![npm version](https://badge.fury.io/js/%40weblauncher%2Fmaterial-administration.svg)](https://badge.fury.io/js/%40weblauncher%2Fmaterial-administration)
+[@weblauncher/material-administration](projects/administration/README.md) [![npm version](https://badge.fury.io/js/%40weblauncher%2Fmaterial-administration.svg)](https://badge.fury.io/js/%40weblauncher%2Fmaterial-administration)
 
-[@weblauncher/material-form](projects/material-form/README.md) [![npm version](https://badge.fury.io/js/%40weblauncher%2Fmaterial-form.svg)](https://badge.fury.io/js/%40weblauncher%2Fmaterial-form)
+[@weblauncher/material-form](projects/form/README.md) [![npm version](https://badge.fury.io/js/%40weblauncher%2Fmaterial-form.svg)](https://badge.fury.io/js/%40weblauncher%2Fmaterial-form)
 
 ### Material design components
 
-[@weblauncher/material-file-input](projects/material-file-input/README.md) [![npm version](https://badge.fury.io/js/%40weblauncher%2Fmaterial-file-input.svg)](https://badge.fury.io/js/%40weblauncher%2Fmaterial-file-input)
+[@weblauncher/material-file-input](projects/file-input/README.md) [![npm version](https://badge.fury.io/js/%40weblauncher%2Fmaterial-file-input.svg)](https://badge.fury.io/js/%40weblauncher%2Fmaterial-file-input)
 
-[@weblauncher/material-ckeditor](projects/material-ckeditor/README.md) [![npm version](https://badge.fury.io/js/%40weblauncher%2Fmaterial-ckeditor.svg)](https://badge.fury.io/js/%40weblauncher%2Fmaterial-ckeditor)
+[@weblauncher/material-ckeditor](projects/ckeditor/README.md) [![npm version](https://badge.fury.io/js/%40weblauncher%2Fmaterial-ckeditor.svg)](https://badge.fury.io/js/%40weblauncher%2Fmaterial-ckeditor)
 
 ## Contributing
 

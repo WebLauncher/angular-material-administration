@@ -24,13 +24,13 @@
         "./node_modules/rxjs"
       ]      ,
       "@weblauncher/material-form": [
-        "./projects/material-form/dist"
+        "./projects/form/dist"
       ],
       "@weblauncher/material-ckeditor": [
-        "./projects/material-ckeditor/dist"
+        "./projects/ckeditor/dist"
       ],
       "@weblauncher/material-file-input": [
-        "./projects/material-file-input/dist"
+        "./projects/file-input/dist"
       ]
     }
   },

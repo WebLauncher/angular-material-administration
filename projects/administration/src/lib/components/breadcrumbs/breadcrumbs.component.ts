@@ -14,6 +14,7 @@ export class BreadcrumbsComponent implements OnInit {
   @Input() set collectionName(value: string) {
     this.collectionName$.next(value);
   }
+
   get collectionName() {
     return this.collectionName$.getValue();
   }

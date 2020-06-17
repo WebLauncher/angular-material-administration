@@ -14,10 +14,15 @@ import { EntityFieldType, EntityFieldInputType } from '../../types';
 })
 export class MetadataComponent implements OnDestroy {
   metadata$: BehaviorSubject<any> = new BehaviorSubject(null);
+
   collectionPath$: BehaviorSubject<string> = new BehaviorSubject(null);
+
   collectionName$: BehaviorSubject<string> = new BehaviorSubject(null);
+
   subCollections$: BehaviorSubject<MatAdministrationEntity[]> = new BehaviorSubject(null);
+
   isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+
   destroyed$ = new Subject();
 
   constructor(

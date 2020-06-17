@@ -8,7 +8,10 @@
   "[html]": {
     "editor.formatOnSave": true
   },
-  "conventionalCommits.scopes": ["app"],
+  "conventionalCommits.scopes": [
+    "app",
+    "deps"
+  ],
   "eslint.validate": ["javascript", "typescript", "html"],
 
   "eslint.options": {
