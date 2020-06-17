@@ -18,10 +18,10 @@
         "./node_modules/rxjs"
       ],
       "@weblauncher/material-ckeditor": [
-        "./projects/material-ckeditor/dist"
+        "./projects/ckeditor/dist"
       ],
       "@weblauncher/material-file-input": [
-        "./projects/material-file-input/dist"
+        "./projects/file-input/dist"
       ]
     }
   },

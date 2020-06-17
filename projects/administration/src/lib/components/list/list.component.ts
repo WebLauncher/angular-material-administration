@@ -16,7 +16,9 @@ import { DataAdapterInterface } from '../../services';
 })
 export class ListComponent extends MetadataComponent {
   displayedColumns$: Observable<any[]>;
+
   displayedColumnsNames$: Observable<string[]>;
+
   list$: Observable<any[]>;
 
   constructor(

@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "wait-on ../material-file-input/dist/public-api.d.ts ../material-ckeditor/dist/public-api.d.ts && ng build material-form",
+    "build": "wait-on ../file-input/dist/public-api.d.ts ../ckeditor/dist/public-api.d.ts && ng build material-form",
     "postpublish": "rm -rf dist/"
   },
   "devDependencies": {

@@ -19,7 +19,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "wait-on ../material-form/dist/public-api.d.ts && ng build material-administration",
+    "build": "wait-on ../form/dist/public-api.d.ts && ng build material-administration",
     "postpublish": "rm -rf dist/"
   },
   "devDependencies": {
