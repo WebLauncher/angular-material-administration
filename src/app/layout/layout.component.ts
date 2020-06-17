@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 import { SiteMetadata } from '../site-metadata';
 
 @Component({
@@ -25,5 +26,10 @@ export class LayoutComponent {
 
   selectedEntity$: BehaviorSubject<string> = new BehaviorSubject('');
 
-  constructor(private auth: AngularFireAuth) {}
+  constructor(private auth: AngularFireAuth, private router: Router) {}
+
+  async logout() {
+    await this.auth.signOut();
+    this.router.navigate(['']);
+  }
 }

@@ -16,7 +16,13 @@
     <mat-toolbar color="primary"
                  class="navbar-top">
       <mat-toolbar-row class="user-toolbar">
-        <button mat-button>Hi, {{userName$ | async}}</button>
+        <button mat-button
+                [matMenuTriggerFor]="userMenu">Hi, {{userName$ | async}}</button>
+
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item
+                  (click)="logout()">Logout</button>
+        </mat-menu>
       </mat-toolbar-row>
     </mat-toolbar>
     <main class="page-content">
