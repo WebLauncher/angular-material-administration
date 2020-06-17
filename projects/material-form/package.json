@@ -1,7 +1,7 @@
 {
   "name": "@weblauncher/material-form",
   "description": "Material form component that generates a form based of fields and layout",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "keywords": [
     "angular",
     "material",
@@ -20,8 +20,8 @@
     "postpublish": "rm -rf dist/"
   },
   "devDependencies": {
-    "@weblauncher/material-ckeditor": "^0.0.22",
-    "@weblauncher/material-file-input": "^0.2.34"
+    "@weblauncher/material-ckeditor": "^0.1.0",
+    "@weblauncher/material-file-input": "^0.3.0"
   },
   "peerDependencies": {
     "@angular/cdk": "^9.1.0",

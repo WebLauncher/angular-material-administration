@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.3.0 (2020-06-17)
+
+
+### Features
+
+* **app:** added material-form library and layout functionality ([e946b31](https://github.com/WebLauncher/angular-material-administration/commit/e946b3196ea9e10a1c2b99093a456699fd379602))
+
+
+
+
+
 ## 0.2.34 (2020-06-15)
 
 **Note:** Version bump only for package @weblauncher/material-administration
