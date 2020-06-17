@@ -5,13 +5,13 @@
     "entryFile": "src/public-api.ts",
     "umdModuleIds": {
       "lodash-es": "lodash-es",
-      "@weblauncher/material-form": "@weblauncher/material-form",
-      "firebase/app": "firebase",
-      "uuid": "uuid"
+      "@weblauncher/material-file-input": "@weblauncher/material-file-input",
+      "@weblauncher/material-ckeditor": "@weblauncher/material-ckeditor"
     }
   },
   "whitelistedNonPeerDependencies": [
     "lodash-es",
-    "@weblauncher/material-form"
+    "@weblauncher/material-file-input",
+    "@weblauncher/material-ckeditor"
   ]
 }

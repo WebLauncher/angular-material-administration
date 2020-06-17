@@ -29,30 +29,20 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFileInputModule } from '@weblauncher/material-file-input';
-import { MatCkeditorModule } from '@weblauncher/material-ckeditor';
+import { MatFormModule } from '@weblauncher/material-form';
 import { ValueFormatService } from './services/value-format.service';
 import {
   ListComponent,
   AddComponent,
   UpdateComponent,
   MetadataComponent,
-  FormComponent,
   MenuComponent,
   BreadcrumbsComponent
 } from './components/index';
 import { FirestoreDataAdapterService } from './services';
 
 @NgModule({
-  declarations: [
-    ListComponent,
-    AddComponent,
-    UpdateComponent,
-    MetadataComponent,
-    FormComponent,
-    BreadcrumbsComponent,
-    MenuComponent
-  ],
+  declarations: [ListComponent, AddComponent, UpdateComponent, MetadataComponent, BreadcrumbsComponent, MenuComponent],
   imports: [
     CommonModule,
     MatChipsModule,
@@ -66,7 +56,6 @@ import { FirestoreDataAdapterService } from './services';
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatFileInputModule,
     MatButtonModule,
     MatInputModule,
     MatSelectModule,
@@ -84,7 +73,7 @@ import { FirestoreDataAdapterService } from './services';
     MatMenuModule,
     MatSidenavModule,
     MatListModule,
-    MatCkeditorModule
+    MatFormModule
   ],
   providers: [
     ValueFormatService,
@@ -99,7 +88,6 @@ import { FirestoreDataAdapterService } from './services';
     AddComponent,
     UpdateComponent,
     MetadataComponent,
-    FormComponent,
     MenuComponent,
     BreadcrumbsComponent,
     RouterModule,

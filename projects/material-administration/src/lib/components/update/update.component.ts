@@ -15,9 +15,14 @@ import { DataAdapterInterface } from '../../services';
 })
 export class UpdateComponent extends MetadataComponent {
   fields$: Observable<any[]>;
+
   doc$: Observable<any>;
+
   id$: BehaviorSubject<any> = new BehaviorSubject(null);
+
   entityTitle$: Observable<string>;
+
+  layout$: Observable<any>;
 
   constructor(
     public route: ActivatedRoute,
@@ -43,9 +48,10 @@ export class UpdateComponent extends MetadataComponent {
       )
     );
     this.entityTitle$ = this.doc$.pipe(map((doc) => doc?.[this.metadata$.getValue()?.titleField || 'title']));
+    this.layout$ = this.metadata$.pipe(map((entityMetadata) => entityMetadata?.layout?.form));
   }
 
-  save(item: any) {
+  submit(item: any) {
     this.isLoading$.next(true);
 
     this.collectionName$

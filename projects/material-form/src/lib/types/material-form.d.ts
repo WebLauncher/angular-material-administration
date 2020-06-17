@@ -2,7 +2,7 @@ import { ValidatorFn, AbstractControlOptions, AsyncValidatorFn } from '@angular/
 import { EntityFieldType } from './entity-field-type.enum';
 import { EntityFieldInputType } from './entity-field-input-type.enum';
 
-export interface MatAdministrationEntityField {
+export interface MatFormEntityField {
   id?: string;
   name?: string;
   hideInList: boolean;
@@ -28,48 +28,20 @@ export interface MatAdministrationEntityField {
   asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null;
 }
 
-export interface MatAdministrationLayout {
+export interface MatFormLayout {
   direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
   mainAlign?: 'none' | 'start' | 'center' | 'end' | 'stretch';
   crossAlign?: 'none' | 'start' | 'center' | 'end' | 'space-around' | 'space-between' | 'space-evenly';
   gap?: string;
 }
 
-export interface MatAdministrationFormSection {
+export interface MatFormSection {
   title: string;
   subtitle: string;
-  fields: string[] | Partial<MatAdministrationEntityField>[];
-  layout: Partial<MatAdministrationLayout>;
+  fields: string[] | Partial<MatFormEntityField>[];
+  layout: Partial<MatFormLayout>;
 }
 
-export interface MatAdministrationFormLayout extends MatAdministrationLayout {
-  sections: Array<Partial<MatAdministrationFormSection>>;
-}
-
-export interface MatAdministrationEntity {
-  id?: string;
-  single: string;
-  plural: string;
-  autoTimestamps: boolean;
-  createdTimestamp: string;
-  updatedTimestamp: string;
-  showMenuDividerAfter: boolean;
-  titleField: string;
-  hideList: boolean;
-  idField: string;
-  fields: { [k: string]: string | Partial<MatAdministrationEntityField> };
-  entities: { [k: string]: Partial<MatAdministrationEntity> };
-  style: Partial<{
-    list: { [k: string]: any };
-    form: { [k: string]: any };
-  }>;
-  layout: {
-    list?: any;
-    form?: Partial<MatAdministrationFormLayout>;
-  };
-}
-
-export interface MatAdministrationMetadata {
-  timestampFormat?: string;
-  entities: { [k: string]: Partial<MatAdministrationEntity> };
+export interface MatFormSectionsLayout extends MatFormLayout {
+  sections: Array<Partial<MatFormSection>>;
 }

@@ -7,6 +7,7 @@ import { Immutable } from 'types/immutable';
 import { SnackbarService } from '../../services/snackbar.service';
 import { MetadataComponent } from '../metadata/metadata.component';
 import { DataAdapterInterface } from '../../services/data-adapter';
+import { MatAdministrationEntityField } from '../../types';
 
 @Component({
   selector: 'mat-administration-add',
@@ -14,7 +15,9 @@ import { DataAdapterInterface } from '../../services/data-adapter';
   styleUrls: ['./add.component.scss']
 })
 export class AddComponent extends MetadataComponent {
-  fields$: Observable<any[]>;
+  fields$: Observable<MatAdministrationEntityField[]>;
+
+  layout$: Observable<any>;
 
   constructor(
     public route: ActivatedRoute,
@@ -30,9 +33,11 @@ export class AddComponent extends MetadataComponent {
         this.isLoading$.next(false);
       })
     );
+
+    this.layout$ = this.metadata$.pipe(map((entityMetadata) => entityMetadata?.layout?.form));
   }
 
-  save(item: any) {
+  submit(item: any) {
     this.isLoading$.next(true);
 
     this.collectionName$

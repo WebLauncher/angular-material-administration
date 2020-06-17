@@ -14,17 +14,8 @@
       "@angular/*": [
         "./node_modules/@angular/*"
       ],
-      "@ckeditor/*": [
-        "./node_modules/@ckeditor/*"
-      ],
-      "firebase": [
-        "./node_modules/firebase"
-      ],
       "rxjs": [
         "./node_modules/rxjs"
-      ]      ,
-      "@weblauncher/material-form": [
-        "./projects/material-form/dist"
       ],
       "@weblauncher/material-ckeditor": [
         "./projects/material-ckeditor/dist"
@@ -35,9 +26,9 @@
     }
   },
   "angularCompilerOptions": {
-    "annotateForClosureCompiler": true,
     "skipTemplateCodegen": true,
-    "strictMetadataEmit": true
+    "strictMetadataEmit": true,
+    "enableResourceInlining": true
   },
   "exclude": [
     "src/test.ts",

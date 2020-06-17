@@ -6,19 +6,6 @@ mat-form-field {
   width: 100%;
 }
 
-:host ::ng-deep .ck-editor__editable_inline {
-  min-height: 200px;
-}
-
-.ckeditor {
-  margin-bottom: 1rem;
-
-  label {
-    opacity: 0.54;
-    transform: scale(0.75);
-  }
-}
-
 .radio {
   margin-bottom: 1rem;
 

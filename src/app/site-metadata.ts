@@ -70,6 +70,26 @@ export const SiteMetadata: MatAdministrationMetadata = {
             }
           }
         }
+      },
+      layout: {
+        form: {
+          gap: '1rem',
+          sections: [
+            {
+              title: 'Details',
+              subtitle: 'Fill in details about the article',
+              fields: ['title', 'sport'],
+              layout: {
+                direction: 'row',
+                gap: '1rem'
+              }
+            },
+            {
+              title: 'Article',
+              fields: ['content', 'imageUrl']
+            }
+          ]
+        }
       }
     },
     events: {

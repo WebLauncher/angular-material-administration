@@ -23,9 +23,10 @@
     </a>
   </mat-toolbar>
   <mat-card>
-    <mat-administration-form *ngIf="fields$ | async"
-                             [fields]="fields$ | async"
-                             (save)="save($event);"></mat-administration-form>
+    <mat-form *ngIf="fields$ | async"
+              [fields]="fields$ | async"
+              [layout]="layout$ | async"
+              (ngSubmit)="submit($event);"></mat-form>
   </mat-card>
 </ng-container>
 

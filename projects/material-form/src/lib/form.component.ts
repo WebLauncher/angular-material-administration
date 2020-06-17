@@ -2,21 +2,25 @@ import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angu
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { MatAdministrationEntityField } from '../../types';
+import { MatFormEntityField, MatFormSectionsLayout, MatFormSection } from './types';
 
 @Component({
-  selector: 'mat-administration-form',
+  selector: 'mat-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnInit, OnDestroy {
-  @Input() fields: MatAdministrationEntityField[];
+export class MaterialFormComponent implements OnInit, OnDestroy {
+  @Input() fields: MatFormEntityField[];
 
-  @Output() save: EventEmitter<any> = new EventEmitter();
+  @Input() layout: MatFormSectionsLayout;
+
+  @Output() ngSubmit: EventEmitter<any> = new EventEmitter();
 
   @Output() valueChanges: EventEmitter<any> = new EventEmitter();
 
   form: FormGroup;
+
+  sections: Partial<MatFormSection>[];
 
   private destroyed$: Subject<void> = new Subject();
 
@@ -32,6 +36,8 @@ export class FormComponent implements OnInit, OnDestroy {
 
       this.form.valueChanges.pipe(takeUntil(this.destroyed$)).subscribe(this.valueChanges);
     }
+
+    this.sections = this.getSectionsWithFields();
   }
 
   ngOnDestroy() {
@@ -41,7 +47,7 @@ export class FormComponent implements OnInit, OnDestroy {
 
   submit() {
     if (this.form.valid) {
-      this.save.emit(this.form.value);
+      this.ngSubmit.emit(this.form.value);
     }
   }
 
@@ -49,11 +55,30 @@ export class FormComponent implements OnInit, OnDestroy {
     this.form.get(field.name).setValue(null);
   }
 
+  private getSectionsWithFields() {
+    if (!this.layout || !this.layout?.sections) {
+      return [
+        {
+          fields: this.fields,
+          layout: this.layout
+        }
+      ];
+    }
+
+    return this.layout?.sections.map((section) => ({
+      ...section,
+      fields: ((section?.fields || []) as string[]).map((fieldName) =>
+        this.fields.find((field) => field?.name === fieldName)
+      ),
+      layout: section?.layout || this.layout
+    }));
+  }
+
   private getFieldValue(field) {
     return field?.value;
   }
 
-  private getFieldValidators(field: MatAdministrationEntityField) {
+  private getFieldValidators(field: MatFormEntityField) {
     return field.validatorOrOpts || [Validators.required];
   }
 }

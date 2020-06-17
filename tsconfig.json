@@ -37,6 +37,12 @@
       "@weblauncher/material-ckeditor/*": [
         "./projects/material-ckeditor/dist/*"
       ],
+      "@weblauncher/material-form": [
+        "./projects/material-form/dist"
+      ],
+      "@weblauncher/material-form/*": [
+        "./projects/material-form/dist/*"
+      ]
     }
   },
   "angularCompilerOptions": {

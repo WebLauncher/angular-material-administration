@@ -1,17 +1,34 @@
 <form [formGroup]="form"
-      (ngSubmit)="submit()">
-  <ng-container *ngIf="fields">
+      (ngSubmit)="submit()"
+      [fxLayout]="layout?.direction || 'column wrap'"
+      fxLayoutAlign="{{layout?.mainAlign || 'center'}} {{layout?.crossAlign || 'stretch'}}"
+      [fxLayoutGap]="layout?.gap || '0'">
+  <mat-card class="form-section"
+            *ngFor="let section of sections">
+    <mat-card-title class="form-section-header"
+                    *ngIf="section?.title">
+      {{section.title}}</mat-card-title>
+    <mat-card-subtitle class="form-section-header"
+                       *ngIf="section?.subtitle">
+      {{section.subtitle}}</mat-card-subtitle>
+    <mat-card-content class="form-section-body"
+                      [fxLayout]="section?.layout?.direction || 'column wrap'"
+                      fxLayoutAlign="{{section?.layout?.mainAlign || 'center'}} {{section?.layout?.crossAlign || 'stretch'}}"
+                      [fxLayoutGap]="section?.layout?.gap || '0'">
+      <ng-container *ngIf="section?.fields">
+        <ng-container *ngFor="let field of section?.fields">
+          <ng-container *ngTemplateOutlet="formField; context: {field: field}"></ng-container>
+        </ng-container>
+      </ng-container>
+    </mat-card-content>
+  </mat-card>
 
-    <div *ngFor="let field of fields">
-      <ng-container *ngTemplateOutlet="formField; context: {field: field}"></ng-container>
-    </div>
-    <div class="flex justify-end">
-      <button mat-raised-button
-              color="primary"
-              type="submit">Save
-      </button>
-    </div>
-  </ng-container>
+  <div fxFlexAlign="end">
+    <button mat-raised-button
+            color="primary"
+            type="submit">Save
+    </button>
+  </div>
 
   <ng-template #formField
                let-field="field">

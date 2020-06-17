@@ -230,6 +230,45 @@
           }
         }
       }
+    },
+    "material-form": {
+      "projectType": "library",
+      "root": "projects/material-form",
+      "sourceRoot": "projects/material-form/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/material-form/tsconfig.lib.json",
+            "project": "projects/material-form/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/material-form/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/material-form/src/test.ts",
+            "tsConfig": "projects/material-form/tsconfig.spec.json",
+            "karmaConfig": "projects/material-form/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "eslintConfig": "projects/material-form/.eslintrc.js",
+            "tsConfig": [
+              "projects/material-form/tsconfig.lib.json",
+              "projects/material-form/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
     }
   },
   "defaultProject": "administration",
