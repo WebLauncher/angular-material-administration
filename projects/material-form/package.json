@@ -1,11 +1,13 @@
 {
   "name": "@weblauncher/material-form",
+  "description": "Material form component that generates a form based of fields and layout",
   "version": "0.0.1",
   "keywords": [
     "angular",
     "material",
     "form",
-    "input"
+    "generator",
+    "layout"
   ],
   "private": false,
   "repository": {

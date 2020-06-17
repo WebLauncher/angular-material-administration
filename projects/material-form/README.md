@@ -13,7 +13,7 @@ This is an Angular Material component library for having a file input component.
 Import module into your project `app.module.ts` or other sub-module:
 
 ```ts
-import { MatFormModume } from '@weblauncher/material-form';
+import { MatFormModule } from '@weblauncher/material-form';
 ```
 
 In your templates now you can add
