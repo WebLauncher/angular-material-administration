@@ -1,7 +1,7 @@
 {
   "name": "@weblauncher/material-administration",
   "description": "Material administration app components library",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "keywords": [
     "angular",
     "material",
@@ -23,9 +23,9 @@
     "postpublish": "rm -rf dist/"
   },
   "devDependencies": {
-    "@weblauncher/material-ckeditor": "^0.1.6",
-    "@weblauncher/material-file-input": "^0.3.6",
-    "@weblauncher/material-form": "^0.1.6"
+    "@weblauncher/material-ckeditor": "^0.1.7",
+    "@weblauncher/material-file-input": "^0.3.7",
+    "@weblauncher/material-form": "^0.1.7"
   },
   "peerDependencies": {
     "@angular/cdk": "^9.1.0",
