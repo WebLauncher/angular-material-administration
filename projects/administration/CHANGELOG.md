@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.4.0 (2020-06-18)
+
+
+### Features
+
+* **app:** added icon for entities and renamed collection to entity ([908accb](https://github.com/WebLauncher/angular-material-administration/commit/908accb1861baf807b026274737ac010c8da86ce))
+
+
+
+
+
 ## 0.3.7 (2020-06-18)
 
 **Note:** Version bump only for package @weblauncher/material-administration
