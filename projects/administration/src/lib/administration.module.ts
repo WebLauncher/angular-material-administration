@@ -30,7 +30,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormModule } from '@weblauncher/material-form';
-import { ValueFormatService } from './services/value-format.service';
 import {
   ListComponent,
   AddComponent,
@@ -39,7 +38,7 @@ import {
   MenuComponent,
   BreadcrumbsComponent
 } from './components/index';
-import { FirestoreDataAdapterService } from './services';
+import { FirestoreDataAdapterService, ValueFormatService, NoPathGuard } from './services';
 
 @NgModule({
   declarations: [ListComponent, AddComponent, UpdateComponent, MetadataComponent, BreadcrumbsComponent, MenuComponent],
@@ -77,6 +76,7 @@ import { FirestoreDataAdapterService } from './services';
   ],
   providers: [
     ValueFormatService,
+    NoPathGuard,
     DatePipe,
     {
       provide: 'MAT_ADMINISTRATION_DATA_ADAPTER',

@@ -3,8 +3,13 @@ import { BehaviorSubject, of, forkJoin, Subject, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { map, shareReplay, switchMap, take, catchError, takeUntil, tap } from 'rxjs/operators';
 import { capitalize } from 'lodash-es';
+import { Immutable } from 'types/immutable';
 import { DownloadData, DataAdapterInterface } from '../../services/index';
-import { MatAdministrationEntity, MatAdministrationEntityField } from '../../types/material-administration-metadata';
+import {
+  MatAdministrationEntity,
+  MatAdministrationEntityField,
+  MatAdministrationMetadata
+} from '../../types/material-administration-metadata';
 import { EntityFieldType, EntityFieldInputType } from '../../types';
 
 @Component({
@@ -28,7 +33,7 @@ export class MetadataComponent implements OnDestroy {
   constructor(
     public route: ActivatedRoute,
     @Inject('MAT_ADMINISTRATION_DATA_ADAPTER') public dataAdapterService: DataAdapterInterface,
-    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: any
+    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: Immutable<MatAdministrationMetadata>
   ) {
     this.route.params
       .pipe(

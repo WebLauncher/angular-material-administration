@@ -7,7 +7,7 @@ import { Immutable } from 'types/immutable';
 import { SnackbarService } from '../../services/snackbar.service';
 import { MetadataComponent } from '../metadata/metadata.component';
 import { DataAdapterInterface } from '../../services/data-adapter';
-import { MatAdministrationEntityField } from '../../types';
+import { MatAdministrationEntityField, MatAdministrationMetadata } from '../../types';
 
 @Component({
   selector: 'mat-administration-add',
@@ -24,7 +24,7 @@ export class AddComponent extends MetadataComponent {
     private snackbar: SnackbarService,
     private router: Router,
     @Inject('MAT_ADMINISTRATION_DATA_ADAPTER') public dataAdapterService: DataAdapterInterface,
-    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: Immutable<any>
+    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: Immutable<MatAdministrationMetadata>
   ) {
     super(route, dataAdapterService, metadata);
 

@@ -71,5 +71,6 @@ export interface MatAdministrationEntity {
 
 export interface MatAdministrationMetadata {
   timestampFormat?: string;
+  disableRedirectToFirstEntity?: boolean;
   entities: { [k: string]: Partial<MatAdministrationEntity> };
 }
