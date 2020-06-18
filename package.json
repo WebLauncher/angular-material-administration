@@ -42,7 +42,7 @@
     "@firebase/util": "~0.2.47",
     "firebase": "~7.13.2",
     "lodash-es": "~4.17.15",
-    "ngx-auth-firebaseui": "~4.3.0",
+    "ngx-auth-firebaseui": "~4.4.0",
     "rxjs": "~6.5.4",
     "tslib": "~1.10.0",
     "uuid": "~7.0.3",
