@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MetadataComponent } from './metadata.component';
+import { EntityComponent } from './entity.component';
 
-describe('MetadataComponent', () => {
-  let component: MetadataComponent;
-  let fixture: ComponentFixture<MetadataComponent>;
+describe('EntityComponent', () => {
+  let component: EntityComponent;
+  let fixture: ComponentFixture<EntityComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MetadataComponent]
+      declarations: [EntityComponent]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MetadataComponent);
+    fixture = TestBed.createComponent(EntityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

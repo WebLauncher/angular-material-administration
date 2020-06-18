@@ -34,14 +34,14 @@ import {
   ListComponent,
   AddComponent,
   UpdateComponent,
-  MetadataComponent,
+  EntityComponent,
   MenuComponent,
   BreadcrumbsComponent
 } from './components/index';
 import { FirestoreDataAdapterService, ValueFormatService, NoPathGuard } from './services';
 
 @NgModule({
-  declarations: [ListComponent, AddComponent, UpdateComponent, MetadataComponent, BreadcrumbsComponent, MenuComponent],
+  declarations: [ListComponent, AddComponent, UpdateComponent, EntityComponent, BreadcrumbsComponent, MenuComponent],
   imports: [
     CommonModule,
     MatChipsModule,
@@ -87,7 +87,7 @@ import { FirestoreDataAdapterService, ValueFormatService, NoPathGuard } from './
     ListComponent,
     AddComponent,
     UpdateComponent,
-    MetadataComponent,
+    EntityComponent,
     MenuComponent,
     BreadcrumbsComponent,
     RouterModule,

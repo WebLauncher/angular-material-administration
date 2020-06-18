@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, switchMap, shareReplay, tap, withLatestFrom } from 'rxjs/operators';
 import { pickBy, capitalize, merge } from 'lodash-es';
 import { ValueFormatService } from '../../services/value-format.service';
-import { MetadataComponent } from '../metadata/metadata.component';
+import { EntityComponent } from '../entity/entity.component';
 import { SnackbarService } from '../../services/snackbar.service';
 import { MatAdministrationMetadata, MatAdministrationEntityField, EntityFieldType } from '../../types';
 import { DataAdapterInterface } from '../../services';
@@ -14,7 +14,7 @@ import { DataAdapterInterface } from '../../services';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent extends MetadataComponent {
+export class ListComponent extends EntityComponent {
   displayedColumns$: Observable<any[]>;
 
   displayedColumnsNames$: Observable<string[]>;
@@ -32,15 +32,15 @@ export class ListComponent extends MetadataComponent {
 
     this.displayedColumns$ = this.getDisplayedColumns();
     this.displayedColumnsNames$ = this.displayedColumns$.pipe(map((columns) => columns.map((column) => column?.id)));
-    this.list$ = this.collectionName$.pipe(
-      switchMap((collection) => this.dataAdapterService.list(collection, this.getIdField())),
+    this.list$ = this.entityName$.pipe(
+      switchMap((entity) => this.dataAdapterService.list(entity, this.getIdField())),
       tap(() => this.isLoading$.next(false)),
       shareReplay(1)
     );
   }
 
   getValue(element, column) {
-    return this.metadata$.pipe(
+    return this.entity$.pipe(
       map((metadata) =>
         this.valueFormatService.transform(element[column], metadata?.fields[column]?.type, metadata?.fields[column])
       )
@@ -49,15 +49,15 @@ export class ListComponent extends MetadataComponent {
 
   delete(element) {
     this.isLoading$.next(true);
-    this.dataAdapterService.delete(this.collectionName$.getValue(), element?.id).subscribe(
-      () => this.snackbar.success(`${capitalize(this.metadata$.getValue()?.single)} added successfully!`),
-      () => this.snackbar.error(`There was an error adding ${this.metadata$.getValue()?.single}!`),
+    this.dataAdapterService.delete(this.entityName$.getValue(), element?.id).subscribe(
+      () => this.snackbar.success(`${capitalize(this.entity$.getValue()?.single)} added successfully!`),
+      () => this.snackbar.error(`There was an error adding ${this.entity$.getValue()?.single}!`),
       () => this.isLoading$.next(false)
     );
   }
 
   private getDisplayedColumns() {
-    return this.metadata$.pipe(
+    return this.entity$.pipe(
       withLatestFrom(this.subCollections$),
       map(([metadata, subCollections]) => {
         const collumns = this.getDisplayableColumns(metadata?.fields);

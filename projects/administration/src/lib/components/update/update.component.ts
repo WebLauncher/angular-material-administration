@@ -5,7 +5,7 @@ import { map, shareReplay, takeUntil, tap, take, switchMap } from 'rxjs/operator
 import { capitalize } from 'lodash-es';
 import { EntityFieldType } from '../../types';
 import { SnackbarService } from '../../services/snackbar.service';
-import { MetadataComponent } from '../metadata/metadata.component';
+import { EntityComponent } from '../entity/entity.component';
 import { DataAdapterInterface } from '../../services';
 
 @Component({
@@ -13,7 +13,7 @@ import { DataAdapterInterface } from '../../services';
   templateUrl: './update.component.html',
   styleUrls: ['./update.component.scss']
 })
-export class UpdateComponent extends MetadataComponent {
+export class UpdateComponent extends EntityComponent {
   fields$: Observable<any[]>;
 
   doc$: Observable<any>;
@@ -47,43 +47,39 @@ export class UpdateComponent extends MetadataComponent {
         })
       )
     );
-    this.entityTitle$ = this.doc$.pipe(map((doc) => doc?.[this.metadata$.getValue()?.titleField || 'title']));
-    this.layout$ = this.metadata$.pipe(map((entityMetadata) => entityMetadata?.layout?.form));
+    this.entityTitle$ = this.doc$.pipe(map((doc) => doc?.[this.entity$.getValue()?.titleField || 'title']));
+    this.layout$ = this.entity$.pipe(map((entityMetadata) => entityMetadata?.layout?.form));
   }
 
   submit(item: any) {
     this.isLoading$.next(true);
 
-    this.collectionName$
+    this.entityName$
       .pipe(
         take(1),
-        switchMap((collectionName) => {
+        switchMap((entityName) => {
           return this.processUploads(item).pipe(
             map((updatedItem) => {
-              return [collectionName, updatedItem];
+              return [entityName, updatedItem];
             })
           );
         }),
-        switchMap(([collectionName, updatedItem]) =>
-          this.dataAdapterService.update(
-            collectionName,
-            this.id$.getValue(),
-            this.getWithTimestamps(updatedItem, 'update')
-          )
+        switchMap(([entityName, updatedItem]) =>
+          this.dataAdapterService.update(entityName, this.id$.getValue(), this.getWithTimestamps(updatedItem, 'update'))
         )
       )
       .subscribe(
         () => {
-          this.snackbar.success(`${capitalize(this.metadata$.getValue()?.single)} updated successfully!`);
-          this.router.navigate([`/${this.collectionPath$.getValue()}/list`]);
+          this.snackbar.success(`${capitalize(this.entity$.getValue()?.single)} updated successfully!`);
+          this.router.navigate([`/${this.entityPath$.getValue()}/list`]);
         },
-        () => this.snackbar.error(`There was an error updating ${this.metadata$.getValue()?.single}!`),
+        () => this.snackbar.error(`There was an error updating ${this.entity$.getValue()?.single}!`),
         () => this.isLoading$.next(false)
       );
   }
 
   private getDoc() {
-    return this.dataAdapterService.get(this.collectionName$.getValue(), this.id$.getValue()).pipe(
+    return this.dataAdapterService.get(this.entityName$.getValue(), this.id$.getValue()).pipe(
       tap(() => this.isLoading$.next(false)),
       shareReplay(1)
     );

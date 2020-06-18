@@ -13,16 +13,15 @@ import {
 import { EntityFieldType, EntityFieldInputType } from '../../types';
 
 @Component({
-  selector: 'mat-administration-metadata',
-  templateUrl: './metadata.component.html',
-  styleUrls: ['./metadata.component.scss']
+  selector: 'mat-administration-entity',
+  template: ''
 })
-export class MetadataComponent implements OnDestroy {
-  metadata$: BehaviorSubject<any> = new BehaviorSubject(null);
+export class EntityComponent implements OnDestroy {
+  entity$: BehaviorSubject<any> = new BehaviorSubject(null);
 
-  collectionPath$: BehaviorSubject<string> = new BehaviorSubject(null);
+  entityPath$: BehaviorSubject<string> = new BehaviorSubject(null);
 
-  collectionName$: BehaviorSubject<string> = new BehaviorSubject(null);
+  entityName$: BehaviorSubject<string> = new BehaviorSubject(null);
 
   subCollections$: BehaviorSubject<MatAdministrationEntity[]> = new BehaviorSubject(null);
 
@@ -37,27 +36,27 @@ export class MetadataComponent implements OnDestroy {
   ) {
     this.route.params
       .pipe(
-        map((params) => params?.collection),
+        map((params) => params?.entity),
         tap(() => this.isLoading$.next(true)),
         takeUntil(this.destroyed$)
       )
-      .subscribe(this.collectionPath$);
+      .subscribe(this.entityPath$);
 
-    this.collectionPath$
+    this.entityPath$
       .pipe(
-        map((collectionPath) => collectionPath.replace(/:/gi, '/')),
+        map((entityPath) => entityPath.replace(/:/gi, '/')),
         shareReplay(1)
       )
-      .subscribe(this.collectionName$);
+      .subscribe(this.entityName$);
 
-    this.collectionName$
+    this.entityName$
       .pipe(
         map((name) => this.getMetadata(name, metadata)),
         shareReplay(1)
       )
-      .subscribe(this.metadata$);
+      .subscribe(this.entity$);
 
-    this.metadata$
+    this.entity$
       .pipe(
         map((meta) => {
           if (!meta?.entities) {
@@ -89,7 +88,7 @@ export class MetadataComponent implements OnDestroy {
   }
 
   getFields() {
-    return this.metadata$.pipe(
+    return this.entity$.pipe(
       map((metadata) => {
         const entries = Object.entries({
           ...metadata?.fields,
@@ -149,7 +148,7 @@ export class MetadataComponent implements OnDestroy {
     const newItem = { ...item };
 
     const timestamp = this.dataAdapterService.getTimestamp();
-    const metadata = this.metadata$.getValue();
+    const metadata = this.entity$.getValue();
     if (action === 'add' && (metadata?.createdTimestamp || metadata?.autoTimestamps)) {
       newItem[metadata?.createdTimestamp || 'created'] = timestamp;
     }
@@ -161,12 +160,12 @@ export class MetadataComponent implements OnDestroy {
   }
 
   getFieldMedatada(field: string) {
-    return this.metadata$.getValue()?.entities?.[field];
+    return this.entity$.getValue()?.entities?.[field];
   }
 
   getAutoFields(): { [k: string]: string | Partial<MatAdministrationEntityField> } {
     const autoFields: { [k: string]: string | Partial<MatAdministrationEntityField> } = {};
-    const metadata = this.metadata$.getValue();
+    const metadata = this.entity$.getValue();
 
     if (metadata.autoTimestamps) {
       autoFields.created = {
@@ -185,11 +184,11 @@ export class MetadataComponent implements OnDestroy {
   }
 
   getIdField() {
-    return this.metadata$.getValue()?.idField || 'id';
+    return this.entity$.getValue()?.idField || 'id';
   }
 
-  private getMetadata(collectionName: string, metadata: any) {
-    const nameParts = collectionName.split('/');
+  private getMetadata(entityName: string, metadata: any) {
+    const nameParts = entityName.split('/');
 
     if (nameParts.length === 1) {
       return metadata.entities[nameParts[0]] || null;
@@ -201,17 +200,17 @@ export class MetadataComponent implements OnDestroy {
   private addAdditionalMetadata(field) {
     if (
       (field?.inputType === EntityFieldInputType.Select || field?.inputType === EntityFieldInputType.Radio) &&
-      field?.data?.type === 'collection'
+      field?.data?.type === 'entity'
     ) {
-      return this.dataAdapterService.list(field?.data?.collection, field?.data?.collectionValue).pipe(
+      return this.dataAdapterService.list(field?.data?.entity, field?.data?.entityValue).pipe(
         take(1),
         map((docs) => {
           return {
             ...field,
             options: docs.map((doc) => {
               return {
-                value: doc[field?.data?.collectionValue],
-                label: doc[field?.data?.collectionLabel]
+                value: doc[field?.data?.entityValue],
+                label: doc[field?.data?.entityLabel]
               };
             })
           };

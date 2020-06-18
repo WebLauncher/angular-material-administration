@@ -2,14 +2,16 @@
      *ngIf="isLoading$ | async">
   <mat-spinner diameter="50"></mat-spinner>
 </div>
-<ng-container *ngIf="metadata$ | async as metadata; else noMetadata">
-  <mat-administration-breadcrumbs [collectionName]="collectionName$ | async"
+<ng-container *ngIf="entity$ | async as entity; else noEntity">
+  <mat-administration-breadcrumbs [entityName]="entityName$ | async"
                                   action="add"></mat-administration-breadcrumbs>
   <mat-toolbar class="justify-between">
-    <h1>Add {{metadata?.single}}</h1>
+    <h1 fxLayoutAlign="start center">
+      <mat-icon *ngIf="entity?.icon">{{entity?.icon}}</mat-icon> Add {{entity?.single}}
+    </h1>
     <a mat-raised-button
        color="warn"
-       routerLink="/{{collectionPath$ | async}}/list">
+       routerLink="/{{entityPath$ | async}}/list">
       <mat-icon>keyboard_backspace</mat-icon> Cancel
     </a>
   </mat-toolbar>
@@ -21,8 +23,8 @@
   </mat-card>
 </ng-container>
 
-<ng-template #noMetadata>
+<ng-template #noEntity>
   <mat-chip-list>
-    <mat-chip color="warn">No entity metadata defined for&nbsp;<strong>{{collectionName$ | async}}</strong>!</mat-chip>
+    <mat-chip color="warn">No entity entity defined for&nbsp;<strong>{{entityName$ | async}}</strong>!</mat-chip>
   </mat-chip-list>
 </ng-template>

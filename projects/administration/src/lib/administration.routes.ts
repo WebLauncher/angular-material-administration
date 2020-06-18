@@ -4,20 +4,20 @@ import { NoPathGuard } from './services';
 
 export const materialAdministrationRoutes: Routes = [
   {
-    path: ':collection/list',
+    path: ':entity/list',
     component: ListComponent
   },
   {
-    path: ':collection/add',
+    path: ':entity/add',
     component: AddComponent
   },
   {
-    path: ':collection/update/:id',
+    path: ':entity/update/:id',
     component: UpdateComponent
   },
   {
-    path: ':collection',
-    redirectTo: ':collection/list'
+    path: ':entity',
+    redirectTo: ':entity/list'
   },
   {
     path: '**',

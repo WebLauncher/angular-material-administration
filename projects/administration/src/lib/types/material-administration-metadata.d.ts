@@ -13,9 +13,9 @@ export interface MatAdministrationEntityField {
   type: EntityFieldType | string;
   data: {
     type: string;
-    collection: string;
-    collectionValue: string;
-    collectionLabel: string;
+    entity: string;
+    entityValue: string;
+    entityLabel: string;
   };
   label: string;
   format: string;
@@ -57,6 +57,7 @@ export interface MatAdministrationEntity {
   titleField: string;
   hideList: boolean;
   idField: string;
+  icon: string;
   fields: { [k: string]: string | Partial<MatAdministrationEntityField> };
   entities: { [k: string]: Partial<MatAdministrationEntity> };
   style: Partial<{

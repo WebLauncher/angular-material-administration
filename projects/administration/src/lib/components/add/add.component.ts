@@ -5,7 +5,7 @@ import { take, tap, switchMap, map } from 'rxjs/operators';
 import { capitalize } from 'lodash-es';
 import { Immutable } from 'types/immutable';
 import { SnackbarService } from '../../services/snackbar.service';
-import { MetadataComponent } from '../metadata/metadata.component';
+import { EntityComponent } from '../entity/entity.component';
 import { DataAdapterInterface } from '../../services/data-adapter';
 import { MatAdministrationEntityField, MatAdministrationMetadata } from '../../types';
 
@@ -14,7 +14,7 @@ import { MatAdministrationEntityField, MatAdministrationMetadata } from '../../t
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.scss']
 })
-export class AddComponent extends MetadataComponent {
+export class AddComponent extends EntityComponent {
   fields$: Observable<MatAdministrationEntityField[]>;
 
   layout$: Observable<any>;
@@ -34,28 +34,26 @@ export class AddComponent extends MetadataComponent {
       })
     );
 
-    this.layout$ = this.metadata$.pipe(map((entityMetadata) => entityMetadata?.layout?.form));
+    this.layout$ = this.entity$.pipe(map((entityMetadata) => entityMetadata?.layout?.form));
   }
 
   submit(item: any) {
     this.isLoading$.next(true);
 
-    this.collectionName$
+    this.entityName$
       .pipe(
         take(1),
-        switchMap((collectionName) =>
-          this.processUploads(item).pipe(map((updatedItem) => [collectionName, updatedItem]))
-        ),
-        switchMap(([collectionName, updatedItem]) =>
-          this.dataAdapterService.add(collectionName, this.getWithTimestamps(updatedItem, 'add'))
+        switchMap((entityName) => this.processUploads(item).pipe(map((updatedItem) => [entityName, updatedItem]))),
+        switchMap(([entityName, updatedItem]) =>
+          this.dataAdapterService.add(entityName, this.getWithTimestamps(updatedItem, 'add'))
         )
       )
       .subscribe(
         () => {
-          this.snackbar.success(`${capitalize(this.metadata$.getValue()?.single)} added successfully!`);
-          this.router.navigate([`/${this.collectionPath$.getValue()}/list`]);
+          this.snackbar.success(`${capitalize(this.entity$.getValue()?.single)} added successfully!`);
+          this.router.navigate([`/${this.entityPath$.getValue()}/list`]);
         },
-        () => this.snackbar.error(`There was an error adding ${this.metadata$.getValue()?.single}!`),
+        () => this.snackbar.error(`There was an error adding ${this.entity$.getValue()?.single}!`),
         () => this.isLoading$.next(false)
       );
   }

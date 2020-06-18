@@ -2,15 +2,17 @@
      *ngIf="isLoading$ | async">
   <mat-spinner diameter="50"></mat-spinner>
 </div>
-<ng-container *ngIf="metadata$ | async as metadata; else noMetadata">
-  <mat-administration-breadcrumbs [collectionName]="collectionName$ | async"
+<ng-container *ngIf="entity$ | async as entity; else noMetadata">
+  <mat-administration-breadcrumbs [entityName]="entityName$ | async"
                                   action="list"></mat-administration-breadcrumbs>
   <mat-toolbar class="justify-between">
-    <h1>{{metadata?.plural | titlecase}}</h1>
+    <h1 fxLayoutAlign="start center">
+      <mat-icon *ngIf="entity?.icon">{{entity?.icon}}</mat-icon> {{entity?.plural | titlecase}}
+    </h1>
     <button mat-raised-button
             color="primary"
-            routerLink="/{{collectionPath$ | async}}/add">
-      <mat-icon>add</mat-icon> Add {{metadata?.single}}
+            routerLink="/{{entityPath$ | async}}/add">
+      <mat-icon>add</mat-icon> Add {{entity?.single}}
     </button>
   </mat-toolbar>
   <table mat-table
@@ -52,7 +54,7 @@
           <button *ngFor="let subCollection of subCollections$ | async"
                   mat-menu-item
                   aria-label="Manage"
-                  routerLink="/{{collectionName$ | async}}:{{element.id}}:{{subCollection?.id}}/list">
+                  routerLink="/{{entityName$ | async}}:{{element.id}}:{{subCollection?.id}}/list">
             {{subCollection?.plural | titlecase}}
           </button>
         </mat-menu>
@@ -66,7 +68,7 @@
           *matCellDef="let element">
         <button mat-icon-button
                 aria-label="Edit"
-                routerLink="/{{collectionPath$ | async}}/update/{{element.id}}">
+                routerLink="/{{entityPath$ | async}}/update/{{element.id}}">
           <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button
@@ -85,14 +87,14 @@
   </table>
 
   <mat-card *ngIf="!(list$ | async)?.length">
-    No {{metadata?.plural}} added. <a mat-button
+    No {{entity?.plural}} added. <a mat-button
        color="primary"
-       routerLink="/{{collectionPath$ | async}}/add">Add {{metadata?.single}}</a>
+       routerLink="/{{entityPath$ | async}}/add">Add {{entity?.single}}</a>
   </mat-card>
 </ng-container>
 
 <ng-template #noMetadata>
   <mat-chip-list>
-    <mat-chip color="warn">No entity metadata defined for&nbsp;<strong>{{collectionName$ | async}}</strong>!</mat-chip>
+    <mat-chip color="warn">No entity metadata defined for&nbsp;<strong>{{entityName$ | async}}</strong>!</mat-chip>
   </mat-chip-list>
 </ng-template>

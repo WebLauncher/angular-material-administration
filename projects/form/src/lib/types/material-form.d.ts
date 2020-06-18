@@ -13,9 +13,9 @@ export interface MatFormEntityField {
   type: EntityFieldType | string;
   data: {
     type: string;
-    collection: string;
-    collectionValue: string;
-    collectionLabel: string;
+    entity: string;
+    entityValue: string;
+    entityLabel: string;
   };
   label: string;
   format: string;

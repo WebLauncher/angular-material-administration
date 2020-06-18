@@ -11,19 +11,19 @@ import { DataAdapterInterface } from '../../services';
   styleUrls: ['./breadcrumbs.component.css']
 })
 export class BreadcrumbsComponent implements OnInit {
-  @Input() set collectionName(value: string) {
-    this.collectionName$.next(value);
+  @Input() set entityName(value: string) {
+    this.entityName$.next(value);
   }
 
-  get collectionName() {
-    return this.collectionName$.getValue();
+  get entityName() {
+    return this.entityName$.getValue();
   }
 
   @Input() action: 'add' | 'update' | 'list';
 
   links$: Observable<any>;
 
-  private collectionName$ = new BehaviorSubject('');
+  private entityName$ = new BehaviorSubject('');
 
   constructor(
     @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: MatAdministrationMetadata,
@@ -31,9 +31,9 @@ export class BreadcrumbsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.links$ = this.collectionName$.pipe(
-      map((collectionName) => {
-        const parts = collectionName.split('/');
+    this.links$ = this.entityName$.pipe(
+      map((entityName) => {
+        const parts = entityName.split('/');
         return this.getLinks(parts, this.metadata.entities[parts[0]]);
       })
     );
@@ -51,13 +51,11 @@ export class BreadcrumbsComponent implements OnInit {
     ];
   }
 
-  private getItemUrl(collection, itemId, metadata, baseUrl) {
+  private getItemUrl(entity, itemId, metadata, baseUrl) {
     return {
       name: metadata.titleField || 'title',
-      source: this.dataAdapterService
-        .get(collection, itemId)
-        .pipe(map((data) => data?.[metadata.titleField || 'title'])),
-      url: [`${baseUrl}${collection}/update/${itemId}`]
+      source: this.dataAdapterService.get(entity, itemId).pipe(map((data) => data?.[metadata.titleField || 'title'])),
+      url: [`${baseUrl}${entity}/update/${itemId}`]
     };
   }
 

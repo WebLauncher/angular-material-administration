@@ -5,15 +5,16 @@ export const SiteMetadata: MatAdministrationMetadata = {
     news: {
       single: 'news',
       plural: 'news',
+      icon: 'article',
       autoTimestamps: true,
       fields: {
         sport: {
           inputType: EntityFieldInputType.Select,
           data: {
-            type: 'collection',
-            collection: 'sports',
-            collectionValue: 'id',
-            collectionLabel: 'name'
+            type: 'entity',
+            entity: 'sports',
+            entityValue: 'id',
+            entityLabel: 'name'
           }
         },
         title: 'title',
@@ -95,16 +96,17 @@ export const SiteMetadata: MatAdministrationMetadata = {
     events: {
       single: 'event',
       plural: 'events',
+      icon: 'event',
       showMenuDividerAfter: true,
       autoTimestamps: true,
       fields: {
         sport: {
           inputType: EntityFieldInputType.Select,
           data: {
-            type: 'collection',
-            collection: 'sports',
-            collectionValue: 'id',
-            collectionLabel: 'name'
+            type: 'entity',
+            entity: 'sports',
+            entityValue: 'id',
+            entityLabel: 'name'
           }
         },
         title: 'title',
@@ -130,6 +132,7 @@ export const SiteMetadata: MatAdministrationMetadata = {
     users: {
       single: 'user',
       plural: 'users',
+      icon: 'people',
       titleField: 'email',
       fields: {
         email: 'email',

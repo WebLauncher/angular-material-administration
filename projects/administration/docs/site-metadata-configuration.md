@@ -38,10 +38,10 @@ export const SiteMetadata: MatAdministrationMetadata = {
         sport: {
           inputType: EntityFieldInputType.Select,
           data: {
-            type: 'collection',
-            collection: 'sports',
-            collectionValue: 'id',
-            collectionLabel: 'name'
+            type: 'enity',
+            entity: 'sports',
+            entityValue: 'id',
+            entityLabel: 'name'
           }
         },
         title: 'title',

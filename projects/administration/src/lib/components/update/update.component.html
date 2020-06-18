@@ -2,15 +2,17 @@
      *ngIf="isLoading$ | async">
   <mat-spinner diameter="50"></mat-spinner>
 </div>
-<ng-container *ngIf="metadata$ | async as metadata; else noMetadata">
-  <mat-administration-breadcrumbs [collectionName]="collectionName$ | async"
+<ng-container *ngIf="entity$ | async as entity; else noEntity">
+  <mat-administration-breadcrumbs [entityName]="entityName$ | async"
                                   action="update"></mat-administration-breadcrumbs>
   <mat-toolbar class="justify-between toolbar-main">
-    <h1>Update {{metadata?.single}}</h1>
+    <h1 fxLayoutAlign="start center">
+      <mat-icon *ngIf="entity?.icon">{{entity?.icon}}</mat-icon> Update {{entity?.single}}
+    </h1>
     <span class="entity-title">{{entityTitle$ | async}}<br /><small>#{{id$ | async}}</small></span>
     <a mat-raised-button
        color="warn"
-       routerLink="/{{collectionPath$ | async}}/list">
+       routerLink="/{{entityPath$ | async}}/list">
       <mat-icon>keyboard_backspace</mat-icon> Cancel
     </a>
   </mat-toolbar>
@@ -18,7 +20,7 @@
     <a *ngFor="let subCollection of subCollections"
        mat-raised-button
        aria-label="Manage"
-       routerLink="/{{collectionName$ | async}}:{{id$ | async}}:{{subCollection?.id}}/list">
+       routerLink="/{{entityName$ | async}}:{{id$ | async}}:{{subCollection?.id}}/list">
       {{subCollection?.plural | titlecase}}
     </a>
   </mat-toolbar>
@@ -30,8 +32,8 @@
   </mat-card>
 </ng-container>
 
-<ng-template #noMetadata>
+<ng-template #noEntity>
   <mat-chip-list>
-    <mat-chip color="warn">No entity metadata defined for&nbsp;<strong>{{collectionName$ | async}}</strong>!</mat-chip>
+    <mat-chip color="warn">No entity entity defined for&nbsp;<strong>{{entityName$ | async}}</strong>!</mat-chip>
   </mat-chip-list>
 </ng-template>
