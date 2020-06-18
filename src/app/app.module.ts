@@ -8,6 +8,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MaterialAdministrationModule } from '@weblauncher/material-administration';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { LayoutComponent } from './layout/layout.component';
 import { LoginComponent } from './login/login.component';
 import { environment } from '../environments/environment';
@@ -33,6 +35,8 @@ export function firebaseAppNameFactory() {
     MatSidenavModule,
     MatButtonModule,
     MatMenuModule,
+    MatProgressSpinnerModule,
+    FlexLayoutModule,
     MaterialAdministrationModule.forRoot(environment.firebase, firebaseAppNameFactory)
   ],
   providers: [

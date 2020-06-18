@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { SiteMetadata } from '../site-metadata';
@@ -25,6 +25,11 @@ export class LayoutComponent {
   userName$ = this.user$.pipe(map((user) => user.displayName || user.email));
 
   selectedEntity$: BehaviorSubject<string> = new BehaviorSubject('');
+
+  loaded$ = this.user$.pipe(
+    take(1),
+    map(() => true)
+  );
 
   constructor(private auth: AngularFireAuth, private router: Router) {}
 

@@ -1,36 +1,46 @@
-<mat-sidenav-container class="layout-container"
-                       *ngIf="user$ | async; else notlogged">
-  <mat-sidenav mode="side"
-               opened
-               color="primary">
-    <mat-toolbar color="primary">
-      <mat-toolbar-row>
-        <img class="logo"
-             src="https://material.angular.io/assets/img/homepage/angular-white-transparent.svg"
-             alt="Logo" />
-      </mat-toolbar-row>
-    </mat-toolbar>
-    <mat-administration-menu></mat-administration-menu>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary"
-                 class="navbar-top">
-      <mat-toolbar-row class="user-toolbar">
-        <button mat-button
-                [matMenuTriggerFor]="userMenu">Hi, {{userName$ | async}}</button>
+<ng-container *ngIf="(loaded$ | async); else loading">
 
-        <mat-menu #userMenu="matMenu">
-          <button mat-menu-item
-                  (click)="logout()">Logout</button>
-        </mat-menu>
-      </mat-toolbar-row>
-    </mat-toolbar>
-    <main class="page-content">
-      <router-outlet #routerOutlet="outlet"></router-outlet>
-    </main>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  <mat-sidenav-container class="layout-container"
+                         *ngIf="user$ | async; else notlogged">
+    <mat-sidenav mode="side"
+                 opened
+                 color="primary">
+      <mat-toolbar color="primary">
+        <mat-toolbar-row>
+          <img class="logo"
+               src="https://material.angular.io/assets/img/homepage/angular-white-transparent.svg"
+               alt="Logo" />
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <mat-administration-menu></mat-administration-menu>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar color="primary"
+                   class="navbar-top">
+        <mat-toolbar-row class="user-toolbar">
+          <button mat-button
+                  [matMenuTriggerFor]="userMenu">Hi, {{userName$ | async}}</button>
 
-<ng-template #notlogged>
-  <app-login></app-login>
+          <mat-menu #userMenu="matMenu">
+            <button mat-menu-item
+                    (click)="logout()">Logout</button>
+          </mat-menu>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <main class="page-content">
+        <router-outlet #routerOutlet="outlet"></router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <ng-template #notlogged>
+    <app-login></app-login>
+  </ng-template>
+</ng-container>
+
+<ng-template #loading>
+  <div class="loading-box"
+       fxLayoutAlign="center center">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
 </ng-template>
