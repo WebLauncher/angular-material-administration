@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.3.6 (2020-06-18)
+
+
+### Bug Fixes
+
+* **app:** fixed demo login form showing temporary ([1177f87](https://github.com/WebLauncher/angular-material-administration/commit/1177f87971fa8b13dfaab82f3ea6d62489b39d70))
+
+
+
+
+
 ## 0.3.5 (2020-06-18)
 
 **Note:** Version bump only for package @weblauncher/material-file-input
