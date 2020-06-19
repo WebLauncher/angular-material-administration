@@ -1482,9 +1482,9 @@
     "@firebase/auth-types" "0.10.0"
 
 "@firebase/auth@~0.14.6":
-  version "0.14.6"
-  resolved "https://registry.yarnpkg.com/@firebase/auth/-/auth-0.14.6.tgz#3d419d9b3553f17f94ceea1aaf2cecfdac26c778"
-  integrity sha512-7gaEUWhUubWBGfOXAZvpTpJqBJT9KyG83RXC6VnjSQIfNUaarHZ485WkzERil43A6KvIl+f4kHxfZShE6ZCK3A==
+  version "0.14.7"
+  resolved "https://registry.yarnpkg.com/@firebase/auth/-/auth-0.14.7.tgz#9a46dd68efff7af7ec8c420b35f26d118c773cff"
+  integrity sha512-NTQY9luV70XUA6zGYOWloDSaOT+l0/R4u3W7ptqVCfZNc4DAt7euUkTbj7SDD14902sHF54j+tk5kmpEmMd0jA==
   dependencies:
     "@firebase/auth-types" "0.10.1"
 
