@@ -4,7 +4,8 @@
       fxLayoutAlign="{{layout?.mainAlign || 'center'}} {{layout?.crossAlign || 'stretch'}}"
       [fxLayoutGap]="layout?.gap || '0'">
   <mat-card class="form-section"
-            *ngFor="let section of sections">
+            *ngFor="let section of sections"
+            [ngClass]="{'mat-elevation-z0': sections.length === 1}">
     <mat-card-title class="form-section-header"
                     *ngIf="section?.title">
       {{section.title}}</mat-card-title>

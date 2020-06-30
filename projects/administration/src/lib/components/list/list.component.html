@@ -18,7 +18,7 @@
   <table mat-table
          *ngIf="(list$ | async)?.length"
          [dataSource]="list$ | async"
-         class="mat-elevation-z8">
+         class="mat-elevation-z0">
     <ng-container *ngFor="let column of displayedColumns$ | async">
       <ng-container [matColumnDef]="column?.id"
                     *ngIf="column?.id != 'actions' && column?.id != 'entities'">
@@ -86,7 +86,8 @@
         *matRowDef="let row; columns: displayedColumnsNames$ | async;"></tr>
   </table>
 
-  <mat-card *ngIf="!(list$ | async)?.length">
+  <mat-card *ngIf="!(list$ | async)?.length"
+            class="mat-elevation-z0">
     No {{entity?.plural}} added. <a mat-button
        color="primary"
        routerLink="/{{entityPath$ | async}}/add">Add {{entity?.single}}</a>

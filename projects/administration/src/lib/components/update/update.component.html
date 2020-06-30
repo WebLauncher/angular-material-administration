@@ -24,7 +24,7 @@
       {{subCollection?.plural | titlecase}}
     </a>
   </mat-toolbar>
-  <mat-card>
+  <mat-card class="mat-elevation-z0">
     <mat-form *ngIf="fields$ | async"
               [fields]="fields$ | async"
               [layout]="layout$ | async"
