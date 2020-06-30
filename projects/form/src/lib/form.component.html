@@ -102,7 +102,7 @@
         </mat-form-field>
         <!-- image upload -->
         <div *ngSwitchCase="'image'">
-          <div *ngIf="field?.value">
+          <div *ngIf="form.controls[field?.name].value">
             <mat-label>{{field?.label}}</mat-label>
             <div fxLayout="row"
                  fxLayoutAlign="start">
@@ -115,7 +115,7 @@
             </div>
           </div>
 
-          <mat-form-field *ngIf="!field?.value">
+          <mat-form-field *ngIf="!form.controls[field?.name].value">
             <mat-label>{{field?.label}}</mat-label>
             <mat-file-input [formControlName]="field?.name"
                             [placeholder]="field?.placeholder"></mat-file-input>
