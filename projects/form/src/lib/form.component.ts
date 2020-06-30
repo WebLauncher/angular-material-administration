@@ -14,6 +14,10 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
 
   @Input() layout: MatFormSectionsLayout;
 
+  @Input() saveBtnText = 'Save';
+
+  @Input() removeBtnText = 'Remove';
+
   @Output() ngSubmit: EventEmitter<any> = new EventEmitter();
 
   @Output() valueChanges: EventEmitter<any> = new EventEmitter();
@@ -24,7 +28,9 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
 
   private destroyed$: Subject<void> = new Subject();
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {
+    // empty
+  }
 
   ngOnInit(): void {
     if (this.fields) {

@@ -9,7 +9,9 @@ import {
   Self,
   ElementRef
 } from '@angular/core';
+
 import { FormControl, ControlValueAccessor, NgControl, FormBuilder, NgForm, FormGroupDirective } from '@angular/forms';
+import { CKEditor5 } from '@ckeditor/ckeditor5-angular';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -38,6 +40,8 @@ export class MaterialCkeditorComponent extends MaterialCkeditorMixinBase
   get shouldLabelFloat() {
     return this.focused || !this.empty;
   }
+
+  @Input() config: CKEditor5.Config;
 
   @Input()
   get placeholder() {
@@ -178,5 +182,7 @@ export class MaterialCkeditorComponent extends MaterialCkeditorMixinBase
     this.onChange = fn;
   }
 
-  registerOnTouched() {}
+  registerOnTouched() {
+    // empty
+  }
 }

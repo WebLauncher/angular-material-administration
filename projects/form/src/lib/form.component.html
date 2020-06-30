@@ -27,7 +27,7 @@
   <div fxFlexAlign="end">
     <button mat-raised-button
             color="primary"
-            type="submit">Save
+            type="submit">{{saveBtnText}}
     </button>
   </div>
 
@@ -111,7 +111,7 @@
                    alt="field?.label" />
               <button type="button"
                       mat-raised-button
-                      (click)="removeImage(field)">Remove</button>
+                      (click)="removeImage(field)">{{removeBtnText}}</button>
             </div>
           </div>
 

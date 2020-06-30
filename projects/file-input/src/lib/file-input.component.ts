@@ -87,6 +87,8 @@ export class MatFileInputComponent extends MaterialFileInputMixinBase
 
   @Input() multiple = false;
 
+  @Input() color: string;
+
   onChange: (value) => void;
 
   form: FormControl;
@@ -175,7 +177,9 @@ export class MatFileInputComponent extends MaterialFileInputMixinBase
     this.onChange = fn;
   }
 
-  registerOnTouched() {}
+  registerOnTouched() {
+    // empty
+  }
 
   openChooseFile() {
     if (this.value) {
