@@ -25,7 +25,7 @@ module.exports = {
       processor: '@angular-eslint/template/extract-inline-html',
     },
     {
-      files: ['lib/**/*.spec.ts', 'lib/**/*.d.ts'],
+      files: ['src/lib/**/*.spec.ts', 'src/lib/**/*.d.ts'],
       parserOptions: {
         project: './tsconfig.spec.json',
       },

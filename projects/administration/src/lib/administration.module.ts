@@ -101,7 +101,7 @@ export class MaterialAdministrationModule {
   static forRoot(
     configFactory: FirebaseAppConfig,
     appNameFactory: () => string | undefined = () => undefined
-  ): ModuleWithProviders {
+  ): ModuleWithProviders<MaterialAdministrationModule> {
     return {
       ngModule: MaterialAdministrationModule,
       providers: [
