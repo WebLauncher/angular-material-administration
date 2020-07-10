@@ -1,7 +1,7 @@
 {
   "name": "@weblauncher/material-file-input",
   "description": "Material file input component module",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "keywords": [
     "angular",
     "material",
