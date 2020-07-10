@@ -3,10 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
 import { map, shareReplay, takeUntil, tap, take, switchMap } from 'rxjs/operators';
 import { capitalize } from 'lodash-es';
-import { EntityFieldType } from '../../types';
-import { SnackbarService } from '../../services/snackbar.service';
-import { EntityComponent } from '../entity/entity.component';
-import { DataAdapterInterface } from '../../services';
+import { SnackbarService } from './../../services/snackbar.service';
+import { EntityComponent } from './../entity/entity.component';
+import { DataAdapterInterface } from '../../types/data-adapter';
+import { EntityFieldType } from '../../types/entity-field-type.enum';
 
 @Component({
   selector: 'mat-administration-update',

@@ -6,8 +6,9 @@ import { pickBy, capitalize, merge } from 'lodash-es';
 import { ValueFormatService } from '../../services/value-format.service';
 import { EntityComponent } from '../entity/entity.component';
 import { SnackbarService } from '../../services/snackbar.service';
-import { MatAdministrationMetadata, MatAdministrationEntityField, EntityFieldType } from '../../types';
-import { DataAdapterInterface } from '../../services';
+import { DataAdapterInterface } from '../../types/data-adapter';
+import { MatAdministrationMetadata, MatAdministrationEntityField } from '../../types/material-administration-metadata';
+import { EntityFieldType } from '../../types/entity-field-type.enum';
 
 @Component({
   selector: 'mat-administration-list',

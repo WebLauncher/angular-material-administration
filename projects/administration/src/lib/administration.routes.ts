@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { ListComponent, AddComponent, UpdateComponent } from './components';
-import { NoPathGuard } from './services';
+import { ListComponent, AddComponent, UpdateComponent } from './components/index';
+import { NoPathGuard } from './services/index';
 
 export const materialAdministrationRoutes: Routes = [
   {

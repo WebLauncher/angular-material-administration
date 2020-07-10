@@ -28,16 +28,16 @@
     "@weblauncher/material-form": "^0.2.2"
   },
   "peerDependencies": {
-    "@angular/cdk": "^9.1.0",
-    "@angular/common": "^10.0.2",
-    "@angular/core": "^10.0.2",
+    "@angular/cdk": "^10.0.1",
+    "@angular/common": "^10.0.3",
+    "@angular/core": "^10.0.3",
     "@angular/fire": "^6.0.0",
     "@angular/flex-layout": "^9.0.0-beta.29",
-    "@angular/forms": "^10.0.2",
+    "@angular/forms": "^10.0.3",
     "@angular/material": "^10.0.1",
-    "@angular/platform-browser": "~10.0.2",
-    "@angular/platform-browser-dynamic": "~10.0.2",
-    "@angular/router": "^10.0.2",
+    "@angular/platform-browser": "~10.0.3",
+    "@angular/platform-browser-dynamic": "~10.0.3",
+    "@angular/router": "^10.0.3",
     "@weblauncher/material-ckeditor": "*",
     "@weblauncher/material-file-input": "*",
     "firebase": "^7.13.2",
@@ -47,6 +47,6 @@
     "zone.js": "~0.10.2"
   },
   "dependencies": {
-    "tslib": "^1.10.0"
+    "tslib": "^2.0.0"
   }
 }

@@ -3,11 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take, tap, switchMap, map } from 'rxjs/operators';
 import { capitalize } from 'lodash-es';
-import { Immutable } from 'types/immutable';
-import { SnackbarService } from '../../services/snackbar.service';
-import { EntityComponent } from '../entity/entity.component';
-import { DataAdapterInterface } from '../../services/data-adapter';
-import { MatAdministrationEntityField, MatAdministrationMetadata } from '../../types';
+import { SnackbarService } from './../../services/snackbar.service';
+import { EntityComponent } from './../entity/entity.component';
+import { MatAdministrationEntityField, MatAdministrationMetadata } from '../../types/material-administration-metadata';
+import { DataAdapterInterface } from '../../types/data-adapter';
+import { Immutable } from '../../types/immutable';
 
 @Component({
   selector: 'mat-administration-add',

@@ -6,12 +6,16 @@
     "umdModuleIds": {
       "lodash-es": "lodash-es",
       "@weblauncher/material-form": "@weblauncher/material-form",
+      "@weblauncher/material-ckeditor": "@weblauncher/material-ckedito",
+      "@weblauncher/material-file-input": "@weblauncher/material-file-input",
       "firebase/app": "firebase",
       "uuid": "uuid"
     }
   },
   "whitelistedNonPeerDependencies": [
     "lodash-es",
-    "@weblauncher/material-form"
+    "@weblauncher/material-form",
+    "@weblauncher/material-file-input",
+    "@weblauncher/material-ckeditor"
   ]
 }

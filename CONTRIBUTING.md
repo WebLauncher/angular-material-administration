@@ -8,7 +8,7 @@ Next steps only describe how to start this projects after all needed software is
 
 2. Install dependencies
 
-    `yarn install`
+    `yarn`
 
 3. Start project
 

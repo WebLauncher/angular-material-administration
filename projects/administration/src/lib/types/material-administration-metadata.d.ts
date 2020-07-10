@@ -2,7 +2,7 @@ import { ValidatorFn, AbstractControlOptions, AsyncValidatorFn } from '@angular/
 import { EntityFieldType } from './entity-field-type.enum';
 import { EntityFieldInputType } from './entity-field-input-type.enum';
 
-export interface MatAdministrationEntityField {
+interface MatAdministrationEntityField {
   id?: string;
   name?: string;
   hideInList: boolean;
@@ -28,25 +28,25 @@ export interface MatAdministrationEntityField {
   asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null;
 }
 
-export interface MatAdministrationLayout {
+interface MatAdministrationLayout {
   direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
   mainAlign?: 'none' | 'start' | 'center' | 'end' | 'stretch';
   crossAlign?: 'none' | 'start' | 'center' | 'end' | 'space-around' | 'space-between' | 'space-evenly';
   gap?: string;
 }
 
-export interface MatAdministrationFormSection {
+interface MatAdministrationFormSection {
   title: string;
   subtitle: string;
   fields: string[] | Partial<MatAdministrationEntityField>[];
   layout: Partial<MatAdministrationLayout>;
 }
 
-export interface MatAdministrationFormLayout extends MatAdministrationLayout {
+interface MatAdministrationFormLayout extends MatAdministrationLayout {
   sections: Array<Partial<MatAdministrationFormSection>>;
 }
 
-export interface MatAdministrationEntity {
+interface MatAdministrationEntity {
   id?: string;
   single: string;
   plural: string;
@@ -70,8 +70,17 @@ export interface MatAdministrationEntity {
   };
 }
 
-export interface MatAdministrationMetadata {
+interface MatAdministrationMetadata {
   timestampFormat?: string;
   disableRedirectToFirstEntity?: boolean;
   entities: { [k: string]: Partial<MatAdministrationEntity> };
 }
+
+export {
+  MatAdministrationMetadata,
+  MatAdministrationEntity,
+  MatAdministrationFormLayout,
+  MatAdministrationFormSection,
+  MatAdministrationLayout,
+  MatAdministrationEntityField,
+};

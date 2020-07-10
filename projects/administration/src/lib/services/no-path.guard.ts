@@ -1,13 +1,13 @@
 import { Injectable, Optional, Inject } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { MatAdministrationMetadata } from '../types';
+import { MatAdministrationMetadata } from '../types/material-administration-metadata';
 
 @Injectable()
 export class NoPathGuard implements CanActivate {
   constructor(
     private router: Router,
     @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: MatAdministrationMetadata
-  ) {}
+  ) { }
 
   canActivate() {
     if (!this.metadata?.disableRedirectToFirstEntity) {

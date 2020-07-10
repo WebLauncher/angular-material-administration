@@ -3,14 +3,11 @@ import { BehaviorSubject, of, forkJoin, Subject, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { map, shareReplay, switchMap, take, catchError, takeUntil, tap } from 'rxjs/operators';
 import { capitalize } from 'lodash-es';
-import { Immutable } from 'types/immutable';
-import { DownloadData, DataAdapterInterface } from '../../services/index';
-import {
-  MatAdministrationEntity,
-  MatAdministrationEntityField,
-  MatAdministrationMetadata
-} from '../../types/material-administration-metadata';
-import { EntityFieldType, EntityFieldInputType } from '../../types';
+import { MatAdministrationEntity, MatAdministrationMetadata, MatAdministrationEntityField } from '../../types/material-administration-metadata';
+import { DataAdapterInterface, DownloadData } from '../../types/data-adapter';
+import { Immutable } from '../../types/immutable';
+import { EntityFieldType } from '../../types/entity-field-type.enum';
+import { EntityFieldInputType } from '../../types/entity-field-input-type.enum';
 
 @Component({
   selector: 'mat-administration-entity',

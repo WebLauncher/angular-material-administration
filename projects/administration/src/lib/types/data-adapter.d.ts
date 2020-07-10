@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-export interface DataAdapterInterface {
+interface DataAdapterInterface {
   get: (entity: string, id: string) => Observable<any>;
   list: (entity: string, idField: string) => Observable<any>;
   add: (entity: string, item: any) => Observable<any>;
@@ -11,7 +11,12 @@ export interface DataAdapterInterface {
   getTimestamp: () => any;
 }
 
-export interface DownloadData {
+interface DownloadData {
   downloadUrl: string;
   path?: string;
 }
+
+export {
+  DataAdapterInterface,
+  DownloadData
+};

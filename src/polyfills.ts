@@ -14,6 +14,10 @@
  * Learn more in https://angular.io/guide/browser-support
  */
 
+/***************************************************************************************************
+ * BROWSER POLYFILLS
+ */
+
 /** IE10 and IE11 requires the following for NgClass support on SVG elements */
 // import 'classlist.js';  // Run `npm install --save classlist.js`.
 
@@ -47,4 +51,13 @@
  *  (window as any).__Zone_enable_cross_context_check = true;
  *
  */
-import 'zone.js/dist/zone'; // Included with Angular CLI.
+
+/***************************************************************************************************
+ * Zone JS is required by default for Angular itself.
+ */
+import 'zone.js/dist/zone';  // Included with Angular CLI.
+
+
+/***************************************************************************************************
+ * APPLICATION IMPORTS
+ */

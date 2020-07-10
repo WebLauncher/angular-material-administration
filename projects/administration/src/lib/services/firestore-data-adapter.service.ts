@@ -5,13 +5,13 @@ import * as firebase from 'firebase/app';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { v4 as uuidv4 } from 'uuid';
 import { finalize, filter } from 'rxjs/operators';
-import { DataAdapterInterface, DownloadData } from './data-adapter';
+import { DataAdapterInterface, DownloadData } from '../types/data-adapter';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreDataAdapterService implements DataAdapterInterface {
-  constructor(private db: AngularFirestore, private storage: AngularFireStorage) {}
+  constructor(private db: AngularFirestore, private storage: AngularFireStorage) { }
 
   get(collection: string, id: string) {
     return this.db.collection(collection).doc(id).valueChanges();

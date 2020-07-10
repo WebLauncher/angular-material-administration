@@ -2,8 +2,8 @@ import { Component, OnInit, Input, Optional, Inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { capitalize } from 'lodash-es';
 import { map } from 'rxjs/operators';
-import { MatAdministrationEntity, MatAdministrationMetadata } from '../../types/material-administration-metadata';
-import { DataAdapterInterface } from '../../services';
+import { MatAdministrationMetadata, MatAdministrationEntity } from '../../types/material-administration-metadata';
+import { DataAdapterInterface } from '../../types/data-adapter';
 
 @Component({
   selector: 'mat-administration-breadcrumbs',
@@ -28,7 +28,7 @@ export class BreadcrumbsComponent implements OnInit {
   constructor(
     @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: MatAdministrationMetadata,
     @Inject('MAT_ADMINISTRATION_DATA_ADAPTER') public dataAdapterService: DataAdapterInterface
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.links$ = this.entityName$.pipe(

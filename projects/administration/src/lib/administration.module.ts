@@ -38,7 +38,7 @@ import {
   MenuComponent,
   BreadcrumbsComponent
 } from './components/index';
-import { FirestoreDataAdapterService, ValueFormatService, NoPathGuard } from './services';
+import { FirestoreDataAdapterService, ValueFormatService, NoPathGuard } from './services/index';
 
 @NgModule({
   declarations: [ListComponent, AddComponent, UpdateComponent, EntityComponent, BreadcrumbsComponent, MenuComponent],
