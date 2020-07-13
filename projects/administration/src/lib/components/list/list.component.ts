@@ -1,6 +1,6 @@
 import { Component, Optional, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { map, switchMap, shareReplay, tap, withLatestFrom } from 'rxjs/operators';
 import { pickBy, capitalize, merge } from 'lodash-es';
 import { ValueFormatService } from '../../services/value-format.service';
@@ -22,6 +22,8 @@ export class ListComponent extends EntityComponent {
 
   list$: Observable<any[]>;
 
+  private refresh$: BehaviorSubject<void> = new BehaviorSubject(null);
+
   constructor(
     public route: ActivatedRoute,
     private valueFormatService: ValueFormatService,
@@ -33,8 +35,11 @@ export class ListComponent extends EntityComponent {
 
     this.displayedColumns$ = this.getDisplayedColumns();
     this.displayedColumnsNames$ = this.displayedColumns$.pipe(map((columns) => columns.map((column) => column?.id)));
-    this.list$ = this.entityName$.pipe(
-      switchMap((entity) => this.dataAdapterService.list(entity, this.getIdField())),
+    this.list$ = combineLatest([
+      this.entityName$,
+      this.refresh$
+    ]).pipe(
+      switchMap(([entity, _]) => this.dataAdapterService.list(entity, this.getIdField())),
       tap(() => this.isLoading$.next(false)),
       shareReplay(1)
     );
@@ -51,9 +56,12 @@ export class ListComponent extends EntityComponent {
   delete(element) {
     this.isLoading$.next(true);
     this.dataAdapterService.delete(this.entityName$.getValue(), element?.id).subscribe(
-      () => this.snackbar.success(`${capitalize(this.entity$.getValue()?.single)} added successfully!`),
-      () => this.snackbar.error(`There was an error adding ${this.entity$.getValue()?.single}!`),
-      () => this.isLoading$.next(false)
+      () => this.snackbar.success(`${capitalize(this.entity$.getValue()?.single)} deleted successfully!`),
+      () => this.snackbar.error(`There was an error deleting ${this.entity$.getValue()?.single}!`),
+      () => {
+        this.isLoading$.next(false);
+        this.refresh$.next();
+      }
     );
   }
 

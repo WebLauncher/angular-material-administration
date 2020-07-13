@@ -1,6 +1,7 @@
 import { ValidatorFn, AbstractControlOptions, AsyncValidatorFn } from '@angular/forms';
 import { EntityFieldType } from './entity-field-type.enum';
 import { EntityFieldInputType } from './entity-field-input-type.enum';
+import { HttpHeaders, HttpParams } from '@angular/common/http';
 
 interface MatAdministrationEntityField {
   id?: string;
@@ -68,11 +69,43 @@ interface MatAdministrationEntity {
     list?: any;
     form?: Partial<MatAdministrationFormLayout>;
   };
+  data: {
+    provider?: 'firebase' | 'http';
+    apiUrl?: string;
+    apiOptions?: {
+      headers?: HttpHeaders | {
+        [header: string]: string | string[];
+      };
+      observe?: 'body';
+      params?: HttpParams | {
+        [param: string]: string | string[];
+      };
+      reportProgress?: boolean;
+      responseType?: 'json';
+      withCredentials?: boolean;
+    };
+  }
 }
 
 interface MatAdministrationMetadata {
   timestampFormat?: string;
   disableRedirectToFirstEntity?: boolean;
+  data?: {
+    provider?: 'firebase' | 'http';
+    apiUrl?: string;
+    apiOptions?: {
+      headers?: HttpHeaders | {
+        [header: string]: string | string[];
+      };
+      observe?: 'body';
+      params?: HttpParams | {
+        [param: string]: string | string[];
+      };
+      reportProgress?: boolean;
+      responseType?: 'json';
+      withCredentials?: boolean;
+    };
+  },
   entities: { [k: string]: Partial<MatAdministrationEntity> };
 }
 

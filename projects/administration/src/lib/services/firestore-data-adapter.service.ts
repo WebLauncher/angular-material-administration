@@ -64,4 +64,8 @@ export class FirestoreDataAdapterService implements DataAdapterInterface {
   getTimestamp() {
     return firebase.firestore.FieldValue.serverTimestamp();
   }
+
+  getDate(timestamp: any) {
+    return timestamp?.toDate();
+  }
 }

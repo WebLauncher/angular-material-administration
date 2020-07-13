@@ -1,0 +1,24 @@
+{
+  "news": [
+    {
+      "sport": "handball",
+      "title": "test",
+      "content": "<p>test</p>",
+      "imageUrl": "https://angular.io/assets/images/logos/angular/logo-nav@2x.png",
+      "imageUrlPath": "not implemented",
+      "created": 1594642878531,
+      "updated": 1594642878531,
+      "id": 1
+    }
+  ],
+  "sports": [
+    {
+      "id": "football",
+      "name": "Football"
+    },
+    {
+      "id": "handball",
+      "name": "Handball"
+    }
+  ]
+}

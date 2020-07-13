@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "start": "ngcc && yarn run clean && run-p watch:* serve",
+    "start": "ngcc && yarn run clean && run-p watch:* serve json-server",
     "build:projects": "ng build material-file-input && ng build material-administration",
     "build:prod": "ng build --prod",
     "serve": "wait-on projects/administration/dist/public-api.d.ts && ng serve",
@@ -17,7 +17,8 @@
     "lint": "ng lint && yarn run lint:styles",
     "lint:styles": "stylelint \"src/**/*.scss\" && stylelint \"projects/**/*.scss\"",
     "e2e": "ng e2e",
-    "clean": "rimraf projects/**/dist"
+    "clean": "rimraf projects/**/dist",
+    "json-server": "json-server --watch test/db.json"
   },
   "dependencies": {
     "@angular-material-extensions/password-strength": "~6.0.0",

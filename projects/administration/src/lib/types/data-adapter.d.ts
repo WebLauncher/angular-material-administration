@@ -9,6 +9,7 @@ interface DataAdapterInterface {
   upload: (file: File) => Observable<any>;
   removeUpload: (filePath: string) => Observable<any>;
   getTimestamp: () => any;
+  getDate: (timestamp: any) => Date;
 }
 
 interface DownloadData {
