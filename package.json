@@ -41,7 +41,7 @@
     "@firebase/auth": "~0.14.6",
     "@firebase/firestore": "~1.14.6",
     "@firebase/util": "~0.2.47",
-    "firebase": "~7.13.2",
+    "firebase": "~7.17.1",
     "lodash-es": "~4.17.15",
     "ngx-auth-firebaseui": "~4.4.0",
     "rxjs": "~6.6.0",
