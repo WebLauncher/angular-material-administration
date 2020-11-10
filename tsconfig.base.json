@@ -11,38 +11,17 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "lib": ["es2018", "dom"],
     "paths": {
-      "types": [
-        "types"
-      ],
-      "@weblauncher/material-file-input": [
-        "./projects/file-input/dist"
-      ],
-      "@weblauncher/material-file-input/*": [
-        "./projects/file-input/dist/*"
-      ],
-      "@weblauncher/material-administration": [
-        "./projects/administration/dist"
-      ],
-      "@weblauncher/material-administration/*": [
-        "./projects/administration/dist/*"
-      ],
-      "@weblauncher/material-ckeditor": [
-        "./projects/ckeditor/dist"
-      ],
-      "@weblauncher/material-ckeditor/*": [
-        "./projects/ckeditor/dist/*"
-      ],
-      "@weblauncher/material-form": [
-        "./projects/form/dist"
-      ],
-      "@weblauncher/material-form/*": [
-        "./projects/form/dist/*"
-      ]
+      "types": ["types"],
+      "@weblauncher/material-file-input": ["./projects/file-input/dist"],
+      "@weblauncher/material-file-input/*": ["./projects/file-input/dist/*"],
+      "@weblauncher/material-administration": ["./projects/administration/dist"],
+      "@weblauncher/material-administration/*": ["./projects/administration/dist/*"],
+      "@weblauncher/material-ckeditor": ["./projects/ckeditor/dist"],
+      "@weblauncher/material-ckeditor/*": ["./projects/ckeditor/dist/*"],
+      "@weblauncher/material-form": ["./projects/form/dist"],
+      "@weblauncher/material-form/*": ["./projects/form/dist/*"]
     }
   }
 }

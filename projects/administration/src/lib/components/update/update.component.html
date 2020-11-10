@@ -10,7 +10,7 @@
       <mat-icon *ngIf="entity?.icon">{{entity?.icon}}</mat-icon> Update {{entity?.single}}
     </h1>
     <span class="entity-title">{{entityTitle$ | async}}<br /><small>#{{id$ | async}}</small></span>
-    <a mat-raised-button
+    <a mat-flat-button
        color="warn"
        routerLink="/{{entityPath$ | async}}/list">
       <mat-icon>keyboard_backspace</mat-icon> Cancel
@@ -18,7 +18,7 @@
   </mat-toolbar>
   <mat-toolbar *ngIf="subCollections$ | async as subCollections">
     <a *ngFor="let subCollection of subCollections"
-       mat-raised-button
+       mat-flat-button
        aria-label="Manage"
        routerLink="/{{entityName$ | async}}:{{id$ | async}}:{{subCollection?.id}}/list">
       {{subCollection?.plural | titlecase}}

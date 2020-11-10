@@ -9,7 +9,7 @@
     <h1 fxLayoutAlign="start center">
       <mat-icon *ngIf="entity?.icon">{{entity?.icon}}</mat-icon> Add {{entity?.single}}
     </h1>
-    <a mat-raised-button
+    <a mat-flat-button
        color="warn"
        routerLink="/{{entityPath$ | async}}/list">
       <mat-icon>keyboard_backspace</mat-icon> Cancel
