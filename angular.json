@@ -37,6 +37,9 @@
                 "output": "./assets/"
               }
             ],
+            "allowedCommonJsDependencies": [
+              "lodash"
+            ],
             "styles": ["src/styles.scss"],
             "scripts": []
           },

@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { from, Subject, Observable } from 'rxjs';
-import * as firebase from 'firebase/app';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { v4 as uuidv4 } from 'uuid';
 import { finalize, filter } from 'rxjs/operators';
+import firebase from 'firebase/app';
 import { DataAdapterInterface, DownloadData } from '../types/data-adapter';
-
 @Injectable({
   providedIn: 'root'
 })

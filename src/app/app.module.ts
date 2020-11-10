@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,10 +26,6 @@ export function firebaseAppNameFactory() {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgxAuthFirebaseUIModule.forRoot(environment.firebase, firebaseAppNameFactory, {
-      authGuardFallbackURL: '/login',
-      authGuardLoggedInURL: '/site'
-    }),
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
