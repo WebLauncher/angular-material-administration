@@ -1,24 +1,24 @@
 import { Injectable, Optional, Inject } from '@angular/core';
-import { DataAdapterInterface } from '../types/data-adapter';
 import { HttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
 import { Immutable } from '../types/immutable';
 import { MatAdministrationMetadata } from '../types/material-administration-metadata';
-import { of } from 'rxjs';
+import { DataAdapterInterface } from '../types/data-adapter';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpDataAdapterService implements DataAdapterInterface {
-
   constructor(
     private http: HttpClient,
     @Optional() @Inject('MAT_ADMINISTRATION_METADATA') private metadata: Immutable<MatAdministrationMetadata>
-  ) { }
+  ) {}
 
   get(entity: string, id: string) {
     return this.http.get(`${this.getApiUrl(entity)}${entity}/${id}`, this.getApiHttpOptions(entity));
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   list(entity: string, idField: string) {
     return this.http.get(`${this.getApiUrl(entity)}${entity}`, this.getApiHttpOptions(entity));
   }
@@ -35,6 +35,7 @@ export class HttpDataAdapterService implements DataAdapterInterface {
     return this.http.delete(`${this.getApiUrl(entity)}${entity}/${id}`, this.getApiHttpOptions(entity));
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   upload(file: File) {
     // TODO upload call implementation
     return of({
@@ -43,6 +44,7 @@ export class HttpDataAdapterService implements DataAdapterInterface {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   removeUpload(filePath: string) {
     // TODO remove upload implementation
     return of('');

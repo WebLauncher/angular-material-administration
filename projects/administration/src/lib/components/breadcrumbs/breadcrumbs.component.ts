@@ -28,7 +28,7 @@ export class BreadcrumbsComponent implements OnInit {
   constructor(
     @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: MatAdministrationMetadata,
     @Inject('MAT_ADMINISTRATION_DATA_ADAPTER') public dataAdapterService: DataAdapterInterface
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.links$ = this.entityName$.pipe(

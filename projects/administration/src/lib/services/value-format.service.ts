@@ -13,7 +13,7 @@ export class ValueFormatService {
     private datePipe: DatePipe,
     @Optional() @Inject('MAT_ADMINISTRATION_METADATA') private metadata: Immutable<MatAdministrationMetadata>,
     @Inject('MAT_ADMINISTRATION_DATA_ADAPTER') public dataAdapterService: DataAdapterInterface
-  ) { }
+  ) {}
 
   transform(value: any, type: string, options = null) {
     switch (type) {

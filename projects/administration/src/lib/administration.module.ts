@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA, InjectionToken } from '@angular/core';
+import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -30,6 +30,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormModule } from '@weblauncher/material-form';
+import { HttpClientModule } from '@angular/common/http';
 import {
   ListComponent,
   AddComponent,
@@ -38,9 +39,7 @@ import {
   MenuComponent,
   BreadcrumbsComponent
 } from './components/index';
-import { FirestoreDataAdapterService, ValueFormatService, NoPathGuard, HttpDataAdapterService } from './services/index';
-import { HttpClientModule } from '@angular/common/http';
-import { DataAdapterInterface } from './types/data-adapter';
+import { FirestoreDataAdapterService, ValueFormatService, NoPathGuard } from './services/index';
 
 @NgModule({
   declarations: [ListComponent, AddComponent, UpdateComponent, EntityComponent, BreadcrumbsComponent, MenuComponent],

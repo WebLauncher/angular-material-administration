@@ -6,9 +6,9 @@ import { pickBy, capitalize, merge } from 'lodash-es';
 import { ValueFormatService } from '../../services/value-format.service';
 import { EntityComponent } from '../entity/entity.component';
 import { SnackbarService } from '../../services/snackbar.service';
-import { DataAdapterInterface } from '../../types/data-adapter';
 import { MatAdministrationMetadata, MatAdministrationEntityField } from '../../types/material-administration-metadata';
 import { EntityFieldType } from '../../types/entity-field-type.enum';
+import { DataAdapterInterface } from '../../types/data-adapter';
 
 @Component({
   selector: 'mat-administration-list',
@@ -35,11 +35,8 @@ export class ListComponent extends EntityComponent {
 
     this.displayedColumns$ = this.getDisplayedColumns();
     this.displayedColumnsNames$ = this.displayedColumns$.pipe(map((columns) => columns.map((column) => column?.id)));
-    this.list$ = combineLatest([
-      this.entityName$,
-      this.refresh$
-    ]).pipe(
-      switchMap(([entity, _]) => this.dataAdapterService.list(entity, this.getIdField())),
+    this.list$ = combineLatest([this.entityName$, this.refresh$]).pipe(
+      switchMap(([entity]) => this.dataAdapterService.list(entity, this.getIdField())),
       tap(() => this.isLoading$.next(false)),
       shareReplay(1)
     );
@@ -69,13 +66,13 @@ export class ListComponent extends EntityComponent {
     return this.entity$.pipe(
       withLatestFrom(this.subCollections$),
       map(([metadata, subCollections]) => {
-        const collumns = this.getDisplayableColumns(metadata?.fields);
+        const columns = this.getDisplayableColumns(metadata?.fields);
         if (subCollections) {
-          collumns.push({ id: 'entities', label: 'Manage' });
+          columns.push({ id: 'entities', label: 'Manage' });
         }
-        collumns.push({ id: 'actions', label: 'Actions' });
+        columns.push({ id: 'actions', label: 'Actions' });
 
-        return collumns;
+        return columns;
       }),
       shareReplay(1)
     );

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angu
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { MatFormEntityField, MatFormSectionsLayout, MatFormSection } from './types/index';
+import { MatFormEntityField, MatFormSection, MatFormSectionsLayout } from './types';
 
 @Component({
   selector: 'mat-form',

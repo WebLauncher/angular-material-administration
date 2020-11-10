@@ -11,7 +11,7 @@ import { DataAdapterInterface, DownloadData } from '../types/data-adapter';
   providedIn: 'root'
 })
 export class FirestoreDataAdapterService implements DataAdapterInterface {
-  constructor(private db: AngularFirestore, private storage: AngularFireStorage) { }
+  constructor(private db: AngularFirestore, private storage: AngularFireStorage) {}
 
   get(collection: string, id: string) {
     return this.db.collection(collection).doc(id).valueChanges();
