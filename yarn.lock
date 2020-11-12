@@ -11745,13 +11745,6 @@ ng-packagr@~10.1.2:
     stylus "^0.54.7"
     terser "^5.0.0"
 
-ngx-auth-firebaseui@~4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/ngx-auth-firebaseui/-/ngx-auth-firebaseui-4.4.0.tgz#4e9a154b2fd2c52efa13dcac51f3c150f34c5e65"
-  integrity sha512-tyhsUvwCO3j7A1d88ACAzoojWjN92iNX2CEHsrkMM+zqx2SbFB8FslVDJ/FSm3Fbq3CXt0FJszh7aDoX7x0rBg==
-  dependencies:
-    tslib "^1.10.0"
-
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
