@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.3.0 (2020-11-12)
+
+
+### Features
+
+* deps ([d2df922](https://github.com/WebLauncher/angular-material-administration/commit/d2df9222c1b471c7b91beed18687afe40a0e6178))
+
+
+
+
+
+
 ## 0.2.6 (2020-11-10)
 
 **Note:** Version bump only for package @weblauncher/material-ckeditor
