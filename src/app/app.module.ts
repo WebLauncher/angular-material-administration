@@ -5,38 +5,37 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
-import { MaterialAdministrationModule } from '@weblauncher/material-administration';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MAT_ADMINISTRATION_METADATA } from 'projects/administration/src';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatListModule } from '@angular/material/list';
 import { LayoutComponent } from './layout/layout.component';
-import { LoginComponent } from './login/login.component';
-import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SiteMetadata } from './site-metadata';
 
-export function firebaseAppNameFactory() {
-  return 'Material Administration';
-}
-
 @NgModule({
-  declarations: [AppComponent, LoginComponent, LayoutComponent],
+  declarations: [AppComponent, LayoutComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
+    MatSnackBarModule,
+    MatListModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatMenuModule,
     MatProgressSpinnerModule,
-    FlexLayoutModule,
-    MaterialAdministrationModule.forRoot(environment.firebase, firebaseAppNameFactory)
+    FlexLayoutModule
   ],
   providers: [
     {
-      provide: 'MAT_ADMINISTRATION_METADATA',
+      provide: MAT_ADMINISTRATION_METADATA,
       useValue: SiteMetadata
     }
   ],

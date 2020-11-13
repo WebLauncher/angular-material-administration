@@ -12,7 +12,7 @@
     <span class="entity-title">{{entityTitle$ | async}}<br /><small>#{{id$ | async}}</small></span>
     <a mat-flat-button
        color="warn"
-       routerLink="/{{entityPath$ | async}}/list">
+       routerLink="{{basePath}}/{{entityPath$ | async}}/list">
       <mat-icon>keyboard_backspace</mat-icon> Cancel
     </a>
   </mat-toolbar>
@@ -20,7 +20,7 @@
     <a *ngFor="let subCollection of subCollections"
        mat-flat-button
        aria-label="Manage"
-       routerLink="/{{entityName$ | async}}:{{id$ | async}}:{{subCollection?.id}}/list">
+       routerLink="{{basePath}}/{{entityName$ | async}}:{{id$ | async}}:{{subCollection?.id}}/list">
       {{subCollection?.plural | titlecase}}
     </a>
   </mat-toolbar>

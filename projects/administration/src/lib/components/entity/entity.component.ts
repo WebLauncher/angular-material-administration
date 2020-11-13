@@ -12,6 +12,11 @@ import { Immutable } from '../../types/immutable';
 import { EntityFieldType } from '../../types/entity-field-type.enum';
 import { EntityFieldInputType } from '../../types/entity-field-input-type.enum';
 import { DataAdapterInterface, DownloadData } from '../../types/data-adapter';
+import {
+  MAT_ADMINISTRATION_BASE_PATH,
+  MAT_ADMINISTRATION_DATA_ADAPTER,
+  MAT_ADMINISTRATION_METADATA
+} from '../../types/injection-tokens';
 
 @Component({
   selector: 'mat-administration-entity',
@@ -32,8 +37,8 @@ export class EntityComponent implements OnDestroy {
 
   constructor(
     public route: ActivatedRoute,
-    @Inject('MAT_ADMINISTRATION_DATA_ADAPTER') public dataAdapterService: DataAdapterInterface,
-    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: Immutable<MatAdministrationMetadata>
+    @Inject(MAT_ADMINISTRATION_DATA_ADAPTER) public dataAdapterService: DataAdapterInterface,
+    @Optional() @Inject(MAT_ADMINISTRATION_METADATA) public metadata: Immutable<MatAdministrationMetadata>
   ) {
     this.route.params
       .pipe(

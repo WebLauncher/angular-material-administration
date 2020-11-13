@@ -38,7 +38,9 @@
               }
             ],
             "allowedCommonJsDependencies": [
-              "lodash"
+              "@angular/fire/firestore",
+              "lodash",
+              "zone.js/dist/zone-error"
             ],
             "styles": ["src/styles.scss"],
             "scripts": []

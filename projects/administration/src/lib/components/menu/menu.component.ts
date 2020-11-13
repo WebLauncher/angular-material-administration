@@ -1,4 +1,6 @@
 import { Component, Optional, Inject } from '@angular/core';
+import { MAT_ADMINISTRATION_METADATA } from '../../types/injection-tokens';
+import { MatAdministrationMetadata } from '../../types/material-administration-metadata';
 
 @Component({
   selector: 'mat-administration-menu',
@@ -6,14 +8,16 @@ import { Component, Optional, Inject } from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
-  entities = Object.keys(this.metadata?.entities)
-    .filter((key: any) => !this.metadata.entities[key]?.hideList)
-    .map((key) => {
-      return {
-        id: key,
-        ...this.metadata.entities[key]
-      };
-    });
+  entities = this.metadata?.entities
+    ? Object.keys(this.metadata?.entities)
+        .filter((key: any) => !this.metadata?.entities[key]?.hideList)
+        .map((key) => {
+          return {
+            id: key,
+            ...this.metadata.entities[key]
+          };
+        })
+    : [];
 
-  constructor(@Optional() @Inject('MAT_ADMINISTRATION_METADATA') private metadata: any) {}
+  constructor(@Optional() @Inject(MAT_ADMINISTRATION_METADATA) private metadata: MatAdministrationMetadata) {}
 }

@@ -11,7 +11,7 @@
     </h1>
     <button mat-flat-button
             color="primary"
-            routerLink="/{{entityPath$ | async}}/add">
+            routerLink="{{basePath}}/{{entityPath$ | async}}/add">
       <mat-icon>add</mat-icon> Add {{entity?.single}}
     </button>
   </mat-toolbar>
@@ -54,7 +54,7 @@
           <button *ngFor="let subCollection of subCollections$ | async"
                   mat-menu-item
                   aria-label="Manage"
-                  routerLink="/{{entityName$ | async}}:{{element.id}}:{{subCollection?.id}}/list">
+                  routerLink="{{basePath}}/{{entityName$ | async}}:{{element.id}}:{{subCollection?.id}}/list">
             {{subCollection?.plural | titlecase}}
           </button>
         </mat-menu>
@@ -68,7 +68,7 @@
           *matCellDef="let element">
         <button mat-icon-button
                 aria-label="Edit"
-                routerLink="/{{entityPath$ | async}}/update/{{element.id}}">
+                routerLink="{{basePath}}/{{entityPath$ | async}}/update/{{element.id}}">
           <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button
@@ -90,7 +90,7 @@
             class="mat-elevation-z0">
     No {{entity?.plural}} added. <a mat-button
        color="primary"
-       routerLink="/{{entityPath$ | async}}/add">Add {{entity?.single}}</a>
+       routerLink="{{basePath}}/{{entityPath$ | async}}/add">Add {{entity?.single}}</a>
   </mat-card>
 </ng-container>
 

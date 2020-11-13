@@ -6,7 +6,7 @@
       <div fxLayout="row"
            fxLayoutAlign="start center">
         <a mat-button
-           [routerLink]="item.url">
+           routerLink="{{basePath}}/{{item.url}}">
           <ng-container *ngIf="item.source">
             {{(item.source | async)}}
           </ng-container>

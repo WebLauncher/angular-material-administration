@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { Immutable } from '../types/immutable';
 import { MatAdministrationMetadata } from '../types/material-administration-metadata';
 import { DataAdapterInterface } from '../types/data-adapter';
+import { MAT_ADMINISTRATION_METADATA } from '../types/injection-tokens';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { DataAdapterInterface } from '../types/data-adapter';
 export class HttpDataAdapterService implements DataAdapterInterface {
   constructor(
     private http: HttpClient,
-    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') private metadata: Immutable<MatAdministrationMetadata>
+    @Optional() @Inject(MAT_ADMINISTRATION_METADATA) private metadata: Immutable<MatAdministrationMetadata>
   ) {}
 
   get(entity: string, id: string) {

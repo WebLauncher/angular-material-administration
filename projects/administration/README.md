@@ -48,7 +48,7 @@ Add your site metadata provider as configured in [site metadata configuration do
   providers: [
     ...
     {
-      provide: 'MAT_ADMINISTRATION_METADATA',
+      provide: MAT_ADMINISTRATION_METADATA,
       useValue: SiteMetadata
     },
     ...

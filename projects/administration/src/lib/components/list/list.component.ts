@@ -9,6 +9,11 @@ import { SnackbarService } from '../../services/snackbar.service';
 import { MatAdministrationMetadata, MatAdministrationEntityField } from '../../types/material-administration-metadata';
 import { EntityFieldType } from '../../types/entity-field-type.enum';
 import { DataAdapterInterface } from '../../types/data-adapter';
+import {
+  MAT_ADMINISTRATION_BASE_PATH,
+  MAT_ADMINISTRATION_DATA_ADAPTER,
+  MAT_ADMINISTRATION_METADATA
+} from '../../types/injection-tokens';
 
 @Component({
   selector: 'mat-administration-list',
@@ -28,8 +33,9 @@ export class ListComponent extends EntityComponent {
     public route: ActivatedRoute,
     private valueFormatService: ValueFormatService,
     private snackbar: SnackbarService,
-    @Inject('MAT_ADMINISTRATION_DATA_ADAPTER') public dataAdapterService: DataAdapterInterface,
-    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: MatAdministrationMetadata
+    @Inject(MAT_ADMINISTRATION_DATA_ADAPTER) public dataAdapterService: DataAdapterInterface,
+    @Optional() @Inject(MAT_ADMINISTRATION_METADATA) public metadata: MatAdministrationMetadata,
+    @Optional() @Inject(MAT_ADMINISTRATION_BASE_PATH) public basePath: string
   ) {
     super(route, dataAdapterService, metadata);
 

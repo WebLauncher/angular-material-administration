@@ -20,7 +20,7 @@ export const materialAdministrationRoutes: Routes = [
     redirectTo: ':entity/list'
   },
   {
-    path: '**',
+    path: '',
     canActivate: [NoPathGuard]
   }
 ];

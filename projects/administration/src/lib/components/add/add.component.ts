@@ -8,6 +8,11 @@ import { EntityComponent } from '../entity/entity.component';
 import { MatAdministrationEntityField, MatAdministrationMetadata } from '../../types/material-administration-metadata';
 import { Immutable } from '../../types/immutable';
 import { DataAdapterInterface } from '../../types/data-adapter';
+import {
+  MAT_ADMINISTRATION_BASE_PATH,
+  MAT_ADMINISTRATION_DATA_ADAPTER,
+  MAT_ADMINISTRATION_METADATA
+} from '../../types/injection-tokens';
 
 @Component({
   selector: 'mat-administration-add',
@@ -23,8 +28,9 @@ export class AddComponent extends EntityComponent {
     public route: ActivatedRoute,
     private snackbar: SnackbarService,
     private router: Router,
-    @Inject('MAT_ADMINISTRATION_DATA_ADAPTER') public dataAdapterService: DataAdapterInterface,
-    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: Immutable<MatAdministrationMetadata>
+    @Inject(MAT_ADMINISTRATION_DATA_ADAPTER) public dataAdapterService: DataAdapterInterface,
+    @Optional() @Inject(MAT_ADMINISTRATION_METADATA) public metadata: Immutable<MatAdministrationMetadata>,
+    @Optional() @Inject(MAT_ADMINISTRATION_BASE_PATH) public basePath: string
   ) {
     super(route, dataAdapterService, metadata);
 

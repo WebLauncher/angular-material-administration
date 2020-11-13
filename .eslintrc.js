@@ -42,9 +42,7 @@ module.exports = {
     {
       files: ['*.ts'],
       extends: [
-        // AirBnB Styleguide rules
         'airbnb-typescript/base',
-        // Settings for Prettier
         'prettier/@typescript-eslint',
         'plugin:prettier/recommended'
       ],
@@ -68,6 +66,20 @@ module.exports = {
         "@typescript-eslint/camelcase": "off",
         "@typescript-eslint/naming-convention": "off",
       },
-    }
+    },
+    {
+      files: ["*.component.html"],
+      extends: ["plugin:@angular-eslint/template/recommended"],
+      rules: {
+        /**
+         * Any template/HTML related rules you wish to use/reconfigure over and above the
+         * recommended set provided by the @angular-eslint project would go here.
+         *
+         * There is an example below from ESLint core (note, this specific example is not
+         * necessarily recommended for all projects):
+         */
+        "max-len": ["error", { "code": 140 }]
+      }
+    },
   ],
 };

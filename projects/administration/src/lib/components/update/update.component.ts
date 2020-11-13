@@ -7,6 +7,12 @@ import { EntityFieldType } from '../../types/entity-field-type.enum';
 import { EntityComponent } from '../entity/entity.component';
 import { DataAdapterInterface } from '../../types/data-adapter';
 import { SnackbarService } from '../../services';
+import {
+  MAT_ADMINISTRATION_BASE_PATH,
+  MAT_ADMINISTRATION_DATA_ADAPTER,
+  MAT_ADMINISTRATION_METADATA
+} from '../../types/injection-tokens';
+import { MatAdministrationMetadata } from '../../types/material-administration-metadata';
 
 @Component({
   selector: 'mat-administration-update',
@@ -28,8 +34,9 @@ export class UpdateComponent extends EntityComponent {
     public route: ActivatedRoute,
     private snackbar: SnackbarService,
     private router: Router,
-    @Inject('MAT_ADMINISTRATION_DATA_ADAPTER') public dataAdapterService: DataAdapterInterface,
-    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: any
+    @Inject(MAT_ADMINISTRATION_DATA_ADAPTER) public dataAdapterService: DataAdapterInterface,
+    @Optional() @Inject(MAT_ADMINISTRATION_METADATA) public metadata: MatAdministrationMetadata,
+    @Optional() @Inject(MAT_ADMINISTRATION_BASE_PATH) public basePath: string
   ) {
     super(route, dataAdapterService, metadata);
 

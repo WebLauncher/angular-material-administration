@@ -4,6 +4,11 @@ import { capitalize } from 'lodash-es';
 import { map } from 'rxjs/operators';
 import { MatAdministrationMetadata, MatAdministrationEntity } from '../../types/material-administration-metadata';
 import { DataAdapterInterface } from '../../types/data-adapter';
+import {
+  MAT_ADMINISTRATION_BASE_PATH,
+  MAT_ADMINISTRATION_DATA_ADAPTER,
+  MAT_ADMINISTRATION_METADATA
+} from '../../types/injection-tokens';
 
 @Component({
   selector: 'mat-administration-breadcrumbs',
@@ -26,8 +31,9 @@ export class BreadcrumbsComponent implements OnInit {
   private entityName$ = new BehaviorSubject('');
 
   constructor(
-    @Optional() @Inject('MAT_ADMINISTRATION_METADATA') public metadata: MatAdministrationMetadata,
-    @Inject('MAT_ADMINISTRATION_DATA_ADAPTER') public dataAdapterService: DataAdapterInterface
+    @Optional() @Inject(MAT_ADMINISTRATION_METADATA) public metadata: MatAdministrationMetadata,
+    @Inject(MAT_ADMINISTRATION_DATA_ADAPTER) public dataAdapterService: DataAdapterInterface,
+    @Optional() @Inject(MAT_ADMINISTRATION_BASE_PATH) public basePath: string
   ) {}
 
   ngOnInit(): void {

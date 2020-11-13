@@ -28,7 +28,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormModule } from '@weblauncher/material-form';
 import { HttpClientModule } from '@angular/common/http';
 import {
@@ -40,6 +39,7 @@ import {
   BreadcrumbsComponent
 } from './components/index';
 import { FirestoreDataAdapterService, ValueFormatService, NoPathGuard } from './services/index';
+import { MAT_ADMINISTRATION_DATA_ADAPTER } from './types/injection-tokens';
 
 @NgModule({
   declarations: [ListComponent, AddComponent, UpdateComponent, EntityComponent, BreadcrumbsComponent, MenuComponent],
@@ -81,21 +81,25 @@ import { FirestoreDataAdapterService, ValueFormatService, NoPathGuard } from './
     NoPathGuard,
     DatePipe,
     {
-      provide: 'MAT_ADMINISTRATION_DATA_ADAPTER',
+      provide: MAT_ADMINISTRATION_DATA_ADAPTER,
       useClass: FirestoreDataAdapterService
+    },
+    {
+      provide: 'MAT_ADMINISTRATION_BASE_PATH',
+      useValue: 'firebase'
     }
   ],
   exports: [
+    RouterModule,
     ListComponent,
     AddComponent,
     UpdateComponent,
     EntityComponent,
     MenuComponent,
     BreadcrumbsComponent,
-    RouterModule,
-    BrowserAnimationsModule,
     AngularFirestoreModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    MatListModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
