@@ -11,6 +11,7 @@ export interface MatFormEntityField {
   showInForm: boolean;
   inputType: EntityFieldInputType | string;
   type: EntityFieldType | string;
+  value: any;
   data: {
     type: string;
     entity: string;

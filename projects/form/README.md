@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/%40weblauncher%2Fmaterial-form.svg)](https://badge.fury.io/js/%40weblauncher%2Fmaterial-form)
 
-This is an Angular Material component library for having a file input component.
+This is an Angular Material component library for having a material design form.
 
 ## Instalation
 

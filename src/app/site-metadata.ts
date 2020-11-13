@@ -17,7 +17,9 @@ export const SiteMetadata: MatAdministrationMetadata = {
             entityLabel: 'name'
           }
         },
-        title: 'title',
+        title: {
+          value: 'This is another article'
+        },
         content: {
           hideInList: true,
           inputType: EntityFieldInputType.Ckeditor

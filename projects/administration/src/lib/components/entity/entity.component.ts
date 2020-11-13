@@ -12,11 +12,7 @@ import { Immutable } from '../../types/immutable';
 import { EntityFieldType } from '../../types/entity-field-type.enum';
 import { EntityFieldInputType } from '../../types/entity-field-input-type.enum';
 import { DataAdapterInterface, DownloadData } from '../../types/data-adapter';
-import {
-  MAT_ADMINISTRATION_BASE_PATH,
-  MAT_ADMINISTRATION_DATA_ADAPTER,
-  MAT_ADMINISTRATION_METADATA
-} from '../../types/injection-tokens';
+import { MAT_ADMINISTRATION_DATA_ADAPTER, MAT_ADMINISTRATION_METADATA } from '../../types/injection-tokens';
 
 @Component({
   selector: 'mat-administration-entity',
@@ -104,7 +100,12 @@ export class EntityComponent implements OnDestroy {
         return entries
           .map(([key, value]) =>
             typeof value === 'object'
-              ? { ...value, name: key, label: (value as any)?.label || this.getFieldLabel(key) }
+              ? {
+                  ...value,
+                  name: key,
+                  label: (value as any)?.label || this.getFieldLabel(key),
+                  value: (value as MatAdministrationEntityField)?.value
+                }
               : { name: key, label: this.getFieldLabel(key) }
           )
           .filter((field) => this.showField(metadata, field));
