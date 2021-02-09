@@ -42,6 +42,7 @@ jobs:
           npx lerna run build
       - name: Build demo
         run: |
+          npx ngcc
           npm run build:prod
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
