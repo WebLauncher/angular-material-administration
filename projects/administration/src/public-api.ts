@@ -2,8 +2,8 @@
  * Public API Surface of material-administration
  */
 
-export * from './lib/components';
-export * from './lib/services';
+export * from './lib/components/index';
+export * from './lib/services/index';
 export * from './lib/administration.routes';
 export * from './lib/administration.module';
 

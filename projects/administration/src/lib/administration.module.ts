@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -100,8 +100,7 @@ import { MAT_ADMINISTRATION_DATA_ADAPTER } from './types/injection-tokens';
     AngularFirestoreModule,
     AngularFireStorageModule,
     MatListModule
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  ]
 })
 export class MaterialAdministrationModule {
   static forRoot(
