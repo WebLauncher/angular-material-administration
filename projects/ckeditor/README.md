@@ -4,7 +4,13 @@
 
 This is an Angular Material component library for having a file input component.
 
-## Instalation
+## Installation
+
+### Install dependencies
+
+`npm i @ckeditor/ckeditor5-angular @ckeditor/ckeditor5-build-classic`
+
+### Install library
 
 `npm i @weblauncher/material-ckeditor`
 

@@ -18,6 +18,8 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
 
   @Input() removeBtnText = 'Remove';
 
+  @Input() disableOnInvalid = true;
+
   @Output() ngSubmit: EventEmitter<any> = new EventEmitter();
 
   @Output() valueChanges: EventEmitter<any> = new EventEmitter();
@@ -59,6 +61,10 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
 
   removeImage(field) {
     this.form.get(field.name).setValue(null);
+  }
+
+  get disabled(): boolean {
+    return this.disableOnInvalid && this.form.invalid;
   }
 
   private getSectionsWithFields() {

@@ -1,136 +1,109 @@
-<form [formGroup]="form"
-      (ngSubmit)="submit()"
-      [fxLayout]="layout?.direction || 'column wrap'"
-      fxLayoutAlign="{{layout?.mainAlign || 'center'}} {{layout?.crossAlign || 'stretch'}}"
-      [fxLayoutGap]="layout?.gap || '0'">
-  <mat-card class="form-section"
-            *ngFor="let section of sections"
-            [ngClass]="{'mat-elevation-z0': sections.length === 1}">
-    <mat-card-title class="form-section-header"
-                    *ngIf="section?.title">
-      {{section.title}}</mat-card-title>
-    <mat-card-subtitle class="form-section-header"
-                       *ngIf="section?.subtitle">
-      {{section.subtitle}}</mat-card-subtitle>
-    <mat-card-content class="form-section-body"
-                      [fxLayout]="section?.layout?.direction || 'column wrap'"
-                      fxLayoutAlign="{{section?.layout?.mainAlign || 'center'}} {{section?.layout?.crossAlign || 'stretch'}}"
-                      [fxLayoutGap]="section?.layout?.gap || '0'">
+<form
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+  [fxLayout]="layout?.direction || 'column wrap'"
+  fxLayoutAlign="{{ layout?.mainAlign || 'center' }} {{ layout?.crossAlign || 'stretch' }}"
+  [fxLayoutGap]="layout?.gap || '0'"
+>
+  <mat-card
+    class="form-section"
+    *ngFor="let section of sections"
+    [ngClass]="{ 'mat-elevation-z0': sections.length === 1 }"
+  >
+    <mat-card-title class="form-section-header" *ngIf="section?.title"> {{ section.title }}</mat-card-title>
+    <mat-card-subtitle class="form-section-header" *ngIf="section?.subtitle"> {{ section.subtitle }}</mat-card-subtitle>
+    <mat-card-content
+      class="form-section-body"
+      [fxLayout]="section?.layout?.direction || 'column wrap'"
+      fxLayoutAlign="{{ section?.layout?.mainAlign || 'center' }} {{ section?.layout?.crossAlign || 'stretch' }}"
+      [fxLayoutGap]="section?.layout?.gap || '0'"
+    >
       <ng-container *ngIf="section?.fields">
         <ng-container *ngFor="let field of section?.fields">
-          <ng-container *ngTemplateOutlet="formField; context: {field: field}"></ng-container>
+          <ng-container *ngTemplateOutlet="formField; context: { field: field }"></ng-container>
         </ng-container>
       </ng-container>
     </mat-card-content>
   </mat-card>
 
   <div fxFlexAlign="end">
-    <button mat-flat-button
-            color="primary"
-            type="submit">{{saveBtnText}}
-    </button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="disabled">{{ saveBtnText }}</button>
   </div>
 
-  <ng-template #formField
-               let-field="field">
-    <div class="form-field-container"
-         [ngStyle]="field?.style?.form">
+  <ng-template #formField let-field="field">
+    <div class="form-field-container" [ngStyle]="field?.style?.form">
       <ng-container [ngSwitch]="field?.inputType">
         <!-- ckeditor -->
-        <mat-form-field *ngSwitchCase="'ckeditor'"
-                        class="ckeditor">
-          <mat-label>{{field?.label}}</mat-label>
+        <mat-form-field *ngSwitchCase="'ckeditor'" class="ckeditor">
+          <mat-label>{{ field?.label }}</mat-label>
           <mat-ckeditor [formControlName]="field?.name"></mat-ckeditor>
         </mat-form-field>
         <!-- textarea -->
         <mat-form-field *ngSwitchCase="'textarea'">
-          <mat-label>{{field?.label}}</mat-label>
-          <textarea matInput
-                    [formControlName]="field?.name"></textarea>
+          <mat-label>{{ field?.label }}</mat-label>
+          <textarea matInput [formControlName]="field?.name"></textarea>
         </mat-form-field>
         <!-- select -->
         <mat-form-field *ngSwitchCase="'select'">
-          <mat-label>{{field?.label}}</mat-label>
+          <mat-label>{{ field?.label }}</mat-label>
           <mat-select [formControlName]="field?.name">
-            <mat-option *ngFor="let option of field?.options"
-                        [value]="option?.value">
-              {{option?.label}}
+            <mat-option *ngFor="let option of field?.options" [value]="option?.value">
+              {{ option?.label }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <!-- radio -->
-        <div *ngSwitchCase="'radio'"
-             class="radio">
-          <mat-label>{{field?.label}}:</mat-label>
-          <mat-radio-group [formControlName]="field?.name"
-                           color="primary">
-            <mat-radio-button *ngFor="let option of field?.options"
-                              [value]="option?.value">{{option?.label}}</mat-radio-button>
+        <div *ngSwitchCase="'radio'" class="radio">
+          <mat-label>{{ field?.label }}:</mat-label>
+          <mat-radio-group [formControlName]="field?.name" color="primary">
+            <mat-radio-button *ngFor="let option of field?.options" [value]="option?.value">{{
+              option?.label
+            }}</mat-radio-button>
           </mat-radio-group>
         </div>
         <!-- datepicker -->
         <mat-form-field *ngSwitchCase="'datepicker'">
-          <mat-label>{{field?.label}}</mat-label>
-          <input matInput
-                 [formControlName]="field?.name"
-                 [matDatepicker]="picker">
-          <mat-datepicker-toggle matSuffix
-                                 [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker touchUi
-                          #picker></mat-datepicker>
+          <mat-label>{{ field?.label }}</mat-label>
+          <input matInput [formControlName]="field?.name" [matDatepicker]="picker" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #picker></mat-datepicker>
         </mat-form-field>
         <!-- checkbox -->
-        <div *ngSwitchCase="'checkbox'"
-             class="checkbox">
-          <mat-checkbox [formControlName]="field?.name"
-                        color="primary"
-                        [value]="true">{{field?.label}}</mat-checkbox>
+        <div *ngSwitchCase="'checkbox'" class="checkbox">
+          <mat-checkbox [formControlName]="field?.name" color="primary" [value]="true">{{ field?.label }}</mat-checkbox>
         </div>
         <!-- slide togle -->
-        <div *ngSwitchCase="'toggle'"
-             class="checkbox">
-          <mat-slide-toggle color="primary"
-                            [formControlName]="field?.name">
-            {{field?.label}}
+        <div *ngSwitchCase="'toggle'" class="checkbox">
+          <mat-slide-toggle color="primary" [formControlName]="field?.name">
+            {{ field?.label }}
           </mat-slide-toggle>
         </div>
         <!-- file upload -->
         <mat-form-field *ngSwitchCase="'file'">
-          <mat-label>{{field?.label}}</mat-label>
-          <mat-file-input [formControlName]="field?.name"
-                          [placeholder]="field?.placeholder"></mat-file-input>
+          <mat-label>{{ field?.label }}</mat-label>
+          <mat-file-input [formControlName]="field?.name" [placeholder]="field?.placeholder"></mat-file-input>
         </mat-form-field>
         <!-- image upload -->
         <div *ngSwitchCase="'image'">
           <div *ngIf="form.controls[field?.name].value">
-            <mat-label>{{field?.label}}</mat-label>
-            <div fxLayout="row"
-                 fxLayoutAlign="start">
-              <img class="file-input-image"
-                   [src]="field?.value"
-                   alt="field?.label" />
-              <button type="button"
-                      mat-flat-button
-                      (click)="removeImage(field)">{{removeBtnText}}</button>
+            <mat-label>{{ field?.label }}</mat-label>
+            <div fxLayout="row" fxLayoutAlign="start">
+              <img class="file-input-image" [src]="field?.value" alt="field?.label" />
+              <button type="button" mat-flat-button (click)="removeImage(field)">{{ removeBtnText }}</button>
             </div>
           </div>
 
           <mat-form-field *ngIf="!form.controls[field?.name].value">
-            <mat-label>{{field?.label}}</mat-label>
-            <mat-file-input [formControlName]="field?.name"
-                            [placeholder]="field?.placeholder"></mat-file-input>
-
+            <mat-label>{{ field?.label }}</mat-label>
+            <mat-file-input [formControlName]="field?.name" [placeholder]="field?.placeholder"></mat-file-input>
           </mat-form-field>
         </div>
         <!-- text input -->
         <mat-form-field *ngSwitchDefault>
-          <mat-label>{{field?.label}}</mat-label>
-          <input matInput
-                 [formControlName]="field?.name"
-                 [placeholder]="field?.placeholder">
+          <mat-label>{{ field?.label }}</mat-label>
+          <input matInput [formControlName]="field?.name" [placeholder]="field?.placeholder" />
         </mat-form-field>
       </ng-container>
     </div>
   </ng-template>
-
 </form>

@@ -4,7 +4,13 @@
 
 This is an Angular Material component library for having a material design form.
 
-## Instalation
+## Installation
+
+### Install dependencies
+
+`npm i @weblauncher/material-ckeditor @weblauncher/material-file-input @ckeditor/ckeditor5-angular @ckeditor/ckeditor5-build-classic`
+
+### Install library
 
 `npm i @weblauncher/material-form`
 
@@ -22,7 +28,9 @@ In your templates now you can add
 <mat-form
   [fields]="fields"
   [layout]="layout"
-  (submit)="submit($event);"
+  [disableOnInvalid]="true"
+  (ngSubmit)="submit($event);"
+  (valueChanges)="formValueChanged($event)"
 ></mat-form>
 ```
 

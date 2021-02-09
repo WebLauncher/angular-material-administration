@@ -36,6 +36,8 @@
     "@angular/router": "^10.2.3",
     "@weblauncher/material-ckeditor": "*",
     "@weblauncher/material-file-input": "*",
+    "@ckeditor/ckeditor5-angular": "2.0.1",
+    "@ckeditor/ckeditor5-build-classic": "^23.1.0",
     "firebase": "^7.13.2",
     "lodash-es": "^4.17.15",
     "rxjs": "~6.6.3",
