@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.4.0 (2021-02-09)
+
+
+### Features
+
+* fix husky ([311f7d7](https://github.com/WebLauncher/angular-material-administration/commit/311f7d7175571bcb226446b3d811d77728d56235))
+
+
+
+
+
 ## 0.3.3 (2021-02-09)
 
 **Note:** Version bump only for package @weblauncher/material-ckeditor
