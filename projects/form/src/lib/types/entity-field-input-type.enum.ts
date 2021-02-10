@@ -8,5 +8,6 @@ export enum EntityFieldInputType {
   File = 'file',
   Toggle = 'toggle',
   Checkbox = 'checkbox',
-  Datepicker = 'datepicker'
+  Datepicker = 'datepicker',
+  Password = 'password'
 }

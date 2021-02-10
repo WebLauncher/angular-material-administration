@@ -1,13 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { MatFormEntityField, MatFormSection, MatFormSectionsLayout } from './types';
+import { MatFormEntityField, MatFormSection, MatFormSectionsLayout, EntityFieldInputType } from './types';
 
 @Component({
   selector: 'mat-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MaterialFormComponent implements OnInit, OnDestroy {
   @Input() fields: MatFormEntityField[];
@@ -27,6 +28,8 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
   sections: Partial<MatFormSection>[];
+
+  EntityFieldInputType = EntityFieldInputType;
 
   private destroyed$: Subject<void> = new Subject();
 

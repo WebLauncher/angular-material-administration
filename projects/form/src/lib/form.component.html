@@ -34,17 +34,17 @@
     <div class="form-field-container" [ngStyle]="field?.style?.form">
       <ng-container [ngSwitch]="field?.inputType">
         <!-- ckeditor -->
-        <mat-form-field *ngSwitchCase="'ckeditor'" class="ckeditor">
+        <mat-form-field *ngSwitchCase="EntityFieldInputType.Ckeditor" class="ckeditor">
           <mat-label>{{ field?.label }}</mat-label>
           <mat-ckeditor [formControlName]="field?.name"></mat-ckeditor>
         </mat-form-field>
         <!-- textarea -->
-        <mat-form-field *ngSwitchCase="'textarea'">
+        <mat-form-field *ngSwitchCase="EntityFieldInputType.Textarea">
           <mat-label>{{ field?.label }}</mat-label>
           <textarea matInput [formControlName]="field?.name"></textarea>
         </mat-form-field>
         <!-- select -->
-        <mat-form-field *ngSwitchCase="'select'">
+        <mat-form-field *ngSwitchCase="EntityFieldInputType.Select">
           <mat-label>{{ field?.label }}</mat-label>
           <mat-select [formControlName]="field?.name">
             <mat-option *ngFor="let option of field?.options" [value]="option?.value">
@@ -53,7 +53,7 @@
           </mat-select>
         </mat-form-field>
         <!-- radio -->
-        <div *ngSwitchCase="'radio'" class="radio">
+        <div *ngSwitchCase="EntityFieldInputType.Radio" class="radio">
           <mat-label>{{ field?.label }}:</mat-label>
           <mat-radio-group [formControlName]="field?.name" color="primary">
             <mat-radio-button *ngFor="let option of field?.options" [value]="option?.value">{{
@@ -62,29 +62,29 @@
           </mat-radio-group>
         </div>
         <!-- datepicker -->
-        <mat-form-field *ngSwitchCase="'datepicker'">
+        <mat-form-field *ngSwitchCase="EntityFieldInputType.Datepicker">
           <mat-label>{{ field?.label }}</mat-label>
           <input matInput [formControlName]="field?.name" [matDatepicker]="picker" />
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker touchUi #picker></mat-datepicker>
         </mat-form-field>
         <!-- checkbox -->
-        <div *ngSwitchCase="'checkbox'" class="checkbox">
+        <div *ngSwitchCase="EntityFieldInputType.Checkbox" class="checkbox">
           <mat-checkbox [formControlName]="field?.name" color="primary" [value]="true">{{ field?.label }}</mat-checkbox>
         </div>
         <!-- slide togle -->
-        <div *ngSwitchCase="'toggle'" class="checkbox">
+        <div *ngSwitchCase="EntityFieldInputType.Toggle" class="checkbox">
           <mat-slide-toggle color="primary" [formControlName]="field?.name">
             {{ field?.label }}
           </mat-slide-toggle>
         </div>
         <!-- file upload -->
-        <mat-form-field *ngSwitchCase="'file'">
+        <mat-form-field *ngSwitchCase="EntityFieldInputType.File">
           <mat-label>{{ field?.label }}</mat-label>
           <mat-file-input [formControlName]="field?.name" [placeholder]="field?.placeholder"></mat-file-input>
         </mat-form-field>
         <!-- image upload -->
-        <div *ngSwitchCase="'image'">
+        <div *ngSwitchCase="EntityFieldInputType.Image">
           <div *ngIf="form.controls[field?.name].value">
             <mat-label>{{ field?.label }}</mat-label>
             <div fxLayout="row" fxLayoutAlign="start">
@@ -98,6 +98,11 @@
             <mat-file-input [formControlName]="field?.name" [placeholder]="field?.placeholder"></mat-file-input>
           </mat-form-field>
         </div>
+        <!-- password input -->
+        <mat-form-field *ngSwitchCase="EntityFieldInputType.Password">
+          <mat-label>{{ field?.label }}</mat-label>
+          <input matInput [formControlName]="field?.name" type="password" [placeholder]="field?.placeholder" />
+        </mat-form-field>
         <!-- text input -->
         <mat-form-field *ngSwitchDefault>
           <mat-label>{{ field?.label }}</mat-label>
