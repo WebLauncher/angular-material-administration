@@ -5,5 +5,13 @@
   "trailingComma": "none",
   "printWidth": 120,
   "tabWidth": 2,
-  "endOfLine":"auto"
+  "endOfLine": "auto",
+  "overrides": [
+    {
+      "files": ["**/*.css", "**/*.scss", "**/*.html"],
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
 }

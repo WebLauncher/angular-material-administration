@@ -28,6 +28,7 @@ interface MatAdministrationEntityField {
   }>;
   validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null;
   asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null;
+  validatorMessages?: { [key: string]: string };
 }
 
 interface MatAdministrationLayout {

@@ -18,7 +18,8 @@ export const SiteMetadata: MatAdministrationMetadata = {
           }
         },
         title: {
-          value: 'This is another article'
+          value: 'This is another article',
+          validatorMessages: { required: 'This field is required' }
         },
         content: {
           hideInList: true,

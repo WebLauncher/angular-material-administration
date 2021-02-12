@@ -37,11 +37,17 @@
         <mat-form-field *ngSwitchCase="EntityFieldInputType.Ckeditor" class="ckeditor">
           <mat-label>{{ field?.label }}</mat-label>
           <mat-ckeditor [formControlName]="field?.name"></mat-ckeditor>
+          <mat-error>
+            <ng-container *ngTemplateOutlet="formFieldErrors; context: { field: field }"></ng-container>
+          </mat-error>
         </mat-form-field>
         <!-- textarea -->
         <mat-form-field *ngSwitchCase="EntityFieldInputType.Textarea">
           <mat-label>{{ field?.label }}</mat-label>
           <textarea matInput [formControlName]="field?.name"></textarea>
+          <mat-error>
+            <ng-container *ngTemplateOutlet="formFieldErrors; context: { field: field }"></ng-container>
+          </mat-error>
         </mat-form-field>
         <!-- select -->
         <mat-form-field *ngSwitchCase="EntityFieldInputType.Select">
@@ -51,6 +57,9 @@
               {{ option?.label }}
             </mat-option>
           </mat-select>
+          <mat-error>
+            <ng-container *ngTemplateOutlet="formFieldErrors; context: { field: field }"></ng-container>
+          </mat-error>
         </mat-form-field>
         <!-- radio -->
         <div *ngSwitchCase="EntityFieldInputType.Radio" class="radio">
@@ -60,6 +69,9 @@
               option?.label
             }}</mat-radio-button>
           </mat-radio-group>
+          <mat-error>
+            <ng-container *ngTemplateOutlet="formFieldErrors; context: { field: field }"></ng-container>
+          </mat-error>
         </div>
         <!-- datepicker -->
         <mat-form-field *ngSwitchCase="EntityFieldInputType.Datepicker">
@@ -67,21 +79,33 @@
           <input matInput [formControlName]="field?.name" [matDatepicker]="picker" />
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker touchUi #picker></mat-datepicker>
+          <mat-error>
+            <ng-container *ngTemplateOutlet="formFieldErrors; context: { field: field }"></ng-container>
+          </mat-error>
         </mat-form-field>
         <!-- checkbox -->
         <div *ngSwitchCase="EntityFieldInputType.Checkbox" class="checkbox">
           <mat-checkbox [formControlName]="field?.name" color="primary" [value]="true">{{ field?.label }}</mat-checkbox>
+          <mat-error>
+            <ng-container *ngTemplateOutlet="formFieldErrors; context: { field: field }"></ng-container>
+          </mat-error>
         </div>
         <!-- slide togle -->
         <div *ngSwitchCase="EntityFieldInputType.Toggle" class="checkbox">
           <mat-slide-toggle color="primary" [formControlName]="field?.name">
             {{ field?.label }}
           </mat-slide-toggle>
+          <mat-error>
+            <ng-container *ngTemplateOutlet="formFieldErrors; context: { field: field }"></ng-container>
+          </mat-error>
         </div>
         <!-- file upload -->
         <mat-form-field *ngSwitchCase="EntityFieldInputType.File">
           <mat-label>{{ field?.label }}</mat-label>
           <mat-file-input [formControlName]="field?.name" [placeholder]="field?.placeholder"></mat-file-input>
+          <mat-error>
+            <ng-container *ngTemplateOutlet="formFieldErrors; context: { field: field }"></ng-container>
+          </mat-error>
         </mat-form-field>
         <!-- image upload -->
         <div *ngSwitchCase="EntityFieldInputType.Image">
@@ -96,19 +120,39 @@
           <mat-form-field *ngIf="!form.controls[field?.name].value">
             <mat-label>{{ field?.label }}</mat-label>
             <mat-file-input [formControlName]="field?.name" [placeholder]="field?.placeholder"></mat-file-input>
+            <mat-error>
+              <ng-container *ngTemplateOutlet="formFieldErrors; context: { field: field }"></ng-container>
+            </mat-error>
           </mat-form-field>
         </div>
         <!-- password input -->
         <mat-form-field *ngSwitchCase="EntityFieldInputType.Password">
           <mat-label>{{ field?.label }}</mat-label>
           <input matInput [formControlName]="field?.name" type="password" [placeholder]="field?.placeholder" />
+          <mat-error>
+            <ng-container *ngTemplateOutlet="formFieldErrors; context: { field: field }"></ng-container>
+          </mat-error>
         </mat-form-field>
         <!-- text input -->
         <mat-form-field *ngSwitchDefault>
           <mat-label>{{ field?.label }}</mat-label>
           <input matInput [formControlName]="field?.name" [placeholder]="field?.placeholder" />
+          <mat-error>
+            <ng-container *ngTemplateOutlet="formFieldErrors; context: { field: field }"></ng-container>
+          </mat-error>
         </mat-form-field>
       </ng-container>
     </div>
+  </ng-template>
+
+  <ng-template #formFieldErrors let-field="field">
+    <ng-container *ngFor="let message of field?.validatorMessages | keyvalue">
+      <div
+        *ngIf="
+          field?.validatorMessages && form.get(field?.name).invalid && form.get(field?.name).hasError(message?.key)
+        "
+        [innerHTML]="message?.value"
+      ></div>
+    </ng-container>
   </ng-template>
 </form>

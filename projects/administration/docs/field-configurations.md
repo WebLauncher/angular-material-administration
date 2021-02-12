@@ -27,6 +27,7 @@ A field configuration can be and avanced object implementation of `MatAdministra
   }>;
   validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null;
   asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null;
+  validatorMessages?: { [key: string]: string };
 }
 ~~~
 

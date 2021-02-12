@@ -27,6 +27,7 @@ export interface MatFormEntityField {
   }>;
   validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null;
   asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null;
+  validatorMessages?: { [key: string]: string };
 }
 
 export interface MatFormLayout {

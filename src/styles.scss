@@ -18,11 +18,7 @@ $administration-accent: mat-palette($mat-pink, a200, a100, a400);
 $administration-warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$administration-theme: mat-light-theme(
-  $administration-primary,
-  $administration-accent,
-  $administration-warn
-);
+$administration-theme: mat-light-theme($administration-primary, $administration-accent, $administration-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component

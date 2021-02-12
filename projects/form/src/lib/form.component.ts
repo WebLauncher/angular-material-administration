@@ -25,6 +25,8 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
 
   @Output() valueChanges: EventEmitter<any> = new EventEmitter();
 
+  @Output() validChanges: EventEmitter<boolean> = new EventEmitter();
+
   form: FormGroup;
 
   sections: Partial<MatFormSection>[];
@@ -46,6 +48,7 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
       );
 
       this.form.valueChanges.pipe(takeUntil(this.destroyed$)).subscribe(this.valueChanges);
+      this.form.statusChanges.pipe(takeUntil(this.destroyed$)).subscribe(() => this.validChanges.emit(this.form.valid));
     }
 
     this.sections = this.getSectionsWithFields();
