@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.8.0 (2021-02-12)
+
+
+### Features
+
+* **app:** added fields validation messages ([49b488d](https://github.com/WebLauncher/angular-material-administration/commit/49b488dcbf87a9311910774875257bbe6b50c7d9))
+
+
+
+
+
 ## 0.7.2 (2021-02-10)
 
 **Note:** Version bump only for package @weblauncher/material-administration
