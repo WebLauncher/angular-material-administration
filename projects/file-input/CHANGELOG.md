@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.9.0 (2021-02-18)
+
+
+### Features
+
+* export all modules ([c32873f](https://github.com/WebLauncher/angular-material-administration/commit/c32873ff6a2c0a44238aef51484c991740ddf01f))
+
+
+
+
+
 # 0.8.0 (2021-02-12)
 
 
