@@ -41,41 +41,39 @@ import {
 import { FirestoreDataAdapterService, ValueFormatService, NoPathGuard } from './services/index';
 import { MAT_ADMINISTRATION_DATA_ADAPTER } from './types/injection-tokens';
 
+const modules = [
+  MatChipsModule,
+  MatCardModule,
+  MatIconModule,
+  MatToolbarModule,
+  MatProgressSpinnerModule,
+  CdkTableModule,
+  MatTableModule,
+  FormsModule,
+  ReactiveFormsModule,
+  MatFormFieldModule,
+  MatButtonModule,
+  MatInputModule,
+  MatSelectModule,
+  MatRadioModule,
+  MatCheckboxModule,
+  MatSlideToggleModule,
+  MatDatepickerModule,
+  MatSnackBarModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatSortModule,
+  AngularFirestoreModule,
+  AngularFireStorageModule,
+  FlexLayoutModule,
+  MatMenuModule,
+  MatSidenavModule,
+  MatListModule,
+  MatFormModule
+];
 @NgModule({
   declarations: [ListComponent, AddComponent, UpdateComponent, EntityComponent, BreadcrumbsComponent, MenuComponent],
-  imports: [
-    CommonModule,
-    MatChipsModule,
-    MatCardModule,
-    MatIconModule,
-    MatToolbarModule,
-    RouterModule,
-    MatProgressSpinnerModule,
-    CdkTableModule,
-    MatTableModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatInputModule,
-    MatSelectModule,
-    MatRadioModule,
-    MatCheckboxModule,
-    MatSlideToggleModule,
-    MatDatepickerModule,
-    MatSnackBarModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatSortModule,
-    AngularFirestoreModule,
-    AngularFireStorageModule,
-    FlexLayoutModule,
-    MatMenuModule,
-    MatSidenavModule,
-    MatListModule,
-    MatFormModule,
-    HttpClientModule
-  ],
+  imports: [CommonModule, HttpClientModule, RouterModule, ...modules],
   providers: [
     ValueFormatService,
     NoPathGuard,
@@ -99,7 +97,7 @@ import { MAT_ADMINISTRATION_DATA_ADAPTER } from './types/injection-tokens';
     BreadcrumbsComponent,
     AngularFirestoreModule,
     AngularFireStorageModule,
-    MatListModule
+    ...modules
   ]
 })
 export class MaterialAdministrationModule {
