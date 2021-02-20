@@ -71,6 +71,7 @@ const modules = [
   MatListModule,
   MatFormModule
 ];
+
 @NgModule({
   declarations: [ListComponent, AddComponent, UpdateComponent, EntityComponent, BreadcrumbsComponent, MenuComponent],
   imports: [CommonModule, HttpClientModule, RouterModule, ...modules],

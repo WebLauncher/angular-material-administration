@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
-import { SiteMetadata } from '../site-metadata';
 
 @Component({
   selector: 'app-layout',
@@ -8,15 +7,6 @@ import { SiteMetadata } from '../site-metadata';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent {
-  entities: any = Object.keys(SiteMetadata.entities)
-    .filter((key: any) => !SiteMetadata.entities[key]?.hideList)
-    .map((key) => {
-      return {
-        id: key,
-        ...SiteMetadata.entities[key]
-      };
-    });
-
   dataSource = document.location.href.includes('/firebase') ? 'firebase' : 'rest';
 
   changeDataSource(event: MatButtonToggleChange) {

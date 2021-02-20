@@ -11,7 +11,7 @@ import { MatFormEntityField, MatFormSection, MatFormSectionsLayout, EntityFieldI
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MaterialFormComponent implements OnInit, OnDestroy {
-  @Input() fields: MatFormEntityField[];
+  @Input() fields: Partial<MatFormEntityField>[];
 
   @Input() layout: MatFormSectionsLayout;
 
@@ -96,7 +96,7 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
     return field?.value;
   }
 
-  private getFieldValidators(field: MatFormEntityField) {
+  private getFieldValidators(field: Partial<MatFormEntityField>) {
     return field.validatorOrOpts || [Validators.required];
   }
 }
