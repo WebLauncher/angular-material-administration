@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.8.4 (2021-03-05)
+
+
+### Bug Fixes
+
+* fix mat label ([30f4bed](https://github.com/WebLauncher/angular-material-administration/commit/30f4bed19e10db9aa761697e012a9033d69cf1b1))
+
+
+
+
+
 ## 0.8.3 (2021-03-05)
 
 
