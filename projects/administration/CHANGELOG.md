@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.10.3 (2021-03-05)
+
+
+### Bug Fixes
+
+* added label for multi checkbox ([81dcf53](https://github.com/WebLauncher/angular-material-administration/commit/81dcf530cf29d5b4e878bbb58e2a87f0905757ad))
+
+
+
+
+
 ## 0.10.2 (2021-03-05)
 
 **Note:** Version bump only for package @weblauncher/material-administration
