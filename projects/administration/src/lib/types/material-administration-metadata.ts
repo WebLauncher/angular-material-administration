@@ -22,6 +22,8 @@ interface MatAdministrationEntityField {
   label: string;
   format: string;
   filePathField: string;
+  options?: Array<{ value: any; label: string }>;
+  optionsUseObjectValue?: boolean;
   style: Partial<{
     list: { [k: string]: any };
     form: { [k: string]: any };

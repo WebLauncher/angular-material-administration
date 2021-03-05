@@ -25,5 +25,8 @@
       "@weblauncher/material-form": ["./projects/form/dist"],
       "@weblauncher/material-form/*": ["./projects/form/dist/*"]
     }
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true
   }
 }

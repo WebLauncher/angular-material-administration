@@ -206,7 +206,10 @@ export class EntityComponent implements OnDestroy {
 
   private addAdditionalMetadata(field) {
     if (
-      (field?.inputType === EntityFieldInputType.Select || field?.inputType === EntityFieldInputType.Radio) &&
+      (field?.inputType === EntityFieldInputType.MultiCheckbox ||
+        field?.inputType === EntityFieldInputType.MultiSelect ||
+        field?.inputType === EntityFieldInputType.Select ||
+        field?.inputType === EntityFieldInputType.Radio) &&
       field?.data?.type === 'entity'
     ) {
       return this.dataAdapterService.list(field?.data?.entity, field?.data?.entityValue).pipe(
@@ -216,7 +219,7 @@ export class EntityComponent implements OnDestroy {
             ...field,
             options: docs.map((doc) => {
               return {
-                value: doc[field?.data?.entityValue],
+                value: field?.optionsUseObjectValue ? doc : doc[field?.data?.entityValue],
                 label: doc[field?.data?.entityLabel]
               };
             })

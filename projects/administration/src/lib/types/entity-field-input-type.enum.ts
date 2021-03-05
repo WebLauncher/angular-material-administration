@@ -1,6 +1,7 @@
 export enum EntityFieldInputType {
   Text = 'text',
   Select = 'select',
+  MultiSelect = 'multi-select',
   Ckeditor = 'ckeditor',
   Radio = 'radio',
   Textarea = 'textarea',
@@ -8,5 +9,7 @@ export enum EntityFieldInputType {
   File = 'file',
   Toggle = 'toggle',
   Checkbox = 'checkbox',
-  Datepicker = 'datepicker'
+  MultiCheckbox = 'multi-checkbox',
+  Datepicker = 'datepicker',
+  Password = 'password'
 }

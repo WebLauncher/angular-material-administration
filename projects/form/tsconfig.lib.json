@@ -7,23 +7,12 @@
     "declaration": true,
     "inlineSources": true,
     "types": [],
-    "lib": [
-      "dom",
-      "es2018"
-    ],
+    "lib": ["dom", "es2018"],
     "paths": {
-      "@angular/*": [
-        "./node_modules/@angular/*"
-      ],
-      "rxjs": [
-        "./node_modules/rxjs"
-      ],
-      "@weblauncher/material-ckeditor": [
-        "./projects/ckeditor/dist"
-      ],
-      "@weblauncher/material-file-input": [
-        "./projects/file-input/dist"
-      ]
+      "@angular/*": ["./node_modules/@angular/*"],
+      "rxjs": ["./node_modules/rxjs"],
+      "@weblauncher/material-ckeditor": ["./projects/ckeditor/dist"],
+      "@weblauncher/material-file-input": ["./projects/file-input/dist"]
     }
   },
   "angularCompilerOptions": {
@@ -31,8 +20,5 @@
     "strictMetadataEmit": true,
     "enableResourceInlining": true
   },
-  "exclude": [
-    "src/test.ts",
-    "**/*.spec.ts"
-  ]
+  "exclude": ["src/test.ts", "**/*.spec.ts"]
 }

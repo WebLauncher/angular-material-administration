@@ -1,4 +1,5 @@
 import { ValidatorFn, AbstractControlOptions, AsyncValidatorFn } from '@angular/forms';
+import { StringLike } from '@firebase/util';
 import { EntityFieldType } from './entity-field-type.enum';
 import { EntityFieldInputType } from './entity-field-input-type.enum';
 
@@ -21,6 +22,7 @@ export interface MatFormEntityField {
   label: string;
   format: string;
   filePathField: string;
+  options?: Array<{ value: any; label: StringLike; valueObject?: any }>;
   style: Partial<{
     list: { [k: string]: any };
     form: { [k: string]: any };
@@ -40,7 +42,7 @@ export interface MatFormLayout {
 export interface MatFormSection {
   title: string;
   subtitle: string;
-  fields: string[] | Partial<MatFormEntityField>[];
+  fields: string[] | Array<Partial<MatFormEntityField>>;
   layout: Partial<MatFormLayout>;
 }
 

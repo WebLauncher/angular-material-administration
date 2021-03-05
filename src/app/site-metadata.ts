@@ -9,7 +9,8 @@ export const SiteMetadata: MatAdministrationMetadata = {
       autoTimestamps: true,
       fields: {
         sport: {
-          inputType: EntityFieldInputType.Select,
+          inputType: EntityFieldInputType.MultiCheckbox,
+          optionsUseObjectValue: false,
           data: {
             type: 'entity',
             entity: 'sports',

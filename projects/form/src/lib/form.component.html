@@ -19,7 +19,7 @@
       [fxLayoutGap]="section?.layout?.gap || '0'"
     >
       <ng-container *ngIf="section?.fields">
-        <ng-container *ngFor="let field of section?.fields">
+        <ng-container *ngFor="let field of $any(section?.fields)">
           <ng-container *ngTemplateOutlet="formField; context: { field: field }"></ng-container>
         </ng-container>
       </ng-container>
@@ -31,7 +31,11 @@
   </div>
 
   <ng-template #formField let-field="field">
-    <div class="form-field-container" [ngStyle]="field?.style?.form">
+    <div
+      class="form-field-container"
+      [ngClass]="'form-field-' + (field?.inputType || 'text')"
+      [ngStyle]="field?.style?.form"
+    >
       <ng-container [ngSwitch]="field?.inputType">
         <!-- ckeditor -->
         <mat-form-field *ngSwitchCase="EntityFieldInputType.Ckeditor" class="ckeditor">
@@ -53,6 +57,18 @@
         <mat-form-field *ngSwitchCase="EntityFieldInputType.Select">
           <mat-label>{{ field?.label }}</mat-label>
           <mat-select [formControlName]="field?.name">
+            <mat-option *ngFor="let option of field?.options" [value]="option?.value">
+              {{ option?.label }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            <ng-container *ngTemplateOutlet="formFieldErrors; context: { field: field }"></ng-container>
+          </mat-error>
+        </mat-form-field>
+        <!-- multi select -->
+        <mat-form-field *ngSwitchCase="EntityFieldInputType.MultiSelect">
+          <mat-label>{{ field?.label }}</mat-label>
+          <mat-select [formControlName]="field?.name" multiple>
             <mat-option *ngFor="let option of field?.options" [value]="option?.value">
               {{ option?.label }}
             </mat-option>
@@ -85,12 +101,21 @@
         </mat-form-field>
         <!-- checkbox -->
         <div *ngSwitchCase="EntityFieldInputType.Checkbox" class="checkbox">
-          <mat-checkbox [formControlName]="field?.name" color="primary" [value]="true">{{ field?.label }}</mat-checkbox>
+          <mat-checkbox [formControlName]="field?.name" color="primary" [value]="'1'">{{ field?.label }}</mat-checkbox>
           <mat-error>
             <ng-container *ngTemplateOutlet="formFieldErrors; context: { field: field }"></ng-container>
           </mat-error>
         </div>
-        <!-- slide togle -->
+        <!-- multi checkbox -->
+        <div *ngSwitchCase="EntityFieldInputType.MultiCheckbox" class="checkbox multi" [formArrayName]="field?.name">
+          <mat-checkbox *ngFor="let option of field?.options; let i = index" [formControlName]="i" color="primary">
+            {{ option?.label }}
+          </mat-checkbox>
+          <mat-error>
+            <ng-container *ngTemplateOutlet="formFieldErrors; context: { field: field }"></ng-container>
+          </mat-error>
+        </div>
+        <!-- slide toggle -->
         <div *ngSwitchCase="EntityFieldInputType.Toggle" class="checkbox">
           <mat-slide-toggle color="primary" [formControlName]="field?.name">
             {{ field?.label }}
@@ -147,12 +172,7 @@
 
   <ng-template #formFieldErrors let-field="field">
     <ng-container *ngFor="let message of field?.validatorMessages | keyvalue">
-      <div
-        *ngIf="
-          field?.validatorMessages && form.get(field?.name).invalid && form.get(field?.name).hasError(message?.key)
-        "
-        [innerHTML]="message?.value"
-      ></div>
+      <div *ngIf="showError(field, message?.key)" [innerHTML]="message?.value"></div>
     </ng-container>
   </ng-template>
 </form>
