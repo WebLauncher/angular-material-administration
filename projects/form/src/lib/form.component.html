@@ -108,7 +108,9 @@
         </div>
         <!-- multi checkbox -->
         <div *ngSwitchCase="EntityFieldInputType.MultiCheckbox" class="checkbox multi" [formArrayName]="field?.name">
-          <mat-label>{{ field?.label }}</mat-label>
+          <div>
+            <mat-label>{{ field?.label }}</mat-label>
+          </div>
           <mat-checkbox *ngFor="let option of field?.options; let i = index" [formControlName]="i" color="primary">
             {{ option?.label }}
           </mat-checkbox>
