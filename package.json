@@ -40,7 +40,7 @@
     "@firebase/app": "~0.6.1",
     "@firebase/app-types": "~0.6.1",
     "@firebase/auth": "~0.14.6",
-    "@firebase/firestore": "~1.14.6",
+    "@firebase/firestore": "~2.3.2",
     "@firebase/storage": "^0.4.1",
     "@firebase/util": "~0.2.47",
     "firebase": "~8.0.1",
