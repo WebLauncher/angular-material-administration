@@ -6,11 +6,13 @@ describe('MaterialCkeditorComponent', () => {
   let component: MaterialCkeditorComponent;
   let fixture: ComponentFixture<MaterialCkeditorComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [MaterialCkeditorComponent]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [MaterialCkeditorComponent]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MaterialCkeditorComponent);

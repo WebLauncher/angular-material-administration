@@ -1,4 +1,4 @@
 .eslintrc.js
 dist
 commitlint.config.js
-projects/**/.eslintrc.js
+projects/**/.eslintrc.json
