@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.10.0 (2024-05-20)
+
+### Features
+
+- **deps:** update to ng 12 ([ed50fbe](https://github.com/WebLauncher/angular-material-administration/commit/ed50fbeae173878e1e7a3f58d0be62068cdeb3b2))
+
 # 0.9.0 (2024-05-20)
 
 ### Features
