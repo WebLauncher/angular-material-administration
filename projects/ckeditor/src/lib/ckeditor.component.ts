@@ -27,7 +27,8 @@ import { MaterialCkeditorMixinBase } from './ckeditor-mixin';
   styleUrls: ['./ckeditor.component.scss'],
   providers: [{ provide: MatFormFieldControl, useExisting: MaterialCkeditorComponent }]
 })
-export class MaterialCkeditorComponent extends MaterialCkeditorMixinBase
+export class MaterialCkeditorComponent
+  extends MaterialCkeditorMixinBase
   implements OnDestroy, MatFormFieldControl<string>, ControlValueAccessor, DoCheck {
   static nextId = 0;
 

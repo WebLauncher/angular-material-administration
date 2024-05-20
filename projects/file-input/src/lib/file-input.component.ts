@@ -24,7 +24,8 @@ import { MaterialFileInputMixinBase } from './file-input-mixin';
   styleUrls: ['./file-input.component.scss'],
   providers: [{ provide: MatFormFieldControl, useExisting: MatFileInputComponent }]
 })
-export class MatFileInputComponent extends MaterialFileInputMixinBase
+export class MatFileInputComponent
+  extends MaterialFileInputMixinBase
   implements OnDestroy, MatFormFieldControl<File[]>, ControlValueAccessor, DoCheck {
   static nextId = 0;
 

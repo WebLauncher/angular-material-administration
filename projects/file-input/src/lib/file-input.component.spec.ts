@@ -6,11 +6,13 @@ describe('MatFileInputComponent', () => {
   let component: MatFileInputComponent;
   let fixture: ComponentFixture<MatFileInputComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [MatFileInputComponent]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [MatFileInputComponent]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MatFileInputComponent);
