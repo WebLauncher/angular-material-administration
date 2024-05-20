@@ -46,7 +46,7 @@ jobs:
           yarn build:prod
           - uses: FirebaseExtended/action-hosting-deploy@v0
           with:
-            repoToken: '${{ secrets.GITHUB_TOKEN }}'
+            repoToken: '${{ secrets.GH_TOKEN }}'
             firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_WEBLAUNCHER_ADMINISTRATION }}'
             channelId: live
             projectId: weblauncher-administration
