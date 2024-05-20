@@ -35,7 +35,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
         run: |
-          yarn install
+          yarn install --ignore-engines
       - name: Build
         run: |
           npx ngcc
@@ -43,7 +43,7 @@ jobs:
       - name: Build demo
         run: |
           npx ngcc
-          npm run build:prod
+          yarn build:prod
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
