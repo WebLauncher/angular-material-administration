@@ -44,12 +44,12 @@ jobs:
         run: |
           npx ngcc
           yarn build:prod
-      - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          - uses: FirebaseExtended/action-hosting-deploy@v0
+          with:
+            repoToken: '${{ secrets.GITHUB_TOKEN }}'
+            firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_WEBLAUNCHER_ADMINISTRATION }}'
+            channelId: live
+            projectId: weblauncher-administration
       - name: Git identity
         run: |
           git config --global user.email "me_shuv@yahoo.com"

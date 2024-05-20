@@ -9,6 +9,7 @@
     }
   },
   "projects": {
-    "admin": "weblauncher-administration"
+    "admin": "weblauncher-administration",
+    "default": "weblauncher-administration"
   }
 }
