@@ -24,8 +24,6 @@ jobs:
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
       - name: Restore Lerna
         uses: actions/cache@v2
         with:
@@ -50,6 +48,7 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_WEBLAUNCHER_ADMINISTRATION }}'
           channelId: live
           projectId: weblauncher-administration
+          firebaseToolsVersion: 8.4.3
       - name: Git identity
         run: |
           git config --global user.email "me_shuv@yahoo.com"
