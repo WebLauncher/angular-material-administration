@@ -19,9 +19,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RouterModule } from '@angular/router';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatNativeDateModule } from '@angular/material/core';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { FirebaseAppConfig, FIREBASE_OPTIONS, FIREBASE_APP_NAME } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { FIREBASE_OPTIONS, FIREBASE_APP_NAME } from '@angular/fire/compat';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -103,7 +103,7 @@ const modules = [
 })
 export class MaterialAdministrationModule {
   static forRoot(
-    configFactory: FirebaseAppConfig,
+    configFactory: any,
     appNameFactory: () => string | undefined = () => undefined
   ): ModuleWithProviders<MaterialAdministrationModule> {
     return {

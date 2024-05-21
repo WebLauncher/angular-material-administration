@@ -37,18 +37,17 @@
     "@angular/router": "~13.4.0",
     "@ckeditor/ckeditor5-angular": "~2.0.1",
     "@ckeditor/ckeditor5-build-classic": "~23.1.0",
-    "@firebase/app": "~0.6.1",
-    "@firebase/app-types": "~0.6.1",
-    "@firebase/auth": "~0.14.6",
-    "@firebase/firestore": "~1.14.6",
-    "@firebase/storage": "^0.4.1",
-    "@firebase/util": "^1.9.6",
-    "firebase": "^8.0.1",
+    "firebase": "^9.0.0",
     "lodash-es": "~4.17.15",
     "rxjs": "~6.6.3",
     "tslib": "^2.6.2",
     "uuid": "~8.3.1",
     "zone.js": "~0.11.4"
+  },
+  "overrides": {
+    "@angular/fire@~7.6.1": {
+      "rxfire@^6.0.0": "6.0.3"
+    }
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.1303.11",
