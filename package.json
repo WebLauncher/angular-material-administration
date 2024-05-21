@@ -37,17 +37,15 @@
     "@angular/router": "~13.4.0",
     "@ckeditor/ckeditor5-angular": "~2.0.1",
     "@ckeditor/ckeditor5-build-classic": "~23.1.0",
-    "firebase": "^9.0.0",
+    "firebase": "^10.12.1",
     "lodash-es": "~4.17.15",
     "rxjs": "~6.6.3",
     "tslib": "^2.6.2",
     "uuid": "~8.3.1",
     "zone.js": "~0.11.4"
   },
-  "overrides": {
-    "@angular/fire@~7.6.1": {
-      "rxfire@^6.0.0": "6.0.3"
-    }
+  "resolutions": {
+    "@angular/fire/firebase": "^10.12.1"
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.1303.11",
@@ -92,7 +90,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "lerna": "^5.6.2",
+    "lerna": "^6.6.2",
     "lint-staged": "^10.5.4",
     "ng-packagr": "~13.3.1",
     "npm-run-all": "~4.1.5",
