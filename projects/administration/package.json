@@ -1,7 +1,7 @@
 {
   "name": "@weblauncher/material-administration",
   "description": "Material administration app components library",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "keywords": [
     "angular",
     "material",
