@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, UntypedFormControl, UntypedFormArray } from '@angular/forms';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { MatFormEntityField, MatFormSection, MatFormSectionsLayout, EntityFieldInputType } from './types';
@@ -27,7 +27,7 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
 
   @Output() validChanges: EventEmitter<boolean> = new EventEmitter();
 
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   sections: Partial<MatFormSection>[];
 
@@ -35,7 +35,7 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
 
   private destroyed$: Subject<void> = new Subject();
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: UntypedFormBuilder) {
     // empty
   }
 
@@ -117,12 +117,12 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
   private getField(field: Partial<MatFormEntityField>) {
     // see if field is a form array field
     if (field?.inputType === EntityFieldInputType.MultiCheckbox) {
-      return new FormArray([
-        ...field?.options.map((option) => new FormControl(this.getFieldValue(field)?.includes(option?.value)))
+      return new UntypedFormArray([
+        ...field?.options.map((option) => new UntypedFormControl(this.getFieldValue(field)?.includes(option?.value)))
       ]);
     }
 
-    return new FormControl(this.getFieldValue(field), this.getFieldValidators(field));
+    return new UntypedFormControl(this.getFieldValue(field), this.getFieldValidators(field));
   }
 
   private mapFormValue(formValue) {

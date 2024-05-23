@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import {
   MAT_ADMINISTRATION_DATA_ADAPTER,
   HttpDataAdapterService,
-  MaterialAdministrationModule
+  MaterialAdministrationModule,
 } from '@weblauncher/material-administration';
 import { siteRoutes } from './rest.routes';
 
@@ -14,12 +14,12 @@ import { siteRoutes } from './rest.routes';
   providers: [
     {
       provide: MAT_ADMINISTRATION_DATA_ADAPTER,
-      useClass: HttpDataAdapterService
+      useClass: HttpDataAdapterService,
     },
     {
       provide: 'MAT_ADMINISTRATION_BASE_PATH',
-      useValue: '/rest'
-    }
-  ]
+      useValue: '/rest',
+    },
+  ],
 })
 export class RestModule {}

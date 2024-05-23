@@ -1,14 +1,28 @@
 {
   "news": [
     {
-      "sport": "handball",
+      "sport": [
+        true,
+        true
+      ],
       "title": "test",
       "content": "<p>test</p>",
       "imageUrl": "https://angular.io/assets/images/logos/angular/logo-nav@2x.png",
-      "imageUrlPath": "not implemented",
-      "created": 1594642878531,
-      "updated": 1594642878531,
+      "updated": 1716472741787,
       "id": 1
+    },
+    {
+      "sport": [
+        null,
+        null
+      ],
+      "title": "This is another article",
+      "content": "<p>test</p>",
+      "imageUrl": "https://angular.io/assets/images/logos/angular/logo-nav@2x.png",
+      "imageUrlPath": "not implemented",
+      "created": 1716472718963,
+      "updated": 1716472718963,
+      "id": 2
     }
   ],
   "sports": [

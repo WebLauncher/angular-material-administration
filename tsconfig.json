@@ -12,8 +12,9 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "esModuleInterop": true,
-    "target": "es2015",
+    "target": "es2020",
     "lib": ["es2018", "dom"],
+    "strict": true,
     "paths": {
       "types": ["types"],
       "@weblauncher/material-file-input": ["./projects/file-input/dist"],
@@ -27,6 +28,7 @@
     }
   },
   "angularCompilerOptions": {
-    "strictTemplates": true
+    "strictTemplates": true,
+    "strictNullChecks": true
   }
 }

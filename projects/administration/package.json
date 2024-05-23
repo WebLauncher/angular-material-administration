@@ -22,22 +22,17 @@
     "build": "wait-on ../form/dist/public-api.d.ts && ng build material-administration --prod",
     "postpublish": "rm -rf dist/"
   },
-  "devDependencies": {
-    "@weblauncher/material-ckeditor": "^0.9.0",
-    "@weblauncher/material-file-input": "^0.11.0",
-    "@weblauncher/material-form": "^0.9.0"
-  },
   "peerDependencies": {
-    "@angular/cdk": "^12.2.13",
-    "@angular/common": "^12.2.17",
-    "@angular/core": "^12.2.17",
+    "@angular/cdk": "^14.2.7",
+    "@angular/common": "^14.3.0",
+    "@angular/core": "^14.3.0",
     "@angular/fire": "~7.6.1",
-    "@angular/flex-layout": "^12.0.0-beta.35",
-    "@angular/forms": "^12.2.17",
-    "@angular/material": "^12.2.13",
-    "@angular/platform-browser": "~12.2.17",
-    "@angular/platform-browser-dynamic": "~12.2.17",
-    "@angular/router": "^12.2.17",
+    "@angular/flex-layout": "^14.0.0-beta.41",
+    "@angular/forms": "^14.3.0",
+    "@angular/material": "^14.2.7",
+    "@angular/platform-browser": "~14.3.0",
+    "@angular/platform-browser-dynamic": "~14.3.0",
+    "@angular/router": "^14.3.0",
     "@weblauncher/material-ckeditor": "*",
     "@weblauncher/material-file-input": "*",
     "firebase": "^10.0.0",
@@ -47,6 +42,9 @@
     "zone.js": "~0.11.4"
   },
   "dependencies": {
+    "@weblauncher/material-ckeditor": "*",
+    "@weblauncher/material-file-input": "*",
+    "@weblauncher/material-form": "*",
     "tslib": "^2.0.0"
   }
 }

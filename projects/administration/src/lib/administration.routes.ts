@@ -21,6 +21,7 @@ export const materialAdministrationRoutes: Routes = [
   },
   {
     path: '',
-    canActivate: [NoPathGuard]
+    canActivate: [NoPathGuard],
+    component: ListComponent
   }
 ];

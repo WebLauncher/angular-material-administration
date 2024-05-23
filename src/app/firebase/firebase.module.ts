@@ -5,7 +5,7 @@ import {
   MAT_ADMINISTRATION_DATA_ADAPTER,
   MAT_ADMINISTRATION_BASE_PATH,
   FirestoreDataAdapterService,
-  MaterialAdministrationModule
+  MaterialAdministrationModule,
 } from '@weblauncher/material-administration';
 import { environment } from 'src/environments/environment';
 import { firebaseRoutes } from './firebase.routes';
@@ -18,18 +18,18 @@ export function firebaseAppNameFactory() {
   imports: [
     CommonModule,
     RouterModule.forChild(firebaseRoutes),
-    MaterialAdministrationModule.forRoot(environment.firebase, firebaseAppNameFactory)
+    MaterialAdministrationModule.forRoot(environment.firebase, firebaseAppNameFactory),
   ],
   exports: [RouterModule],
   providers: [
     {
       provide: MAT_ADMINISTRATION_DATA_ADAPTER,
-      useClass: FirestoreDataAdapterService
+      useClass: FirestoreDataAdapterService,
     },
     {
       provide: MAT_ADMINISTRATION_BASE_PATH,
-      useValue: '/firebase'
-    }
-  ]
+      useValue: '/firebase',
+    },
+  ],
 })
 export class FirebaseModule {}

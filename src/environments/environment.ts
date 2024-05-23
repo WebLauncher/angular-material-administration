@@ -21,6 +21,6 @@ export const environment = {
     storageBucket: 'weblauncher-administration.appspot.com',
     messagingSenderId: '384505651321',
     appId: '1:384505651321:web:5d8b767431b0ff218534a8',
-    measurementId: 'G-NR03P4BZ8K'
-  }
+    measurementId: 'G-NR03P4BZ8K',
+  },
 }; // Included with Angular CLI.
