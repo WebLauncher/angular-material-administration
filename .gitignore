@@ -48,3 +48,8 @@ testem.log
 Thumbs.db
 
 .nx/cache
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json

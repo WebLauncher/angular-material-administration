@@ -7,7 +7,8 @@ import {
   Optional,
   Self,
   ViewChild,
-  DoCheck
+  DoCheck,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { Subject } from 'rxjs';
@@ -17,7 +18,7 @@ import {
   UntypedFormControl,
   ControlValueAccessor,
   NgForm,
-  FormGroupDirective
+  FormGroupDirective,
 } from '@angular/forms';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -28,12 +29,15 @@ import { ErrorStateMatcher } from '@angular/material/core';
   selector: 'mat-file-input',
   templateUrl: './file-input.component.html',
   styleUrls: ['./file-input.component.scss'],
-  providers: [{ provide: MatFormFieldControl, useExisting: MatFileInputComponent }]
+  providers: [{ provide: MatFormFieldControl,
+    useExisting: MatFileInputComponent }],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MatFileInputComponent
   implements OnDestroy, MatFormFieldControl<File[] | null>, ControlValueAccessor, DoCheck {
   static nextId = 0;
 
+  // eslint-disable-next-line rxjs/finnish
   stateChanges = new Subject<void>();
 
   focused = false;
@@ -129,7 +133,7 @@ export class MatFileInputComponent
     private elRef: ElementRef<HTMLElement>,
     public _defaultErrorStateMatcher: ErrorStateMatcher,
     @Optional() public _parentForm: NgForm,
-    @Optional() public _parentFormGroup: FormGroupDirective
+    @Optional() public _parentFormGroup: FormGroupDirective,
   ) {
     // Replace the provider from above with this.
     if (this.ngControl != null) {

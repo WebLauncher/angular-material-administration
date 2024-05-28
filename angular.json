@@ -144,7 +144,7 @@
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/file-input/tsconfig.lib.json",
-            "project": "projects/file-input/ng-package.json",
+            "project": "projects/file-input/ng-package.json"
           },
           "configurations": {
             "production": {
@@ -293,5 +293,13 @@
   },
   "cli": {
     "analytics": false
+  },
+  "schematics": {
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
+    }
   }
 }

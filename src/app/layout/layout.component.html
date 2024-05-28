@@ -1,24 +1,37 @@
 <mat-sidenav-container class="layout-container">
-  <mat-sidenav mode="side"
-               opened
-               color="primary">
+  <mat-sidenav mode="side" opened color="primary">
     <mat-toolbar color="primary">
       <mat-toolbar-row>
-        <img class="logo"
-             src="https://material.angular.io/assets/img/homepage/angular-white-transparent.svg"
-             alt="Logo" />
+        <svg
+          class="logo"
+          _ngcontent-ng-c1910891413=""
+          x="0px"
+          y="0px"
+          width="960px"
+          height="960px"
+          viewBox="0 0 960 960"
+        >
+          <polygon _ngcontent-ng-c1910891413="" points="562.6,109.8 804.1,629.5 829.2,233.1"></polygon>
+          <polygon
+            _ngcontent-ng-c1910891413=""
+            points="624.9,655.9 334.3,655.9 297.2,745.8 479.6,849.8 662,745.8"
+          ></polygon>
+          <polygon _ngcontent-ng-c1910891413="" points="384.1,539.3 575.2,539.3 479.6,307"></polygon>
+          <polygon _ngcontent-ng-c1910891413="" points="396.6,109.8 130,233.1 155.1,629.5"></polygon>
+        </svg>
       </mat-toolbar-row>
     </mat-toolbar>
     <router-outlet name="menu"></router-outlet>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary"
-                 class="navbar-top">
+    <mat-toolbar color="primary" class="navbar-top">
       <mat-toolbar-row class="user-toolbar">
-        <mat-button-toggle-group name="dataSource"
-                                 [value]="dataSource"
-                                 (change)="changeDataSource($event)"
-                                 aria-label="Font Style">
+        <mat-button-toggle-group
+          name="dataSource"
+          [value]="dataSource"
+          (change)="changeDataSource($event)"
+          aria-label="Font Style"
+        >
           <mat-button-toggle value="firebase">Firebase</mat-button-toggle>
           <mat-button-toggle value="rest">REST API</mat-button-toggle>
         </mat-button-toggle-group>

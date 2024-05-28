@@ -12,6 +12,19 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MAT_ADMINISTRATION_METADATA } from 'projects/administration/src';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
+import {
+ initializeApp, provideFirebaseApp,
+} from '@angular/fire/app';
+import {
+ provideAuth, getAuth,
+} from '@angular/fire/auth';
+import {
+ provideFirestore, getFirestore,
+} from '@angular/fire/firestore';
+import {
+ getStorage, provideStorage,
+} from '@angular/fire/storage';
+import { environment } from '../environments/environment';
 import { LayoutComponent } from './layout/layout.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -32,6 +45,10 @@ import { SiteMetadata } from './site-metadata';
     MatMenuModule,
     MatProgressSpinnerModule,
     FlexLayoutModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
   ],
   providers: [
     {

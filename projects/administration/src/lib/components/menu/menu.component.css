@@ -1,6 +1,14 @@
 .active {
   color: white !important;
   background-color: black !important;
+
+  --mdc-list-list-item-label-text-color: white;
+  --mdc-list-list-item-focus-label-text-color: white;
+  --mdc-list-list-item-hover-label-text-color: white;
+}
+
+.active .mdc-list-item__content span {
+  color: white !important;
 }
 
 mat-icon {

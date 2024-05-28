@@ -36,11 +36,9 @@ jobs:
           yarn install --ignore-engines
       - name: Build
         run: |
-          npx ngcc
           npx lerna run build
       - name: Build demo
         run: |
-          npx ngcc
           yarn build:prod
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -59,7 +57,7 @@ jobs:
       - name: Publish
         run: |
           npm config set access public
-          npx lerna publish --contents dist --yes
+          npx lerna publish --create-release github --contents dist --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

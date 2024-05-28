@@ -1,5 +1,9 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import {
+ NgModule, ModuleWithProviders,
+} from '@angular/core';
+import {
+ CommonModule, DatePipe,
+} from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,7 +14,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+ FormsModule, ReactiveFormsModule,
+} from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
@@ -19,9 +25,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RouterModule } from '@angular/router';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatNativeDateModule } from '@angular/material/core';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { FIREBASE_OPTIONS, FIREBASE_APP_NAME } from '@angular/fire/compat';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -30,16 +33,24 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatFormModule } from '@weblauncher/material-form';
 import { HttpClientModule } from '@angular/common/http';
+
+import { FirebaseAppModule } from '@angular/fire/app';
+import { AuthModule } from '@angular/fire/auth';
+import { StorageModule } from '@angular/fire/storage';
 import {
   ListComponent,
   AddComponent,
   UpdateComponent,
   EntityComponent,
   MenuComponent,
-  BreadcrumbsComponent
+  BreadcrumbsComponent,
 } from './components/index';
-import { FirestoreDataAdapterService, ValueFormatService, NoPathGuard } from './services/index';
-import { MAT_ADMINISTRATION_DATA_ADAPTER } from './types/injection-tokens';
+import {
+ FirestoreDataAdapterService, ValueFormatService, NoPathGuard,
+} from './services/index';
+import {
+ MAT_ADMINISTRATION_BASE_PATH, MAT_ADMINISTRATION_DATA_ADAPTER,
+} from './types/injection-tokens';
 
 const modules = [
   MatChipsModule,
@@ -63,30 +74,36 @@ const modules = [
   MatNativeDateModule,
   MatPaginatorModule,
   MatSortModule,
-  AngularFirestoreModule,
-  AngularFireStorageModule,
   FlexLayoutModule,
   MatMenuModule,
   MatSidenavModule,
   MatListModule,
-  MatFormModule
+  MatFormModule,
+  FirebaseAppModule,
+  AuthModule,
+  StorageModule,
 ];
 
 @NgModule({
   declarations: [ListComponent, AddComponent, UpdateComponent, EntityComponent, BreadcrumbsComponent, MenuComponent],
-  imports: [CommonModule, HttpClientModule, RouterModule, ...modules],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    RouterModule,
+    ...modules,
+  ],
   providers: [
     ValueFormatService,
     NoPathGuard,
     DatePipe,
     {
       provide: MAT_ADMINISTRATION_DATA_ADAPTER,
-      useClass: FirestoreDataAdapterService
+      useClass: FirestoreDataAdapterService,
     },
     {
-      provide: 'MAT_ADMINISTRATION_BASE_PATH',
-      useValue: 'firebase'
-    }
+      provide: MAT_ADMINISTRATION_BASE_PATH,
+      useValue: 'firebase',
+    },
   ],
   exports: [
     RouterModule,
@@ -96,29 +113,17 @@ const modules = [
     EntityComponent,
     MenuComponent,
     BreadcrumbsComponent,
-    AngularFirestoreModule,
-    AngularFireStorageModule,
-    ...modules
-  ]
+    ...modules,
+  ],
 })
 export class MaterialAdministrationModule {
   static forRoot(
     configFactory: any,
-    appNameFactory: () => string | undefined = () => undefined
+    appNameFactory: () => string | undefined = () => undefined,
   ): ModuleWithProviders<MaterialAdministrationModule> {
     return {
       ngModule: MaterialAdministrationModule,
-      providers: [
-        {
-          provide: FIREBASE_OPTIONS,
-          useValue: configFactory
-        },
-        {
-          provide: FIREBASE_APP_NAME,
-          useFactory: appNameFactory
-        },
-        ValueFormatService
-      ]
+      providers: [ValueFormatService],
     };
   }
 }

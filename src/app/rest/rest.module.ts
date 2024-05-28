@@ -5,6 +5,7 @@ import {
   MAT_ADMINISTRATION_DATA_ADAPTER,
   HttpDataAdapterService,
   MaterialAdministrationModule,
+  MAT_ADMINISTRATION_BASE_PATH,
 } from '@weblauncher/material-administration';
 import { siteRoutes } from './rest.routes';
 
@@ -17,7 +18,7 @@ import { siteRoutes } from './rest.routes';
       useClass: HttpDataAdapterService,
     },
     {
-      provide: 'MAT_ADMINISTRATION_BASE_PATH',
+      provide: MAT_ADMINISTRATION_BASE_PATH,
       useValue: '/rest',
     },
   ],
