@@ -1,7 +1,7 @@
 {
   "name": "@weblauncher/material-administration",
   "description": "Material administration app components library",
-  "version": "0.12.1",
+  "version": "0.12.2",
   "keywords": [
     "angular",
     "material",
@@ -42,9 +42,9 @@
     "zone.js": "~0.11.4"
   },
   "dependencies": {
-    "@weblauncher/material-ckeditor": "*",
-    "@weblauncher/material-file-input": "*",
-    "@weblauncher/material-form": "*",
+    "@weblauncher/material-ckeditor": "^0.12.2",
+    "@weblauncher/material-file-input": "^0.12.2",
+    "@weblauncher/material-form": "^0.12.2",
     "tslib": "^2.0.0"
   }
 }
