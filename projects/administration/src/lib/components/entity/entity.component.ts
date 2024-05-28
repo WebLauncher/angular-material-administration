@@ -1,60 +1,71 @@
-import { Component, OnDestroy, Optional, Inject } from '@angular/core';
-import { BehaviorSubject, of, forkJoin, Subject, Observable } from 'rxjs';
+import {
+ Component, OnDestroy, Optional, Inject, ChangeDetectionStrategy,
+} from '@angular/core';
+import {
+ BehaviorSubject, of, forkJoin, Subject, Observable,
+} from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { map, shareReplay, switchMap, take, catchError, takeUntil, tap } from 'rxjs/operators';
+import {
+ map, shareReplay, switchMap, take, catchError, takeUntil, tap,
+} from 'rxjs/operators';
 import { capitalize } from 'lodash-es';
 import {
   MatAdministrationEntity,
   MatAdministrationMetadata,
-  MatAdministrationEntityField
+  MatAdministrationEntityField,
 } from '../../types/material-administration-metadata';
 import { Immutable } from '../../types/immutable';
 import { EntityFieldType } from '../../types/entity-field-type.enum';
 import { EntityFieldInputType } from '../../types/entity-field-input-type.enum';
-import { DataAdapterInterface, DownloadData } from '../../types/data-adapter';
-import { MAT_ADMINISTRATION_DATA_ADAPTER, MAT_ADMINISTRATION_METADATA } from '../../types/injection-tokens';
+import {
+ DataAdapterInterface, DownloadData,
+} from '../../types/data-adapter';
+import {
+ MAT_ADMINISTRATION_DATA_ADAPTER, MAT_ADMINISTRATION_METADATA,
+} from '../../types/injection-tokens';
 
 @Component({
   selector: 'mat-administration-entity',
-  template: ''
+  template: '',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EntityComponent implements OnDestroy {
-  entity$: BehaviorSubject<any> = new BehaviorSubject(null);
+  entity$: BehaviorSubject<any> = new BehaviorSubject(undefined);
 
-  entityPath$: BehaviorSubject<string> = new BehaviorSubject(null);
+  entityPath$: BehaviorSubject<string> = new BehaviorSubject('');
 
-  entityName$: BehaviorSubject<string> = new BehaviorSubject(null);
+  entityName$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  subCollections$: BehaviorSubject<MatAdministrationEntity[]> = new BehaviorSubject(null);
+  subCollections$: BehaviorSubject<any> = new BehaviorSubject([]);
 
-  isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   destroyed$ = new Subject();
 
   constructor(
     public route: ActivatedRoute,
     @Inject(MAT_ADMINISTRATION_DATA_ADAPTER) public dataAdapterService: DataAdapterInterface,
-    @Optional() @Inject(MAT_ADMINISTRATION_METADATA) public metadata: Immutable<MatAdministrationMetadata>
+    @Optional() @Inject(MAT_ADMINISTRATION_METADATA) public metadata: Immutable<MatAdministrationMetadata>,
   ) {
     this.route.params
       .pipe(
         map((params) => params?.entity),
         tap(() => this.isLoading$.next(true)),
-        takeUntil(this.destroyed$)
+        takeUntil(this.destroyed$),
       )
       .subscribe(this.entityPath$);
 
     this.entityPath$
       .pipe(
         map((entityPath) => entityPath.replace(/:/gi, '/')),
-        shareReplay(1)
+        shareReplay(1),
       )
       .subscribe(this.entityName$);
 
     this.entityName$
       .pipe(
         map((name) => this.getMetadata(name, metadata)),
-        shareReplay(1)
+        shareReplay(1),
       )
       .subscribe(this.entity$);
 
@@ -65,13 +76,11 @@ export class EntityComponent implements OnDestroy {
             return null;
           }
 
-          return Object.keys(meta.entities).map((key) => {
-            return {
+          return Object.keys(meta.entities).map((key) => ({
               id: key,
-              ...meta.entities[key]
-            };
-          });
-        })
+              ...meta.entities[key],
+            }));
+        }),
       )
       .subscribe(this.subCollections$);
   }
@@ -94,7 +103,7 @@ export class EntityComponent implements OnDestroy {
       map((metadata) => {
         const entries = Object.entries({
           ...metadata?.fields,
-          ...this.getAutoFields()
+          ...this.getAutoFields(),
         });
 
         return entries
@@ -104,33 +113,31 @@ export class EntityComponent implements OnDestroy {
                   ...value,
                   name: key,
                   label: (value as any)?.label || this.getFieldLabel(key),
-                  value: (value as MatAdministrationEntityField)?.value
+                  value: (value as MatAdministrationEntityField)?.value,
                 }
-              : { name: key, label: this.getFieldLabel(key) }
+              : { name: key,
+label: this.getFieldLabel(key) },
           )
           .filter((field) => this.showField(metadata, field));
       }),
       switchMap((fields) => forkJoin(fields.map((field) => this.addAdditionalMetadata(field)))),
       catchError(() => of([])),
-      shareReplay(1)
+      shareReplay(1),
     );
   }
 
-  processUploads(item) {
+  processUploads(item: any) {
     const filesKeys = Object.keys(item).filter((key) => Array.isArray(item[key]) && item[key][0] instanceof File);
 
     if (filesKeys.length) {
-      const itemUpdates = {};
+      const itemUpdates: any = {};
 
       return forkJoin(
-        filesKeys.map((key) => {
-          return this.dataAdapterService.upload(item[key][0]).pipe(
-            map((downloadData) => {
-              return { key, downloadData };
-            }),
-            catchError(() => of(null))
-          ) as Observable<{ key: string; downloadData: DownloadData }>;
-        })
+        filesKeys.map((key) => this.dataAdapterService.upload(item[key][0]).pipe(
+            map((downloadData) => ({ key,
+downloadData })),
+            catchError(() => of(null)),
+          ) as Observable<{ key: string; downloadData: DownloadData }>),
       ).pipe(
         map((uploadedFiles) => {
           if (uploadedFiles) {
@@ -142,16 +149,16 @@ export class EntityComponent implements OnDestroy {
 
           return {
             ...item,
-            ...itemUpdates
+            ...itemUpdates,
           };
-        })
+        }),
       );
     }
 
     return of(item);
   }
 
-  getWithTimestamps(item, action: 'add' | 'update') {
+  getWithTimestamps(item: any, action: 'add' | 'update') {
     const newItem = { ...item };
 
     const timestamp = this.dataAdapterService.getTimestamp();
@@ -176,10 +183,10 @@ export class EntityComponent implements OnDestroy {
 
     if (metadata.autoTimestamps) {
       autoFields.created = {
-        type: EntityFieldType.Timestamp
+        type: EntityFieldType.Timestamp,
       };
       autoFields.updated = {
-        type: EntityFieldType.Timestamp
+        type: EntityFieldType.Timestamp,
       };
     }
 
@@ -194,7 +201,7 @@ export class EntityComponent implements OnDestroy {
     return this.entity$.getValue()?.idField || 'id';
   }
 
-  private getMetadata(entityName: string, metadata: any) {
+  private getMetadata(entityName: string, metadata: any): any {
     const nameParts = entityName.split('/');
 
     if (nameParts.length === 1) {
@@ -204,7 +211,7 @@ export class EntityComponent implements OnDestroy {
     return this.getMetadata(nameParts.slice(2).join('/'), metadata.entities[nameParts[0]]);
   }
 
-  private addAdditionalMetadata(field) {
+  private addAdditionalMetadata(field: any) {
     if (
       (field?.inputType === EntityFieldInputType.MultiCheckbox ||
         field?.inputType === EntityFieldInputType.MultiSelect ||
@@ -214,17 +221,13 @@ export class EntityComponent implements OnDestroy {
     ) {
       return this.dataAdapterService.list(field?.data?.entity, field?.data?.entityValue).pipe(
         take(1),
-        map((docs) => {
-          return {
+        map((docs) => ({
             ...field,
-            options: docs.map((doc) => {
-              return {
+            options: docs.map((doc: any) => ({
                 value: field?.optionsUseObjectValue ? doc : doc[field?.data?.entityValue],
-                label: doc[field?.data?.entityLabel]
-              };
-            })
-          };
-        })
+                label: doc[field?.data?.entityLabel],
+              })),
+          })),
       );
     }
 
@@ -255,11 +258,11 @@ export class EntityComponent implements OnDestroy {
 
   private getFieldDetails(
     metadata: MatAdministrationEntity,
-    field: Partial<MatAdministrationEntityField>
+    field: Partial<MatAdministrationEntityField>,
   ): Partial<MatAdministrationEntityField> {
     return {
       ...field,
-      ...(metadata?.fields[field?.name] as Partial<MatAdministrationEntityField>)
+      ...(metadata?.fields[field?.name ?? ''] as Partial<MatAdministrationEntityField>),
     };
   }
 }

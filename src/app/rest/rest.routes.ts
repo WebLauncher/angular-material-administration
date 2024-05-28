@@ -7,6 +7,6 @@ export const siteRoutes: Routes = [
   {
     path: '',
     component: MenuComponent,
-    outlet: 'menu'
-  }
+    outlet: 'menu',
+  },
 ];

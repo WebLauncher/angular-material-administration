@@ -10,16 +10,22 @@ import {
   ElementRef
 } from '@angular/core';
 
-import { FormControl, ControlValueAccessor, NgControl, FormBuilder, NgForm, FormGroupDirective } from '@angular/forms';
-import { CKEditor5 } from '@ckeditor/ckeditor5-angular';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {
+  UntypedFormControl,
+  ControlValueAccessor,
+  NgControl,
+  UntypedFormBuilder,
+  NgForm,
+  FormGroupDirective
+} from '@angular/forms';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { takeUntil } from 'rxjs/operators';
-import { MaterialCkeditorMixinBase } from './ckeditor-mixin';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { EditorConfig } from '@ckeditor/ckeditor5-core';
 
 @Component({
   selector: 'mat-ckeditor',
@@ -28,7 +34,6 @@ import { MaterialCkeditorMixinBase } from './ckeditor-mixin';
   providers: [{ provide: MatFormFieldControl, useExisting: MaterialCkeditorComponent }]
 })
 export class MaterialCkeditorComponent
-  extends MaterialCkeditorMixinBase
   implements OnDestroy, MatFormFieldControl<string>, ControlValueAccessor, DoCheck {
   static nextId = 0;
 
@@ -42,7 +47,7 @@ export class MaterialCkeditorComponent
     return this.focused || !this.empty;
   }
 
-  @Input() config: CKEditor5.Config;
+  @Input() config!: EditorConfig;
 
   @Input()
   get placeholder() {
@@ -95,13 +100,15 @@ export class MaterialCkeditorComponent
 
   @Input() multiple = false;
 
-  onChange: (value) => void;
+  onChange!: (value: string) => void;
 
-  form: FormControl;
-
-  stateChanges = new Subject<void>();
+  form: UntypedFormControl;
 
   focused = false;
+
+  touched = false;
+
+  stateChanges = new Subject<void>();
 
   set value(value: string) {
     this.form.setValue(value);
@@ -116,28 +123,26 @@ export class MaterialCkeditorComponent
     return !this.form.value;
   }
 
-  @ViewChild('editor') editor;
+  @ViewChild('editor') editor!: ElementRef;
 
   private destroyed$ = new Subject();
 
   constructor(
     @Optional() @Self() public ngControl: NgControl,
-    fb: FormBuilder,
+    fb: UntypedFormBuilder,
     private fm: FocusMonitor,
     private elRef: ElementRef<HTMLElement>,
     public _defaultErrorStateMatcher: ErrorStateMatcher,
     @Optional() public _parentForm: NgForm,
     @Optional() public _parentFormGroup: FormGroupDirective
   ) {
-    super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
-
     // Replace the provider from above with this.
     if (this.ngControl != null) {
       // Setting the value accessor directly (instead of using
       // the providers) to avoid running into a circular import.
       this.ngControl.valueAccessor = this as any;
     }
-    this.form = new FormControl(null);
+    this.form = new UntypedFormControl(null);
     this.form.valueChanges.pipe(takeUntil(this.destroyed$)).subscribe((value) => {
       if (this.onChange) {
         this.onChange(value);
@@ -167,7 +172,7 @@ export class MaterialCkeditorComponent
 
   onContainerClick(event: MouseEvent) {
     if ((event.target as Element).tagName.toLowerCase() !== 'input') {
-      this.elRef.nativeElement.querySelector('input').focus();
+      this.elRef.nativeElement.querySelector('input')?.focus();
     }
   }
 
@@ -185,5 +190,35 @@ export class MaterialCkeditorComponent
 
   registerOnTouched() {
     // empty
+  }
+
+  onFocusIn(event: FocusEvent) {
+    if (!this.focused) {
+      this.focused = true;
+      this.stateChanges.next();
+    }
+  }
+
+  onFocusOut(event: FocusEvent) {
+    if (!this.elRef.nativeElement.contains(event.relatedTarget as Element)) {
+      this.touched = true;
+      this.focused = false;
+      this.onTouched();
+      this.stateChanges.next();
+    }
+  }
+
+  onTouched() {}
+
+  private updateErrorState() {
+    const parent = this._parentFormGroup || this._parentForm;
+
+    const oldState = this.errorState;
+    const newState = (this.ngControl?.invalid || this.form.invalid) && (this.touched || parent.submitted);
+
+    if (oldState !== newState) {
+      this.errorState = newState;
+      this.stateChanges.next();
+    }
   }
 }

@@ -11,12 +11,18 @@ import {
 } from '@angular/core';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { Subject } from 'rxjs';
-import { FormBuilder, NgControl, FormControl, ControlValueAccessor, NgForm, FormGroupDirective } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  NgControl,
+  UntypedFormControl,
+  ControlValueAccessor,
+  NgForm,
+  FormGroupDirective
+} from '@angular/forms';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntil } from 'rxjs/operators';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { MaterialFileInputMixinBase } from './file-input-mixin';
 
 @Component({
   selector: 'mat-file-input',
@@ -25,9 +31,14 @@ import { MaterialFileInputMixinBase } from './file-input-mixin';
   providers: [{ provide: MatFormFieldControl, useExisting: MatFileInputComponent }]
 })
 export class MatFileInputComponent
-  extends MaterialFileInputMixinBase
-  implements OnDestroy, MatFormFieldControl<File[]>, ControlValueAccessor, DoCheck {
+  implements OnDestroy, MatFormFieldControl<File[] | null>, ControlValueAccessor, DoCheck {
   static nextId = 0;
+
+  stateChanges = new Subject<void>();
+
+  focused = false;
+
+  touched = false;
 
   // eslint-disable-next-line no-plusplus
   @HostBinding() id = `mat-file-input-${MatFileInputComponent.nextId++}`;
@@ -88,17 +99,13 @@ export class MatFileInputComponent
 
   @Input() multiple = false;
 
-  @Input() color: string;
+  @Input() color!: string;
 
-  onChange: (value) => void;
+  onChange!: (value: File[] | null) => void;
 
-  form: FormControl;
+  form: UntypedFormControl;
 
-  stateChanges = new Subject<void>();
-
-  focused = false;
-
-  set value(value: File[]) {
+  set value(value: File[] | null) {
     this.form.setValue(value);
     this.stateChanges.next();
   }
@@ -111,28 +118,26 @@ export class MatFileInputComponent
     return !this.form.value;
   }
 
-  @ViewChild('file') file;
+  @ViewChild('file') file!: ElementRef;
 
   private destroyed$ = new Subject();
 
   constructor(
     @Optional() @Self() public ngControl: NgControl,
-    fb: FormBuilder,
+    fb: UntypedFormBuilder,
     private fm: FocusMonitor,
     private elRef: ElementRef<HTMLElement>,
     public _defaultErrorStateMatcher: ErrorStateMatcher,
     @Optional() public _parentForm: NgForm,
     @Optional() public _parentFormGroup: FormGroupDirective
   ) {
-    super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
-
     // Replace the provider from above with this.
     if (this.ngControl != null) {
       // Setting the value accessor directly (instead of using
       // the providers) to avoid running into a circular import.
       this.ngControl.valueAccessor = this as any;
     }
-    this.form = new FormControl(null);
+    this.form = new UntypedFormControl(null);
     this.form.valueChanges.pipe(takeUntil(this.destroyed$)).subscribe((value) => {
       if (this.onChange) {
         this.onChange(value);
@@ -162,7 +167,7 @@ export class MatFileInputComponent
 
   onContainerClick(event: MouseEvent) {
     if ((event.target as Element).tagName.toLowerCase() !== 'input') {
-      this.elRef.nativeElement.querySelector('input').focus();
+      this.elRef?.nativeElement?.querySelector('input')?.focus();
     }
   }
 
@@ -201,5 +206,35 @@ export class MatFileInputComponent
     }
 
     return this.multiple ? this.value.map((file) => file?.name).join(', ') : this.value[0]?.name;
+  }
+
+  onFocusIn(event: FocusEvent) {
+    if (!this.focused) {
+      this.focused = true;
+      this.stateChanges.next();
+    }
+  }
+
+  onFocusOut(event: FocusEvent) {
+    if (!this.elRef.nativeElement.contains(event.relatedTarget as Element)) {
+      this.touched = true;
+      this.focused = false;
+      this.onTouched();
+      this.stateChanges.next();
+    }
+  }
+
+  onTouched() {}
+
+  private updateErrorState() {
+    const parent = this._parentFormGroup || this._parentForm;
+
+    const oldState = this.errorState;
+    const newState = (this.ngControl?.invalid || this.form.invalid) && (this.touched || parent.submitted);
+
+    if (oldState !== newState) {
+      this.errorState = newState;
+      this.stateChanges.next();
+    }
   }
 }

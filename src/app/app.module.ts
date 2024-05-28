@@ -31,14 +31,14 @@ import { SiteMetadata } from './site-metadata';
     MatButtonToggleModule,
     MatMenuModule,
     MatProgressSpinnerModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   providers: [
     {
       provide: MAT_ADMINISTRATION_METADATA,
-      useValue: SiteMetadata
-    }
+      useValue: SiteMetadata,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

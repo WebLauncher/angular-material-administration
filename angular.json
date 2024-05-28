@@ -37,11 +37,12 @@
               }
             ],
             "allowedCommonJsDependencies": [
-              "@angular/fire/firestore",
-              "lodash",
-              "zone.js/dist/zone-error"
+              "@ckeditor/ckeditor5-build-classic",
+              "lodash"
             ],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -84,8 +85,7 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-          },
+          "options": {},
           "configurations": {
             "production": {
               "browserTarget": "administration:build:production"
@@ -109,15 +109,23 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": []
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["**/*.spec.ts", "**/*.ts"]
+            "lintFilePatterns": [
+              "**/*.spec.ts",
+              "**/*.ts"
+            ]
           }
         },
         "deploy": {
@@ -136,7 +144,7 @@
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/file-input/tsconfig.lib.json",
-            "project": "projects/file-input/ng-package.json"
+            "project": "projects/file-input/ng-package.json",
           },
           "configurations": {
             "production": {
@@ -157,7 +165,10 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["**/*.spec.ts", "**/*.ts"]
+            "lintFilePatterns": [
+              "**/*.spec.ts",
+              "**/*.ts"
+            ]
           }
         }
       }
@@ -193,7 +204,10 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["**/*.spec.ts", "**/*.ts"]
+            "lintFilePatterns": [
+              "**/*.spec.ts",
+              "**/*.ts"
+            ]
           }
         }
       }
@@ -229,7 +243,10 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["**/*.spec.ts", "**/*.ts"]
+            "lintFilePatterns": [
+              "**/*.spec.ts",
+              "**/*.ts"
+            ]
           }
         }
       }
@@ -265,13 +282,15 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["**/*.spec.ts", "**/*.ts"]
+            "lintFilePatterns": [
+              "**/*.spec.ts",
+              "**/*.ts"
+            ]
           }
         }
       }
     }
   },
-  "defaultProject": "administration",
   "cli": {
     "analytics": false
   }

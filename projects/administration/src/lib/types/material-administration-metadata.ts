@@ -1,5 +1,9 @@
-import { ValidatorFn, AbstractControlOptions, AsyncValidatorFn } from '@angular/forms';
-import { HttpHeaders, HttpParams } from '@angular/common/http';
+import {
+ ValidatorFn, AbstractControlOptions, AsyncValidatorFn,
+} from '@angular/forms';
+import {
+ HttpHeaders, HttpParams,
+} from '@angular/common/http';
 import { EntityFieldType } from './entity-field-type.enum';
 import { EntityFieldInputType } from './entity-field-input-type.enum';
 
@@ -22,7 +26,7 @@ interface MatAdministrationEntityField {
   label: string;
   format: string;
   filePathField: string;
-  options?: Array<{ value: any; label: string }>;
+  options?: { value: any; label: string }[];
   optionsUseObjectValue?: boolean;
   style: Partial<{
     list: { [k: string]: any };
@@ -48,7 +52,7 @@ interface MatAdministrationFormSection {
 }
 
 interface MatAdministrationFormLayout extends MatAdministrationLayout {
-  sections: Array<Partial<MatAdministrationFormSection>>;
+  sections: Partial<MatAdministrationFormSection>[];
 }
 
 interface MatAdministrationEntity {
@@ -127,5 +131,5 @@ export {
   MatAdministrationFormLayout,
   MatAdministrationFormSection,
   MatAdministrationLayout,
-  MatAdministrationEntityField
+  MatAdministrationEntityField,
 };

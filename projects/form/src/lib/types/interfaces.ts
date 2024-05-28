@@ -21,7 +21,7 @@ export interface MatFormEntityField {
   label: string;
   format: string;
   filePathField: string;
-  options?: Array<{ value: any; label: string; valueObject?: any }>;
+  options?: { value: any; label: string; valueObject?: any }[];
   style: Partial<{
     list: { [k: string]: any };
     form: { [k: string]: any };
@@ -41,10 +41,10 @@ export interface MatFormLayout {
 export interface MatFormSection {
   title: string;
   subtitle: string;
-  fields: string[] | Array<Partial<MatFormEntityField>>;
+  fields: string[] | (Partial<MatFormEntityField> | undefined)[];
   layout: Partial<MatFormLayout>;
 }
 
 export interface MatFormSectionsLayout extends MatFormLayout {
-  sections: Array<Partial<MatFormSection>>;
+  sections: Partial<MatFormSection>[];
 }

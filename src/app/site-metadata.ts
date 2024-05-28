@@ -1,4 +1,6 @@
-import { MatAdministrationMetadata, EntityFieldType, EntityFieldInputType } from '@weblauncher/material-administration';
+import {
+ MatAdministrationMetadata, EntityFieldType, EntityFieldInputType,
+} from '@weblauncher/material-administration';
 
 export const SiteMetadata: MatAdministrationMetadata = {
   entities: {
@@ -15,16 +17,16 @@ export const SiteMetadata: MatAdministrationMetadata = {
             type: 'entity',
             entity: 'sports',
             entityValue: 'id',
-            entityLabel: 'name'
-          }
+            entityLabel: 'name',
+          },
         },
         title: {
           value: 'This is another article',
-          validatorMessages: { required: 'This field is required' }
+          validatorMessages: { required: 'This field is required' },
         },
         content: {
           hideInList: true,
-          inputType: EntityFieldInputType.Ckeditor
+          inputType: EntityFieldInputType.Ckeditor,
         },
         imageUrl: {
           label: 'Image',
@@ -32,12 +34,12 @@ export const SiteMetadata: MatAdministrationMetadata = {
           format: 'image',
           filePathField: 'imageUrlPath',
           style: {
-            list: { height: '100px' }
-          }
+            list: { height: '100px' },
+          },
         },
         created: {
-          showInList: true
-        }
+          showInList: true,
+        },
       },
       entities: {
         images: {
@@ -46,19 +48,19 @@ export const SiteMetadata: MatAdministrationMetadata = {
           autoTimestamps: true,
           fields: {
             id: {
-              hideInList: true
+              hideInList: true,
             },
             title: 'title',
             imageUrl: {
               label: 'Image',
               inputType: EntityFieldInputType.Image,
               format: 'image',
-              filePathField: 'imageUrlPath'
+              filePathField: 'imageUrlPath',
             },
             created: {
-              showInList: true
-            }
-          }
+              showInList: true,
+            },
+          },
         },
         comments: {
           single: 'comment',
@@ -66,15 +68,15 @@ export const SiteMetadata: MatAdministrationMetadata = {
           autoTimestamps: true,
           fields: {
             id: {
-              hideInList: true
+              hideInList: true,
             },
             title: 'title',
             content: 'content',
             created: {
-              showInList: true
-            }
-          }
-        }
+              showInList: true,
+            },
+          },
+        },
       },
       layout: {
         form: {
@@ -86,16 +88,16 @@ export const SiteMetadata: MatAdministrationMetadata = {
               fields: ['title', 'sport'],
               layout: {
                 direction: 'row',
-                gap: '1rem'
-              }
+                gap: '1rem',
+              },
             },
             {
               title: 'Article',
-              fields: ['content', 'imageUrl']
-            }
-          ]
-        }
-      }
+              fields: ['content', 'imageUrl'],
+            },
+          ],
+        },
+      },
     },
     events: {
       single: 'event',
@@ -110,28 +112,28 @@ export const SiteMetadata: MatAdministrationMetadata = {
             type: 'entity',
             entity: 'sports',
             entityValue: 'id',
-            entityLabel: 'name'
-          }
+            entityLabel: 'name',
+          },
         },
         title: 'title',
         description: {
           hideInList: true,
-          inputType: EntityFieldInputType.Ckeditor
+          inputType: EntityFieldInputType.Ckeditor,
         },
         start: {
           type: EntityFieldType.Timestamp,
           inputType: 'datepicker',
-          showInList: true
+          showInList: true,
         },
         end: {
           type: EntityFieldType.Timestamp,
           inputType: 'datepicker',
-          showInList: true
+          showInList: true,
         },
         created: {
-          showInList: true
-        }
-      }
+          showInList: true,
+        },
+      },
     },
     users: {
       single: 'user',
@@ -140,8 +142,8 @@ export const SiteMetadata: MatAdministrationMetadata = {
       titleField: 'email',
       fields: {
         email: 'email',
-        displayName: 'displayName'
-      }
+        displayName: 'displayName',
+      },
     },
     sports: {
       single: 'sport',
@@ -150,8 +152,8 @@ export const SiteMetadata: MatAdministrationMetadata = {
       fields: {
         name: 'name',
         order: 'order',
-        icon: 'icon'
-      }
-    }
-  }
+        icon: 'icon',
+      },
+    },
+  },
 };
