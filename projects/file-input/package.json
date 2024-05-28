@@ -15,7 +15,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "ng build material-file-input --prod",
+    "build": "ng build material-file-input --configuration production",
     "postpublish": "rm -rf dist/"
   },
   "peerDependencies": {

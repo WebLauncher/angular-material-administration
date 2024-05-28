@@ -1,33 +1,46 @@
-import { Component, Optional, Inject } from '@angular/core';
+import {
+ Component, Optional, Inject, ChangeDetectionStrategy,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { map, switchMap, shareReplay, tap, withLatestFrom } from 'rxjs/operators';
-import { pickBy, capitalize, merge } from 'lodash-es';
+import {
+ Observable, BehaviorSubject, combineLatest,
+ Subject,
+} from 'rxjs';
+import {
+ map, switchMap, shareReplay, tap, withLatestFrom,
+} from 'rxjs/operators';
+import {
+ pickBy, capitalize, merge,
+} from 'lodash-es';
 import { ValueFormatService } from '../../services/value-format.service';
 import { EntityComponent } from '../entity/entity.component';
 import { SnackbarService } from '../../services/snackbar.service';
-import { MatAdministrationMetadata, MatAdministrationEntityField } from '../../types/material-administration-metadata';
+import {
+ MatAdministrationMetadata, MatAdministrationEntityField,
+} from '../../types/material-administration-metadata';
 import { EntityFieldType } from '../../types/entity-field-type.enum';
 import { DataAdapterInterface } from '../../types/data-adapter';
 import {
   MAT_ADMINISTRATION_BASE_PATH,
   MAT_ADMINISTRATION_DATA_ADAPTER,
-  MAT_ADMINISTRATION_METADATA
+  MAT_ADMINISTRATION_METADATA,
 } from '../../types/injection-tokens';
+import { CdkTableDataSourceInput } from '@angular/cdk/table';
 
 @Component({
   selector: 'mat-administration-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListComponent extends EntityComponent {
   displayedColumns$: Observable<any[]>;
 
   displayedColumnsNames$: Observable<string[]>;
 
-  list$: Observable<any[]>;
+  list$: Observable<any>;
 
-  private refresh$: BehaviorSubject<void> = new BehaviorSubject(null);
+  private refresh$: Subject<void> = new Subject();
 
   constructor(
     public route: ActivatedRoute,
@@ -35,7 +48,7 @@ export class ListComponent extends EntityComponent {
     private snackbar: SnackbarService,
     @Inject(MAT_ADMINISTRATION_DATA_ADAPTER) public dataAdapterService: DataAdapterInterface,
     @Optional() @Inject(MAT_ADMINISTRATION_METADATA) public metadata: MatAdministrationMetadata,
-    @Optional() @Inject(MAT_ADMINISTRATION_BASE_PATH) public basePath: string
+    @Optional() @Inject(MAT_ADMINISTRATION_BASE_PATH) public basePath: string,
   ) {
     super(route, dataAdapterService, metadata);
 
@@ -44,19 +57,19 @@ export class ListComponent extends EntityComponent {
     this.list$ = combineLatest([this.entityName$, this.refresh$]).pipe(
       switchMap(([entity]) => this.dataAdapterService.list(entity, this.getIdField())),
       tap(() => this.isLoading$.next(false)),
-      shareReplay(1)
+      shareReplay(1),
     );
   }
 
-  getValue(element, column) {
+  getValue(element: any, column: string) {
     return this.entity$.pipe(
       map((metadata) =>
-        this.valueFormatService.transform(element[column], metadata?.fields[column]?.type, metadata?.fields[column])
-      )
+        this.valueFormatService.transform(element[column], metadata?.fields[column]?.type, metadata?.fields[column]),
+      ),
     );
   }
 
-  delete(element) {
+  delete(element: any) {
     this.isLoading$.next(true);
     this.dataAdapterService.delete(this.entityName$.getValue(), element?.id).subscribe(
       () => this.snackbar.success(`${capitalize(this.entity$.getValue()?.single)} deleted successfully!`),
@@ -64,7 +77,7 @@ export class ListComponent extends EntityComponent {
       () => {
         this.isLoading$.next(false);
         this.refresh$.next();
-      }
+      },
     );
   }
 
@@ -74,17 +87,19 @@ export class ListComponent extends EntityComponent {
       map(([metadata, subCollections]) => {
         const columns = this.getDisplayableColumns(metadata?.fields);
         if (subCollections) {
-          columns.push({ id: 'entities', label: 'Manage' });
+          columns.push({ id: 'entities',
+label: 'Manage' });
         }
-        columns.push({ id: 'actions', label: 'Actions' });
+        columns.push({ id: 'actions',
+label: 'Actions' });
 
         return columns;
       }),
-      shareReplay(1)
+      shareReplay(1),
     );
   }
 
-  private getDisplayableColumns(columns) {
+  private getDisplayableColumns(columns: any) {
     if (!columns) {
       return [];
     }
@@ -96,7 +111,7 @@ export class ListComponent extends EntityComponent {
       .map((column) => ({
         ...columns[column],
         label: columns[column]?.label || this.getFieldLabel({ label: column }),
-        id: columns[column]?.id || column
+        id: columns[column]?.id || column,
       }));
   }
 

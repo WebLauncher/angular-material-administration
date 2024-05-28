@@ -47,7 +47,7 @@ export class MaterialCkeditorComponent
     return this.focused || !this.empty;
   }
 
-  @Input() config: EditorConfig;
+  @Input() config!: EditorConfig;
 
   @Input()
   get placeholder() {
@@ -100,7 +100,7 @@ export class MaterialCkeditorComponent
 
   @Input() multiple = false;
 
-  onChange: (value) => void;
+  onChange!: (value: string) => void;
 
   form: UntypedFormControl;
 
@@ -123,7 +123,7 @@ export class MaterialCkeditorComponent
     return !this.form.value;
   }
 
-  @ViewChild('editor') editor;
+  @ViewChild('editor') editor!: ElementRef;
 
   private destroyed$ = new Subject();
 
@@ -172,7 +172,7 @@ export class MaterialCkeditorComponent
 
   onContainerClick(event: MouseEvent) {
     if ((event.target as Element).tagName.toLowerCase() !== 'input') {
-      this.elRef.nativeElement.querySelector('input').focus();
+      this.elRef.nativeElement.querySelector('input')?.focus();
     }
   }
 

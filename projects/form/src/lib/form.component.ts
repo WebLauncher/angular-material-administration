@@ -1,19 +1,32 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators, UntypedFormControl, UntypedFormArray } from '@angular/forms';
-import { map, takeUntil } from 'rxjs/operators';
+import {
+ Component, OnInit, Input, Output, EventEmitter, OnDestroy, ChangeDetectionStrategy,
+} from '@angular/core';
+import {
+  UntypedFormGroup,
+  UntypedFormBuilder,
+  Validators,
+  UntypedFormControl,
+  FormControl,
+  FormArray,
+} from '@angular/forms';
+import {
+ map, takeUntil,
+} from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { MatFormEntityField, MatFormSection, MatFormSectionsLayout, EntityFieldInputType } from './types';
+import {
+ MatFormEntityField, MatFormSection, MatFormSectionsLayout, EntityFieldInputType,
+} from './types';
 
 @Component({
   selector: 'mat-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialFormComponent implements OnInit, OnDestroy {
-  @Input() fields: Partial<MatFormEntityField>[];
+  @Input() fields!: Partial<MatFormEntityField>[] | undefined | null;
 
-  @Input() layout: MatFormSectionsLayout;
+  @Input() layout!: MatFormSectionsLayout;
 
   @Input() saveBtnText = 'Save';
 
@@ -27,9 +40,9 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
 
   @Output() validChanges: EventEmitter<boolean> = new EventEmitter();
 
-  form: UntypedFormGroup;
+  form!: UntypedFormGroup;
 
-  sections: Partial<MatFormSection>[];
+  sections!: Partial<MatFormSection>[];
 
   EntityFieldInputType = EntityFieldInputType;
 
@@ -42,21 +55,20 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.fields) {
       this.form = this.formBuilder.group(
-        this.fields?.reduce((prev, cur) => {
-          return { ...prev, [cur?.name]: this.getField(cur) };
-        }, {})
+        this.fields?.reduce((prev, cur) => ({ ...prev,
+[cur?.name ?? '']: this.getField(cur) }), {}),
       );
 
       this.form.valueChanges
         .pipe(
           map((value) => this.mapFormValue(value)),
-          takeUntil(this.destroyed$)
+          takeUntil(this.destroyed$),
         )
         .subscribe(this.valueChanges);
       this.form.statusChanges.pipe(takeUntil(this.destroyed$)).subscribe(() => this.validChanges.emit(this.form.valid));
     }
 
-    this.sections = this.getSectionsWithFields();
+    this.sections = this.getSectionsWithFields() as Partial<MatFormSection>[];
   }
 
   ngOnDestroy() {
@@ -70,70 +82,78 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  removeImage(field) {
-    this.form.get(field.name).setValue(null);
+  removeImage(field: MatFormEntityField) {
+    if (field?.name) {
+      this.form.get(field.name)?.setValue(null);
+    }
   }
 
   get disabled(): boolean {
     return this.disableOnInvalid && this.form.invalid;
   }
 
-  showError(field: any, messageKey: string | unknown) {
+  showError(field: MatFormEntityField, messageKey: string | unknown) {
     return (
       messageKey &&
       field?.validatorMessages &&
-      this.form.get(field?.name).invalid &&
-      this.form.get(field?.name).hasError(messageKey as string)
+      field?.name &&
+      this.form.get(field?.name)?.invalid &&
+      this.form.get(field?.name)?.hasError(messageKey as string)
     );
   }
 
   private getSectionsWithFields() {
-    if (!this.layout || !this.layout?.sections) {
+    if (!this.layout?.sections) {
       return [
         {
           fields: this.fields,
-          layout: this.layout
-        }
+          layout: this.layout,
+        },
       ];
     }
 
     return this.layout?.sections.map((section) => ({
       ...section,
-      fields: ((section?.fields || []) as string[]).map((fieldName) =>
-        this.fields.find((field) => field?.name === fieldName)
+      fields: ((section?.fields ?? []) as string[]).map((fieldName) =>
+        this.fields?.find((field) => field?.name === fieldName),
       ),
-      layout: section?.layout || this.layout
+      layout: section?.layout ?? this.layout,
     }));
   }
 
-  private getFieldValue(field) {
+  private getFieldValue(field: Partial<MatFormEntityField>) {
     return field?.value;
   }
 
   private getFieldValidators(field: Partial<MatFormEntityField>) {
-    return field.validatorOrOpts || [Validators.required];
+    return field.validatorOrOpts ?? [Validators.required];
   }
 
   private getField(field: Partial<MatFormEntityField>) {
     // see if field is a form array field
     if (field?.inputType === EntityFieldInputType.MultiCheckbox) {
-      return new UntypedFormArray([
-        ...field?.options.map((option) => new UntypedFormControl(this.getFieldValue(field)?.includes(option?.value)))
+      return new FormArray([
+        ...(field?.options?.map(
+          (option: { value: any; label: string; valueObject?: any }) =>
+            new FormControl(this.getFieldValue(field)?.includes(option?.value)),
+        ) ?? []),
       ]);
     }
 
     return new UntypedFormControl(this.getFieldValue(field), this.getFieldValidators(field));
   }
 
-  private mapFormValue(formValue) {
-    return this.fields?.reduce((prev, cur) => {
-      return { ...prev, [cur?.name]: this.getFormFieldValue(cur, formValue?.[cur?.name]) };
-    }, {});
+  private mapFormValue(formValue: any) {
+    return this.fields?.reduce(
+      (prev, cur) => ({ ...prev,
+[cur?.name ?? '']: this.getFormFieldValue(cur, formValue?.[cur?.name ?? '']) }),
+      {},
+    );
   }
 
-  private getFormFieldValue(field: Partial<MatFormEntityField>, formValue) {
+  private getFormFieldValue(field: Partial<MatFormEntityField>, formValue: any) {
     if (field?.inputType === EntityFieldInputType.MultiCheckbox) {
-      return field?.options.filter((_, i) => !!formValue?.[i]).map((option) => option?.value);
+      return field?.options?.filter((_, i) => !!formValue?.[i]).map((option) => option?.value);
     }
 
     return formValue;

@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { from, Subject, Observable } from 'rxjs';
+import {
+ from, Subject, Observable,
+} from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { v4 as uuidv4 } from 'uuid';
-import { finalize, filter } from 'rxjs/operators';
+import {
+ finalize, filter,
+} from 'rxjs/operators';
 import { serverTimestamp } from '@angular/fire/firestore';
-import { DataAdapterInterface, DownloadData } from '../types/data-adapter';
+import {
+ DataAdapterInterface, DownloadData,
+} from '../types/data-adapter';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FirestoreDataAdapterService implements DataAdapterInterface {
   constructor(private db: AngularFirestore, private storage: AngularFireStorage) {}
@@ -46,11 +52,11 @@ export class FirestoreDataAdapterService implements DataAdapterInterface {
           fileRef.getDownloadURL().subscribe((downloadUrl) => {
             downloadData$.next({
               downloadUrl,
-              path
+              path,
             });
             downloadData$.complete();
           });
-        })
+        }),
       )
       .subscribe();
 

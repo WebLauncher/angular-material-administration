@@ -4,3 +4,4 @@
 
 export * from './lib/form.component';
 export * from './lib/form.module';
+export * from './lib/types';

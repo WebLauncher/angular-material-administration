@@ -15,7 +15,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "ng build material-ckeditor --prod",
+    "build": "ng build material-ckeditor --configuration production",
     "postpublish": "rm -rf dist/"
   },
   "peerDependencies": {

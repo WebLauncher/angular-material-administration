@@ -30,7 +30,8 @@ import { ErrorStateMatcher } from '@angular/material/core';
   styleUrls: ['./file-input.component.scss'],
   providers: [{ provide: MatFormFieldControl, useExisting: MatFileInputComponent }]
 })
-export class MatFileInputComponent implements OnDestroy, MatFormFieldControl<File[]>, ControlValueAccessor, DoCheck {
+export class MatFileInputComponent
+  implements OnDestroy, MatFormFieldControl<File[] | null>, ControlValueAccessor, DoCheck {
   static nextId = 0;
 
   stateChanges = new Subject<void>();
@@ -98,13 +99,13 @@ export class MatFileInputComponent implements OnDestroy, MatFormFieldControl<Fil
 
   @Input() multiple = false;
 
-  @Input() color: string;
+  @Input() color!: string;
 
-  onChange: (value) => void;
+  onChange!: (value: File[] | null) => void;
 
   form: UntypedFormControl;
 
-  set value(value: File[]) {
+  set value(value: File[] | null) {
     this.form.setValue(value);
     this.stateChanges.next();
   }
@@ -117,7 +118,7 @@ export class MatFileInputComponent implements OnDestroy, MatFormFieldControl<Fil
     return !this.form.value;
   }
 
-  @ViewChild('file') file;
+  @ViewChild('file') file!: ElementRef;
 
   private destroyed$ = new Subject();
 
@@ -166,7 +167,7 @@ export class MatFileInputComponent implements OnDestroy, MatFormFieldControl<Fil
 
   onContainerClick(event: MouseEvent) {
     if ((event.target as Element).tagName.toLowerCase() !== 'input') {
-      this.elRef.nativeElement.querySelector('input').focus();
+      this.elRef?.nativeElement?.querySelector('input')?.focus();
     }
   }
 
