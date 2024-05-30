@@ -7,7 +7,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MAT_ADMINISTRATION_METADATA } from 'projects/administration/src';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -44,7 +43,6 @@ import { SiteMetadata } from './site-metadata';
     MatButtonToggleModule,
     MatMenuModule,
     MatProgressSpinnerModule,
-    FlexLayoutModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),

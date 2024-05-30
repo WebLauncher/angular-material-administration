@@ -4,7 +4,7 @@
 <ng-container *ngIf="entity$ | async as entity; else noEntity">
   <mat-administration-breadcrumbs [entityName]="entityName$ | async" action="update"></mat-administration-breadcrumbs>
   <mat-toolbar class="justify-between toolbar-main">
-    <h1 fxLayoutAlign="start center">
+    <h1 class="display-flex" style="justify-content: start; align-items: center">
       <mat-icon *ngIf="entity?.icon">{{ entity?.icon }}</mat-icon> Update {{ entity?.single }}
     </h1>
     <span class="entity-title"

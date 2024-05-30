@@ -1,17 +1,17 @@
-<div fxLayout="row"
-     fxAlign="start"
-     *ngIf="links$ | async as links">
+<div
+  class="display-flex"
+  style="flex-direction: row; justify-content: start; align-items: center"
+  *ngIf="links$ | async as links"
+>
   <ng-container *ngIf="links.length > 1">
     <ng-container *ngFor="let item of links; let last = last">
-      <div fxLayout="row"
-           fxLayoutAlign="start center">
-        <a mat-button
-           routerLink="{{basePath}}/{{item.url}}">
+      <div class="display-flex" style="flex-direction: row; justify-content: start; align-items: center">
+        <a mat-button routerLink="{{ basePath }}/{{ item.url }}">
           <ng-container *ngIf="item.source">
-            {{(item.source | async)}}
+            {{ item.source | async }}
           </ng-container>
           <ng-container *ngIf="!item.source">
-            {{item.name}}
+            {{ item.name }}
           </ng-container>
         </a>
         <mat-icon *ngIf="!last">arrow_right</mat-icon>

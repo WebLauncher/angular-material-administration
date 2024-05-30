@@ -1,10 +1,4 @@
-<form
-  [formGroup]="form"
-  (ngSubmit)="submit()"
-  [fxLayout]="layout?.direction || 'column wrap'"
-  fxLayoutAlign="{{ layout?.mainAlign || 'center' }} {{ layout?.crossAlign || 'stretch' }}"
-  [fxLayoutGap]="layout?.gap || '0'"
->
+<form [formGroup]="form" (ngSubmit)="submit()" class="display-flex" [ngStyle]="formStyles">
   <mat-card
     class="form-section"
     *ngFor="let section of sections"
@@ -12,12 +6,7 @@
   >
     <mat-card-title class="form-section-header" *ngIf="section?.title"> {{ section.title }}</mat-card-title>
     <mat-card-subtitle class="form-section-header" *ngIf="section?.subtitle"> {{ section.subtitle }}</mat-card-subtitle>
-    <mat-card-content
-      class="form-section-body"
-      [fxLayout]="section?.layout?.direction || 'column wrap'"
-      fxLayoutAlign="{{ section?.layout?.mainAlign || 'center' }} {{ section?.layout?.crossAlign || 'stretch' }}"
-      [fxLayoutGap]="section?.layout?.gap || '0'"
-    >
+    <mat-card-content class="form-section-body display-flex" [ngStyle]="getLayoutStyles(section?.layout)">
       <ng-container *ngIf="section?.fields">
         <ng-container *ngFor="let field of $any(section?.fields)">
           <ng-container *ngTemplateOutlet="formField; context: { field: field }"></ng-container>
@@ -26,7 +15,7 @@
     </mat-card-content>
   </mat-card>
 
-  <div fxFlexAlign="end">
+  <div class="display-flex" [ngStyle]="{ 'justify-content': 'end' }">
     <button mat-flat-button color="primary" type="submit" [disabled]="disabled">{{ saveBtnText }}</button>
   </div>
 
@@ -139,7 +128,7 @@
         <div *ngSwitchCase="EntityFieldInputType.Image">
           <div *ngIf="form.controls[field?.name].value">
             <mat-label>{{ field?.label }}</mat-label>
-            <div fxLayout="row" fxLayoutAlign="start">
+            <div style="display: flex; flex-direction: row">
               <img class="file-input-image" [src]="field?.value" alt="field?.label" />
               <button type="button" mat-flat-button (click)="removeImage(field)">{{ removeBtnText }}</button>
             </div>

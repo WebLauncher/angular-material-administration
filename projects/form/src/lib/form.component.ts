@@ -46,6 +46,8 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
 
   EntityFieldInputType = EntityFieldInputType;
 
+  formStyles = this.getLayoutStyles(this.layout);
+
   private destroyed$: Subject<void> = new Subject();
 
   constructor(private formBuilder: UntypedFormBuilder) {
@@ -90,6 +92,13 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
 
   get disabled(): boolean {
     return this.disableOnInvalid && this.form.invalid;
+  }
+
+  getLayoutStyles(layout: any) {
+    return {
+      'flex-flow': this.layout?.direction ?? 'column wrap',
+      'place-content': `${this.layout?.crossAlign ?? 'stretch'} ${this.layout?.mainAlign ?? 'center'}`,
+    };
   }
 
   showError(field: MatFormEntityField, messageKey: string | unknown) {

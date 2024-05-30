@@ -4,7 +4,7 @@
 <ng-container *ngIf="entity$ | async as entity; else noEntity">
   <mat-administration-breadcrumbs [entityName]="entityName$ | async" action="add"></mat-administration-breadcrumbs>
   <mat-toolbar class="justify-between">
-    <h1 fxLayoutAlign="start center">
+    <h1 class="display-flex" style="justify-content: start; align-items: center">
       <mat-icon *ngIf="entity?.icon">{{ entity?.icon }}</mat-icon> Add {{ entity?.single }}
     </h1>
     <a mat-flat-button color="warn" routerLink="{{ basePath }}/{{ entityPath$ | async }}/list">

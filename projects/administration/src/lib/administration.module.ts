@@ -25,7 +25,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RouterModule } from '@angular/router';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatNativeDateModule } from '@angular/material/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
@@ -74,7 +73,6 @@ const modules = [
   MatNativeDateModule,
   MatPaginatorModule,
   MatSortModule,
-  FlexLayoutModule,
   MatMenuModule,
   MatSidenavModule,
   MatListModule,

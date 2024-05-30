@@ -16,7 +16,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatNativeDateModule } from '@angular/material/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCkeditorModule } from '@weblauncher/material-ckeditor';
 import { MatFileInputModule } from '@weblauncher/material-file-input';
 import { MaterialFormComponent } from './form.component';
@@ -38,7 +37,6 @@ import { MaterialFormComponent } from './form.component';
     MatDatepickerModule,
     MatSnackBarModule,
     MatNativeDateModule,
-    FlexLayoutModule,
     MatCkeditorModule,
     MatFileInputModule,
   ],

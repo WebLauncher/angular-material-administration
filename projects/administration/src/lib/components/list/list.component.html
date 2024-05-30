@@ -4,7 +4,7 @@
 <ng-container *ngIf="entity$ | async as entity; else noMetadata">
   <mat-administration-breadcrumbs [entityName]="entityName$ | async" action="list"></mat-administration-breadcrumbs>
   <mat-toolbar class="justify-between">
-    <h1 fxLayoutAlign="start center">
+    <h1 class="display-flex" style="justify-content: start; align-items: center">
       <mat-icon *ngIf="entity?.icon">{{ entity?.icon }}</mat-icon> {{ entity?.plural | titlecase }}
     </h1>
     <button mat-flat-button color="primary" routerLink="{{ basePath }}/{{ entityPath$ | async }}/add">
