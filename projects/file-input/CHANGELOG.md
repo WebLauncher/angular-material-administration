@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.13.0 (2024-05-30)
+
+### Features
+
+- **deps:** update to angular v15 ([a190ac5](https://github.com/WebLauncher/angular-material-administration/commit/a190ac5402c6f1536bf4dd23bdf564eb35a78179))
+
 ## 0.12.4 (2024-05-30)
 
 **Note:** Version bump only for package @weblauncher/material-file-input
