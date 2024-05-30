@@ -10,7 +10,8 @@
   },
   "conventionalCommits.scopes": [
     "app",
-    "deps"
+    "deps",
+    "docs"
   ],
   "eslint.validate": ["javascript", "typescript", "html"],
 

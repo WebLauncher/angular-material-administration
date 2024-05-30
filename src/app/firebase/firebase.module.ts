@@ -7,7 +7,6 @@ import {
   FirestoreDataAdapterService,
   MaterialAdministrationModule,
 } from '@weblauncher/material-administration';
-import { environment } from 'src/environments/environment';
 import { firebaseRoutes } from './firebase.routes';
 
 export function firebaseAppNameFactory() {
@@ -18,7 +17,7 @@ export function firebaseAppNameFactory() {
   imports: [
     CommonModule,
     RouterModule.forChild(firebaseRoutes),
-    MaterialAdministrationModule.forRoot(environment.firebase, firebaseAppNameFactory),
+    MaterialAdministrationModule,
   ],
   exports: [RouterModule],
   providers: [

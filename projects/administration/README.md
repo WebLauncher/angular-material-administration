@@ -22,22 +22,14 @@ Password:   testing
 
 The next steps describes how to import for Firebase Firestore data source.
 
-Create app name Firebase factory function
-
-~~~ts
-export function firebaseAppNameFactory() {
-  return 'Your Firebase App Name';
-}
-~~~
-
-In `environment.ts` (and other environment files) define `firebase` config as described in [Angular Firebase documentation](https://github.com/angular/angularfire/blob/master/docs/install-and-setup.md)
+Provide firebase modules using `@angular/fire`.
 
 In your `app.module.ts` import the module as below
 
 ~~~ts
 imports: [
   ...
-  MaterialAdministrationModule.forRoot(environment.firebase, firebaseAppNameFactory),
+  MaterialAdministrationModule
   ...
 ]
 ~~~
