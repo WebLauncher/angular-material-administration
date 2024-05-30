@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.14.0 (2024-05-30)
+
+### Features
+
+- **deps:** remove f@angular/lex-layout dependecy ([e352f2e](https://github.com/WebLauncher/angular-material-administration/commit/e352f2ecc0354e2ee752262b0b752673e40497a9))
+
 ## 0.13.4 (2024-05-30)
 
 ### Bug Fixes
