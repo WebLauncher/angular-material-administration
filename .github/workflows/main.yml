@@ -57,8 +57,7 @@ jobs:
       - name: Publish
         run: |
           npm config set access public
-          npx lerna version --conventional-commits --create-release github --yes
-          npx lerna publish from-git --contents dist --yes
+          npx lerna publish --conventional-commits --create-release github --contents dist --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
