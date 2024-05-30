@@ -42,5 +42,4 @@ jobs:
           npm run lint
       - name: Build
         run: |
-          npx ngcc
           npx lerna run build

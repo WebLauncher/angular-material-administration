@@ -7,7 +7,8 @@ import {
   ViewChild,
   Optional,
   Self,
-  ElementRef
+  ElementRef,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 
 import {
@@ -16,11 +17,11 @@ import {
   NgControl,
   UntypedFormBuilder,
   NgForm,
-  FormGroupDirective
+  FormGroupDirective,
 } from '@angular/forms';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { takeUntil } from 'rxjs/operators';
@@ -31,7 +32,9 @@ import { EditorConfig } from '@ckeditor/ckeditor5-core';
   selector: 'mat-ckeditor',
   templateUrl: './ckeditor.component.html',
   styleUrls: ['./ckeditor.component.scss'],
-  providers: [{ provide: MatFormFieldControl, useExisting: MaterialCkeditorComponent }]
+  providers: [{ provide: MatFormFieldControl,
+useExisting: MaterialCkeditorComponent }],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaterialCkeditorComponent
   implements OnDestroy, MatFormFieldControl<string>, ControlValueAccessor, DoCheck {
@@ -134,7 +137,7 @@ export class MaterialCkeditorComponent
     private elRef: ElementRef<HTMLElement>,
     public _defaultErrorStateMatcher: ErrorStateMatcher,
     @Optional() public _parentForm: NgForm,
-    @Optional() public _parentFormGroup: FormGroupDirective
+    @Optional() public _parentFormGroup: FormGroupDirective,
   ) {
     // Replace the provider from above with this.
     if (this.ngControl != null) {

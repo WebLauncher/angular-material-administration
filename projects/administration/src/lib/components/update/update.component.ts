@@ -83,7 +83,7 @@ value: this.getFieldValue(field, doc) })),
       .subscribe(
         () => {
           this.snackbar.success(`${capitalize(this.entity$.getValue()?.single)} updated successfully!`);
-          this.router.navigate([`/${this.entityPath$.getValue()}/list`]);
+          this.router.navigate([this.basePath, this.entityPath$.getValue(), 'list']);
         },
         () => this.snackbar.error(`There was an error updating ${this.entity$.getValue()?.single}!`),
         () => this.isLoading$.next(false),

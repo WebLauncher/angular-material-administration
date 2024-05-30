@@ -12,20 +12,42 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "esModuleInterop": true,
-    "target": "es2020",
-    "lib": ["es2018", "dom"],
+    "target": "ES2022",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
     "strict": true,
     "paths": {
-      "types": ["types"],
-      "@weblauncher/material-file-input": ["./projects/file-input/dist"],
-      "@weblauncher/material-file-input/*": ["./projects/file-input/dist/*"],
-      "@weblauncher/material-administration": ["./projects/administration/dist"],
-      "@weblauncher/material-administration/*": ["./projects/administration/dist/*"],
-      "@weblauncher/material-ckeditor": ["./projects/ckeditor/dist"],
-      "@weblauncher/material-ckeditor/*": ["./projects/ckeditor/dist/*"],
-      "@weblauncher/material-form": ["./projects/form/dist"],
-      "@weblauncher/material-form/*": ["./projects/form/dist/*"]
-    }
+      "types": [
+        "types"
+      ],
+      "@weblauncher/material-file-input": [
+        "./projects/file-input/dist"
+      ],
+      "@weblauncher/material-file-input/*": [
+        "./projects/file-input/dist/*"
+      ],
+      "@weblauncher/material-administration": [
+        "./projects/administration/dist"
+      ],
+      "@weblauncher/material-administration/*": [
+        "./projects/administration/dist/*"
+      ],
+      "@weblauncher/material-ckeditor": [
+        "./projects/ckeditor/dist"
+      ],
+      "@weblauncher/material-ckeditor/*": [
+        "./projects/ckeditor/dist/*"
+      ],
+      "@weblauncher/material-form": [
+        "./projects/form/dist"
+      ],
+      "@weblauncher/material-form/*": [
+        "./projects/form/dist/*"
+      ]
+    },
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "strictTemplates": true,

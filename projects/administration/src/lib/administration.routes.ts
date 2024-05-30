@@ -1,27 +1,29 @@
 import { Routes } from '@angular/router';
-import { ListComponent, AddComponent, UpdateComponent } from './components/index';
+import {
+ ListComponent, AddComponent, UpdateComponent,
+} from './components/index';
 import { NoPathGuard } from './services/index';
 
 export const materialAdministrationRoutes: Routes = [
   {
     path: ':entity/list',
-    component: ListComponent
+    component: ListComponent,
   },
   {
     path: ':entity/add',
-    component: AddComponent
+    component: AddComponent,
   },
   {
     path: ':entity/update/:id',
-    component: UpdateComponent
+    component: UpdateComponent,
   },
   {
     path: ':entity',
-    redirectTo: ':entity/list'
+    redirectTo: ':entity/list',
   },
   {
     path: '',
     canActivate: [NoPathGuard],
-    component: ListComponent
-  }
+    component: ListComponent,
+  },
 ];

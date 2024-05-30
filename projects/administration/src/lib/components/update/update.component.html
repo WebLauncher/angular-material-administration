@@ -1,39 +1,44 @@
-<div class="loading-box-overflow"
-     *ngIf="isLoading$ | async">
+<div class="loading-box-overflow" *ngIf="isLoading$ | async">
   <mat-spinner diameter="50"></mat-spinner>
 </div>
 <ng-container *ngIf="entity$ | async as entity; else noEntity">
-  <mat-administration-breadcrumbs [entityName]="entityName$ | async"
-                                  action="update"></mat-administration-breadcrumbs>
+  <mat-administration-breadcrumbs [entityName]="entityName$ | async" action="update"></mat-administration-breadcrumbs>
   <mat-toolbar class="justify-between toolbar-main">
     <h1 fxLayoutAlign="start center">
-      <mat-icon *ngIf="entity?.icon">{{entity?.icon}}</mat-icon> Update {{entity?.single}}
+      <mat-icon *ngIf="entity?.icon">{{ entity?.icon }}</mat-icon> Update {{ entity?.single }}
     </h1>
-    <span class="entity-title">{{entityTitle$ | async}}<br /><small>#{{id$ | async}}</small></span>
-    <a mat-flat-button
-       color="warn"
-       routerLink="{{basePath}}/{{entityPath$ | async}}/list">
+    <span class="entity-title"
+      >{{ entityTitle$ | async }}<br /><small>#{{ id$ | async }}</small></span
+    >
+    <a mat-flat-button color="warn" routerLink="{{ basePath }}/{{ entityPath$ | async }}/list">
       <mat-icon>keyboard_backspace</mat-icon> Cancel
     </a>
   </mat-toolbar>
   <mat-toolbar *ngIf="subCollections$ | async as subCollections">
-    <a *ngFor="let subCollection of subCollections"
-       mat-flat-button
-       aria-label="Manage"
-       routerLink="{{basePath}}/{{entityName$ | async}}:{{id$ | async}}:{{subCollection?.id}}/list">
-      {{subCollection?.plural | titlecase}}
+    <a
+      *ngFor="let subCollection of subCollections"
+      mat-flat-button
+      aria-label="Manage"
+      routerLink="{{ basePath }}/{{ entityName$ | async }}:{{ id$ | async }}:{{ subCollection?.id }}/list"
+    >
+      {{ subCollection?.plural | titlecase }}
     </a>
   </mat-toolbar>
   <mat-card class="mat-elevation-z0">
-    <mat-form *ngIf="fields$ | async"
-              [fields]="fields$ | async"
-              [layout]="layout$ | async"
-              (ngSubmit)="submit($event);"></mat-form>
+    <mat-form
+      *ngIf="fields$ | async"
+      [fields]="fields$ | async"
+      [layout]="layout$ | async"
+      (ngSubmit)="submit($event)"
+    ></mat-form>
   </mat-card>
 </ng-container>
 
 <ng-template #noEntity>
-  <mat-chip-list>
-    <mat-chip color="warn">No entity entity defined for&nbsp;<strong>{{entityName$ | async}}</strong>!</mat-chip>
-  </mat-chip-list>
+  <mat-chip-listbox>
+    <mat-chip color="warn"
+      >No entity entity defined for&nbsp;<strong>{{ entityName$ | async }}</strong
+      >!</mat-chip
+    >
+  </mat-chip-listbox>
 </ng-template>

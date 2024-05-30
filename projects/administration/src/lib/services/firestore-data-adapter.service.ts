@@ -1,14 +1,27 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+ Inject, Injectable,
+} from '@angular/core';
+import {
+  Firestore,
+  addDoc,
+  collection,
+  collectionData,
+  deleteDoc,
+  doc,
+  getDoc,
+  serverTimestamp,
+  updateDoc,
+} from '@angular/fire/firestore';
 import {
  from, Subject, Observable,
 } from 'rxjs';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { v4 as uuidv4 } from 'uuid';
 import {
- finalize, filter,
+ filter, tap,
 } from 'rxjs/operators';
-import { serverTimestamp } from '@angular/fire/firestore';
+import {
+ Storage, deleteObject, getDownloadURL, ref, uploadBytesResumable,
+} from '@angular/fire/storage';
 import {
  DataAdapterInterface, DownloadData,
 } from '../types/data-adapter';
@@ -17,54 +30,78 @@ import {
   providedIn: 'root',
 })
 export class FirestoreDataAdapterService implements DataAdapterInterface {
-  constructor(private db: AngularFirestore, private storage: AngularFireStorage) {}
+  constructor(@Inject(Firestore) private db: Firestore, @Inject(Storage) private storage: Storage) {}
 
-  get(collection: string, id: string) {
-    return this.db.collection(collection).doc(id).valueChanges();
+  get(collectionName: string, id: string) {
+    return from(getDoc(doc(this.db, collectionName, id)).then((snapshot) => ({ ...snapshot.data(),
+id }))).pipe(
+      tap(console.log),
+    );
   }
 
-  list(collection: string, idField: string) {
-    return this.db.collection(collection).valueChanges({ idField });
+  list(collectionName: string, idField: string) {
+    return collectionData(collection(this.db, collectionName), { idField });
   }
 
-  add(collection: string, item: any) {
-    return from(this.db.collection(collection).add(item));
+  add(collectionName: string, item: any) {
+    return from(addDoc(collection(this.db, collectionName), item));
   }
 
-  update(collection: string, id: string, item: any) {
-    return from(this.db.collection(collection).doc(id).update(item));
+  update(collectionName: string, id: string, item: any) {
+    return from(updateDoc(doc(this.db, collectionName, id), item));
   }
 
-  delete(collection: string, id: string) {
-    return from(this.db.collection(collection).doc(id).delete());
+  delete(collectionName: string, id: string) {
+    return from(deleteDoc(doc(this.db, collectionName, id)));
   }
 
   upload(file: File): Observable<DownloadData> {
     const path = `${uuidv4()}_${file?.name}`;
-    const fileRef = this.storage.ref(path);
-    const task = this.storage.upload(path, file);
+    const fileRef = ref(this.storage, path);
+    const task = uploadBytesResumable(fileRef, file);
     const downloadData$ = new Subject<DownloadData>();
 
-    task
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe((downloadUrl) => {
-            downloadData$.next({
-              downloadUrl,
-              path,
-            });
-            downloadData$.complete();
+    task.on(
+      'state_changed',
+      (snapshot) => {
+        // Observe state change events such as progress, pause, and resume
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        switch (snapshot.state) {
+          case 'paused':
+            console.log('Upload is paused');
+            break;
+          case 'running':
+            console.log('Upload is running');
+            break;
+          default:
+            console.log('snapshot', snapshot);
+            break;
+        }
+      },
+      (error) => {
+        // Handle unsuccessful uploads
+        console.error(error);
+      },
+      () => {
+        // Handle successful uploads on complete
+        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+        getDownloadURL(task.snapshot.ref).then((downloadURL) => {
+          downloadData$.next({
+            downloadUrl: downloadURL,
+            path,
           });
-        }),
-      )
-      .subscribe();
+          downloadData$.complete();
+        });
+      },
+    );
 
     return downloadData$.pipe(filter(Boolean)) as Observable<DownloadData>;
   }
 
   removeUpload(filePath: string) {
-    return this.storage.ref(filePath).delete();
+    return from(deleteObject(ref(this.storage, filePath)));
   }
 
   getTimestamp() {

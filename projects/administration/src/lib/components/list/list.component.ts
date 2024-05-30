@@ -3,8 +3,8 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
- Observable, BehaviorSubject, combineLatest,
- Subject,
+  BehaviorSubject,
+ Observable, combineLatest,
 } from 'rxjs';
 import {
  map, switchMap, shareReplay, tap, withLatestFrom,
@@ -25,7 +25,6 @@ import {
   MAT_ADMINISTRATION_DATA_ADAPTER,
   MAT_ADMINISTRATION_METADATA,
 } from '../../types/injection-tokens';
-import { CdkTableDataSourceInput } from '@angular/cdk/table';
 
 @Component({
   selector: 'mat-administration-list',
@@ -40,7 +39,7 @@ export class ListComponent extends EntityComponent {
 
   list$: Observable<any>;
 
-  private refresh$: Subject<void> = new Subject();
+  private refresh$: BehaviorSubject<string> = new BehaviorSubject('');
 
   constructor(
     public route: ActivatedRoute,
@@ -76,7 +75,7 @@ export class ListComponent extends EntityComponent {
       () => this.snackbar.error(`There was an error deleting ${this.entity$.getValue()?.single}!`),
       () => {
         this.isLoading$.next(false);
-        this.refresh$.next();
+        this.refresh$.next('');
       },
     );
   }

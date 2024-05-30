@@ -1,4 +1,6 @@
-import { Injectable, Optional, Inject } from '@angular/core';
+import {
+ Injectable, Optional, Inject,
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
 import { Immutable } from '../types/immutable';
@@ -7,12 +9,12 @@ import { DataAdapterInterface } from '../types/data-adapter';
 import { MAT_ADMINISTRATION_METADATA } from '../types/injection-tokens';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpDataAdapterService implements DataAdapterInterface {
   constructor(
     private http: HttpClient,
-    @Optional() @Inject(MAT_ADMINISTRATION_METADATA) private metadata: Immutable<MatAdministrationMetadata>
+    @Optional() @Inject(MAT_ADMINISTRATION_METADATA) private metadata: Immutable<MatAdministrationMetadata>,
   ) {}
 
   get(entity: string, id: string) {
@@ -41,7 +43,7 @@ export class HttpDataAdapterService implements DataAdapterInterface {
     // TODO upload call implementation
     return of({
       downloadUrl: 'https://angular.io/assets/images/logos/angular/logo-nav@2x.png',
-      path: 'not implemented'
+      path: 'not implemented',
     });
   }
 
@@ -60,10 +62,10 @@ export class HttpDataAdapterService implements DataAdapterInterface {
   }
 
   private getApiUrl(entity: string) {
-    return this.metadata.entities?.[entity]?.data?.apiUrl || this.metadata?.data?.apiUrl || 'http://localhost:3000/';
+    return this.metadata.entities?.[entity]?.data?.apiUrl ?? this.metadata?.data?.apiUrl ?? 'http://localhost:3000/';
   }
 
   private getApiHttpOptions(entity: string) {
-    return this.metadata.entities?.[entity]?.data?.apiUrl || this.metadata?.data?.apiUrl || {};
+    return this.metadata.entities?.[entity]?.data?.apiUrl ?? this.metadata?.data?.apiUrl ?? {};
   }
 }
