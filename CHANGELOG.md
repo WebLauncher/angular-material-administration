@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.13.4 (2024-05-30)
+
+### Bug Fixes
+
+- **deps:** fix deploy ([e897d4c](https://github.com/WebLauncher/angular-material-administration/commit/e897d4c9266bc30bd9cb937eaa6e2c918fb4ebc4))
+
 ## 0.13.3 (2024-05-30)
 
 ### Bug Fixes
