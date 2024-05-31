@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.14.2 (2024-05-31)
+
+### Bug Fixes
+
+- **app:** improve styles ([e5be4d5](https://github.com/WebLauncher/angular-material-administration/commit/e5be4d5f81c62d135dd77b8e863806b00efc6872))
+
 ## 0.14.1 (2024-05-30)
 
 ### Bug Fixes
