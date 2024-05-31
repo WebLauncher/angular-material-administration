@@ -4,21 +4,19 @@
 <ng-container *ngIf="entity$ | async as entity; else noEntity">
   <mat-administration-breadcrumbs [entityName]="entityName$ | async" action="add"></mat-administration-breadcrumbs>
   <mat-toolbar class="justify-between">
-    <h1 class="display-flex" style="justify-content: start; align-items: center">
+    <h1 class="form-heading">
       <mat-icon *ngIf="entity?.icon">{{ entity?.icon }}</mat-icon> Add {{ entity?.single }}
     </h1>
     <a mat-flat-button color="warn" routerLink="{{ basePath }}/{{ entityPath$ | async }}/list">
       <mat-icon>keyboard_backspace</mat-icon> Cancel
     </a>
   </mat-toolbar>
-  <mat-card class="mat-elevation-z0">
-    <mat-form
-      [fields]="fields$ | async"
-      [layout]="layout$ | async"
-      *ngIf="fields$ | async"
-      (ngSubmit)="submit($event)"
-    ></mat-form>
-  </mat-card>
+  <mat-form
+    [fields]="fields$ | async"
+    [layout]="layout$ | async"
+    *ngIf="fields$ | async"
+    (ngSubmit)="submit($event)"
+  ></mat-form>
 </ng-container>
 
 <ng-template #noEntity>

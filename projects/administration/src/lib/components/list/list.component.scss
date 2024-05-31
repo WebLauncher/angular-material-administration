@@ -12,6 +12,13 @@ table {
   padding: 1rem;
 }
 
+.form-heading {
+  margin-bottom: 0;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
 .mat-column-id {
   max-width: 0.5rem;
   overflow: hidden;

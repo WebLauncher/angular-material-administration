@@ -4,8 +4,13 @@
     *ngFor="let section of sections"
     [ngClass]="{ 'mat-elevation-z0': sections.length === 1 }"
   >
-    <mat-card-title class="form-section-header" *ngIf="section?.title"> {{ section.title }}</mat-card-title>
-    <mat-card-subtitle class="form-section-header" *ngIf="section?.subtitle"> {{ section.subtitle }}</mat-card-subtitle>
+    <mat-card-header>
+      <mat-card-title class="form-section-header" *ngIf="section?.title"> {{ section.title }}</mat-card-title>
+      <mat-card-subtitle class="form-section-header" *ngIf="section?.subtitle">
+        {{ section.subtitle }}</mat-card-subtitle
+      >
+    </mat-card-header>
+
     <mat-card-content class="form-section-body display-flex" [ngStyle]="getLayoutStyles(section?.layout)">
       <ng-container *ngIf="section?.fields">
         <ng-container *ngFor="let field of $any(section?.fields)">

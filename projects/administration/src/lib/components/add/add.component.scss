@@ -3,6 +3,13 @@
   position: relative;
 }
 
+.form-heading {
+  margin-bottom: 0;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
 h1 mat-icon {
   margin-right: 6px;
 }

@@ -12,13 +12,13 @@ This is an Angular Material component library for having a file input component.
 
 Import module into your project `app.module.ts` or other sub-module:
 
-```
+```ts
 import { MatFileInputModule } from '@weblauncher/material-file-input';
 ```
 
 In your templates now you can add
 
-```
+```html
 <mat-form-field>
   <mat-label>File</mat-label>
   <mat-file-input [(ngModel)]="file" 

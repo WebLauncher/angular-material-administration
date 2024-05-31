@@ -18,13 +18,13 @@ This is an Angular Material component library for having a file input component.
 
 Import module into your project `app.module.ts` or other sub-module:
 
-```
+```ts
 import { MatCkeditorModule } from '@weblauncher/material-ckeditor';
 ```
 
 In your templates now you can add
 
-```
+```html
 <mat-form-field>
   <mat-label>Editor</mat-label>
   <mat-ckeditor [(ngModel)]="content" 

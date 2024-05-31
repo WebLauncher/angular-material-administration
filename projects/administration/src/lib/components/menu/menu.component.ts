@@ -7,7 +7,7 @@ import { MatAdministrationMetadata } from '../../types/material-administration-m
 @Component({
   selector: 'mat-administration-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css'],
+  styleUrls: ['./menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuComponent {
