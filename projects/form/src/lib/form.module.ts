@@ -19,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatCkeditorModule } from '@weblauncher/material-ckeditor';
 import { MatFileInputModule } from '@weblauncher/material-file-input';
 import { MaterialFormComponent } from './form.component';
+import { ImgPreviewComponent } from './components/img-preview/img-preview.component';
 
 @NgModule({
   declarations: [MaterialFormComponent],
@@ -39,6 +40,7 @@ import { MaterialFormComponent } from './form.component';
     MatNativeDateModule,
     MatCkeditorModule,
     MatFileInputModule,
+    ImgPreviewComponent,
   ],
   exports: [MaterialFormComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

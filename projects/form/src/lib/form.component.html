@@ -134,7 +134,7 @@
           <div *ngIf="form.controls[field?.name].value">
             <mat-label>{{ field?.label }}</mat-label>
             <div style="display: flex; flex-direction: row">
-              <img class="file-input-image" [src]="field?.value" alt="field?.label" />
+              <mat-img-preview [file]="form.controls[field?.name].value?.[0]" [alt]="field?.label"></mat-img-preview>
               <button type="button" mat-flat-button (click)="removeImage(field)">{{ removeBtnText }}</button>
             </div>
           </div>

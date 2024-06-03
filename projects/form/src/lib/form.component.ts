@@ -96,8 +96,11 @@ export class MaterialFormComponent implements OnInit, OnDestroy {
 
   getLayoutStyles(layout: any) {
     return {
-      flexFlow: this.layout?.direction ?? 'column wrap',
-      placeContent: `${this.layout?.crossAlign ?? 'stretch'} ${this.layout?.mainAlign ?? 'center'}`,
+      display: 'flex',
+      flexFlow: layout?.direction ?? 'column wrap',
+      placeContent: `${layout?.crossAlign ?? 'stretch'} ${layout?.mainAlign ?? 'center'}`,
+      rowGap: layout?.gap,
+      columnGap: layout?.gap,
     };
   }
 

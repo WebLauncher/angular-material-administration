@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import {
   Component,
   Input,
@@ -30,7 +31,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
   templateUrl: './file-input.component.html',
   styleUrls: ['./file-input.component.scss'],
   providers: [{ provide: MatFormFieldControl,
-    useExisting: MatFileInputComponent }],
+useExisting: MatFileInputComponent }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MatFileInputComponent
@@ -62,8 +63,6 @@ export class MatFileInputComponent
     this.stateChanges.next();
   }
 
-  private placeholderValue = '';
-
   @Input()
   get required() {
     return this.requiredValue;
@@ -73,8 +72,6 @@ export class MatFileInputComponent
     this.requiredValue = coerceBooleanProperty(req);
     this.stateChanges.next();
   }
-
-  private requiredValue = false;
 
   @Input()
   get disabled(): boolean {
@@ -90,8 +87,6 @@ export class MatFileInputComponent
     }
     this.stateChanges.next();
   }
-
-  private disabledValue = false;
 
   @Input() buttonText = 'Choose...';
 
@@ -125,6 +120,9 @@ export class MatFileInputComponent
   @ViewChild('file') file!: ElementRef;
 
   private destroyed$ = new Subject();
+  private disabledValue = false;
+  private placeholderValue = '';
+  private requiredValue = false;
 
   constructor(
     @Optional() @Self() public ngControl: NgControl,
@@ -147,7 +145,7 @@ export class MatFileInputComponent
         this.onChange(value);
       }
     });
-    fm.monitor(elRef.nativeElement, true).subscribe((origin) => {
+    fm.monitor(elRef.nativeElement, true).pipe(takeUntil(this.destroyed$)).subscribe((origin) => {
       this.focused = !!origin;
       this.stateChanges.next();
     });
