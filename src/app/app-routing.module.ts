@@ -18,10 +18,14 @@ const routes: Routes = [
     path: 'rest',
     loadChildren: () => import('./rest/rest.module').then((m) => m.RestModule),
   },
+  {
+    path: 'form',
+    loadChildren: () => import('./form/form.module').then((m) => m.FormModule),
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { enableTracing: environment.production })],
+  imports: [RouterModule.forRoot(routes, { enableTracing: !environment.production })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

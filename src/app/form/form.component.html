@@ -1,0 +1,32 @@
+<ng-container [ngSwitch]="tab$ | async">
+  <ng-container *ngSwitchCase="'overview'">
+    <h1>Form Component</h1>
+    <p><code>&#60;mat-form&#62;</code> is a form generator component based on provided layout JSON scheme.</p>
+  </ng-container>
+  <ng-container *ngSwitchCase="'api'">
+    <h1>API reference for Angular Material form</h1>
+    <markdown clipboard [data]="importData"></markdown>
+  </ng-container>
+  <ng-container *ngSwitchCase="'examples'">
+    <h1>Examples</h1>
+    <mat-card class="mb-md">
+      <mat-card-header>
+        <mat-card-title>Login form</mat-card-title>
+        <mat-card-subtitle>When no layout input is provided all fields show in a single column</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <app-form-example1></app-form-example1>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Login form on a row</mat-card-title>
+        <mat-card-subtitle>Showing a form in a single row layout</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <app-form-example2></app-form-example2>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</ng-container>

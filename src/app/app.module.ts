@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {
+ NgModule, SecurityContext,
+} from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -23,6 +25,7 @@ import {
 import {
  getStorage, provideStorage,
 } from '@angular/fire/storage';
+import { MarkdownModule } from 'ngx-markdown';
 import { environment } from '../environments/environment';
 import { LayoutComponent } from './layout/layout.component';
 import { AppComponent } from './app.component';
@@ -43,6 +46,7 @@ import { SiteMetadata } from './site-metadata';
     MatButtonToggleModule,
     MatMenuModule,
     MatProgressSpinnerModule,
+    MarkdownModule.forRoot({ sanitize: SecurityContext.NONE }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),

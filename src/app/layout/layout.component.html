@@ -2,15 +2,7 @@
   <mat-sidenav mode="side" opened color="primary">
     <mat-toolbar color="primary">
       <mat-toolbar-row>
-        <svg
-          class="logo"
-          _ngcontent-ng-c1910891413=""
-          x="0px"
-          y="0px"
-          width="960px"
-          height="960px"
-          viewBox="0 0 960 960"
-        >
+        <svg class="logo" _ngcontent-ng-c1910891413="" x="0px" y="0px" height="960px" viewBox="0 0 960 960">
           <polygon _ngcontent-ng-c1910891413="" points="562.6,109.8 804.1,629.5 829.2,233.1"></polygon>
           <polygon
             _ngcontent-ng-c1910891413=""
@@ -19,6 +11,7 @@
           <polygon _ngcontent-ng-c1910891413="" points="384.1,539.3 575.2,539.3 479.6,307"></polygon>
           <polygon _ngcontent-ng-c1910891413="" points="396.6,109.8 130,233.1 155.1,629.5"></polygon>
         </svg>
+        Material
       </mat-toolbar-row>
     </mat-toolbar>
     <router-outlet name="menu"></router-outlet>
@@ -26,11 +19,28 @@
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="navbar-top">
       <mat-toolbar-row class="user-toolbar">
+        <div>
+          <button
+            mat-flat-button
+            color="primary"
+            [routerLink]="['firebase']"
+            [ngClass]="(dataSource$ | async) ? 'active' : ''"
+          >
+            Administration
+          </button>
+          <button mat-flat-button color="primary" [routerLink]="['form', 'overview']" routerLinkActive="active">
+            Form
+          </button>
+          <button mat-flat-button color="primary" [routerLink]="['components']" routerLinkActive="active">
+            Components
+          </button>
+        </div>
         <mat-button-toggle-group
           name="dataSource"
-          [value]="dataSource"
+          [value]="dataSource$ | async"
           (change)="changeDataSource($event)"
           aria-label="Font Style"
+          *ngIf="dataSource$ | async"
         >
           <mat-button-toggle value="firebase">Firebase</mat-button-toggle>
           <mat-button-toggle value="rest">REST API</mat-button-toggle>
@@ -38,7 +48,7 @@
       </mat-toolbar-row>
     </mat-toolbar>
     <main class="page-content">
-      <router-outlet #routerOutlet="outlet"></router-outlet>
+      <router-outlet></router-outlet>
     </main>
   </mat-sidenav-content>
 </mat-sidenav-container>

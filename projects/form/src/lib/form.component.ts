@@ -26,7 +26,7 @@ import {
 export class MaterialFormComponent implements OnInit, OnDestroy {
   @Input() fields!: Partial<MatFormEntityField>[] | undefined | null;
 
-  @Input() layout!: MatFormSectionsLayout;
+  @Input() layout!: MatFormSectionsLayout | undefined | null;
 
   @Input() saveBtnText = 'Save';
 

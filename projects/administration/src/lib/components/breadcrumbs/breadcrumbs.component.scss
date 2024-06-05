@@ -1,7 +1,7 @@
 .breadcrumbs-wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
 }
@@ -9,6 +9,6 @@
 .breadcrumbs-part {
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
 }
