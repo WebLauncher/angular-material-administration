@@ -1,7 +1,7 @@
 {
   "packages": ["projects/*"],
   "npmClient": "yarn",
-  "version": "0.14.3",
+  "version": "0.14.4",
   "command": {
     "publish": {
       "conventionalCommits": true,
